@@ -37,7 +37,10 @@ namespace UniSell.NET.Data.WebServices
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User CreateUser(User user)
         {
-            //ONLY VALIDATE IValidateSecurity();
+            if (user.Role != Model.Types.UserRole.BUYER)
+            {
+                ValidateSecurity();
+            }
             user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
             {
