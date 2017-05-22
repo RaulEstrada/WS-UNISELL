@@ -8,6 +8,8 @@ using System.Web.Services.Protocols;
 using UniSell.NET.Data.Factory;
 using UniSell.NET.Data.JWT;
 using UniSell.NET.Data.Model;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace UniSell.NET.Data.WebServices
 {
@@ -35,7 +37,8 @@ namespace UniSell.NET.Data.WebServices
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User CreateUser(User user)
         {
-            ValidateSecurity();
+            //ONLY VALIDATE IValidateSecurity();
+            user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
             {
                 return ds.getUserDAO().Create(user);
@@ -67,9 +70,10 @@ namespace UniSell.NET.Data.WebServices
         [WebMethod]
         public string Login(string username, string password)
         {
+            string hashedPassword = getHashedPassword(password);
             using (var ds = new DataService())
             {
-                if (ds.getUserDAO().ExistsUsernamePassword(username, password))
+                if (ds.getUserDAO().ExistsUsernamePassword(username, hashedPassword))
                 {
                     return JWTGenerator.Generate(username);
                 }
@@ -93,6 +97,7 @@ namespace UniSell.NET.Data.WebServices
         public User UpdateUser(User user)
         {
             ValidateSecurity();
+            user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
             {
                 return ds.getUserDAO().Update(user);
@@ -127,7 +132,14 @@ namespace UniSell.NET.Data.WebServices
                 throw new SoapException("Authentication Failure - Auth token provided is not valid",
                         SoapException.ClientFaultCode);
             }
-            
+        }
+
+        private string getHashedPassword(string plainPassword)
+        {
+            SHA512 sha512 = new SHA512Managed();
+            byte[] password = Encoding.UTF8.GetBytes(plainPassword);
+            byte[] hashed = sha512.ComputeHash(password);
+            return Convert.ToBase64String(hashed);
         }
     }
 }

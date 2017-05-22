@@ -167,6 +167,7 @@
       <DependentUpon>DataAccessWS.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebServices\SerializableExpandoObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
