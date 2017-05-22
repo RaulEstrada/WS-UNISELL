@@ -152,7 +152,11 @@
     <Compile Include="JWT\JWTAuthenticator.cs" />
     <Compile Include="JWT\JWTGenerator.cs" />
     <Compile Include="JWT\Security.cs" />
+    <Compile Include="Model\Types\UserRole.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserAdmin.cs" />
+    <Compile Include="Model\UserBuyer.cs" />
+    <Compile Include="Model\UserSeller.cs" />
     <Compile Include="Persistence\IGenericDAO.cs" />
     <Compile Include="Persistence\Implementation\GenericDAO.cs" />
     <Compile Include="Persistence\Implementation\UserDAO.cs" />
@@ -167,7 +171,6 @@
       <DependentUpon>DataAccessWS.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WebServices\SerializableExpandoObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

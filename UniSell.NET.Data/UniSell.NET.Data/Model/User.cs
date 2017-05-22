@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UniSell.NET.Data.Model.Types;
 
 namespace UniSell.NET.Data.Model
 {
-    public class User : IEquatable<User>, IComparable<User>
+    public abstract class User : IEquatable<User>, IComparable<User>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,6 +28,8 @@ namespace UniSell.NET.Data.Model
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public abstract UserRole Role { get; }
 
         public User() { }
 
