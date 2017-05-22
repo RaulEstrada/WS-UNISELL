@@ -37,3 +37,13 @@ C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET
 C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\obj\Debug\UniSell.NET.Data.csprojResolveAssemblyReference.cache
 C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\obj\Debug\UniSell.NET.Data.dll
 C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\obj\Debug\UniSell.NET.Data.pdb
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\Newtonsoft.Json.dll
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\Newtonsoft.Json.xml
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\obj\Debug\UniSell.NET.Data.Properties.Resources.resources
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\obj\Debug\UniSell.NET.Data.csproj.GenerateResource.Cache
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\RaulEstrada\Desktop\WebServices\WS-UNISELL\UniSell.NET.Data\UniSell.NET.Data\bin\System.IdentityModel.Tokens.Jwt.xml

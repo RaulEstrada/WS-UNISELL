@@ -12,5 +12,12 @@ namespace UniSell.NET.Data.Persistence.Implementation
         public UserDAO(DBContext context) : base(context)
         {
         }
+
+        public bool ExistsUsernamePassword(string username, string password)
+        {
+            User[] users = DbSet.Where(u => u.Username.Equals(username) && u.Password.Equals(password))
+                .ToArray();
+            return users != null && users.Length > 0;
+        }
     }
 }

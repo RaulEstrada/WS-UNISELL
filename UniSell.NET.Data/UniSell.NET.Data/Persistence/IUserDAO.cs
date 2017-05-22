@@ -9,5 +9,6 @@ namespace UniSell.NET.Data.Persistence
 {
     public interface IUserDAO : IGenericDAO<User>
     {
+        bool ExistsUsernamePassword(string username, string password);
     }
 }
