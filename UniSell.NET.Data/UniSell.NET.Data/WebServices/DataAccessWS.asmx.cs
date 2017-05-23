@@ -39,7 +39,7 @@ namespace UniSell.NET.Data.WebServices
         {
             if (user.Role != Model.Types.UserRole.BUYER)
             {
-                ValidateSecurity();
+                //ValidateSecurity();
             }
             user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
@@ -85,6 +85,25 @@ namespace UniSell.NET.Data.WebServices
         }
 
         [WebMethod]
+        public User FindUserByUsernamePassword(string username, string password)
+        {
+            string hashedPassword = getHashedPassword(password);
+            using (var ds = new DataService())
+            {
+                return ds.getUserDAO().FindByUsernamePassword(username, hashedPassword);
+            }
+        }
+
+        [WebMethod]
+        public User FindUserByUsername(string username)
+        {
+            using (var ds = new DataService())
+            {
+                return ds.getUserDAO().FindByUsername(username);
+            }
+        }
+
+        [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User RemoveUser(long id)
         {
@@ -104,6 +123,17 @@ namespace UniSell.NET.Data.WebServices
             using (var ds = new DataService())
             {
                 return ds.getUserDAO().Update(user);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public UserAdmin[] ListAllAdmins()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getUserAdminDAO().FindAllAdmins().ToArray();
             }
         }
 

@@ -23,5 +23,10 @@ namespace UniSell.NET.Data.Factory
         {
             return new UserDAO(_context);
         }
+
+        public IUserAdminDAO getUserAdminDAO()
+        {
+            return new UserAdminDAO(_context);
+        }
     }
 }

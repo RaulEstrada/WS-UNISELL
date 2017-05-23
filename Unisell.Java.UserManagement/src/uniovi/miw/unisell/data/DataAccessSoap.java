@@ -25,6 +25,7 @@ public interface DataAccessSoap {
 
     /**
      * 
+     * @param security
      * @return
      *     returns int
      */
@@ -32,10 +33,13 @@ public interface DataAccessSoap {
     @WebResult(name = "CountUsersResult", targetNamespace = "http://unisell.net.data/")
     @RequestWrapper(localName = "CountUsers", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CountUsers")
     @ResponseWrapper(localName = "CountUsersResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CountUsersResponse")
-    public int countUsers();
+    public int countUsers(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
 
     /**
      * 
+     * @param security
      * @param user
      * @return
      *     returns uniovi.miw.unisell.data.User
@@ -46,10 +50,13 @@ public interface DataAccessSoap {
     @ResponseWrapper(localName = "CreateUserResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CreateUserResponse")
     public User createUser(
         @WebParam(name = "user", targetNamespace = "http://unisell.net.data/")
-        User user);
+        User user,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
 
     /**
      * 
+     * @param security
      * @return
      *     returns uniovi.miw.unisell.data.ArrayOfUser
      */
@@ -57,10 +64,13 @@ public interface DataAccessSoap {
     @WebResult(name = "FindAllUsersResult", targetNamespace = "http://unisell.net.data/")
     @RequestWrapper(localName = "FindAllUsers", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindAllUsers")
     @ResponseWrapper(localName = "FindAllUsersResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindAllUsersResponse")
-    public ArrayOfUser findAllUsers();
+    public ArrayOfUser findAllUsers(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
 
     /**
      * 
+     * @param security
      * @param id
      * @return
      *     returns uniovi.miw.unisell.data.User
@@ -71,7 +81,9 @@ public interface DataAccessSoap {
     @ResponseWrapper(localName = "FindUserResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserResponse")
     public User findUser(
         @WebParam(name = "id", targetNamespace = "http://unisell.net.data/")
-        long id);
+        long id,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
 
     /**
      * 
@@ -92,6 +104,38 @@ public interface DataAccessSoap {
 
     /**
      * 
+     * @param password
+     * @param username
+     * @return
+     *     returns uniovi.miw.unisell.data.User
+     */
+    @WebMethod(operationName = "FindUserByUsernamePassword", action = "http://unisell.net.data/FindUserByUsernamePassword")
+    @WebResult(name = "FindUserByUsernamePasswordResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindUserByUsernamePassword", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserByUsernamePassword")
+    @ResponseWrapper(localName = "FindUserByUsernamePasswordResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserByUsernamePasswordResponse")
+    public User findUserByUsernamePassword(
+        @WebParam(name = "username", targetNamespace = "http://unisell.net.data/")
+        String username,
+        @WebParam(name = "password", targetNamespace = "http://unisell.net.data/")
+        String password);
+
+    /**
+     * 
+     * @param username
+     * @return
+     *     returns uniovi.miw.unisell.data.User
+     */
+    @WebMethod(operationName = "FindUserByUsername", action = "http://unisell.net.data/FindUserByUsername")
+    @WebResult(name = "FindUserByUsernameResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindUserByUsername", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserByUsername")
+    @ResponseWrapper(localName = "FindUserByUsernameResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserByUsernameResponse")
+    public User findUserByUsername(
+        @WebParam(name = "username", targetNamespace = "http://unisell.net.data/")
+        String username);
+
+    /**
+     * 
+     * @param security
      * @param id
      * @return
      *     returns uniovi.miw.unisell.data.User
@@ -102,10 +146,13 @@ public interface DataAccessSoap {
     @ResponseWrapper(localName = "RemoveUserResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.RemoveUserResponse")
     public User removeUser(
         @WebParam(name = "id", targetNamespace = "http://unisell.net.data/")
-        long id);
+        long id,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
 
     /**
      * 
+     * @param security
      * @param user
      * @return
      *     returns uniovi.miw.unisell.data.User
@@ -116,6 +163,22 @@ public interface DataAccessSoap {
     @ResponseWrapper(localName = "UpdateUserResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.UpdateUserResponse")
     public User updateUser(
         @WebParam(name = "user", targetNamespace = "http://unisell.net.data/")
-        User user);
+        User user,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfUserAdmin
+     */
+    @WebMethod(operationName = "ListAllAdmins", action = "http://unisell.net.data/ListAllAdmins")
+    @WebResult(name = "ListAllAdminsResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "ListAllAdmins", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllAdmins")
+    @ResponseWrapper(localName = "ListAllAdminsResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllAdminsResponse")
+    public ArrayOfUserAdmin listAllAdmins(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
 
 }

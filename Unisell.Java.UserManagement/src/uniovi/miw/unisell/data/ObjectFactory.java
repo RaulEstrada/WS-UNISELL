@@ -42,11 +42,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindUserByUsernameResponse }
+     * 
+     */
+    public FindUserByUsernameResponse createFindUserByUsernameResponse() {
+        return new FindUserByUsernameResponse();
+    }
+
+    /**
      * Create an instance of {@link RemoveUser }
      * 
      */
     public RemoveUser createRemoveUser() {
         return new RemoveUser();
+    }
+
+    /**
+     * Create an instance of {@link ListAllAdmins }
+     * 
+     */
+    public ListAllAdmins createListAllAdmins() {
+        return new ListAllAdmins();
     }
 
     /**
@@ -114,6 +130,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindUserByUsernamePassword }
+     * 
+     */
+    public FindUserByUsernamePassword createFindUserByUsernamePassword() {
+        return new FindUserByUsernamePassword();
+    }
+
+    /**
      * Create an instance of {@link RemoveUserResponse }
      * 
      */
@@ -138,6 +162,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindUserByUsernamePasswordResponse }
+     * 
+     */
+    public FindUserByUsernamePasswordResponse createFindUserByUsernamePasswordResponse() {
+        return new FindUserByUsernamePasswordResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindUserByUsername }
+     * 
+     */
+    public FindUserByUsername createFindUserByUsername() {
+        return new FindUserByUsername();
+    }
+
+    /**
      * Create an instance of {@link UpdateUser }
      * 
      */
@@ -159,6 +199,30 @@ public class ObjectFactory {
      */
     public FindUserResponse createFindUserResponse() {
         return new FindUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link ListAllAdminsResponse }
+     * 
+     */
+    public ListAllAdminsResponse createListAllAdminsResponse() {
+        return new ListAllAdminsResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfUserAdmin }
+     * 
+     */
+    public ArrayOfUserAdmin createArrayOfUserAdmin() {
+        return new ArrayOfUserAdmin();
+    }
+
+    /**
+     * Create an instance of {@link UserAdmin }
+     * 
+     */
+    public UserAdmin createUserAdmin() {
+        return new UserAdmin();
     }
 
     /**

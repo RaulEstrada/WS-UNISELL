@@ -4,6 +4,8 @@ package uniovi.miw.unisell.data;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -22,8 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Surname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="IdDocument" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="IdDocumentType" type="{http://unisell.net.data/}PersonIdDocumentType"/>
  *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="activeAccount" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,8 +44,14 @@ import javax.xml.bind.annotation.XmlType;
     "name",
     "surname",
     "email",
+    "idDocument",
+    "idDocumentType",
     "username",
-    "password"
+    "password",
+    "activeAccount"
+})
+@XmlSeeAlso({
+    UserAdmin.class
 })
 public abstract class User {
 
@@ -53,10 +64,16 @@ public abstract class User {
     protected String surname;
     @XmlElement(name = "Email")
     protected String email;
+    @XmlElement(name = "IdDocument")
+    protected String idDocument;
+    @XmlElement(name = "IdDocumentType", required = true)
+    @XmlSchemaType(name = "string")
+    protected PersonIdDocumentType idDocumentType;
     @XmlElement(name = "Username")
     protected String username;
     @XmlElement(name = "Password")
     protected String password;
+    protected boolean activeAccount;
 
     /**
      * Obtiene el valor de la propiedad id.
@@ -163,6 +180,54 @@ public abstract class User {
     }
 
     /**
+     * Obtiene el valor de la propiedad idDocument.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdDocument() {
+        return idDocument;
+    }
+
+    /**
+     * Define el valor de la propiedad idDocument.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdDocument(String value) {
+        this.idDocument = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idDocumentType.
+     * 
+     * @return
+     *     possible object is
+     *     {@link PersonIdDocumentType }
+     *     
+     */
+    public PersonIdDocumentType getIdDocumentType() {
+        return idDocumentType;
+    }
+
+    /**
+     * Define el valor de la propiedad idDocumentType.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link PersonIdDocumentType }
+     *     
+     */
+    public void setIdDocumentType(PersonIdDocumentType value) {
+        this.idDocumentType = value;
+    }
+
+    /**
      * Obtiene el valor de la propiedad username.
      * 
      * @return
@@ -208,6 +273,22 @@ public abstract class User {
      */
     public void setPassword(String value) {
         this.password = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad activeAccount.
+     * 
+     */
+    public boolean isActiveAccount() {
+        return activeAccount;
+    }
+
+    /**
+     * Define el valor de la propiedad activeAccount.
+     * 
+     */
+    public void setActiveAccount(boolean value) {
+        this.activeAccount = value;
     }
 
 }

@@ -84,6 +84,28 @@ public class DataAccess
         return super.getPort(new QName("http://unisell.net.data/", "DataAccessSoap"), DataAccessSoap.class, features);
     }
 
+    /**
+     * 
+     * @return
+     *     returns DataAccessSoap
+     */
+    @WebEndpoint(name = "DataAccessSoap12")
+    public DataAccessSoap getDataAccessSoap12() {
+        return super.getPort(new QName("http://unisell.net.data/", "DataAccessSoap12"), DataAccessSoap.class);
+    }
+
+    /**
+     * 
+     * @param features
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     * @return
+     *     returns DataAccessSoap
+     */
+    @WebEndpoint(name = "DataAccessSoap12")
+    public DataAccessSoap getDataAccessSoap12(WebServiceFeature... features) {
+        return super.getPort(new QName("http://unisell.net.data/", "DataAccessSoap12"), DataAccessSoap.class, features);
+    }
+
     private static URL __getWsdlLocation() {
         if (DATAACCESS_EXCEPTION!= null) {
             throw DATAACCESS_EXCEPTION;

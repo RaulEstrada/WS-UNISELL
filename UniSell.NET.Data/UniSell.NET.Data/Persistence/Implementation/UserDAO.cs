@@ -15,9 +15,21 @@ namespace UniSell.NET.Data.Persistence.Implementation
 
         public bool ExistsUsernamePassword(string username, string password)
         {
+            return FindByUsernamePassword(username, password) != null;
+        }
+
+        public User FindByUsername(string username)
+        {
+            User[] users = DbSet.Where(u => u.Username.Equals(username))
+                .ToArray();
+            return (users != null && users.Length > 0) ? users[0] : null;
+        }
+
+        public User FindByUsernamePassword(string username, string password)
+        {
             User[] users = DbSet.Where(u => u.Username.Equals(username) && u.Password.Equals(password))
                 .ToArray();
-            return users != null && users.Length > 0;
+            return (users != null && users.Length > 0) ? users[0] : null;
         }
     }
 }

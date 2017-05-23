@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+ 	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+ 	
+	<endpoint
+		name="UserManagementWS"
+ 		implementation="uniovi.miw.unisell.ws.impl.UserWS"
+ 		url-pattern="/usermanagement" />
+ 	<endpoint
+		name="AdminManagementWS"
+ 		implementation="uniovi.miw.unisell.ws.impl.AdminWS"
+ 		url-pattern="/adminmanagement" />
+ 		
+</endpoints> 
