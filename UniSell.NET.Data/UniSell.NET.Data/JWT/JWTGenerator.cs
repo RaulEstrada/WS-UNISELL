@@ -10,7 +10,7 @@ namespace UniSell.NET.Data.JWT
     public class JWTGenerator
     {
         private static byte[] SECRET = Guid.NewGuid().ToByteArray();
-        public const int EXPIRATION = 1;
+        public const int EXPIRATION = 45;
 
         public static string Generate(string username)
         {

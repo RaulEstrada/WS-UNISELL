@@ -122,15 +122,9 @@ namespace UniSell.NET.Data.WebServices
                     throw new SoapException("Authentication Failure - Auth token provided is not valid",
                         SoapException.ClientFaultCode);
                 }
-            } catch (ArgumentException ex)
-            {
-                throw new SoapException("Authentication Failure - Auth token provided is not valid",
-                        SoapException.ClientFaultCode);
-            } catch (SecurityTokenInvalidSignatureException ex)
-            {
-                throw new SoapException("Authentication Failure - Auth token provided is not valid",
-                        SoapException.ClientFaultCode);
-            } catch (SecurityTokenExpiredException ex)
+            } catch (Exception ex) when (ex is ArgumentException
+                || ex is SecurityTokenInvalidSignatureException
+                || ex is SecurityTokenExpiredException)
             {
                 throw new SoapException("Authentication Failure - Auth token provided is not valid",
                         SoapException.ClientFaultCode);

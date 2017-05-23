@@ -16,5 +16,10 @@ namespace UniSell.NET.Data.Context
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<UserAdmin> UserAdmin { get; set; }
+        public DbSet<UserSeller> UserSeller { get; set; }
+        public DbSet<UserBuyer> UserBuyer { get; set; }
+        public DbSet<Company> Company { get; set; }
+
     }
 }

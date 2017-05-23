@@ -2,7 +2,7 @@
 
 namespace UniSell.NET.Data.Context
 {
-    public class DBInitializer : DropCreateDatabaseIfModelChanges<DBContext>
+    public class DBInitializer : DropCreateDatabaseAlways<DBContext>
     {
         protected override void Seed(DBContext context)
         {
