@@ -6,9 +6,5 @@
 		name="UserManagementWS"
  		implementation="uniovi.miw.unisell.ws.impl.UserWS"
  		url-pattern="/usermanagement" />
- 	<endpoint
-		name="AdminManagementWS"
- 		implementation="uniovi.miw.unisell.ws.impl.AdminWS"
- 		url-pattern="/adminmanagement" />
  		
 </endpoints> 

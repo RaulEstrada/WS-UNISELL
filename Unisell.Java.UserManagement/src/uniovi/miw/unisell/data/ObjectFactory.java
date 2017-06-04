@@ -98,6 +98,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindUsersByFilter }
+     * 
+     */
+    public FindUsersByFilter createFindUsersByFilter() {
+        return new FindUsersByFilter();
+    }
+
+    /**
+     * Create an instance of {@link UserSearchFilter }
+     * 
+     */
+    public UserSearchFilter createUserSearchFilter() {
+        return new UserSearchFilter();
+    }
+
+    /**
      * Create an instance of {@link CountUsers }
      * 
      */
@@ -130,11 +146,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUserByUsernamePassword }
+     * Create an instance of {@link FindUsersByFilterResponse }
      * 
      */
-    public FindUserByUsernamePassword createFindUserByUsernamePassword() {
-        return new FindUserByUsernamePassword();
+    public FindUsersByFilterResponse createFindUsersByFilterResponse() {
+        return new FindUsersByFilterResponse();
     }
 
     /**
@@ -159,14 +175,6 @@ public class ObjectFactory {
      */
     public UpdateUserResponse createUpdateUserResponse() {
         return new UpdateUserResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindUserByUsernamePasswordResponse }
-     * 
-     */
-    public FindUserByUsernamePasswordResponse createFindUserByUsernamePasswordResponse() {
-        return new FindUserByUsernamePasswordResponse();
     }
 
     /**

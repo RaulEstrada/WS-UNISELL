@@ -12,14 +12,19 @@ namespace UniSell.NET.Data.JWT
     {
         public static bool ValidateToken(string token)
         {
+            return JWTAuthenticator.GetTokenIdentity(token) != null;
+        }
+
+        public static string GetTokenIdentity(string token)
+        {
             var principal = JWTGenerator.GetPrincipal(token);
             var identity = principal.Identity as ClaimsIdentity;
             if (identity == null || !identity.IsAuthenticated)
             {
-                return false;
+                return null;
             }
             var usernameClaim = identity.FindFirst(ClaimTypes.Name);
-            return !(string.IsNullOrEmpty(usernameClaim?.Value));
+            return (string.IsNullOrEmpty(usernameClaim?.Value)) ? null : usernameClaim?.Value;
         }
     }
 }

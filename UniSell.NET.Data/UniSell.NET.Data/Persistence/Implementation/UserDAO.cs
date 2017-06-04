@@ -15,7 +15,9 @@ namespace UniSell.NET.Data.Persistence.Implementation
 
         public bool ExistsUsernamePassword(string username, string password)
         {
-            return FindByUsernamePassword(username, password) != null;
+            User[] users = DbSet.Where(u => u.Username.Equals(username) && u.Password.Equals(password) && u.activeAccount)
+                .ToArray();
+            return users != null && users.Length > 0;
         }
 
         public User FindByUsername(string username)
@@ -25,11 +27,17 @@ namespace UniSell.NET.Data.Persistence.Implementation
             return (users != null && users.Length > 0) ? users[0] : null;
         }
 
-        public User FindByUsernamePassword(string username, string password)
+        public User[] FindUsersByFilter(UserSearchFilter filter)
         {
-            User[] users = DbSet.Where(u => u.Username.Equals(username) && u.Password.Equals(password))
-                .ToArray();
-            return (users != null && users.Length > 0) ? users[0] : null;
+            User[] users = DbSet.ToArray();
+            if (!string.IsNullOrEmpty(filter.IdDocument)) { users = users.Where(u => u.IdDocument.Equals(filter.IdDocument)).ToArray(); }
+            if (filter.IdDocumentType != 0) { users = users.Where(u => u.IdDocumentType == filter.IdDocumentType).ToArray(); }
+            if (!string.IsNullOrEmpty(filter.Email)) { users = users.Where(u => u.Email.Equals(filter.Email)).ToArray(); }
+            if (!string.IsNullOrEmpty(filter.Name)) { users = users.Where(u => u.Name.Equals(filter.Name)).ToArray(); }
+            if (!string.IsNullOrEmpty(filter.Surname)) { users = users.Where(u => u.Surname.Equals(filter.Surname)).ToArray(); }
+            if (!string.IsNullOrEmpty(filter.Username)) { users = users.Where(u => u.Username.Equals(filter.Username)).ToArray(); }
+            if (filter.Role != 0) { users = users.Where(u => u.Role == filter.Role).ToArray(); }
+            return users;
         }
     }
 }

@@ -21,19 +21,10 @@
 		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet>
-		<servlet-name>adminmanagement</servlet-name>
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>usermanagement</servlet-name>
 		<url-pattern>/usermanagement</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>adminmanagement</servlet-name>
-		<url-pattern>/adminmanagement</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

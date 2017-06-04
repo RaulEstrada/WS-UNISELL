@@ -10,6 +10,7 @@ using UniSell.NET.Data.JWT;
 using UniSell.NET.Data.Model;
 using System.Security.Cryptography;
 using System.Text;
+using UniSell.NET.Data.Persistence.Implementation;
 
 namespace UniSell.NET.Data.WebServices
 {
@@ -39,7 +40,7 @@ namespace UniSell.NET.Data.WebServices
         {
             if (user.Role != Model.Types.UserRole.BUYER)
             {
-                //ValidateSecurity();
+                ValidateSecurity();
             }
             user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
@@ -85,16 +86,6 @@ namespace UniSell.NET.Data.WebServices
         }
 
         [WebMethod]
-        public User FindUserByUsernamePassword(string username, string password)
-        {
-            string hashedPassword = getHashedPassword(password);
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().FindByUsernamePassword(username, hashedPassword);
-            }
-        }
-
-        [WebMethod]
         public User FindUserByUsername(string username)
         {
             using (var ds = new DataService())
@@ -119,10 +110,18 @@ namespace UniSell.NET.Data.WebServices
         public User UpdateUser(User user)
         {
             ValidateSecurity();
-            user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
             {
-                return ds.getUserDAO().Update(user);
+                User dbUser = ds.getUserDAO().Find(user.Id);
+                dbUser.Name = (!String.IsNullOrEmpty(user.Name)) ? user.Name : dbUser.Name;
+                dbUser.Surname = (!String.IsNullOrEmpty(user.Surname)) ? user.Surname : dbUser.Surname;
+                dbUser.Username = (!String.IsNullOrEmpty(user.Username)) ? user.Username : dbUser.Username;
+                dbUser.Password = (!String.IsNullOrEmpty(user.Password)) ? getHashedPassword(user.Password) : dbUser.Password;
+                dbUser.IdDocument = (!String.IsNullOrEmpty(user.IdDocument)) ? user.IdDocument : dbUser.IdDocument;
+                dbUser.IdDocumentType = (user.IdDocumentType != 0) ? user.IdDocumentType : dbUser.IdDocumentType;
+                dbUser.Email = (!String.IsNullOrEmpty(user.Email)) ? user.Email : dbUser.Email;
+                dbUser.activeAccount = user.activeAccount;
+                return ds.getUserDAO().Update(dbUser);
             }
         }
 
@@ -134,6 +133,17 @@ namespace UniSell.NET.Data.WebServices
             using (var ds = new DataService())
             {
                 return ds.getUserAdminDAO().FindAllAdmins().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public User[] FindUsersByFilter(UserSearchFilter filter)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getUserDAO().FindUsersByFilter(filter);
             }
         }
 

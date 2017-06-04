@@ -7,7 +7,7 @@ namespace UniSell.NET.Data.Model.Types
 {
     public enum PersonIdDocumentType
     {
-        DNIE,
+        DNI,
         NIF,
         NIE, 
         PASSPORT
