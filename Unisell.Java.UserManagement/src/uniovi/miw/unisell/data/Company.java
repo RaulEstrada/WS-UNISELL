@@ -5,30 +5,26 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para User complex type.
+ * <p>Clase Java para Company complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="User">
+ * &lt;complexType name="Company">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="Id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="version" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Surname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="IdDocument" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="IdDocumentType" type="{http://unisell.net.data/}PersonIdDocumentType"/>
- *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="activeAccount" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="IdDocumentType" type="{http://unisell.net.data/}LegalPersonIdDocumentType"/>
+ *         &lt;element name="LocationInfo" type="{http://unisell.net.data/}LocationInfo" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,43 +34,31 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "User", propOrder = {
+@XmlType(name = "Company", propOrder = {
     "id",
     "version",
     "name",
-    "surname",
-    "email",
+    "description",
     "idDocument",
     "idDocumentType",
-    "username",
-    "password",
-    "activeAccount"
+    "locationInfo"
 })
-@XmlSeeAlso({
-    UserAdmin.class,
-    UserSeller.class
-})
-public abstract class User {
+public class Company {
 
     @XmlElement(name = "Id")
     protected long id;
     protected long version;
     @XmlElement(name = "Name")
     protected String name;
-    @XmlElement(name = "Surname")
-    protected String surname;
-    @XmlElement(name = "Email")
-    protected String email;
+    @XmlElement(name = "Description")
+    protected String description;
     @XmlElement(name = "IdDocument")
     protected String idDocument;
     @XmlElement(name = "IdDocumentType", required = true)
     @XmlSchemaType(name = "string")
-    protected PersonIdDocumentType idDocumentType;
-    @XmlElement(name = "Username")
-    protected String username;
-    @XmlElement(name = "Password")
-    protected String password;
-    protected boolean activeAccount;
+    protected LegalPersonIdDocumentType idDocumentType;
+    @XmlElement(name = "LocationInfo")
+    protected LocationInfo locationInfo;
 
     /**
      * Obtiene el valor de la propiedad id.
@@ -133,51 +117,27 @@ public abstract class User {
     }
 
     /**
-     * Obtiene el valor de la propiedad surname.
+     * Obtiene el valor de la propiedad description.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getSurname() {
-        return surname;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * Define el valor de la propiedad surname.
+     * Define el valor de la propiedad description.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSurname(String value) {
-        this.surname = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad email.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Define el valor de la propiedad email.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setEmail(String value) {
-        this.email = value;
+    public void setDescription(String value) {
+        this.description = value;
     }
 
     /**
@@ -209,10 +169,10 @@ public abstract class User {
      * 
      * @return
      *     possible object is
-     *     {@link PersonIdDocumentType }
+     *     {@link LegalPersonIdDocumentType }
      *     
      */
-    public PersonIdDocumentType getIdDocumentType() {
+    public LegalPersonIdDocumentType getIdDocumentType() {
         return idDocumentType;
     }
 
@@ -221,75 +181,35 @@ public abstract class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link PersonIdDocumentType }
+     *     {@link LegalPersonIdDocumentType }
      *     
      */
-    public void setIdDocumentType(PersonIdDocumentType value) {
+    public void setIdDocumentType(LegalPersonIdDocumentType value) {
         this.idDocumentType = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad username.
+     * Obtiene el valor de la propiedad locationInfo.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link LocationInfo }
      *     
      */
-    public String getUsername() {
-        return username;
+    public LocationInfo getLocationInfo() {
+        return locationInfo;
     }
 
     /**
-     * Define el valor de la propiedad username.
+     * Define el valor de la propiedad locationInfo.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link LocationInfo }
      *     
      */
-    public void setUsername(String value) {
-        this.username = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad password.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Define el valor de la propiedad password.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPassword(String value) {
-        this.password = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad activeAccount.
-     * 
-     */
-    public boolean isActiveAccount() {
-        return activeAccount;
-    }
-
-    /**
-     * Define el valor de la propiedad activeAccount.
-     * 
-     */
-    public void setActiveAccount(boolean value) {
-        this.activeAccount = value;
+    public void setLocationInfo(LocationInfo value) {
+        this.locationInfo = value;
     }
 
 }

@@ -166,6 +166,20 @@ public interface DataAccessSoap {
 
     /**
      * 
+     * @param security
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfUserSeller
+     */
+    @WebMethod(operationName = "ListAllSellers", action = "http://unisell.net.data/ListAllSellers")
+    @WebResult(name = "ListAllSellersResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "ListAllSellers", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllSellers")
+    @ResponseWrapper(localName = "ListAllSellersResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllSellersResponse")
+    public ArrayOfUserSeller listAllSellers(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
      * @param filter
      * @param security
      * @return
@@ -178,6 +192,119 @@ public interface DataAccessSoap {
     public ArrayOfUser findUsersByFilter(
         @WebParam(name = "filter", targetNamespace = "http://unisell.net.data/")
         UserSearchFilter filter,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @return
+     *     returns int
+     */
+    @WebMethod(operationName = "CountCompanies", action = "http://unisell.net.data/CountCompanies")
+    @WebResult(name = "CountCompaniesResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "CountCompanies", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CountCompanies")
+    @ResponseWrapper(localName = "CountCompaniesResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CountCompaniesResponse")
+    public int countCompanies(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @param company
+     * @return
+     *     returns uniovi.miw.unisell.data.Company
+     */
+    @WebMethod(operationName = "CreateCompany", action = "http://unisell.net.data/CreateCompany")
+    @WebResult(name = "CreateCompanyResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "CreateCompany", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CreateCompany")
+    @ResponseWrapper(localName = "CreateCompanyResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CreateCompanyResponse")
+    public Company createCompany(
+        @WebParam(name = "Company", targetNamespace = "http://unisell.net.data/")
+        Company company,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfCompany
+     */
+    @WebMethod(operationName = "FindAllCompanies", action = "http://unisell.net.data/FindAllCompanies")
+    @WebResult(name = "FindAllCompaniesResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindAllCompanies", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindAllCompanies")
+    @ResponseWrapper(localName = "FindAllCompaniesResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindAllCompaniesResponse")
+    public ArrayOfCompany findAllCompanies(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @param id
+     * @return
+     *     returns uniovi.miw.unisell.data.Company
+     */
+    @WebMethod(operationName = "FindCompany", action = "http://unisell.net.data/FindCompany")
+    @WebResult(name = "FindCompanyResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindCompany", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindCompany")
+    @ResponseWrapper(localName = "FindCompanyResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindCompanyResponse")
+    public Company findCompany(
+        @WebParam(name = "id", targetNamespace = "http://unisell.net.data/")
+        long id,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @param id
+     * @return
+     *     returns uniovi.miw.unisell.data.Company
+     */
+    @WebMethod(operationName = "RemoveCompany", action = "http://unisell.net.data/RemoveCompany")
+    @WebResult(name = "RemoveCompanyResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "RemoveCompany", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.RemoveCompany")
+    @ResponseWrapper(localName = "RemoveCompanyResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.RemoveCompanyResponse")
+    public Company removeCompany(
+        @WebParam(name = "id", targetNamespace = "http://unisell.net.data/")
+        long id,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @param company
+     * @return
+     *     returns uniovi.miw.unisell.data.Company
+     */
+    @WebMethod(operationName = "UpdateCompany", action = "http://unisell.net.data/UpdateCompany")
+    @WebResult(name = "UpdateCompanyResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "UpdateCompany", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.UpdateCompany")
+    @ResponseWrapper(localName = "UpdateCompanyResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.UpdateCompanyResponse")
+    public Company updateCompany(
+        @WebParam(name = "company", targetNamespace = "http://unisell.net.data/")
+        Company company,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param filter
+     * @param security
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfCompany
+     */
+    @WebMethod(operationName = "FindCompaniesByFilter", action = "http://unisell.net.data/FindCompaniesByFilter")
+    @WebResult(name = "FindCompaniesByFilterResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindCompaniesByFilter", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindCompaniesByFilter")
+    @ResponseWrapper(localName = "FindCompaniesByFilterResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindCompaniesByFilterResponse")
+    public ArrayOfCompany findCompaniesByFilter(
+        @WebParam(name = "filter", targetNamespace = "http://unisell.net.data/")
+        CompanySearchFilter filter,
         @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
         Security security);
 

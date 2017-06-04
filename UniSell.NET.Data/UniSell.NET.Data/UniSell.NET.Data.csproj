@@ -162,13 +162,18 @@
     <Compile Include="Model\UserBuyer.cs" />
     <Compile Include="Model\UserSeller.cs" />
     <Compile Include="Model\valueObjects\LocationInfo.cs" />
+    <Compile Include="Persistence\ICompanyDAO.cs" />
     <Compile Include="Persistence\IGenericDAO.cs" />
+    <Compile Include="Persistence\Implementation\CompanyDAO.cs" />
+    <Compile Include="Persistence\Implementation\CompanySearchFilter.cs" />
     <Compile Include="Persistence\Implementation\GenericDAO.cs" />
     <Compile Include="Persistence\Implementation\UserAdminDAO.cs" />
     <Compile Include="Persistence\Implementation\UserDAO.cs" />
     <Compile Include="Persistence\Implementation\UserSearchFilter.cs" />
+    <Compile Include="Persistence\Implementation\UserSellerDAO.cs" />
     <Compile Include="Persistence\IUserAdminDAO.cs" />
     <Compile Include="Persistence\IUserDAO.cs" />
+    <Compile Include="Persistence\IUserSellerDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

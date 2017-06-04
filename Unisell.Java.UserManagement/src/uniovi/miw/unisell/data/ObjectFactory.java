@@ -42,11 +42,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUserByUsernameResponse }
+     * Create an instance of {@link FindCompany }
      * 
      */
-    public FindUserByUsernameResponse createFindUserByUsernameResponse() {
-        return new FindUserByUsernameResponse();
+    public FindCompany createFindCompany() {
+        return new FindCompany();
     }
 
     /**
@@ -66,27 +66,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link ListAllSellersResponse }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
+    public ListAllSellersResponse createListAllSellersResponse() {
+        return new ListAllSellersResponse();
     }
 
     /**
-     * Create an instance of {@link FindAllUsersResponse }
+     * Create an instance of {@link ArrayOfUserSeller }
      * 
      */
-    public FindAllUsersResponse createFindAllUsersResponse() {
-        return new FindAllUsersResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfUser }
-     * 
-     */
-    public ArrayOfUser createArrayOfUser() {
-        return new ArrayOfUser();
+    public ArrayOfUserSeller createArrayOfUserSeller() {
+        return new ArrayOfUserSeller();
     }
 
     /**
@@ -122,6 +114,134 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UpdateCompany }
+     * 
+     */
+    public UpdateCompany createUpdateCompany() {
+        return new UpdateCompany();
+    }
+
+    /**
+     * Create an instance of {@link Company }
+     * 
+     */
+    public Company createCompany() {
+        return new Company();
+    }
+
+    /**
+     * Create an instance of {@link FindCompaniesByFilter }
+     * 
+     */
+    public FindCompaniesByFilter createFindCompaniesByFilter() {
+        return new FindCompaniesByFilter();
+    }
+
+    /**
+     * Create an instance of {@link CompanySearchFilter }
+     * 
+     */
+    public CompanySearchFilter createCompanySearchFilter() {
+        return new CompanySearchFilter();
+    }
+
+    /**
+     * Create an instance of {@link RemoveUserResponse }
+     * 
+     */
+    public RemoveUserResponse createRemoveUserResponse() {
+        return new RemoveUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link CreateUserResponse }
+     * 
+     */
+    public CreateUserResponse createCreateUserResponse() {
+        return new CreateUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindAllCompanies }
+     * 
+     */
+    public FindAllCompanies createFindAllCompanies() {
+        return new FindAllCompanies();
+    }
+
+    /**
+     * Create an instance of {@link FindUserByUsername }
+     * 
+     */
+    public FindUserByUsername createFindUserByUsername() {
+        return new FindUserByUsername();
+    }
+
+    /**
+     * Create an instance of {@link FindUser }
+     * 
+     */
+    public FindUser createFindUser() {
+        return new FindUser();
+    }
+
+    /**
+     * Create an instance of {@link FindCompanyResponse }
+     * 
+     */
+    public FindCompanyResponse createFindCompanyResponse() {
+        return new FindCompanyResponse();
+    }
+
+    /**
+     * Create an instance of {@link CountCompaniesResponse }
+     * 
+     */
+    public CountCompaniesResponse createCountCompaniesResponse() {
+        return new CountCompaniesResponse();
+    }
+
+    /**
+     * Create an instance of {@link UpdateCompanyResponse }
+     * 
+     */
+    public UpdateCompanyResponse createUpdateCompanyResponse() {
+        return new UpdateCompanyResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindUserByUsernameResponse }
+     * 
+     */
+    public FindUserByUsernameResponse createFindUserByUsernameResponse() {
+        return new FindUserByUsernameResponse();
+    }
+
+    /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindAllUsersResponse }
+     * 
+     */
+    public FindAllUsersResponse createFindAllUsersResponse() {
+        return new FindAllUsersResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfUser }
+     * 
+     */
+    public ArrayOfUser createArrayOfUser() {
+        return new ArrayOfUser();
+    }
+
+    /**
      * Create an instance of {@link CountUsersResponse }
      * 
      */
@@ -146,6 +266,46 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CreateCompany }
+     * 
+     */
+    public CreateCompany createCreateCompany() {
+        return new CreateCompany();
+    }
+
+    /**
+     * Create an instance of {@link FindAllCompaniesResponse }
+     * 
+     */
+    public FindAllCompaniesResponse createFindAllCompaniesResponse() {
+        return new FindAllCompaniesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfCompany }
+     * 
+     */
+    public ArrayOfCompany createArrayOfCompany() {
+        return new ArrayOfCompany();
+    }
+
+    /**
+     * Create an instance of {@link RemoveCompanyResponse }
+     * 
+     */
+    public RemoveCompanyResponse createRemoveCompanyResponse() {
+        return new RemoveCompanyResponse();
+    }
+
+    /**
+     * Create an instance of {@link RemoveCompany }
+     * 
+     */
+    public RemoveCompany createRemoveCompany() {
+        return new RemoveCompany();
+    }
+
+    /**
      * Create an instance of {@link FindUsersByFilterResponse }
      * 
      */
@@ -154,19 +314,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RemoveUserResponse }
+     * Create an instance of {@link CreateCompanyResponse }
      * 
      */
-    public RemoveUserResponse createRemoveUserResponse() {
-        return new RemoveUserResponse();
+    public CreateCompanyResponse createCreateCompanyResponse() {
+        return new CreateCompanyResponse();
     }
 
     /**
-     * Create an instance of {@link CreateUserResponse }
+     * Create an instance of {@link FindCompaniesByFilterResponse }
      * 
      */
-    public CreateUserResponse createCreateUserResponse() {
-        return new CreateUserResponse();
+    public FindCompaniesByFilterResponse createFindCompaniesByFilterResponse() {
+        return new FindCompaniesByFilterResponse();
+    }
+
+    /**
+     * Create an instance of {@link CountCompanies }
+     * 
+     */
+    public CountCompanies createCountCompanies() {
+        return new CountCompanies();
     }
 
     /**
@@ -178,14 +346,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUserByUsername }
-     * 
-     */
-    public FindUserByUsername createFindUserByUsername() {
-        return new FindUserByUsername();
-    }
-
-    /**
      * Create an instance of {@link UpdateUser }
      * 
      */
@@ -194,11 +354,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUser }
+     * Create an instance of {@link ListAllSellers }
      * 
      */
-    public FindUser createFindUser() {
-        return new FindUser();
+    public ListAllSellers createListAllSellers() {
+        return new ListAllSellers();
     }
 
     /**
@@ -231,6 +391,22 @@ public class ObjectFactory {
      */
     public UserAdmin createUserAdmin() {
         return new UserAdmin();
+    }
+
+    /**
+     * Create an instance of {@link UserSeller }
+     * 
+     */
+    public UserSeller createUserSeller() {
+        return new UserSeller();
+    }
+
+    /**
+     * Create an instance of {@link LocationInfo }
+     * 
+     */
+    public LocationInfo createLocationInfo() {
+        return new LocationInfo();
     }
 
     /**

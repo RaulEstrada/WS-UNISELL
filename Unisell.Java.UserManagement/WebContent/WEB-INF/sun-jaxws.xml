@@ -7,4 +7,9 @@
  		implementation="uniovi.miw.unisell.ws.impl.UserWS"
  		url-pattern="/usermanagement" />
  		
+ 	<endpoint
+		name="CompanyManagementWS"
+ 		implementation="uniovi.miw.unisell.ws.impl.CompanyWS"
+ 		url-pattern="/companymanagement" />
+ 		
 </endpoints> 

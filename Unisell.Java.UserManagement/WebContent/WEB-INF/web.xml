@@ -22,9 +22,20 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>companymanagement</servlet-name>
+		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>usermanagement</servlet-name>
 		<url-pattern>/usermanagement</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>companymanagement</servlet-name>
+		<url-pattern>/companymanagement</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

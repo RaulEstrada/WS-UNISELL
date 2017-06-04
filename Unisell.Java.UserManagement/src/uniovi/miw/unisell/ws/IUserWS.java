@@ -18,13 +18,39 @@ import uniovi.miw.unisell.ws.exceptions.*;
 public interface IUserWS {
 	@WebMethod
 	public EditUserData createAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			UserData admin) throws InvalidUserException, RepeatedUsernameException, 
+			UserData admin) throws InvalidEntityException, RepeatedUsernameException, 
 			RepeatedEmailException, RepeatedDocumentException;
 	
 	@WebMethod
-	public EditUserData editUser(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			EditUserData user) throws InvalidUserException, RepeatedUsernameException, 
+	public EditUserData createSeller(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			UserData user) throws InvalidEntityException, RepeatedUsernameException, 
 			RepeatedEmailException, RepeatedDocumentException;
+	
+	@WebMethod
+	public EditUserData editUserAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			EditUserData user) throws InvalidEntityException, RepeatedUsernameException, 
+			RepeatedEmailException, RepeatedDocumentException;
+	
+	@WebMethod
+	public EditUserData editUserSeller(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			EditUserData user) throws InvalidEntityException, RepeatedUsernameException, 
+			RepeatedEmailException, RepeatedDocumentException;
+	
+	@WebMethod
+	public EditUserData findUserAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			Long id);
+	
+	@WebMethod
+	public EditUserData findUserSeller(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			Long id);
+	
+	@WebMethod
+	public EditUserData removeUserAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			Long id);
+	
+	@WebMethod
+	public EditUserData removeUserSeller(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			Long id);
 	
 	@WebMethod
 	public String login(String username, String password) throws ArgumentException;

@@ -19,7 +19,7 @@ namespace UniSell.NET.Data.WebServices
     /// </summary>
     [WebService(Namespace = "http://unisell.net.data/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    public class DataAccess : System.Web.Services.WebService
+    public partial class DataAccess : System.Web.Services.WebService
     {
         public Security Security { set; get; }
 
@@ -138,12 +138,106 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public UserSeller[] ListAllSellers()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getUserSellerDAO().FindAllSellers().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User[] FindUsersByFilter(UserSearchFilter filter)
         {
             ValidateSecurity();
             using (var ds = new DataService())
             {
                 return ds.getUserDAO().FindUsersByFilter(filter);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public int CountCompanies()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCompanyDAO().Count();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Company CreateCompany(Company Company)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCompanyDAO().Create(Company);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Company[] FindAllCompanies()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCompanyDAO().All().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Company FindCompany(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCompanyDAO().Find(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Company RemoveCompany(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCompanyDAO().Remove(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Company UpdateCompany(Company company)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                Company dbCompany = ds.getCompanyDAO().Find(company.Id);
+                dbCompany.Name = (!string.IsNullOrEmpty(company.Name)) ? company.Name : dbCompany.Name;
+                dbCompany.Description = (!string.IsNullOrEmpty(company.Description)) ? company.Description : dbCompany.Description;
+                dbCompany.IdDocument = (!string.IsNullOrEmpty(company.IdDocument)) ? company.IdDocument : dbCompany.IdDocument;
+                dbCompany.IdDocumentType = (company.IdDocumentType != 0) ? company.IdDocumentType : dbCompany.IdDocumentType;
+                dbCompany.LocationInfo = (company.LocationInfo != null) ? company.LocationInfo : dbCompany.LocationInfo;
+                return ds.getCompanyDAO().Update(dbCompany);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Company[] FindCompaniesByFilter(CompanySearchFilter filter)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCompanyDAO().FindCompaniesByFilter(filter);
             }
         }
 
