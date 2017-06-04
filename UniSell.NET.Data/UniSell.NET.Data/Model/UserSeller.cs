@@ -14,12 +14,9 @@ namespace UniSell.NET.Data.Model
         [ForeignKey("company_id")]
         public Company Company { get; set; }
 
-        public override UserRole Role
+        public UserSeller()
         {
-            get
-            {
-                return UserRole.SELLER;
-            }
+            Role = UserRole.SELLER;
         }
     }
 }

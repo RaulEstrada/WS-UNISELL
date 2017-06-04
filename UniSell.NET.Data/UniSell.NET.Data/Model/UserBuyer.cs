@@ -9,12 +9,9 @@ namespace UniSell.NET.Data.Model
 
     public class UserBuyer : User
     {
-        public override UserRole Role
+        public UserBuyer()
         {
-            get
-            {
-                return UserRole.BUYER;
-            }
+            Role = UserRole.BUYER;
         }
     }
 }

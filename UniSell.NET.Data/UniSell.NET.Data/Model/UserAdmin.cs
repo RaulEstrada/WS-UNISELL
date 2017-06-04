@@ -9,12 +9,9 @@ namespace UniSell.NET.Data.Model
 {
     public class UserAdmin : User
     {
-        public override UserRole Role
+        public UserAdmin()
         {
-            get
-            {
-                return UserRole.ADMIN;
-            }
+            Role = UserRole.ADMIN;
         }
     }
 }

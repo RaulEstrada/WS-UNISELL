@@ -37,7 +37,7 @@ namespace UniSell.NET.Data.Model
         [Required]
         public bool activeAccount { get; set; } = true;
         [Required]
-        public abstract UserRole Role { get; }
+        public UserRole Role { get; set; }
 
         public User() { }
 

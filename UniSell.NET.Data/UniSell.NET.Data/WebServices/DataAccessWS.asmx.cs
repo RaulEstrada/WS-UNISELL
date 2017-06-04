@@ -121,6 +121,12 @@ namespace UniSell.NET.Data.WebServices
                 dbUser.IdDocumentType = (user.IdDocumentType != 0) ? user.IdDocumentType : dbUser.IdDocumentType;
                 dbUser.Email = (!String.IsNullOrEmpty(user.Email)) ? user.Email : dbUser.Email;
                 dbUser.activeAccount = user.activeAccount;
+                if (user.Role == Model.Types.UserRole.SELLER)
+                {
+                    UserSeller seller = user as UserSeller;
+                    UserSeller dbSeller = dbUser as UserSeller;
+                    dbSeller.company_id = (seller.company_id != 0) ? seller.company_id : dbSeller.company_id;
+                }
                 return ds.getUserDAO().Update(dbUser);
             }
         }

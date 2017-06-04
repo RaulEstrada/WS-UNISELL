@@ -6,7 +6,7 @@ public class EditUserData implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private UserData userData = new UserData();
+	protected UserData userData = new UserData();
 	
 	public Long getId() {
 		return id;

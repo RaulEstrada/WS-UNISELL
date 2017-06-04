@@ -12,4 +12,14 @@
  		implementation="uniovi.miw.unisell.ws.impl.CompanyWS"
  		url-pattern="/companymanagement" />
  		
+ 	<endpoint
+		name="AdminManagementWS"
+ 		implementation="uniovi.miw.unisell.ws.impl.UserAdminWS"
+ 		url-pattern="/adminmanagement" />
+ 		
+ 	<endpoint
+		name="SellerManagementWS"
+ 		implementation="uniovi.miw.unisell.ws.impl.UserSellerWS"
+ 		url-pattern="/sellermanagement" />
+ 		
 </endpoints> 

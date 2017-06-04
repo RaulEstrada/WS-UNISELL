@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="activeAccount" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="Role" type="{http://unisell.net.data/}UserRole"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -48,7 +49,8 @@ import javax.xml.bind.annotation.XmlType;
     "idDocumentType",
     "username",
     "password",
-    "activeAccount"
+    "activeAccount",
+    "role"
 })
 @XmlSeeAlso({
     UserAdmin.class,
@@ -75,6 +77,9 @@ public abstract class User {
     @XmlElement(name = "Password")
     protected String password;
     protected boolean activeAccount;
+    @XmlElement(name = "Role", required = true)
+    @XmlSchemaType(name = "string")
+    protected UserRole role;
 
     /**
      * Obtiene el valor de la propiedad id.
@@ -290,6 +295,30 @@ public abstract class User {
      */
     public void setActiveAccount(boolean value) {
         this.activeAccount = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad role.
+     * 
+     * @return
+     *     possible object is
+     *     {@link UserRole }
+     *     
+     */
+    public UserRole getRole() {
+        return role;
+    }
+
+    /**
+     * Define el valor de la propiedad role.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link UserRole }
+     *     
+     */
+    public void setRole(UserRole value) {
+        this.role = value;
     }
 
 }
