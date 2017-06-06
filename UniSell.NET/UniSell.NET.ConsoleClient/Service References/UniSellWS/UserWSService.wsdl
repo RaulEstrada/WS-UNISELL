@@ -32,6 +32,15 @@
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
     </operation>
+    <operation name="findUserRoles">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="disableAccount">
       <soap:operation soapAction="" />
       <input>
@@ -63,15 +72,6 @@
       <fault name="ArgumentException">
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
-    </operation>
-    <operation name="findUserRoles">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
     </operation>
     <operation name="listUsersByFilter">
       <soap:operation soapAction="" />

@@ -3,12 +3,14 @@ package uniovi.miw.unisell.model;
 import java.io.Serializable;
 
 import uniovi.miw.unisell.data.PersonIdDocumentType;
+import uniovi.miw.unisell.data.UserRole;
 
 public class UserData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name, surname, email, idDocument, username, password;
 	private boolean accountEnabled;
 	private PersonIdDocumentType documentType;
+	private UserRole role;
 	
 	public String getName() {
 		return name;
@@ -79,6 +81,15 @@ public class UserData implements Serializable {
 
 	public UserData setAccountEnabled(boolean accountEnabled) {
 		this.accountEnabled = accountEnabled;
+		return this;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public UserData setRole(UserRole role) {
+		this.role = role;
 		return this;
 	}
 

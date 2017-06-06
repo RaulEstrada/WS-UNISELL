@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://impl.ws.unisell.miw.uniovi/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="UserAdminWSService" targetNamespace="http://impl.ws.unisell.miw.uniovi/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <import namespace="http://ws.unisell.miw.uniovi/" location="http://156.35.98.14:8086/Unisell.Java.UserManagement/adminmanagement?wsdl=1" />
+  <types />
+  <binding xmlns:ns1="http://ws.unisell.miw.uniovi/" name="UserAdminWSPortBinding" type="ns1:IUserAdminWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="createAdmin">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:createAdmin" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="InvalidEntityException">
+        <soap:fault use="literal" name="InvalidEntityException" namespace="" />
+      </fault>
+      <fault name="RepeatedUsernameException">
+        <soap:fault use="literal" name="RepeatedUsernameException" namespace="" />
+      </fault>
+      <fault name="RepeatedEmailException">
+        <soap:fault use="literal" name="RepeatedEmailException" namespace="" />
+      </fault>
+      <fault name="RepeatedDocumentException">
+        <soap:fault use="literal" name="RepeatedDocumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="editAdmin">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:editAdmin" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="InvalidEntityException">
+        <soap:fault use="literal" name="InvalidEntityException" namespace="" />
+      </fault>
+      <fault name="RepeatedUsernameException">
+        <soap:fault use="literal" name="RepeatedUsernameException" namespace="" />
+      </fault>
+      <fault name="RepeatedEmailException">
+        <soap:fault use="literal" name="RepeatedEmailException" namespace="" />
+      </fault>
+      <fault name="RepeatedDocumentException">
+        <soap:fault use="literal" name="RepeatedDocumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="findAdmin">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:findAdmin" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="UserAdminWSService">
+    <port name="UserAdminWSPort" binding="tns:UserAdminWSPortBinding">
+      <soap:address location="http://156.35.98.14:8086/Unisell.Java.UserManagement/adminmanagement" />
+    </port>
+  </service>
+</definitions>

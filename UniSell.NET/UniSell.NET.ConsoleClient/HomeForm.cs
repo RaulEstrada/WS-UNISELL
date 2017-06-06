@@ -9,17 +9,19 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UniSell.NET.ConsoleClient.UniSellAdminWS;
+using UniSell.NET.ConsoleClient.UniSellSellerWS;
 using UniSell.NET.ConsoleClient.UniSellWS;
 
 namespace UniSell.NET.ConsoleClient
 {
     public partial class HomeForm : Form
     {
-        private Security Security;
+        private string authToken;
 
         public HomeForm(string authToken)
         {
-            this.Security = new Security { BinarySecurityToken = authToken };
+            this.authToken = authToken;
             InitializeComponent();
             InitializeUserRolesCombobox();
             InitializeUserDocumentTypeCombobox();
@@ -30,7 +32,7 @@ namespace UniSell.NET.ConsoleClient
         private void InitializeUserRolesCombobox()
         {
             UserWSClient ws = new UserWSClient();
-            UserRole?[] roles = ws.findUserRoles();
+            UniSellWS.UserRole?[] roles = ws.findUserRoles();
             if (roles != null)
             {
                 foreach (var rol in roles)
@@ -43,7 +45,7 @@ namespace UniSell.NET.ConsoleClient
         private void InitializeUserDocumentTypeCombobox()
         {
             UserWSClient ws = new UserWSClient();
-            PersonIdDocumentType?[] types = ws.findPersonDocumentTypes();
+            UniSellWS.PersonIdDocumentType?[] types = ws.findPersonDocumentTypes();
             if (types != null)
             {
                 foreach (var type in types)
@@ -60,9 +62,10 @@ namespace UniSell.NET.ConsoleClient
             userTable.Controls.Add(new Label() { Text = "Email" }, 2, 0);
             userTable.Controls.Add(new Label() { Text = "Doc." }, 3, 0);
             userTable.Controls.Add(new Label() { Text = "Usuario" }, 4, 0);
-            userTable.Controls.Add(new Label() { Text = "Editar" }, 5, 0);
-            userTable.Controls.Add(new Label() { Text = "Borrar" }, 6, 0);
-            userTable.Controls.Add(new Label() { Text = "Activar" }, 7, 0);
+            userTable.Controls.Add(new Label() { Text = "Rol" }, 5, 0);
+            userTable.Controls.Add(new Label() { Text = "Editar" }, 6, 0);
+            userTable.Controls.Add(new Label() { Text = "Borrar" }, 7, 0);
+            userTable.Controls.Add(new Label() { Text = "Activar" }, 8, 0);
         }
 
         private void Tab_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,19 +98,23 @@ namespace UniSell.NET.ConsoleClient
                 userTable.Controls.RemoveAt(indx);
             }
             userTable.RowCount = 1;
-            editUserData[] users = ws.listUsersByFilter(Security, new listUsersByFilter { arg1 = filter });
+            UniSellWS.editUserData[] users = ws.listUsersByFilter(new UniSellWS.Security { BinarySecurityToken = authToken }, new listUsersByFilter { arg1 = filter });
             FillUsersTable(users);
         }
 
-        private void FillUsersTable(editUserData[] users)
+        private void FillUsersTable(UniSellWS.editUserData[] users)
         {
             if (users == null)
             {
                 return;
             }
-            foreach (editUserData user in users)
+            foreach (UniSellWS.editUserData user in users)
             {
-                Button editBtn = new Button{Text = "Editar"};
+                dynamic editTag = new ExpandoObject();
+                editTag.id = user.id;
+                editTag.role = user.userData.role;
+                Button editBtn = new Button{Text = "Editar", Tag = editTag };
+                editBtn.Click += EditUser;
                 Button removeBtn = new Button { Text = "Borrar", Tag = user.id };
                 removeBtn.Click += DeleteUser;
                 dynamic activateTag = new ExpandoObject();
@@ -124,9 +131,10 @@ namespace UniSell.NET.ConsoleClient
                 userTable.Controls.Add(new Label() { Text = user.userData.email }, 2, userTable.RowCount - 1);
                 userTable.Controls.Add(new Label() { Text = user.userData.documentType + " " + user.userData.idDocument }, 3, userTable.RowCount - 1);
                 userTable.Controls.Add(new Label() { Text = user.userData.username }, 4, userTable.RowCount - 1);
-                userTable.Controls.Add(editBtn, 5, userTable.RowCount - 1);
-                userTable.Controls.Add(removeBtn, 6, userTable.RowCount - 1);
-                userTable.Controls.Add(activateBtn, 7, userTable.RowCount - 1);
+                userTable.Controls.Add(new Label() { Text = user.userData.role.ToString() }, 5, userTable.RowCount - 1);
+                userTable.Controls.Add(editBtn, 6, userTable.RowCount - 1);
+                userTable.Controls.Add(removeBtn, 7, userTable.RowCount - 1);
+                userTable.Controls.Add(activateBtn, 8, userTable.RowCount - 1);
             }
         }
 
@@ -148,7 +156,7 @@ namespace UniSell.NET.ConsoleClient
                 UserWSClient ws = new UserWSClient();
                 try
                 {
-                    removeUserResponse response = ws.removeUser(Security, new removeUser { arg1 = id,  arg1Specified = true });
+                    removeUserResponse response = ws.removeUser(new UniSellWS.Security { BinarySecurityToken = authToken }, new removeUser { arg1 = id,  arg1Specified = true });
                     FilterUsersTable();
                 }
                 catch (FaultException<ElementNotFoundException> ex)
@@ -177,11 +185,11 @@ namespace UniSell.NET.ConsoleClient
             {
                 if (enabled)
                 {
-                    ws.disableAccount(Security, new disableAccount { arg1 = id, arg1Specified = true });
+                    ws.disableAccount(new UniSellWS.Security { BinarySecurityToken = authToken }, new disableAccount { arg1 = id, arg1Specified = true });
                 }
                 else
                 {
-                    ws.enableAccount(Security, new enableAccount { arg1 = id, arg1Specified = true });
+                    ws.enableAccount(new UniSellWS.Security { BinarySecurityToken = authToken }, new enableAccount { arg1 = id, arg1Specified = true });
                 }
                 FilterUsersTable();
             } catch (FaultException<UniSellWS.ArgumentException> ex)
@@ -198,6 +206,38 @@ namespace UniSell.NET.ConsoleClient
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
             }
+        }
+
+        private void EditUser(dynamic sender, EventArgs e)
+        {
+            long id = sender.Tag.id;
+            UniSellWS.UserRole role = sender.Tag.role;
+            dynamic user = null;
+            if (role == UniSellWS.UserRole.SELLER)
+            {
+                UserSellerWSClient ws = new UserSellerWSClient();
+                findSellerResponse res = ws.findSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken }, new findSeller { arg1 = id, arg1Specified = true });
+                user = res.@return;
+            } else
+            {
+                UserAdminWSClient ws = new UserAdminWSClient();
+                findAdminResponse res = ws.findAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken }, new findAdmin { arg1 = id, arg1Specified = true });
+                user = res.@return;
+            }
+            UserForm form = new UserForm(role == UniSellWS.UserRole.SELLER, user);
+            form.Show();
+        }
+
+        private void newAdminButton_Click(object sender, EventArgs e)
+        {
+            UserForm form = new UserForm(false, authToken);
+            form.Show();
+        }
+
+        private void newSellerButton_Click(object sender, EventArgs e)
+        {
+            UserForm form = new UserForm(true, authToken);
+            form.Show();
         }
     }
 }

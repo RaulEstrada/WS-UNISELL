@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.xmlsoap.org/ws/2002/04/secext" targetNamespace="http://schemas.xmlsoap.org/ws/2002/04/secext" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="arg0" nillable="true" type="tns:Security" />
+  <xs:complexType name="Security">
+    <xs:sequence>
+      <xs:element minOccurs="0" form="qualified" name="BinarySecurityToken" type="xs:string" />
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="skip" />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://unisell.net.data/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="PersonIdDocumentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DNI" />
+      <xs:enumeration value="NIF" />
+      <xs:enumeration value="NIE" />
+      <xs:enumeration value="PASSPORT" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UserRole">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ADMIN" />
+      <xs:enumeration value="SELLER" />
+      <xs:enumeration value="BUYER" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://ws.unisell.miw.uniovi/" xmlns:ns1="http://unisell.net.data/" targetNamespace="http://ws.unisell.miw.uniovi/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://156.35.98.14:8086/Unisell.Java.UserManagement/companymanagement?xsd=2" namespace="http://unisell.net.data/" />
+  <xs:element name="ArgumentException" type="tns:ArgumentException" />
+  <xs:element name="CannotRemoveElementException" type="tns:CannotRemoveElementException" />
+  <xs:element name="ElementNotFoundException" type="tns:ElementNotFoundException" />
+  <xs:element name="InvalidEntityException" type="tns:InvalidEntityException" />
+  <xs:element name="RepeatedDocumentException" type="tns:RepeatedDocumentException" />
+  <xs:element name="UnauthorizeAccessException" type="tns:UnauthorizeAccessException" />
+  <xs:element name="createCompany" type="tns:createCompany" />
+  <xs:element name="createCompanyResponse" type="tns:createCompanyResponse" />
+  <xs:element name="editCompany" type="tns:editCompany" />
+  <xs:element name="editCompanyResponse" type="tns:editCompanyResponse" />
+  <xs:element name="findCompany" type="tns:findCompany" />
+  <xs:element name="findCompanyResponse" type="tns:findCompanyResponse" />
+  <xs:element name="listCompaniesByFilter" type="tns:listCompaniesByFilter" />
+  <xs:element name="listCompaniesByFilterResponse" type="tns:listCompaniesByFilterResponse" />
+  <xs:element name="removeCompany" type="tns:removeCompany" />
+  <xs:element name="removeCompanyResponse" type="tns:removeCompanyResponse" />
+  <xs:complexType name="removeCompany">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeCompanyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCompanyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editCompanyData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="companyData" type="tns:companyData" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="companyData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="description" type="xs:string" />
+      <xs:element minOccurs="0" name="idDocument" type="xs:string" />
+      <xs:element minOccurs="0" name="idDocumentType" type="ns1:LegalPersonIdDocumentType" />
+      <xs:element minOccurs="0" name="locationInfo" type="ns1:LocationInfo" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArgumentException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElementNotFoundException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CannotRemoveElementException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editCompany">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="tns:editCompanyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editCompanyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCompanyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RepeatedDocumentException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvalidEntityException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findCompany">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findCompanyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCompanyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCompany">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="tns:companyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCompanyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCompanyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCompaniesByFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="ns1:CompanySearchFilter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCompaniesByFilterResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="tns:editCompanyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnauthorizeAccessException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

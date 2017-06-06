@@ -43,6 +43,7 @@ public class UserConversor {
 				.setUsername(user.getUsername())
 				.setDocumentType(user.getIdDocumentType())
 				.setIdDocument(user.getIdDocument())
-				.setAccountEnabled(user.isActiveAccount());
+				.setAccountEnabled(user.isActiveAccount())
+				.setRole(user.getRole());
 	}
 }

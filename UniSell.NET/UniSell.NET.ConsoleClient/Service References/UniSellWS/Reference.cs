@@ -131,6 +131,15 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse")]
         System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request);
         
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> findUserRolesAsync(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request);
+        
         // CODEGEN: Generating message contract since the operation disableAccount is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/UnauthorizeAccessExcept" +
@@ -152,15 +161,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse")]
         System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1> enableAccountAsync(UniSell.NET.ConsoleClient.UniSellWS.enableAccountRequest request);
-        
-        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> findUserRolesAsync(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request);
         
         // CODEGEN: Generating message contract since the operation listUsersByFilter is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterResponse")]
@@ -439,6 +439,10 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         private string passwordField;
         
+        private UserRole roleField;
+        
+        private bool roleFieldSpecified;
+        
         private string surnameField;
         
         private string usernameField;
@@ -529,6 +533,30 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public UserRole role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+                this.RaisePropertyChanged("role");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool roleSpecified {
+            get {
+                return this.roleFieldSpecified;
+            }
+            set {
+                this.roleFieldSpecified = value;
+                this.RaisePropertyChanged("roleSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public string surname {
             get {
                 return this.surnameField;
@@ -540,7 +568,7 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public string username {
             get {
                 return this.usernameField;
@@ -580,6 +608,22 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         PASSPORT,
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public enum UserRole {
+        
+        /// <remarks/>
+        ADMIN,
+        
+        /// <remarks/>
+        SELLER,
+        
+        /// <remarks/>
+        BUYER,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -616,6 +660,34 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         public removeUserResponse1(UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUserResponse) {
             this.removeUserResponse = removeUserResponse;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRoles", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findUserRolesRequest {
+        
+        public findUserRolesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRolesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findUserRolesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
+        public System.Nullable<UserRole>[] @return;
+        
+        public findUserRolesResponse() {
+        }
+        
+        public findUserRolesResponse(System.Nullable<UserRole>[] @return) {
+            this.@return = @return;
         }
     }
     
@@ -850,50 +922,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         public enableAccountResponse1(UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse enableAccountResponse) {
             this.enableAccountResponse = enableAccountResponse;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
-    public enum UserRole {
-        
-        /// <remarks/>
-        ADMIN,
-        
-        /// <remarks/>
-        SELLER,
-        
-        /// <remarks/>
-        BUYER,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRoles", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
-    public partial class findUserRolesRequest {
-        
-        public findUserRolesRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRolesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
-    public partial class findUserRolesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
-        public System.Nullable<UserRole>[] @return;
-        
-        public findUserRolesResponse() {
-        }
-        
-        public findUserRolesResponse(System.Nullable<UserRole>[] @return) {
-            this.@return = @return;
         }
     }
     
@@ -1232,6 +1260,27 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
+            return base.Channel.findUserRoles(request);
+        }
+        
+        public System.Nullable<UserRole>[] findUserRoles() {
+            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest();
+            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findUserRoles(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRolesAsync(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
+            return base.Channel.findUserRolesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> findUserRolesAsync() {
+            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest();
+            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findUserRolesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse1 UniSell.NET.ConsoleClient.UniSellWS.IUserWS.disableAccount(UniSell.NET.ConsoleClient.UniSellWS.disableAccountRequest request) {
             return base.Channel.disableAccount(request);
         }
@@ -1279,27 +1328,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
             inValue.arg0 = arg0;
             inValue.enableAccount = enableAccount;
             return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).enableAccountAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
-            return base.Channel.findUserRoles(request);
-        }
-        
-        public System.Nullable<UserRole>[] findUserRoles() {
-            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest();
-            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findUserRoles(inValue);
-            return retVal.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRolesAsync(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
-            return base.Channel.findUserRolesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> findUserRolesAsync() {
-            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest();
-            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findUserRolesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://unisell.net.data/" elementFormDefault="qualified" targetNamespace="http://unisell.net.data/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="LocationInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" type="xs:string" />
+      <xs:element minOccurs="0" name="Region" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" type="xs:string" />
+      <xs:element minOccurs="0" name="ZipCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CompanySearchFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdDocument" type="xs:string" />
+      <xs:element name="IdDocumentType" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" name="City" type="xs:string" />
+      <xs:element minOccurs="0" name="Region" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" type="xs:string" />
+      <xs:element minOccurs="0" name="ZipCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LegalPersonIdDocumentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CIF" />
+      <xs:enumeration value="CIE" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
