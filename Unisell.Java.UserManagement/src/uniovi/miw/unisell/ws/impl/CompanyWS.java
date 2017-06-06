@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jws.WebService;
 
 import uniovi.miw.unisell.data.ArrayOfCompany;
+import uniovi.miw.unisell.data.ArrayOfUserSeller;
 import uniovi.miw.unisell.data.Company;
 import uniovi.miw.unisell.data.CompanySearchFilter;
 import uniovi.miw.unisell.data.DataAccess;
@@ -15,6 +16,7 @@ import uniovi.miw.unisell.model.CompanyData;
 import uniovi.miw.unisell.model.EditCompanyData;
 import uniovi.miw.unisell.ws.ICompanyWS;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
+import uniovi.miw.unisell.ws.exceptions.CannotRemoveElementException;
 import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
@@ -71,14 +73,19 @@ public class CompanyWS implements ICompanyWS {
 	}
 
 	@Override
-	public EditCompanyData removeCompany(Security security, Long id) throws ArgumentException, ElementNotFoundException {
+	public EditCompanyData removeCompany(Security security, Long id) 
+			throws ArgumentException, ElementNotFoundException, CannotRemoveElementException {
 		if (id == null) {
 			throw new ArgumentException("Id required but not provided");
 		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
-		if (soap.findCompany(id, security) == null) {
+		Company target = soap.findCompany(id, security);
+		if (target == null) {
 			throw new ElementNotFoundException("Company with id " + id + " not found");
+		}
+		if (!canRemoveCompany(target, soap, security)) {
+			throw new CannotRemoveElementException("Company with id " + target.getId() + " has sellers assigned and cannot be removed");
 		}
 		Company deleted = soap.removeCompany(id, security);
 		return companyCreator.createEditCompanyData(deleted);
@@ -106,6 +113,11 @@ public class CompanyWS implements ICompanyWS {
 				(!res.getCompany().isEmpty() && res.getCompany().get(0).getId() != id)) {
 			throw new RepeatedDocumentException(company.getIdDocument() + " has already been registered");
 		}
+	}
+	
+	private boolean canRemoveCompany(Company company, DataAccessSoap soap, Security security) {
+		ArrayOfUserSeller sellers = soap.findSellersByCompanyId(company.getId(), security);
+		return sellers == null || sellers.getUserSeller() == null || sellers.getUserSeller().isEmpty();
 	}
 
 }

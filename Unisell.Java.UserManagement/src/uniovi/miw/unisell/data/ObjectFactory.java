@@ -90,6 +90,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindSellersByCompanyId }
+     * 
+     */
+    public FindSellersByCompanyId createFindSellersByCompanyId() {
+        return new FindSellersByCompanyId();
+    }
+
+    /**
      * Create an instance of {@link FindUsersByFilter }
      * 
      */
@@ -343,6 +351,14 @@ public class ObjectFactory {
      */
     public UpdateUserResponse createUpdateUserResponse() {
         return new UpdateUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindSellersByCompanyIdResponse }
+     * 
+     */
+    public FindSellersByCompanyIdResponse createFindSellersByCompanyIdResponse() {
+        return new FindSellersByCompanyIdResponse();
     }
 
     /**

@@ -155,6 +155,16 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public UserSeller[] FindSellersByCompanyId(long id)
+        {
+            using (var ds = new DataService())
+            {
+                return ds.getUserSellerDAO().FindByCompanyId(id).ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User[] FindUsersByFilter(UserSearchFilter filter)
         {
             ValidateSecurity();

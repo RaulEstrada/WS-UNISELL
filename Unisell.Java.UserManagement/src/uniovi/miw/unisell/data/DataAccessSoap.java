@@ -180,6 +180,23 @@ public interface DataAccessSoap {
 
     /**
      * 
+     * @param security
+     * @param id
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfUserSeller
+     */
+    @WebMethod(operationName = "FindSellersByCompanyId", action = "http://unisell.net.data/FindSellersByCompanyId")
+    @WebResult(name = "FindSellersByCompanyIdResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindSellersByCompanyId", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindSellersByCompanyId")
+    @ResponseWrapper(localName = "FindSellersByCompanyIdResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindSellersByCompanyIdResponse")
+    public ArrayOfUserSeller findSellersByCompanyId(
+        @WebParam(name = "id", targetNamespace = "http://unisell.net.data/")
+        long id,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
      * @param filter
      * @param security
      * @return

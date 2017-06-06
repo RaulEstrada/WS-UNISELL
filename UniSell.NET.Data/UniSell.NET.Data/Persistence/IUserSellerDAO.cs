@@ -9,5 +9,6 @@ namespace UniSell.NET.Data.Persistence
     public interface IUserSellerDAO
     {
         IEnumerable<UserSeller> FindAllSellers();
+        IEnumerable<UserSeller> FindByCompanyId(long id);
     }
 }

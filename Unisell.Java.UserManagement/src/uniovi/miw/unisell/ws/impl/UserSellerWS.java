@@ -1,7 +1,11 @@
 package uniovi.miw.unisell.ws.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jws.WebService;
 
+import uniovi.miw.unisell.data.ArrayOfUserSeller;
 import uniovi.miw.unisell.data.Company;
 import uniovi.miw.unisell.data.DataAccess;
 import uniovi.miw.unisell.data.DataAccessSoap;
@@ -95,6 +99,21 @@ public class UserSellerWS implements IUserSellerWS {
 		}
 		User deleted = soap.removeUser(id, security);
 		return conversor.createEditUserData((UserSeller)deleted);
+	}
+
+	@Override
+	public EditUserSellerData[] findSellersByCompanyId(Security security, Long id) throws ArgumentException {
+		if (id == null) {
+			throw new ArgumentException("Company id required but not provided");
+		}
+		DataAccess dataAccessWS = new DataAccess();
+		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
+		ArrayOfUserSeller sellers = soap.findSellersByCompanyId(id, security);
+		List<EditUserSellerData> sellersData = new ArrayList<>();
+		for (UserSeller seller : sellers.getUserSeller()) {
+			sellersData.add(conversor.createEditUserData(seller));
+		}
+		return sellersData.toArray(new EditUserSellerData[0]);
 	}
 
 }

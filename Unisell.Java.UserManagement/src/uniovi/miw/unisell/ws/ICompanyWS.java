@@ -12,6 +12,7 @@ import uniovi.miw.unisell.data.Security;
 import uniovi.miw.unisell.model.CompanyData;
 import uniovi.miw.unisell.model.EditCompanyData;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
+import uniovi.miw.unisell.ws.exceptions.CannotRemoveElementException;
 import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
@@ -35,7 +36,7 @@ public interface ICompanyWS {
 	
 	@WebMethod
 	public EditCompanyData removeCompany(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ArgumentException, ElementNotFoundException;
+			Long id) throws ArgumentException, ElementNotFoundException, CannotRemoveElementException;
 	
 	@WebMethod
 	public EditCompanyData findCompany(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,

@@ -17,5 +17,10 @@ namespace UniSell.NET.Data.Persistence.Implementation
         {
             return DbSet.ToList();
         }
+
+        public IEnumerable<UserSeller> FindByCompanyId(long id)
+        {
+            return DbSet.Where(u => u.company_id == id);
+        }
     }
 }

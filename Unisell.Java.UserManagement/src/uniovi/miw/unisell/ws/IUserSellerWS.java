@@ -38,4 +38,8 @@ public interface IUserSellerWS {
 	@WebMethod
 	public EditUserSellerData removeSeller(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
 			Long id) throws ElementNotFoundException, ArgumentException;
+	
+	@WebMethod
+	public EditUserSellerData[] findSellersByCompanyId(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			Long id) throws ArgumentException;
 }
