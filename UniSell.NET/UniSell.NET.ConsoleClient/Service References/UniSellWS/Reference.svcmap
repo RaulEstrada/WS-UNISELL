@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="037d4e0d-9a40-40df-a35f-177aa2e51308" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://156.35.98.14:8086/Unisell.Java.UserManagement/usermanagement?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="usermanagement.xsd" MetadataType="Schema" ID="05e09aba-7bee-4bb1-a98e-b25a396d0e47" SourceId="1" SourceUrl="http://156.35.98.14:8086/Unisell.Java.UserManagement/usermanagement?xsd=2" />
+    <MetadataFile FileName="usermanagement1.xsd" MetadataType="Schema" ID="f8956785-e68b-488c-ba71-3f225dded277" SourceId="1" SourceUrl="http://156.35.98.14:8086/Unisell.Java.UserManagement/usermanagement?xsd=1" />
+    <MetadataFile FileName="usermanagement2.xsd" MetadataType="Schema" ID="ace87209-5e15-4d9c-be90-b4ef0b1d5113" SourceId="1" SourceUrl="http://156.35.98.14:8086/Unisell.Java.UserManagement/usermanagement?xsd=3" />
+    <MetadataFile FileName="UserWSService.wsdl" MetadataType="Wsdl" ID="8df8b7e4-ea2a-4ab4-8c5a-be47ffc1e842" SourceId="1" SourceUrl="http://156.35.98.14:8086/Unisell.Java.UserManagement/usermanagement?wsdl" />
+    <MetadataFile FileName="usermanagement.wsdl" MetadataType="Wsdl" ID="570ac1ba-1b72-46f5-9623-de5071d159be" SourceId="1" SourceUrl="http://156.35.98.14:8086/Unisell.Java.UserManagement/usermanagement?wsdl=1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
