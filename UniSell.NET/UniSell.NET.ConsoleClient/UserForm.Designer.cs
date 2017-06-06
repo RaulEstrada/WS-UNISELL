@@ -224,6 +224,7 @@
             this.save_user_button.TabIndex = 20;
             this.save_user_button.Text = "Guardar";
             this.save_user_button.UseVisualStyleBackColor = false;
+            this.save_user_button.Click += new System.EventHandler(this.save_user_button_Click);
             // 
             // user_clear_button
             // 
@@ -241,12 +242,13 @@
             // 
             this.edit_user_button.BackColor = System.Drawing.Color.LightGreen;
             this.edit_user_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.edit_user_button.Location = new System.Drawing.Point(521, 347);
+            this.edit_user_button.Location = new System.Drawing.Point(521, 346);
             this.edit_user_button.Name = "edit_user_button";
             this.edit_user_button.Size = new System.Drawing.Size(140, 37);
             this.edit_user_button.TabIndex = 22;
             this.edit_user_button.Text = "Guardar";
             this.edit_user_button.UseVisualStyleBackColor = false;
+            this.edit_user_button.Click += new System.EventHandler(this.edit_user_button_Click);
             // 
             // UserForm
             // 

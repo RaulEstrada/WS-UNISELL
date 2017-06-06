@@ -50,7 +50,7 @@ public class UserSellerWS implements IUserSellerWS {
 	public EditUserSellerData editSeller(Security security, EditUserSellerData user) throws InvalidEntityException,
 			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException {
 		if (user == null || user.getId() == null || 
-				!DataValidator.validateUser(user.getUserData().getUserData()) || 
+				!DataValidator.validateUserEdit(user.getUserData().getUserData()) || 
 				user.getUserData().getCompanyId() == null) {
 			throw new InvalidEntityException("User is missing some required field");
 		}

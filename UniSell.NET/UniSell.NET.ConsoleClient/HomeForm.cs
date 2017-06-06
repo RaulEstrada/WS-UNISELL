@@ -80,7 +80,7 @@ namespace UniSell.NET.ConsoleClient
             }
         }
 
-        private void FilterUsersTable()
+        public void FilterUsersTable()
         {
             UserSearchFilter filter = new UserSearchFilter
             {
@@ -224,19 +224,19 @@ namespace UniSell.NET.ConsoleClient
                 findAdminResponse res = ws.findAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken }, new findAdmin { arg1 = id, arg1Specified = true });
                 user = res.@return;
             }
-            UserForm form = new UserForm(role == UniSellWS.UserRole.SELLER, user);
+            UserForm form = new UserForm(role == UniSellWS.UserRole.SELLER, authToken, this, user);
             form.Show();
         }
 
         private void newAdminButton_Click(object sender, EventArgs e)
         {
-            UserForm form = new UserForm(false, authToken);
+            UserForm form = new UserForm(false, authToken, this);
             form.Show();
         }
 
         private void newSellerButton_Click(object sender, EventArgs e)
         {
-            UserForm form = new UserForm(true, authToken);
+            UserForm form = new UserForm(true, authToken, this);
             form.Show();
         }
     }

@@ -14,13 +14,18 @@ import uniovi.miw.unisell.ws.exceptions.RepeatedUsernameException;
 public class DataValidator {
 	public static boolean validateUser(UserData user) {
 		return user != null
+				&& validateUserEdit(user)
+				&& user.getPassword() != null && !user.getPassword().trim().isEmpty();
+	}
+	
+	public static boolean validateUserEdit(UserData user) {
+		return user != null
 				&& user.getName() != null && !user.getName().trim().isEmpty()
 				&& user.getSurname() != null && !user.getSurname().trim().isEmpty()
 				&& user.getEmail() != null && !user.getEmail().trim().isEmpty()
 				&& user.getIdDocument() != null && !user.getIdDocument().trim().isEmpty()
 				&& user.getDocumentType() != null
-				&& user.getUsername() != null && !user.getUsername().trim().isEmpty()
-				&& user.getPassword() != null && !user.getPassword().trim().isEmpty();
+				&& user.getUsername() != null && !user.getUsername().trim().isEmpty();
 	}
 	
 	public static boolean validateCompany(CompanyData company) {

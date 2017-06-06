@@ -39,7 +39,7 @@ public class UserAdminWS implements IUserAdminWS {
 	@Override
 	public EditUserData editAdmin(Security security, EditUserData user) throws InvalidEntityException,
 			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException {
-		if (user == null || user.getId() == null || !DataValidator.validateUser(user.getUserData())) {
+		if (user == null || user.getId() == null || !DataValidator.validateUserEdit(user.getUserData())) {
 			throw new InvalidEntityException("User is missing some required field");
 		}
 		DataAccess dataAccessWS = new DataAccess();
