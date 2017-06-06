@@ -35,6 +35,10 @@ public interface IUserWS {
 			UserSearchFilter filter) throws UnauthorizeAccessException, ArgumentException;
 	
 	@WebMethod
+	public EditUserData removeUser(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
+			Long id) throws ElementNotFoundException, ArgumentException;
+	
+	@WebMethod
 	public UserRole[] findUserRoles();
 	
 	@WebMethod

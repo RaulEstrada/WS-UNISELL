@@ -128,6 +128,12 @@
     <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.PersonIdDocumentType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.UserRole.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

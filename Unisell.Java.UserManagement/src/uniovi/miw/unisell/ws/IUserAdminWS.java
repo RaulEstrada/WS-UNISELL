@@ -11,7 +11,6 @@ import uniovi.miw.unisell.data.Security;
 import uniovi.miw.unisell.model.EditUserData;
 import uniovi.miw.unisell.model.UserData;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
-import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedEmailException;
@@ -33,8 +32,4 @@ public interface IUserAdminWS {
 	@WebMethod
 	public EditUserData findAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
 			Long id)  throws ArgumentException;
-	
-	@WebMethod
-	public EditUserData removeAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ElementNotFoundException, ArgumentException;
 }

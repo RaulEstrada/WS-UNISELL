@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Dynamic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -106,8 +108,16 @@ namespace UniSell.NET.ConsoleClient
             foreach (editUserData user in users)
             {
                 Button editBtn = new Button{Text = "Editar"};
-                Button removeBtn = new Button { Text = "Borrar" };
-                Button activateBtn = new Button { Text = user.userData.accountEnabled ? "Desactivar" : "Activar" };
+                Button removeBtn = new Button { Text = "Borrar", Tag = user.id };
+                removeBtn.Click += DeleteUser;
+                dynamic activateTag = new ExpandoObject();
+                activateTag.id = user.id;
+                activateTag.enabled = user.userData.accountEnabled;
+                Button activateBtn = new Button {
+                    Text = user.userData.accountEnabled ? "Desactivar" : "Activar",
+                    Tag = activateTag
+                };
+                activateBtn.Click += ActivateUser;
                 userTable.RowCount++;
                 userTable.Controls.Add(new Label() { Text = user.id.ToString()}, 0, userTable.RowCount - 1);
                 userTable.Controls.Add(new Label() { Text = user.userData.name + " " + user.userData.surname }, 1, userTable.RowCount - 1);
@@ -123,6 +133,71 @@ namespace UniSell.NET.ConsoleClient
         private void button1_Click(object sender, EventArgs e)
         {
             FilterUsersTable();
+        }
+
+        private void DeleteUser(dynamic sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Está a punto de eliminar un usuario. " +
+                "Esta acción no se podrá deshacer. ¿Desea continuar con la operación?",
+                "Confirmar borrado",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+            if (confirmResult == DialogResult.Yes)
+            {
+                long id = sender.Tag;
+                UserWSClient ws = new UserWSClient();
+                try
+                {
+                    removeUserResponse response = ws.removeUser(Security, new removeUser { arg1 = id,  arg1Specified = true });
+                    FilterUsersTable();
+                }
+                catch (FaultException<ElementNotFoundException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se ha encontrado un usuario con id " + id + " en el sistema",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (FaultException<UniSellWS.ArgumentException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se ha recibido el id del usuario a eliminar",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ActivateUser(dynamic sender, EventArgs e)
+        {
+            long id = sender.Tag.id;
+            bool enabled = sender.Tag.enabled;
+            UserWSClient ws = new UserWSClient();
+            try
+            {
+                if (enabled)
+                {
+                    ws.disableAccount(Security, new disableAccount { arg1 = id, arg1Specified = true });
+                }
+                else
+                {
+                    ws.enableAccount(Security, new enableAccount { arg1 = id, arg1Specified = true });
+                }
+                FilterUsersTable();
+            } catch (FaultException<UniSellWS.ArgumentException> ex)
+            {
+                MessageBox.Show("Ha ocurrido un error. No se ha recibido el id del usuario a eliminar",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            }
+            catch (FaultException<UniSellWS.UnauthorizeAccessException> ex)
+            {
+                MessageBox.Show("Ha ocurrido un error. No está autorizado a realizar esta operación",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -17,7 +17,6 @@ import uniovi.miw.unisell.model.EditUserSellerData;
 import uniovi.miw.unisell.model.UserSellerData;
 import uniovi.miw.unisell.ws.IUserSellerWS;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
-import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedEmailException;
@@ -83,22 +82,6 @@ public class UserSellerWS implements IUserSellerWS {
 			return null;
 		}
 		return conversor.createEditUserData((UserSeller)user);
-	}
-
-	@Override
-	public EditUserSellerData removeSeller(Security security, Long id)
-			throws ElementNotFoundException, ArgumentException {
-		if (id == null) {
-			throw new ArgumentException("Id required but not provided");
-		}
-		DataAccess dataAccessWS = new DataAccess();
-		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
-		User user = soap.findUser(id, security);
-		if (user == null || user.getRole() != UserRole.SELLER) {
-			throw new ElementNotFoundException("User seller with id " + id + " not found");
-		}
-		User deleted = soap.removeUser(id, security);
-		return conversor.createEditUserData((UserSeller)deleted);
 	}
 
 	@Override

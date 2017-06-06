@@ -13,6 +13,7 @@ import uniovi.miw.unisell.data.PersonIdDocumentType;
 import uniovi.miw.unisell.model.EditUserData;
 import uniovi.miw.unisell.ws.IUserWS;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
+import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.UnauthorizeAccessException;
 import uniovi.miw.unisell.ws.impl.utils.RequestClientValidator;
 import uniovi.miw.unisell.ws.impl.utils.UserConversor;
@@ -103,5 +104,20 @@ public class UserWS implements IUserWS {
 		DataAccessSoap dataAccessSOAP = dataAccessWS.getDataAccessSoap();
 		return dataAccessSOAP.findLegalIdDocumentTypes().getLegalPersonIdDocumentType()
 				.toArray(new LegalPersonIdDocumentType[0]);
+	}
+	
+	@Override
+	public EditUserData removeUser(Security security, Long id) throws ElementNotFoundException, ArgumentException {
+		if (id == null) {
+			throw new ArgumentException("Id required but not provided");
+		}
+		DataAccess dataAccessWS = new DataAccess();
+		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
+		User target = soap.findUser(id, security);
+		if (target == null) {
+			throw new ElementNotFoundException("User admin with id " + id + " not found");
+		}
+		soap.removeUser(id, security);
+		return userConversor.createEditUserData(target);
 	}
 }

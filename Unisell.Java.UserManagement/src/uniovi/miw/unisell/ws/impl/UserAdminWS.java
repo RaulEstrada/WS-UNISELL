@@ -11,7 +11,6 @@ import uniovi.miw.unisell.model.EditUserData;
 import uniovi.miw.unisell.model.UserData;
 import uniovi.miw.unisell.ws.IUserAdminWS;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
-import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedEmailException;
@@ -68,21 +67,5 @@ public class UserAdminWS implements IUserAdminWS {
 		}
 		return conversor.createEditUserData(user);
 	}
-
-	@Override
-	public EditUserData removeAdmin(Security security, Long id) throws ElementNotFoundException, ArgumentException {
-		if (id == null) {
-			throw new ArgumentException("Id required but not provided");
-		}
-		DataAccess dataAccessWS = new DataAccess();
-		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
-		User target = soap.findUser(id, security);
-		if (target == null || target.getRole() != UserRole.ADMIN) {
-			throw new ElementNotFoundException("User admin with id " + id + " not found");
-		}
-		soap.removeUser(id, security);
-		return conversor.createEditUserData(target);
-	}
-	
 
 }
