@@ -32,6 +32,12 @@ namespace UniSell.NET.ConsoleClient
                 if (string.IsNullOrEmpty(authToken))
                 {
                     showErrorMsg("Credenciales de acceso incorrectas", "Login Incorrecto");
+                } else
+                {
+                    this.Hide();
+                    HomeForm homeForm = new HomeForm(authToken);
+                    homeForm.Closed += (s, args) => this.Close();
+                    homeForm.Show();
                 }
             }
         }

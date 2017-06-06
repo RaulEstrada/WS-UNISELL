@@ -7,6 +7,12 @@
   <xs:element name="disableAccountResponse" type="tns:disableAccountResponse" />
   <xs:element name="enableAccount" type="tns:enableAccount" />
   <xs:element name="enableAccountResponse" type="tns:enableAccountResponse" />
+  <xs:element name="findLegalDocumentTypes" type="tns:findLegalDocumentTypes" />
+  <xs:element name="findLegalDocumentTypesResponse" type="tns:findLegalDocumentTypesResponse" />
+  <xs:element name="findPersonDocumentTypes" type="tns:findPersonDocumentTypes" />
+  <xs:element name="findPersonDocumentTypesResponse" type="tns:findPersonDocumentTypesResponse" />
+  <xs:element name="findUserRoles" type="tns:findUserRoles" />
+  <xs:element name="findUserRolesResponse" type="tns:findUserRolesResponse" />
   <xs:element name="listUsersByFilter" type="tns:listUsersByFilter" />
   <xs:element name="listUsersByFilterResponse" type="tns:listUsersByFilterResponse" />
   <xs:element name="login" type="tns:login" />
@@ -59,6 +65,22 @@
       <xs:element minOccurs="0" name="return" type="tns:editUserData" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="findUserRoles">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="findUserRolesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="ns1:UserRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findLegalDocumentTypes">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="findLegalDocumentTypesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="ns1:LegalPersonIdDocumentType" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="login">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:string" />
@@ -68,6 +90,14 @@
   <xs:complexType name="loginResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findPersonDocumentTypes">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="findPersonDocumentTypesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="ns1:PersonIdDocumentType" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="listUsersByFilter">

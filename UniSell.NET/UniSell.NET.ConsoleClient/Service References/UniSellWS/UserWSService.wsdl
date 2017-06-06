@@ -4,18 +4,6 @@
   <types />
   <binding xmlns:ns1="http://ws.unisell.miw.uniovi/" name="UserWSPortBinding" type="ns1:IUserWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="login">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="ArgumentException">
-        <soap:fault use="literal" name="ArgumentException" namespace="" />
-      </fault>
-    </operation>
     <operation name="listUsersByFilter">
       <soap:operation soapAction="" />
       <input>
@@ -31,6 +19,45 @@
       <fault name="ArgumentException">
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
+    </operation>
+    <operation name="findPersonDocumentTypes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findLegalDocumentTypes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="login">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="findUserRoles">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
     </operation>
     <operation name="disableAccount">
       <soap:operation soapAction="" />

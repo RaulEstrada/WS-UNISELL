@@ -8,6 +8,8 @@ import javax.jws.WebService;
 import uniovi.miw.unisell.data.ArrayOfUser;
 import uniovi.miw.unisell.data.DataAccess;
 import uniovi.miw.unisell.data.DataAccessSoap;
+import uniovi.miw.unisell.data.LegalPersonIdDocumentType;
+import uniovi.miw.unisell.data.PersonIdDocumentType;
 import uniovi.miw.unisell.model.EditUserData;
 import uniovi.miw.unisell.ws.IUserWS;
 import uniovi.miw.unisell.ws.exceptions.ArgumentException;
@@ -16,6 +18,7 @@ import uniovi.miw.unisell.ws.impl.utils.RequestClientValidator;
 import uniovi.miw.unisell.ws.impl.utils.UserConversor;
 import uniovi.miw.unisell.data.Security;
 import uniovi.miw.unisell.data.User;
+import uniovi.miw.unisell.data.UserRole;
 import uniovi.miw.unisell.data.UserSearchFilter;
 
 @WebService(endpointInterface = "uniovi.miw.unisell.ws.IUserWS")
@@ -77,5 +80,28 @@ public class UserWS implements IUserWS {
 		user.setActiveAccount(enabled);
 		user = dataAccessSOAP.updateUser(user, security);
 		return userConversor.createEditUserData(user);
+	}
+
+	@Override
+	public UserRole[] findUserRoles() {
+		DataAccess dataAccessWS = new DataAccess();
+		DataAccessSoap dataAccessSOAP = dataAccessWS.getDataAccessSoap();
+		return dataAccessSOAP.findUserRoles().getUserRole().toArray(new UserRole[0]);
+	}
+
+	@Override
+	public PersonIdDocumentType[] findPersonDocumentTypes() {
+		DataAccess dataAccessWS = new DataAccess();
+		DataAccessSoap dataAccessSOAP = dataAccessWS.getDataAccessSoap();
+		return dataAccessSOAP.findPersonIdDocumentTypes().getPersonIdDocumentType()
+				.toArray(new PersonIdDocumentType[0]);
+	}
+
+	@Override
+	public LegalPersonIdDocumentType[] findLegalDocumentTypes() {
+		DataAccess dataAccessWS = new DataAccess();
+		DataAccessSoap dataAccessSOAP = dataAccessWS.getDataAccessSoap();
+		return dataAccessSOAP.findLegalIdDocumentTypes().getLegalPersonIdDocumentType()
+				.toArray(new LegalPersonIdDocumentType[0]);
 	}
 }

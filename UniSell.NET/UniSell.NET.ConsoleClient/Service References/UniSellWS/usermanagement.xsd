@@ -26,4 +26,10 @@
       <xs:enumeration value="BUYER" />
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="LegalPersonIdDocumentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CIF" />
+      <xs:enumeration value="CIE" />
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

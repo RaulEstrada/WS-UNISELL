@@ -11,6 +11,7 @@ using UniSell.NET.Data.Model;
 using System.Security.Cryptography;
 using System.Text;
 using UniSell.NET.Data.Persistence.Implementation;
+using UniSell.NET.Data.Model.Types;
 
 namespace UniSell.NET.Data.WebServices
 {
@@ -255,6 +256,24 @@ namespace UniSell.NET.Data.WebServices
             {
                 return ds.getCompanyDAO().FindCompaniesByFilter(filter);
             }
+        }
+
+        [WebMethod]
+        public UserRole[] FindUserRoles()
+        {
+            return Enum.GetValues(typeof(UserRole)).Cast<UserRole>().ToArray();
+        }
+
+        [WebMethod]
+        public PersonIdDocumentType[] FindPersonIdDocumentTypes()
+        {
+            return Enum.GetValues(typeof(PersonIdDocumentType)).Cast<PersonIdDocumentType>().ToArray();
+        }
+
+        [WebMethod]
+        public LegalPersonIdDocumentType[] FindLegalIdDocumentTypes()
+        {
+            return Enum.GetValues(typeof(LegalPersonIdDocumentType)).Cast<LegalPersonIdDocumentType>().ToArray();
         }
 
         private void ValidateSecurity()

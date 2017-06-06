@@ -82,6 +82,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindUserRoles }
+     * 
+     */
+    public FindUserRoles createFindUserRoles() {
+        return new FindUserRoles();
+    }
+
+    /**
      * Create an instance of {@link FindAllUsers }
      * 
      */
@@ -154,11 +162,75 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindPersonIdDocumentTypesResponse }
+     * 
+     */
+    public FindPersonIdDocumentTypesResponse createFindPersonIdDocumentTypesResponse() {
+        return new FindPersonIdDocumentTypesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfPersonIdDocumentType }
+     * 
+     */
+    public ArrayOfPersonIdDocumentType createArrayOfPersonIdDocumentType() {
+        return new ArrayOfPersonIdDocumentType();
+    }
+
+    /**
+     * Create an instance of {@link FindLegalIdDocumentTypesResponse }
+     * 
+     */
+    public FindLegalIdDocumentTypesResponse createFindLegalIdDocumentTypesResponse() {
+        return new FindLegalIdDocumentTypesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfLegalPersonIdDocumentType }
+     * 
+     */
+    public ArrayOfLegalPersonIdDocumentType createArrayOfLegalPersonIdDocumentType() {
+        return new ArrayOfLegalPersonIdDocumentType();
+    }
+
+    /**
+     * Create an instance of {@link FindUserRolesResponse }
+     * 
+     */
+    public FindUserRolesResponse createFindUserRolesResponse() {
+        return new FindUserRolesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfUserRole }
+     * 
+     */
+    public ArrayOfUserRole createArrayOfUserRole() {
+        return new ArrayOfUserRole();
+    }
+
+    /**
+     * Create an instance of {@link FindPersonIdDocumentTypes }
+     * 
+     */
+    public FindPersonIdDocumentTypes createFindPersonIdDocumentTypes() {
+        return new FindPersonIdDocumentTypes();
+    }
+
+    /**
      * Create an instance of {@link RemoveUserResponse }
      * 
      */
     public RemoveUserResponse createRemoveUserResponse() {
         return new RemoveUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindLegalIdDocumentTypes }
+     * 
+     */
+    public FindLegalIdDocumentTypes createFindLegalIdDocumentTypes() {
+        return new FindLegalIdDocumentTypes();
     }
 
     /**

@@ -325,4 +325,37 @@ public interface DataAccessSoap {
         @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
         Security security);
 
+    /**
+     * 
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfUserRole
+     */
+    @WebMethod(operationName = "FindUserRoles", action = "http://unisell.net.data/FindUserRoles")
+    @WebResult(name = "FindUserRolesResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindUserRoles", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserRoles")
+    @ResponseWrapper(localName = "FindUserRolesResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUserRolesResponse")
+    public ArrayOfUserRole findUserRoles();
+
+    /**
+     * 
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfPersonIdDocumentType
+     */
+    @WebMethod(operationName = "FindPersonIdDocumentTypes", action = "http://unisell.net.data/FindPersonIdDocumentTypes")
+    @WebResult(name = "FindPersonIdDocumentTypesResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindPersonIdDocumentTypes", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindPersonIdDocumentTypes")
+    @ResponseWrapper(localName = "FindPersonIdDocumentTypesResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindPersonIdDocumentTypesResponse")
+    public ArrayOfPersonIdDocumentType findPersonIdDocumentTypes();
+
+    /**
+     * 
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfLegalPersonIdDocumentType
+     */
+    @WebMethod(operationName = "FindLegalIdDocumentTypes", action = "http://unisell.net.data/FindLegalIdDocumentTypes")
+    @WebResult(name = "FindLegalIdDocumentTypesResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindLegalIdDocumentTypes", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindLegalIdDocumentTypes")
+    @ResponseWrapper(localName = "FindLegalIdDocumentTypesResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindLegalIdDocumentTypesResponse")
+    public ArrayOfLegalPersonIdDocumentType findLegalIdDocumentTypes();
+
 }

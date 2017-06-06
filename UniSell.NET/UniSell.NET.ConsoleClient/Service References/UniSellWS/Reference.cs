@@ -17,38 +17,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class ArgumentException : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string messageField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                this.messageField = value;
-                this.RaisePropertyChanged("message");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
     public partial class UnauthorizeAccessException : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string messageField;
@@ -62,349 +30,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
             set {
                 this.messageField = value;
                 this.RaisePropertyChanged("message");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://ws.unisell.miw.uniovi/", ConfigurationName="UniSellWS.IUserWS")]
-    public interface IUserWS {
-        
-        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/loginRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/loginResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/login/Fault/ArgumentException", Name="ArgumentException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
-        UniSell.NET.ConsoleClient.UniSellWS.loginResponse login(UniSell.NET.ConsoleClient.UniSellWS.loginRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/loginRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/loginResponse")]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.loginResponse> loginAsync(UniSell.NET.ConsoleClient.UniSellWS.loginRequest request);
-        
-        // CODEGEN: Generating message contract since the operation listUsersByFilter is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilter/Fault/UnauthorizeAccessExc" +
-            "eption", Name="UnauthorizeAccessException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilter/Fault/ArgumentException", Name="ArgumentException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse listUsersByFilter(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterResponse")]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse> listUsersByFilterAsync(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request);
-        
-        // CODEGEN: Generating message contract since the operation disableAccount is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/UnauthorizeAccessExcept" +
-            "ion", Name="UnauthorizeAccessException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/ArgumentException", Name="ArgumentException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse1 disableAccount(UniSell.NET.ConsoleClient.UniSellWS.disableAccountRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse")]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse1> disableAccountAsync(UniSell.NET.ConsoleClient.UniSellWS.disableAccountRequest request);
-        
-        // CODEGEN: Generating message contract since the operation enableAccount is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/UnauthorizeAccessExcepti" +
-            "on", Name="UnauthorizeAccessException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/ArgumentException", Name="ArgumentException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1 enableAccount(UniSell.NET.ConsoleClient.UniSellWS.enableAccountRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse")]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1> enableAccountAsync(UniSell.NET.ConsoleClient.UniSellWS.enableAccountRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="login", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
-    public partial class loginRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg0;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg1;
-        
-        public loginRequest() {
-        }
-        
-        public loginRequest(string arg0, string arg1) {
-            this.arg0 = arg0;
-            this.arg1 = arg1;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="loginResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
-    public partial class loginResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string @return;
-        
-        public loginResponse() {
-        }
-        
-        public loginResponse(string @return) {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
-    public partial class Security : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string binarySecurityTokenField;
-        
-        private System.Xml.XmlAttribute[] anyAttrField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string BinarySecurityToken {
-            get {
-                return this.binarySecurityTokenField;
-            }
-            set {
-                this.binarySecurityTokenField = value;
-                this.RaisePropertyChanged("BinarySecurityToken");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
-        public System.Xml.XmlAttribute[] AnyAttr {
-            get {
-                return this.anyAttrField;
-            }
-            set {
-                this.anyAttrField = value;
-                this.RaisePropertyChanged("AnyAttr");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class listUsersByFilter : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private UserSearchFilter arg1Field;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public UserSearchFilter arg1 {
-            get {
-                return this.arg1Field;
-            }
-            set {
-                this.arg1Field = value;
-                this.RaisePropertyChanged("arg1");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
-    public partial class UserSearchFilter : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string idDocumentField;
-        
-        private string idDocumentTypeField;
-        
-        private string emailField;
-        
-        private string nameField;
-        
-        private string surnameField;
-        
-        private string usernameField;
-        
-        private string roleField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public string IdDocument {
-            get {
-                return this.idDocumentField;
-            }
-            set {
-                this.idDocumentField = value;
-                this.RaisePropertyChanged("IdDocument");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string IdDocumentType {
-            get {
-                return this.idDocumentTypeField;
-            }
-            set {
-                this.idDocumentTypeField = value;
-                this.RaisePropertyChanged("IdDocumentType");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-                this.RaisePropertyChanged("Email");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-                this.RaisePropertyChanged("Name");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string Surname {
-            get {
-                return this.surnameField;
-            }
-            set {
-                this.surnameField = value;
-                this.RaisePropertyChanged("Surname");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public string Username {
-            get {
-                return this.usernameField;
-            }
-            set {
-                this.usernameField = value;
-                this.RaisePropertyChanged("Username");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public string Role {
-            get {
-                return this.roleField;
-            }
-            set {
-                this.roleField = value;
-                this.RaisePropertyChanged("Role");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class editUserData : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private long idField;
-        
-        private bool idFieldSpecified;
-        
-        private userData userDataField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public long id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-                this.RaisePropertyChanged("id");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool idSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
-                this.RaisePropertyChanged("idSpecified");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public userData userData {
-            get {
-                return this.userDataField;
-            }
-            set {
-                this.userDataField = value;
-                this.RaisePropertyChanged("userData");
             }
         }
         
@@ -581,6 +206,367 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         PASSPORT,
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
+    public partial class editUserData : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private long idField;
+        
+        private bool idFieldSpecified;
+        
+        private userData userDataField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public long id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("id");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool idSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+                this.RaisePropertyChanged("idSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public userData userData {
+            get {
+                return this.userDataField;
+            }
+            set {
+                this.userDataField = value;
+                this.RaisePropertyChanged("userData");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public partial class UserSearchFilter : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string idDocumentField;
+        
+        private string idDocumentTypeField;
+        
+        private string emailField;
+        
+        private string nameField;
+        
+        private string surnameField;
+        
+        private string usernameField;
+        
+        private string roleField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string IdDocument {
+            get {
+                return this.idDocumentField;
+            }
+            set {
+                this.idDocumentField = value;
+                this.RaisePropertyChanged("IdDocument");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string IdDocumentType {
+            get {
+                return this.idDocumentTypeField;
+            }
+            set {
+                this.idDocumentTypeField = value;
+                this.RaisePropertyChanged("IdDocumentType");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+                this.RaisePropertyChanged("Email");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+                this.RaisePropertyChanged("Name");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string Surname {
+            get {
+                return this.surnameField;
+            }
+            set {
+                this.surnameField = value;
+                this.RaisePropertyChanged("Surname");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string Username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                this.usernameField = value;
+                this.RaisePropertyChanged("Username");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public string Role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+                this.RaisePropertyChanged("Role");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
+    public partial class listUsersByFilter : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private UserSearchFilter arg1Field;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public UserSearchFilter arg1 {
+            get {
+                return this.arg1Field;
+            }
+            set {
+                this.arg1Field = value;
+                this.RaisePropertyChanged("arg1");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
+    public partial class ArgumentException : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string messageField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string message {
+            get {
+                return this.messageField;
+            }
+            set {
+                this.messageField = value;
+                this.RaisePropertyChanged("message");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://ws.unisell.miw.uniovi/", ConfigurationName="UniSellWS.IUserWS")]
+    public interface IUserWS {
+        
+        // CODEGEN: Generating message contract since the operation listUsersByFilter is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilter/Fault/UnauthorizeAccessExc" +
+            "eption", Name="UnauthorizeAccessException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilter/Fault/ArgumentException", Name="ArgumentException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse listUsersByFilter(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse> listUsersByFilterAsync(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request);
+        
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findPersonDocumentTypesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findPersonDocumentTypesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse findPersonDocumentTypes(UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findPersonDocumentTypesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findPersonDocumentTypesResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse> findPersonDocumentTypesAsync(UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest request);
+        
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findLegalDocumentTypesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findLegalDocumentTypesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse findLegalDocumentTypes(UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findLegalDocumentTypesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findLegalDocumentTypesResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse> findLegalDocumentTypesAsync(UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest request);
+        
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/loginRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/loginResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/login/Fault/ArgumentException", Name="ArgumentException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        UniSell.NET.ConsoleClient.UniSellWS.loginResponse login(UniSell.NET.ConsoleClient.UniSellWS.loginRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/loginRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/loginResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.loginResponse> loginAsync(UniSell.NET.ConsoleClient.UniSellWS.loginRequest request);
+        
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
+        UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> findUserRolesAsync(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request);
+        
+        // CODEGEN: Generating message contract since the operation disableAccount is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/UnauthorizeAccessExcept" +
+            "ion", Name="UnauthorizeAccessException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/ArgumentException", Name="ArgumentException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse1 disableAccount(UniSell.NET.ConsoleClient.UniSellWS.disableAccountRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse1> disableAccountAsync(UniSell.NET.ConsoleClient.UniSellWS.disableAccountRequest request);
+        
+        // CODEGEN: Generating message contract since the operation enableAccount is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.UnauthorizeAccessException), Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/UnauthorizeAccessExcepti" +
+            "on", Name="UnauthorizeAccessException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/ArgumentException", Name="ArgumentException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1 enableAccount(UniSell.NET.ConsoleClient.UniSellWS.enableAccountRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1> enableAccountAsync(UniSell.NET.ConsoleClient.UniSellWS.enableAccountRequest request);
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
+    public partial class Security : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string binarySecurityTokenField;
+        
+        private System.Xml.XmlAttribute[] anyAttrField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string BinarySecurityToken {
+            get {
+                return this.binarySecurityTokenField;
+            }
+            set {
+                this.binarySecurityTokenField = value;
+                this.RaisePropertyChanged("BinarySecurityToken");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyAttributeAttribute()]
+        public System.Xml.XmlAttribute[] AnyAttr {
+            get {
+                return this.anyAttrField;
+            }
+            set {
+                this.anyAttrField = value;
+                this.RaisePropertyChanged("AnyAttr");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -618,6 +604,160 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         public listUsersByFilterResponse(UniSell.NET.ConsoleClient.UniSellWS.editUserData[] listUsersByFilterResponse1) {
             this.listUsersByFilterResponse1 = listUsersByFilterResponse1;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findPersonDocumentTypes", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findPersonDocumentTypesRequest {
+        
+        public findPersonDocumentTypesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findPersonDocumentTypesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findPersonDocumentTypesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
+        public System.Nullable<PersonIdDocumentType>[] @return;
+        
+        public findPersonDocumentTypesResponse() {
+        }
+        
+        public findPersonDocumentTypesResponse(System.Nullable<PersonIdDocumentType>[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public enum LegalPersonIdDocumentType {
+        
+        /// <remarks/>
+        CIF,
+        
+        /// <remarks/>
+        CIE,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findLegalDocumentTypes", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findLegalDocumentTypesRequest {
+        
+        public findLegalDocumentTypesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findLegalDocumentTypesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findLegalDocumentTypesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
+        public System.Nullable<LegalPersonIdDocumentType>[] @return;
+        
+        public findLegalDocumentTypesResponse() {
+        }
+        
+        public findLegalDocumentTypesResponse(System.Nullable<LegalPersonIdDocumentType>[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="login", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class loginRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg1;
+        
+        public loginRequest() {
+        }
+        
+        public loginRequest(string arg0, string arg1) {
+            this.arg0 = arg0;
+            this.arg1 = arg1;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="loginResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class loginResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string @return;
+        
+        public loginResponse() {
+        }
+        
+        public loginResponse(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public enum UserRole {
+        
+        /// <remarks/>
+        ADMIN,
+        
+        /// <remarks/>
+        SELLER,
+        
+        /// <remarks/>
+        BUYER,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRoles", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findUserRolesRequest {
+        
+        public findUserRolesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRolesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findUserRolesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
+        public System.Nullable<UserRole>[] @return;
+        
+        public findUserRolesResponse() {
+        }
+        
+        public findUserRolesResponse(System.Nullable<UserRole>[] @return) {
+            this.@return = @return;
         }
     }
     
@@ -883,6 +1023,73 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.listUsersByFilter(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request) {
+            return base.Channel.listUsersByFilter(request);
+        }
+        
+        public UniSell.NET.ConsoleClient.UniSellWS.editUserData[] listUsersByFilter(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilter listUsersByFilter1) {
+            UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest();
+            inValue.arg0 = arg0;
+            inValue.listUsersByFilter = listUsersByFilter1;
+            UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).listUsersByFilter(inValue);
+            return retVal.listUsersByFilterResponse1;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.listUsersByFilterAsync(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request) {
+            return base.Channel.listUsersByFilterAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse> listUsersByFilterAsync(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilter listUsersByFilter) {
+            UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest();
+            inValue.arg0 = arg0;
+            inValue.listUsersByFilter = listUsersByFilter;
+            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).listUsersByFilterAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findPersonDocumentTypes(UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest request) {
+            return base.Channel.findPersonDocumentTypes(request);
+        }
+        
+        public System.Nullable<PersonIdDocumentType>[] findPersonDocumentTypes() {
+            UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest();
+            UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findPersonDocumentTypes(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findPersonDocumentTypesAsync(UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest request) {
+            return base.Channel.findPersonDocumentTypesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse> findPersonDocumentTypesAsync() {
+            UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesRequest();
+            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findPersonDocumentTypesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findLegalDocumentTypes(UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest request) {
+            return base.Channel.findLegalDocumentTypes(request);
+        }
+        
+        public System.Nullable<LegalPersonIdDocumentType>[] findLegalDocumentTypes() {
+            UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest();
+            UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findLegalDocumentTypes(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findLegalDocumentTypesAsync(UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest request) {
+            return base.Channel.findLegalDocumentTypesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse> findLegalDocumentTypesAsync() {
+            UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesRequest();
+            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findLegalDocumentTypesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         UniSell.NET.ConsoleClient.UniSellWS.loginResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.login(UniSell.NET.ConsoleClient.UniSellWS.loginRequest request) {
             return base.Channel.login(request);
         }
@@ -908,28 +1115,24 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.listUsersByFilter(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request) {
-            return base.Channel.listUsersByFilter(request);
+        UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
+            return base.Channel.findUserRoles(request);
         }
         
-        public UniSell.NET.ConsoleClient.UniSellWS.editUserData[] listUsersByFilter(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilter listUsersByFilter1) {
-            UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest();
-            inValue.arg0 = arg0;
-            inValue.listUsersByFilter = listUsersByFilter1;
-            UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).listUsersByFilter(inValue);
-            return retVal.listUsersByFilterResponse1;
+        public System.Nullable<UserRole>[] findUserRoles() {
+            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest();
+            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findUserRoles(inValue);
+            return retVal.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.listUsersByFilterAsync(UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest request) {
-            return base.Channel.listUsersByFilterAsync(request);
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRolesAsync(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
+            return base.Channel.findUserRolesAsync(request);
         }
         
-        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse> listUsersByFilterAsync(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilter listUsersByFilter) {
-            UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterRequest();
-            inValue.arg0 = arg0;
-            inValue.listUsersByFilter = listUsersByFilter;
-            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).listUsersByFilterAsync(inValue);
+        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse> findUserRolesAsync() {
+            UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest();
+            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).findUserRolesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
