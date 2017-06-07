@@ -197,7 +197,7 @@ namespace UniSell.NET.ConsoleClient
             foreach (var company in companies)
             {
                 Button editBtn = new Button { Text = "Editar", Tag = company.id };
-                editBtn.Click += EditUser;
+                editBtn.Click += EditCompany;
                 Button removeBtn = new Button { Text = "Borrar", Tag = company.id };
                 removeBtn.Click += DeleteCompany;
                 companiesTable.RowCount++;
@@ -303,6 +303,16 @@ namespace UniSell.NET.ConsoleClient
             form.Show();
         }
 
+        private void EditCompany(dynamic sender, EventArgs e)
+        {
+            long id = sender.Tag;
+            CompanyWSClient ws = new CompanyWSClient();
+            findCompanyResponse res = ws.findCompany(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+                new findCompany { arg1 = id, arg1Specified = true });
+            CompanyForm form = new CompanyForm(authToken, this, res.@return);
+            form.Show();
+        }
+
         private void newAdminButton_Click(object sender, EventArgs e)
         {
             UserForm form = new UserForm(false, authToken, this);
@@ -371,6 +381,11 @@ namespace UniSell.NET.ConsoleClient
                         MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void newCompanyButton_Click(object sender, EventArgs e)
+        {
+            new CompanyForm(authToken, this).Show();
         }
     }
 }
