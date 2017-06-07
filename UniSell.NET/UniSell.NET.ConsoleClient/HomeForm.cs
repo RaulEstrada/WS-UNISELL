@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UniSell.NET.ConsoleClient.UniSellAdminWS;
+using UniSell.NET.ConsoleClient.UniSellCompanyWS;
 using UniSell.NET.ConsoleClient.UniSellSellerWS;
 using UniSell.NET.ConsoleClient.UniSellWS;
 
@@ -25,8 +26,11 @@ namespace UniSell.NET.ConsoleClient
             InitializeComponent();
             InitializeUserRolesCombobox();
             InitializeUserDocumentTypeCombobox();
+            InitializeCompanyDocumentTypeCombobox();
             InitializeUserTableControls();
+            InitializeCompanyTableControls();
             FilterUsersTable();
+            FilterCompaniesTable();
         }
 
         private void InitializeUserRolesCombobox()
@@ -55,6 +59,15 @@ namespace UniSell.NET.ConsoleClient
             }
         }
 
+        private void InitializeCompanyDocumentTypeCombobox()
+        {
+            var types = Enum.GetValues(typeof(UniSellCompanyWS.LegalPersonIdDocumentType));
+            foreach (var type in types)
+            {
+                comp_document_type.Items.Add(type);
+            }
+        }
+
         private void InitializeUserTableControls()
         {
             userTable.Controls.Add(new Label() { Text = "Id" }, 0, 0);
@@ -66,6 +79,19 @@ namespace UniSell.NET.ConsoleClient
             userTable.Controls.Add(new Label() { Text = "Editar" }, 6, 0);
             userTable.Controls.Add(new Label() { Text = "Borrar" }, 7, 0);
             userTable.Controls.Add(new Label() { Text = "Activar" }, 8, 0);
+        }
+
+        private void InitializeCompanyTableControls()
+        {
+            companiesTable.Controls.Add(new Label() { Text = "Id" }, 0, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Nombre" }, 1, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Ciudad" }, 2, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Región" }, 3, 0);
+            companiesTable.Controls.Add(new Label() { Text = "País" }, 4, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Código Postal" }, 5, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Documento" }, 6, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Editar" }, 7, 0);
+            companiesTable.Controls.Add(new Label() { Text = "Borrar" }, 8, 0);
         }
 
         private void Tab_SelectedIndexChanged(object sender, EventArgs e)
@@ -138,6 +164,55 @@ namespace UniSell.NET.ConsoleClient
             }
         }
 
+        public void FilterCompaniesTable()
+        {
+            CompanySearchFilter filter = new CompanySearchFilter
+            {
+                Name = comp_name.Text,
+                Description = comp_desc.Text,
+                City = comp_city.Text,
+                Region = comp_region.Text,
+                Country = comp_country.Text,
+                ZipCode = comp_zipcode.Text,
+                IdDocument = comp_document.Text,
+                IdDocumentType = comp_document_type.Text
+            };
+            CompanyWSClient ws = new CompanyWSClient();
+            for (int indx = (companiesTable.RowCount * companiesTable.ColumnCount) - 1; indx >= companiesTable.ColumnCount; indx--)
+            {
+                companiesTable.Controls.RemoveAt(indx);
+            }
+            companiesTable.RowCount = 1;
+            editCompanyData[] data = ws.listCompaniesByFilter(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+                new listCompaniesByFilter { arg1 = filter });
+            FillCompaniesTable(data);
+        }
+
+        private void FillCompaniesTable(editCompanyData[] companies)
+        {
+            if (companies == null)
+            {
+                return;
+            }
+            foreach (var company in companies)
+            {
+                Button editBtn = new Button { Text = "Editar", Tag = company.id };
+                editBtn.Click += EditUser;
+                Button removeBtn = new Button { Text = "Borrar", Tag = company.id };
+                removeBtn.Click += DeleteUser;
+                companiesTable.RowCount++;
+                companiesTable.Controls.Add(new Label() { Text = company.id.ToString() }, 0, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(new Label() { Text = company.companyData.name }, 1, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(new Label() { Text = company.companyData.locationInfo.City }, 2, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(new Label() { Text = company.companyData.locationInfo.Region }, 3, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(new Label() { Text = company.companyData.locationInfo.Country }, 4, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(new Label() { Text = company.companyData.locationInfo.ZipCode }, 5, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(new Label() { Text = company.companyData.idDocumentType + " " + company.companyData.idDocument }, 6, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(editBtn, 7, companiesTable.RowCount - 1);
+                companiesTable.Controls.Add(removeBtn, 8, companiesTable.RowCount - 1);
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FilterUsersTable();
@@ -159,7 +234,7 @@ namespace UniSell.NET.ConsoleClient
                     removeUserResponse response = ws.removeUser(new UniSellWS.Security { BinarySecurityToken = authToken }, new removeUser { arg1 = id,  arg1Specified = true });
                     FilterUsersTable();
                 }
-                catch (FaultException<ElementNotFoundException> ex)
+                catch (FaultException<UniSellWS.ElementNotFoundException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha encontrado un usuario con id " + id + " en el sistema",
                         "Error",
@@ -238,6 +313,11 @@ namespace UniSell.NET.ConsoleClient
         {
             UserForm form = new UserForm(true, authToken, this);
             form.Show();
+        }
+
+        private void filterCompanies_Click(object sender, EventArgs e)
+        {
+            FilterCompaniesTable();
         }
     }
 }

@@ -55,9 +55,29 @@
             this.companiesTab = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comp_name = new System.Windows.Forms.TextBox();
+            this.comp_desc = new System.Windows.Forms.TextBox();
+            this.comp_city = new System.Windows.Forms.TextBox();
+            this.comp_region = new System.Windows.Forms.TextBox();
+            this.comp_country = new System.Windows.Forms.TextBox();
+            this.comp_zipcode = new System.Windows.Forms.TextBox();
+            this.comp_document = new System.Windows.Forms.TextBox();
+            this.comp_document_type = new System.Windows.Forms.ComboBox();
+            this.filterCompanies = new System.Windows.Forms.Button();
+            this.companiesTable = new System.Windows.Forms.TableLayoutPanel();
+            this.newCompanyButton = new System.Windows.Forms.Button();
             this.Inicio.SuspendLayout();
             this.homeTab.SuspendLayout();
             this.usersTab.SuspendLayout();
+            this.companiesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -298,7 +318,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(19, 14);
+            this.label4.Location = new System.Drawing.Point(19, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 20);
             this.label4.TabIndex = 0;
@@ -306,6 +326,25 @@
             // 
             // companiesTab
             // 
+            this.companiesTab.Controls.Add(this.newCompanyButton);
+            this.companiesTab.Controls.Add(this.companiesTable);
+            this.companiesTab.Controls.Add(this.filterCompanies);
+            this.companiesTab.Controls.Add(this.comp_document_type);
+            this.companiesTab.Controls.Add(this.comp_document);
+            this.companiesTab.Controls.Add(this.comp_zipcode);
+            this.companiesTab.Controls.Add(this.comp_country);
+            this.companiesTab.Controls.Add(this.comp_region);
+            this.companiesTab.Controls.Add(this.comp_city);
+            this.companiesTab.Controls.Add(this.comp_desc);
+            this.companiesTab.Controls.Add(this.comp_name);
+            this.companiesTab.Controls.Add(this.label17);
+            this.companiesTab.Controls.Add(this.label16);
+            this.companiesTab.Controls.Add(this.label15);
+            this.companiesTab.Controls.Add(this.label14);
+            this.companiesTab.Controls.Add(this.label13);
+            this.companiesTab.Controls.Add(this.label12);
+            this.companiesTab.Controls.Add(this.label11);
+            this.companiesTab.Controls.Add(this.label10);
             this.companiesTab.Location = new System.Drawing.Point(4, 22);
             this.companiesTab.Name = "companiesTab";
             this.companiesTab.Padding = new System.Windows.Forms.Padding(3);
@@ -334,6 +373,177 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(14, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 20);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Filtros";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 36);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 15);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Nombre:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(341, 36);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 15);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Descripción:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(19, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(49, 15);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Ciudad:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(341, 61);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 15);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Región:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(20, 92);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(34, 15);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "País:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(338, 92);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(86, 15);
+            this.label16.TabIndex = 6;
+            this.label16.Text = "Código Postal:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(17, 118);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(74, 15);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Documento:";
+            // 
+            // comp_name
+            // 
+            this.comp_name.Location = new System.Drawing.Point(97, 33);
+            this.comp_name.Name = "comp_name";
+            this.comp_name.Size = new System.Drawing.Size(222, 20);
+            this.comp_name.TabIndex = 8;
+            // 
+            // comp_desc
+            // 
+            this.comp_desc.Location = new System.Drawing.Point(422, 32);
+            this.comp_desc.Name = "comp_desc";
+            this.comp_desc.Size = new System.Drawing.Size(343, 20);
+            this.comp_desc.TabIndex = 9;
+            // 
+            // comp_city
+            // 
+            this.comp_city.Location = new System.Drawing.Point(97, 61);
+            this.comp_city.Name = "comp_city";
+            this.comp_city.Size = new System.Drawing.Size(222, 20);
+            this.comp_city.TabIndex = 10;
+            // 
+            // comp_region
+            // 
+            this.comp_region.Location = new System.Drawing.Point(422, 59);
+            this.comp_region.Name = "comp_region";
+            this.comp_region.Size = new System.Drawing.Size(343, 20);
+            this.comp_region.TabIndex = 11;
+            // 
+            // comp_country
+            // 
+            this.comp_country.Location = new System.Drawing.Point(98, 87);
+            this.comp_country.Name = "comp_country";
+            this.comp_country.Size = new System.Drawing.Size(222, 20);
+            this.comp_country.TabIndex = 12;
+            // 
+            // comp_zipcode
+            // 
+            this.comp_zipcode.Location = new System.Drawing.Point(423, 87);
+            this.comp_zipcode.Name = "comp_zipcode";
+            this.comp_zipcode.Size = new System.Drawing.Size(343, 20);
+            this.comp_zipcode.TabIndex = 13;
+            // 
+            // comp_document
+            // 
+            this.comp_document.Location = new System.Drawing.Point(98, 112);
+            this.comp_document.Name = "comp_document";
+            this.comp_document.Size = new System.Drawing.Size(219, 20);
+            this.comp_document.TabIndex = 14;
+            // 
+            // comp_document_type
+            // 
+            this.comp_document_type.FormattingEnabled = true;
+            this.comp_document_type.Location = new System.Drawing.Point(423, 112);
+            this.comp_document_type.Name = "comp_document_type";
+            this.comp_document_type.Size = new System.Drawing.Size(343, 21);
+            this.comp_document_type.TabIndex = 15;
+            // 
+            // filterCompanies
+            // 
+            this.filterCompanies.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterCompanies.Location = new System.Drawing.Point(661, 139);
+            this.filterCompanies.Name = "filterCompanies";
+            this.filterCompanies.Size = new System.Drawing.Size(104, 35);
+            this.filterCompanies.TabIndex = 16;
+            this.filterCompanies.Text = "Filtrar";
+            this.filterCompanies.UseVisualStyleBackColor = true;
+            this.filterCompanies.Click += new System.EventHandler(this.filterCompanies_Click);
+            // 
+            // companiesTable
+            // 
+            this.companiesTable.ColumnCount = 9;
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.companiesTable.Location = new System.Drawing.Point(23, 183);
+            this.companiesTable.Name = "companiesTable";
+            this.companiesTable.RowCount = 1;
+            this.companiesTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.companiesTable.Size = new System.Drawing.Size(743, 231);
+            this.companiesTable.TabIndex = 17;
+            // 
+            // newCompanyButton
+            // 
+            this.newCompanyButton.BackColor = System.Drawing.Color.LightGreen;
+            this.newCompanyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newCompanyButton.Location = new System.Drawing.Point(23, 420);
+            this.newCompanyButton.Name = "newCompanyButton";
+            this.newCompanyButton.Size = new System.Drawing.Size(143, 45);
+            this.newCompanyButton.TabIndex = 0;
+            this.newCompanyButton.Text = "Nueva empresa";
+            this.newCompanyButton.UseVisualStyleBackColor = false;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +560,8 @@
             this.homeTab.PerformLayout();
             this.usersTab.ResumeLayout(false);
             this.usersTab.PerformLayout();
+            this.companiesTab.ResumeLayout(false);
+            this.companiesTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -384,5 +596,24 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button newSellerButton;
         private System.Windows.Forms.Button newAdminButton;
+        private System.Windows.Forms.ComboBox comp_document_type;
+        private System.Windows.Forms.TextBox comp_document;
+        private System.Windows.Forms.TextBox comp_zipcode;
+        private System.Windows.Forms.TextBox comp_country;
+        private System.Windows.Forms.TextBox comp_region;
+        private System.Windows.Forms.TextBox comp_city;
+        private System.Windows.Forms.TextBox comp_desc;
+        private System.Windows.Forms.TextBox comp_name;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button filterCompanies;
+        private System.Windows.Forms.TableLayoutPanel companiesTable;
+        private System.Windows.Forms.Button newCompanyButton;
     }
 }
