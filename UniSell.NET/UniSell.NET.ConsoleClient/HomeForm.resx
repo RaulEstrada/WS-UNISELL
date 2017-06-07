@@ -118,17 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label3.Text" xml:space="preserve">
-    <value>Este programa permite a los administradores gestionar las empresas y usuarios de éstas 
-(vendedores), que tienen acceso al portal de comercio electrónico UniSell.
+    <value>Este programa permite a los administradores gestionar las empresas y usuarios de éstas (vendedores), 
+que tienen acceso al portal de comercio electrónico UniSell.
 
-En la pestaña USUARIOS se pueden listar, filtrar, editar, crear y borrar usuarios tanto 
-administradores del propio portal como vendedores de una empresa.
+En la pestaña USUARIOS se pueden listar, filtrar, editar, crear y borrar usuarios tanto administradores 
+del propio portal como vendedores de una empresa.
 
-En la pestaña EMPRESAS se pueden listar, filtrar, editar, crear y borrar empresas 
-siempre y cuando no tengan relacionado algún vendedor.
+En la pestaña EMPRESAS se pueden listar, filtrar, editar, crear y borrar empresas siempre y cuando no
+ tengan relacionado algún vendedor.
 
-Para resolver cualquier duda o problema, puede comunicarlo a la siguiente dirección 
-de correo electrónico: uo225271@uniovi.es</value>
+Para resolver cualquier duda o problema, puede comunicarlo a la siguiente dirección de correo 
+electrónico: uo225271@uniovi.es</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

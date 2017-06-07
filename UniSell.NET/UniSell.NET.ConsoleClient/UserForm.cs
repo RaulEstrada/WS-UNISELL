@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.Net.Mail;
+using System.ServiceModel;
 using System.Windows.Forms;
 using UniSell.NET.ConsoleClient.UniSellAdminWS;
 using UniSell.NET.ConsoleClient.UniSellCompanyWS;
@@ -67,7 +71,7 @@ namespace UniSell.NET.ConsoleClient
                 CompanyWSClient ws = new CompanyWSClient();
                 findCompanyResponse res = ws.findCompany(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
                     new findCompany { arg1 = user.userData.companyId, arg1Specified = true });
-                user_company.SelectedIndex = user_company.FindStringExact(res.@return.companyData.name);
+                user_company.SelectedIndex = user_company.FindStringExact(res.@return.companyData.name + " - " + res.@return.companyData.idDocument);
             }
         }
 
@@ -84,7 +88,7 @@ namespace UniSell.NET.ConsoleClient
                     foreach (var companyData in data) {
                         user_company.Items.Add(new CompanyComboboxItem {
                             Id= companyData.id,
-                            Label = companyData.companyData.name
+                            Label = companyData.companyData.name + " - " + companyData.companyData.idDocument
                         });
                     }
                 }
@@ -107,37 +111,117 @@ namespace UniSell.NET.ConsoleClient
 
         private void edit_user_button_Click(object sender, EventArgs e)
         {
+            try
+            {
+                DoEditUser();
+            }
+            catch (FaultException<UniSellSellerWS.RepeatedUsernameException> ex)
+            {
+                ShowExceptionError("Ya hay otra persona con ese usuario (nombre de usuario). Por favor, introduzca otro");
+            }
+            catch (FaultException<UniSellSellerWS.InvalidEntityException> ex)
+            {
+                ShowExceptionError("No se han recibido todos los datos necesarios para completar la acción");
+            }
+            catch (FaultException<UniSellSellerWS.RepeatedEmailException> ex)
+            {
+                ShowExceptionError("Ya hay otra persona con ese email. Por favor, introduzca otro");
+            }
+            catch (FaultException<UniSellSellerWS.RepeatedDocumentException> ex)
+            {
+                ShowExceptionError("Ya hay otra persona con ese documento. Por favor, introduzca otro");
+            }
+        }
+
+        private void DoEditUser()
+        {
+            if (!validationEmptyErrorMessage() || !validateEmailAndPassword())
+            {
+                return;
+            }
             if (seller)
             {
                 UserSellerWSClient ws = new UserSellerWSClient();
                 user.userData.companyId = ((CompanyComboboxItem)user_company.SelectedItem).Id;
                 createUserData(user.userData.userData, user_document_type.SelectedItem);
-                ws.editSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken }, 
+                ws.editSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken },
                     new editSeller { arg1 = user });
-            } else
+            }
+            else
             {
                 UserAdminWSClient ws = new UserAdminWSClient();
                 createUserData(user.userData, user_document_type.SelectedItem);
-                ws.editAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken }, 
+                ws.editAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken },
                     new editAdmin { arg1 = user });
             }
             parentForm.FilterUsersTable();
             this.Close();
         }
 
+        private bool validationEmptyErrorMessage()
+        {
+            IList<String> invalidFields = validateEmptyFields();
+            if (invalidFields.Count > 0)
+            {
+                MessageBox.Show("Por favor, introduzca los siguientes campos en el formulario: " +
+                string.Join(", ", invalidFields),
+                        "Datos no válidos",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         private void save_user_button_Click(object sender, EventArgs e)
         {
+            try
+            {
+                DoSaveUser();
+            } catch (FaultException<UniSellSellerWS.RepeatedUsernameException> ex)
+            {
+                ShowExceptionError("Ya hay otra persona con ese usuario (nombre de usuario). Por favor, introduzca otro");
+            } catch (FaultException<UniSellSellerWS.InvalidEntityException> ex)
+            {
+                ShowExceptionError("No se han recibido todos los datos necesarios para completar la acción");
+            } catch (FaultException<UniSellSellerWS.RepeatedEmailException> ex)
+            {
+                ShowExceptionError("Ya hay otra persona con ese email. Por favor, introduzca otro");
+            } catch (FaultException<UniSellSellerWS.RepeatedDocumentException> ex)
+            {
+                ShowExceptionError("Ya hay otra persona con ese documento. Por favor, introduzca otro");
+            }
+        }
+
+        private void ShowExceptionError(string msg)
+        {
+            MessageBox.Show(msg,
+                        "Error completando la operación",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+        }
+
+        private void DoSaveUser()
+        {
+            if (!validationEmptyErrorMessage() || !validateEmailAndPassword())
+            {
+                return;
+            }
             if (seller)
             {
                 UniSellSellerWS.userData ud = new UniSellSellerWS.userData();
                 createUserData(ud, user_document_type.SelectedItem);
                 UserSellerWSClient ws = new UserSellerWSClient();
                 ws.createSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken },
-                    new createSeller { arg1 = new userSellerData {
-                        companyId = ((CompanyComboboxItem)user_company.SelectedItem).Id,
-                        companyIdSpecified = true,
-                        userData = ud
-                    } });
+                    new createSeller
+                    {
+                        arg1 = new userSellerData
+                        {
+                            companyId = ((CompanyComboboxItem)user_company.SelectedItem).Id,
+                            companyIdSpecified = true,
+                            userData = ud
+                        }
+                    });
             }
             else
             {
@@ -162,6 +246,58 @@ namespace UniSell.NET.ConsoleClient
             ud.username = user_username.Text;
             ud.password = user_password.Text;
             ud.documentTypeSpecified = true;
+        }
+
+        private IList<String> validateEmptyFields()
+        {
+            IList<String> emptyFields = new List<String>();
+            foreach (dynamic cntrl in Controls)
+            {
+                if (cntrl is TextBox && string.IsNullOrEmpty(cntrl.Text))
+                {
+                    if ((cntrl.Equals(user_password) || cntrl.Equals(user_re_password))
+                        && user != null)
+                    {
+                        continue;
+                    }
+                    emptyFields.Insert(0, cntrl.Tag);
+                }
+                else if (cntrl is ComboBox && cntrl.SelectedIndex == -1)
+                {
+                    if (cntrl.Equals(user_company) && !seller)
+                    {
+                        continue;
+                    }
+                    emptyFields.Insert(0, cntrl.Tag);
+                }
+            }
+            return emptyFields;
+        }
+
+        private bool validateEmailAndPassword()
+        {
+            if (!user_password.Text.Equals(user_re_password.Text))
+            {
+                MessageBox.Show("Las contraseñas no coinciden",
+                        "Datos no válidos",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                return false;
+            }
+            try
+            {
+                MailAddress m = new MailAddress(user_email.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("El formato del email no se corresponde con el formato de una " +
+                    "dirección de correo electrónico",
+                        "Datos no válidos",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
     }
 

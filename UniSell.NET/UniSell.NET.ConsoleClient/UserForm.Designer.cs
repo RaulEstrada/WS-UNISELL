@@ -132,6 +132,7 @@
             this.user_name.Name = "user_name";
             this.user_name.Size = new System.Drawing.Size(198, 20);
             this.user_name.TabIndex = 9;
+            this.user_name.Tag = "nombre";
             // 
             // user_surname
             // 
@@ -139,6 +140,7 @@
             this.user_surname.Name = "user_surname";
             this.user_surname.Size = new System.Drawing.Size(198, 20);
             this.user_surname.TabIndex = 10;
+            this.user_surname.Tag = "apellidos";
             // 
             // user_email
             // 
@@ -146,6 +148,7 @@
             this.user_email.Name = "user_email";
             this.user_email.Size = new System.Drawing.Size(198, 20);
             this.user_email.TabIndex = 11;
+            this.user_email.Tag = "email";
             // 
             // user_document
             // 
@@ -153,6 +156,7 @@
             this.user_document.Name = "user_document";
             this.user_document.Size = new System.Drawing.Size(198, 20);
             this.user_document.TabIndex = 12;
+            this.user_document.Tag = "documento";
             // 
             // user_username
             // 
@@ -160,6 +164,7 @@
             this.user_username.Name = "user_username";
             this.user_username.Size = new System.Drawing.Size(198, 20);
             this.user_username.TabIndex = 13;
+            this.user_username.Tag = "usuario";
             // 
             // user_password
             // 
@@ -167,6 +172,7 @@
             this.user_password.Name = "user_password";
             this.user_password.Size = new System.Drawing.Size(198, 20);
             this.user_password.TabIndex = 14;
+            this.user_password.Tag = "contraseña";
             this.user_password.UseSystemPasswordChar = true;
             // 
             // user_re_password
@@ -175,6 +181,7 @@
             this.user_re_password.Name = "user_re_password";
             this.user_re_password.Size = new System.Drawing.Size(198, 20);
             this.user_re_password.TabIndex = 15;
+            this.user_re_password.Tag = "re-contraseña";
             this.user_re_password.UseSystemPasswordChar = true;
             // 
             // user_enabled
@@ -196,6 +203,7 @@
             this.user_document_type.Name = "user_document_type";
             this.user_document_type.Size = new System.Drawing.Size(198, 21);
             this.user_document_type.TabIndex = 17;
+            this.user_document_type.Tag = "tipo de documento";
             // 
             // user_company
             // 
@@ -204,6 +212,7 @@
             this.user_company.Name = "user_company";
             this.user_company.Size = new System.Drawing.Size(198, 21);
             this.user_company.TabIndex = 18;
+            this.user_company.Tag = "empresa";
             // 
             // user_company_label
             // 
