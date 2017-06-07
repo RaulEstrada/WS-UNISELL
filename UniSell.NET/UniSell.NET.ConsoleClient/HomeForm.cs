@@ -199,7 +199,7 @@ namespace UniSell.NET.ConsoleClient
                 Button editBtn = new Button { Text = "Editar", Tag = company.id };
                 editBtn.Click += EditUser;
                 Button removeBtn = new Button { Text = "Borrar", Tag = company.id };
-                removeBtn.Click += DeleteUser;
+                removeBtn.Click += DeleteCompany;
                 companiesTable.RowCount++;
                 companiesTable.Controls.Add(new Label() { Text = company.id.ToString() }, 0, companiesTable.RowCount - 1);
                 companiesTable.Controls.Add(new Label() { Text = company.companyData.name }, 1, companiesTable.RowCount - 1);
@@ -318,6 +318,59 @@ namespace UniSell.NET.ConsoleClient
         private void filterCompanies_Click(object sender, EventArgs e)
         {
             FilterCompaniesTable();
+        }
+
+        private void DeleteCompany(dynamic sender, EventArgs e)
+        {
+            long id = sender.Tag;
+            UserSellerWSClient ws = new UserSellerWSClient();
+            editUserSellerData[] sellers = ws.findSellersByCompanyId(new UniSellSellerWS.Security { BinarySecurityToken = authToken },
+                new findSellersByCompanyId { arg1 = id, arg1Specified = true });
+            if (sellers != null && sellers.Length > 0)
+            {
+                MessageBox.Show("No se puede eliminar la empresa. Todavía tiene usuarios asociados cuyos documentos son: " +
+                    string.Join(", ", sellers.Select(seller => seller.userData.userData.idDocument)),
+                    "No se puede borrar empresa",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+            var confirmResult = MessageBox.Show("Está a punto de eliminar una empresa. " +
+                "Esta acción no se podrá deshacer. ¿Desea continuar con la operación?",
+                "Confirmar borrado",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+            if (confirmResult == DialogResult.Yes)
+            {
+                CompanyWSClient companyWS = new CompanyWSClient();
+                try
+                {
+                    removeCompanyResponse response = companyWS.removeCompany(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+                        new removeCompany { arg1 = id, arg1Specified = true });
+                    FilterCompaniesTable();
+                }
+                catch (FaultException<UniSellCompanyWS.ElementNotFoundException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se ha encontrado una empresa con id " + id + " en el sistema",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (FaultException<UniSellCompanyWS.ArgumentException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se ha recibido el id de la empresa a eliminar",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (FaultException<UniSellCompanyWS.CannotRemoveElementException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se puede eliminar la empresa porque todavía tiene usuarios asociados",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
