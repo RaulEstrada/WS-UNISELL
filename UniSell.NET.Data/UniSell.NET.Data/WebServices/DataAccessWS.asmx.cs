@@ -73,12 +73,12 @@ namespace UniSell.NET.Data.WebServices
         }
 
         [WebMethod]
-        public string Login(string username, string password)
+        public string Login(string username, string password, UserRole[] rolesAllowed)
         {
             string hashedPassword = getHashedPassword(password);
             using (var ds = new DataService())
             {
-                if (ds.getUserDAO().ExistsUsernamePassword(username, hashedPassword))
+                if (ds.getUserDAO().ExistsUsernamePassword(username, hashedPassword, rolesAllowed))
                 {
                     return JWTGenerator.Generate(username);
                 }

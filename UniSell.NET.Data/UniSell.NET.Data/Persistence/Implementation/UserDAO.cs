@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UniSell.NET.Data.Context;
 using UniSell.NET.Data.Model;
+using UniSell.NET.Data.Model.Types;
 
 namespace UniSell.NET.Data.Persistence.Implementation
 {
@@ -13,9 +14,11 @@ namespace UniSell.NET.Data.Persistence.Implementation
         {
         }
 
-        public bool ExistsUsernamePassword(string username, string password)
+        public bool ExistsUsernamePassword(string username, string password, UserRole[] rolesAllowed)
         {
-            User[] users = DbSet.Where(u => u.Username.Equals(username) && u.Password.Equals(password) && u.activeAccount)
+            User[] users = DbSet.Where(u => u.Username.Equals(username) && 
+            u.Password.Equals(password) && u.activeAccount && 
+            rolesAllowed.Contains(u.Role))
                 .ToArray();
             return users != null && users.Length > 0;
         }

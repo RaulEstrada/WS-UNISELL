@@ -49,10 +49,10 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/Login", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string Login(string username, string password);
+        string Login(string username, string password, UniSell.NET.RESTProvider.DataAccessWS.UserRole[] rolesAllowed);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/Login", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> LoginAsync(string username, string password);
+        System.Threading.Tasks.Task<string> LoginAsync(string username, string password, UniSell.NET.RESTProvider.DataAccessWS.UserRole[] rolesAllowed);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindUserByUsername", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -2450,12 +2450,12 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
             return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindUserAsync(inValue);
         }
         
-        public string Login(string username, string password) {
-            return base.Channel.Login(username, password);
+        public string Login(string username, string password, UniSell.NET.RESTProvider.DataAccessWS.UserRole[] rolesAllowed) {
+            return base.Channel.Login(username, password, rolesAllowed);
         }
         
-        public System.Threading.Tasks.Task<string> LoginAsync(string username, string password) {
-            return base.Channel.LoginAsync(username, password);
+        public System.Threading.Tasks.Task<string> LoginAsync(string username, string password, UniSell.NET.RESTProvider.DataAccessWS.UserRole[] rolesAllowed) {
+            return base.Channel.LoginAsync(username, password, rolesAllowed);
         }
         
         public UniSell.NET.RESTProvider.DataAccessWS.User FindUserByUsername(string username) {

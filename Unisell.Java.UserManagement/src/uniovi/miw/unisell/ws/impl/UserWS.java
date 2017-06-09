@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jws.WebService;
 
 import uniovi.miw.unisell.data.ArrayOfUser;
+import uniovi.miw.unisell.data.ArrayOfUserRole;
 import uniovi.miw.unisell.data.DataAccess;
 import uniovi.miw.unisell.data.DataAccessSoap;
 import uniovi.miw.unisell.data.LegalPersonIdDocumentType;
@@ -34,7 +35,9 @@ public class UserWS implements IUserWS {
 		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap dataAccessSOAP = dataAccessWS.getDataAccessSoap();
-		return dataAccessSOAP.login(username, password);
+		ArrayOfUserRole rolesAllowed = new ArrayOfUserRole();
+		rolesAllowed.getUserRole().add(UserRole.ADMIN);
+		return dataAccessSOAP.login(username, password, rolesAllowed);
 	}
 
 	@Override

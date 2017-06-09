@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="rolesAllowed" type="{http://unisell.net.data/}ArrayOfUserRole" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,13 +31,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "username",
-    "password"
+    "password",
+    "rolesAllowed"
 })
 @XmlRootElement(name = "Login")
 public class Login {
 
     protected String username;
     protected String password;
+    protected ArrayOfUserRole rolesAllowed;
 
     /**
      * Obtiene el valor de la propiedad username.
@@ -84,6 +87,30 @@ public class Login {
      */
     public void setPassword(String value) {
         this.password = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad rolesAllowed.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ArrayOfUserRole }
+     *     
+     */
+    public ArrayOfUserRole getRolesAllowed() {
+        return rolesAllowed;
+    }
+
+    /**
+     * Define el valor de la propiedad rolesAllowed.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ArrayOfUserRole }
+     *     
+     */
+    public void setRolesAllowed(ArrayOfUserRole value) {
+        this.rolesAllowed = value;
     }
 
 }

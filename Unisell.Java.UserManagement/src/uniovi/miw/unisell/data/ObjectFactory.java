@@ -50,14 +50,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RemoveUser }
-     * 
-     */
-    public RemoveUser createRemoveUser() {
-        return new RemoveUser();
-    }
-
-    /**
      * Create an instance of {@link ListAllAdmins }
      * 
      */
@@ -82,27 +74,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUserRoles }
+     * Create an instance of {@link RemoveCategory }
      * 
      */
-    public FindUserRoles createFindUserRoles() {
-        return new FindUserRoles();
-    }
-
-    /**
-     * Create an instance of {@link FindAllUsers }
-     * 
-     */
-    public FindAllUsers createFindAllUsers() {
-        return new FindAllUsers();
-    }
-
-    /**
-     * Create an instance of {@link FindSellersByCompanyId }
-     * 
-     */
-    public FindSellersByCompanyId createFindSellersByCompanyId() {
-        return new FindSellersByCompanyId();
+    public RemoveCategory createRemoveCategory() {
+        return new RemoveCategory();
     }
 
     /**
@@ -122,30 +98,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CountUsers }
-     * 
-     */
-    public CountUsers createCountUsers() {
-        return new CountUsers();
-    }
-
-    /**
-     * Create an instance of {@link UpdateCompany }
-     * 
-     */
-    public UpdateCompany createUpdateCompany() {
-        return new UpdateCompany();
-    }
-
-    /**
-     * Create an instance of {@link Company }
-     * 
-     */
-    public Company createCompany() {
-        return new Company();
-    }
-
-    /**
      * Create an instance of {@link FindCompaniesByFilter }
      * 
      */
@@ -159,6 +111,22 @@ public class ObjectFactory {
      */
     public CompanySearchFilter createCompanySearchFilter() {
         return new CompanySearchFilter();
+    }
+
+    /**
+     * Create an instance of {@link RemoveProductResponse }
+     * 
+     */
+    public RemoveProductResponse createRemoveProductResponse() {
+        return new RemoveProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link Product }
+     * 
+     */
+    public Product createProduct() {
+        return new Product();
     }
 
     /**
@@ -194,43 +162,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUserRolesResponse }
+     * Create an instance of {@link UpdateCategoryResponse }
      * 
      */
-    public FindUserRolesResponse createFindUserRolesResponse() {
-        return new FindUserRolesResponse();
+    public UpdateCategoryResponse createUpdateCategoryResponse() {
+        return new UpdateCategoryResponse();
     }
 
     /**
-     * Create an instance of {@link ArrayOfUserRole }
+     * Create an instance of {@link Category }
      * 
      */
-    public ArrayOfUserRole createArrayOfUserRole() {
-        return new ArrayOfUserRole();
+    public Category createCategory() {
+        return new Category();
     }
 
     /**
-     * Create an instance of {@link FindPersonIdDocumentTypes }
+     * Create an instance of {@link FindAllProducts }
      * 
      */
-    public FindPersonIdDocumentTypes createFindPersonIdDocumentTypes() {
-        return new FindPersonIdDocumentTypes();
-    }
-
-    /**
-     * Create an instance of {@link RemoveUserResponse }
-     * 
-     */
-    public RemoveUserResponse createRemoveUserResponse() {
-        return new RemoveUserResponse();
-    }
-
-    /**
-     * Create an instance of {@link FindLegalIdDocumentTypes }
-     * 
-     */
-    public FindLegalIdDocumentTypes createFindLegalIdDocumentTypes() {
-        return new FindLegalIdDocumentTypes();
+    public FindAllProducts createFindAllProducts() {
+        return new FindAllProducts();
     }
 
     /**
@@ -266,19 +218,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindCompanyResponse }
+     * Create an instance of {@link CountProducts }
      * 
      */
-    public FindCompanyResponse createFindCompanyResponse() {
-        return new FindCompanyResponse();
+    public CountProducts createCountProducts() {
+        return new CountProducts();
     }
 
     /**
-     * Create an instance of {@link CountCompaniesResponse }
+     * Create an instance of {@link FindProduct }
      * 
      */
-    public CountCompaniesResponse createCountCompaniesResponse() {
-        return new CountCompaniesResponse();
+    public FindProduct createFindProduct() {
+        return new FindProduct();
     }
 
     /**
@@ -287,6 +239,22 @@ public class ObjectFactory {
      */
     public UpdateCompanyResponse createUpdateCompanyResponse() {
         return new UpdateCompanyResponse();
+    }
+
+    /**
+     * Create an instance of {@link Company }
+     * 
+     */
+    public Company createCompany() {
+        return new Company();
+    }
+
+    /**
+     * Create an instance of {@link UpdateCategory }
+     * 
+     */
+    public UpdateCategory createUpdateCategory() {
+        return new UpdateCategory();
     }
 
     /**
@@ -322,19 +290,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CountUsersResponse }
+     * Create an instance of {@link CreateProduct }
      * 
      */
-    public CountUsersResponse createCountUsersResponse() {
-        return new CountUsersResponse();
-    }
-
-    /**
-     * Create an instance of {@link CreateUser }
-     * 
-     */
-    public CreateUser createCreateUser() {
-        return new CreateUser();
+    public CreateProduct createCreateProduct() {
+        return new CreateProduct();
     }
 
     /**
@@ -346,11 +306,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CreateCompany }
+     * Create an instance of {@link ArrayOfUserRole }
      * 
      */
-    public CreateCompany createCreateCompany() {
-        return new CreateCompany();
+    public ArrayOfUserRole createArrayOfUserRole() {
+        return new ArrayOfUserRole();
     }
 
     /**
@@ -383,6 +343,278 @@ public class ObjectFactory {
      */
     public RemoveCompany createRemoveCompany() {
         return new RemoveCompany();
+    }
+
+    /**
+     * Create an instance of {@link CreateProductResponse }
+     * 
+     */
+    public CreateProductResponse createCreateProductResponse() {
+        return new CreateProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindCategoryResponse }
+     * 
+     */
+    public FindCategoryResponse createFindCategoryResponse() {
+        return new FindCategoryResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindAllCategories }
+     * 
+     */
+    public FindAllCategories createFindAllCategories() {
+        return new FindAllCategories();
+    }
+
+    /**
+     * Create an instance of {@link FindUserResponse }
+     * 
+     */
+    public FindUserResponse createFindUserResponse() {
+        return new FindUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link ListAllAdminsResponse }
+     * 
+     */
+    public ListAllAdminsResponse createListAllAdminsResponse() {
+        return new ListAllAdminsResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfUserAdmin }
+     * 
+     */
+    public ArrayOfUserAdmin createArrayOfUserAdmin() {
+        return new ArrayOfUserAdmin();
+    }
+
+    /**
+     * Create an instance of {@link RemoveUser }
+     * 
+     */
+    public RemoveUser createRemoveUser() {
+        return new RemoveUser();
+    }
+
+    /**
+     * Create an instance of {@link CountProductsResponse }
+     * 
+     */
+    public CountProductsResponse createCountProductsResponse() {
+        return new CountProductsResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindUserRoles }
+     * 
+     */
+    public FindUserRoles createFindUserRoles() {
+        return new FindUserRoles();
+    }
+
+    /**
+     * Create an instance of {@link FindAllProductsResponse }
+     * 
+     */
+    public FindAllProductsResponse createFindAllProductsResponse() {
+        return new FindAllProductsResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfProduct }
+     * 
+     */
+    public ArrayOfProduct createArrayOfProduct() {
+        return new ArrayOfProduct();
+    }
+
+    /**
+     * Create an instance of {@link UpdateProduct }
+     * 
+     */
+    public UpdateProduct createUpdateProduct() {
+        return new UpdateProduct();
+    }
+
+    /**
+     * Create an instance of {@link RemoveProduct }
+     * 
+     */
+    public RemoveProduct createRemoveProduct() {
+        return new RemoveProduct();
+    }
+
+    /**
+     * Create an instance of {@link FindAllUsers }
+     * 
+     */
+    public FindAllUsers createFindAllUsers() {
+        return new FindAllUsers();
+    }
+
+    /**
+     * Create an instance of {@link FindSellersByCompanyId }
+     * 
+     */
+    public FindSellersByCompanyId createFindSellersByCompanyId() {
+        return new FindSellersByCompanyId();
+    }
+
+    /**
+     * Create an instance of {@link CountUsers }
+     * 
+     */
+    public CountUsers createCountUsers() {
+        return new CountUsers();
+    }
+
+    /**
+     * Create an instance of {@link UpdateCompany }
+     * 
+     */
+    public UpdateCompany createUpdateCompany() {
+        return new UpdateCompany();
+    }
+
+    /**
+     * Create an instance of {@link FindUserRolesResponse }
+     * 
+     */
+    public FindUserRolesResponse createFindUserRolesResponse() {
+        return new FindUserRolesResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindPersonIdDocumentTypes }
+     * 
+     */
+    public FindPersonIdDocumentTypes createFindPersonIdDocumentTypes() {
+        return new FindPersonIdDocumentTypes();
+    }
+
+    /**
+     * Create an instance of {@link RemoveUserResponse }
+     * 
+     */
+    public RemoveUserResponse createRemoveUserResponse() {
+        return new RemoveUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindLegalIdDocumentTypes }
+     * 
+     */
+    public FindLegalIdDocumentTypes createFindLegalIdDocumentTypes() {
+        return new FindLegalIdDocumentTypes();
+    }
+
+    /**
+     * Create an instance of {@link FindProductResponse }
+     * 
+     */
+    public FindProductResponse createFindProductResponse() {
+        return new FindProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindCompanyResponse }
+     * 
+     */
+    public FindCompanyResponse createFindCompanyResponse() {
+        return new FindCompanyResponse();
+    }
+
+    /**
+     * Create an instance of {@link CountCategoriesResponse }
+     * 
+     */
+    public CountCategoriesResponse createCountCategoriesResponse() {
+        return new CountCategoriesResponse();
+    }
+
+    /**
+     * Create an instance of {@link UpdateProductResponse }
+     * 
+     */
+    public UpdateProductResponse createUpdateProductResponse() {
+        return new UpdateProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link CountCompaniesResponse }
+     * 
+     */
+    public CountCompaniesResponse createCountCompaniesResponse() {
+        return new CountCompaniesResponse();
+    }
+
+    /**
+     * Create an instance of {@link RemoveCategoryResponse }
+     * 
+     */
+    public RemoveCategoryResponse createRemoveCategoryResponse() {
+        return new RemoveCategoryResponse();
+    }
+
+    /**
+     * Create an instance of {@link CountCategories }
+     * 
+     */
+    public CountCategories createCountCategories() {
+        return new CountCategories();
+    }
+
+    /**
+     * Create an instance of {@link CountUsersResponse }
+     * 
+     */
+    public CountUsersResponse createCountUsersResponse() {
+        return new CountUsersResponse();
+    }
+
+    /**
+     * Create an instance of {@link CreateUser }
+     * 
+     */
+    public CreateUser createCreateUser() {
+        return new CreateUser();
+    }
+
+    /**
+     * Create an instance of {@link CreateCompany }
+     * 
+     */
+    public CreateCompany createCreateCompany() {
+        return new CreateCompany();
+    }
+
+    /**
+     * Create an instance of {@link FindCategory }
+     * 
+     */
+    public FindCategory createFindCategory() {
+        return new FindCategory();
+    }
+
+    /**
+     * Create an instance of {@link FindAllCategoriesResponse }
+     * 
+     */
+    public FindAllCategoriesResponse createFindAllCategoriesResponse() {
+        return new FindAllCategoriesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfCategory }
+     * 
+     */
+    public ArrayOfCategory createArrayOfCategory() {
+        return new ArrayOfCategory();
     }
 
     /**
@@ -450,27 +682,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FindUserResponse }
+     * Create an instance of {@link CreateCategory }
      * 
      */
-    public FindUserResponse createFindUserResponse() {
-        return new FindUserResponse();
+    public CreateCategory createCreateCategory() {
+        return new CreateCategory();
     }
 
     /**
-     * Create an instance of {@link ListAllAdminsResponse }
+     * Create an instance of {@link CreateCategoryResponse }
      * 
      */
-    public ListAllAdminsResponse createListAllAdminsResponse() {
-        return new ListAllAdminsResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfUserAdmin }
-     * 
-     */
-    public ArrayOfUserAdmin createArrayOfUserAdmin() {
-        return new ArrayOfUserAdmin();
+    public CreateCategoryResponse createCreateCategoryResponse() {
+        return new CreateCategoryResponse();
     }
 
     /**
