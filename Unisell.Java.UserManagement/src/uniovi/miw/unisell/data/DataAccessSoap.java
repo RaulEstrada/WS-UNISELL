@@ -39,7 +39,6 @@ public interface DataAccessSoap {
 
     /**
      * 
-     * @param security
      * @param user
      * @return
      *     returns uniovi.miw.unisell.data.User
@@ -50,9 +49,7 @@ public interface DataAccessSoap {
     @ResponseWrapper(localName = "CreateUserResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CreateUserResponse")
     public User createUser(
         @WebParam(name = "user", targetNamespace = "http://unisell.net.data/")
-        User user,
-        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
-        Security security);
+        User user);
 
     /**
      * 
@@ -178,6 +175,20 @@ public interface DataAccessSoap {
     @RequestWrapper(localName = "ListAllSellers", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllSellers")
     @ResponseWrapper(localName = "ListAllSellersResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllSellersResponse")
     public ArrayOfUserSeller listAllSellers(
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfUserBuyer
+     */
+    @WebMethod(operationName = "ListAllBuyers", action = "http://unisell.net.data/ListAllBuyers")
+    @WebResult(name = "ListAllBuyersResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "ListAllBuyers", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllBuyers")
+    @ResponseWrapper(localName = "ListAllBuyersResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.ListAllBuyersResponse")
+    public ArrayOfUserBuyer listAllBuyers(
         @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
         Security security);
 

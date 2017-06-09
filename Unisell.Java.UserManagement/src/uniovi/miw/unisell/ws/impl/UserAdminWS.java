@@ -32,7 +32,7 @@ public class UserAdminWS implements IUserAdminWS {
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		DataValidator.validateUserData(soap, security, admin, null);
 		User user = conversor.createUser(admin);
-		User serverUser = soap.createUser(user, security);
+		User serverUser = soap.createUser(user);
 		return conversor.createEditUserData(serverUser);
 	}
 

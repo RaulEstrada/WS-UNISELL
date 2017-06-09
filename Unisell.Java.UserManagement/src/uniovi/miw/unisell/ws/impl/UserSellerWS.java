@@ -42,7 +42,7 @@ public class UserSellerWS implements IUserSellerWS {
 			throw new InvalidEntityException("Seller company with id " + user.getCompanyId() + " not found in the system");
 		}
 		User usr = conversor.createUser(user);
-		User serverUser = soap.createUser(usr, security);
+		User serverUser = soap.createUser(usr);
 		return conversor.createEditUserData((UserSeller)serverUser);
 	}
 

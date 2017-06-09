@@ -114,6 +114,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ListAllBuyersResponse }
+     * 
+     */
+    public ListAllBuyersResponse createListAllBuyersResponse() {
+        return new ListAllBuyersResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfUserBuyer }
+     * 
+     */
+    public ArrayOfUserBuyer createArrayOfUserBuyer() {
+        return new ArrayOfUserBuyer();
+    }
+
+    /**
      * Create an instance of {@link RemoveProductResponse }
      * 
      */
@@ -127,6 +143,14 @@ public class ObjectFactory {
      */
     public Product createProduct() {
         return new Product();
+    }
+
+    /**
+     * Create an instance of {@link ListAllBuyers }
+     * 
+     */
+    public ListAllBuyers createListAllBuyers() {
+        return new ListAllBuyers();
     }
 
     /**
@@ -719,6 +743,14 @@ public class ObjectFactory {
      */
     public LocationInfo createLocationInfo() {
         return new LocationInfo();
+    }
+
+    /**
+     * Create an instance of {@link UserBuyer }
+     * 
+     */
+    public UserBuyer createUserBuyer() {
+        return new UserBuyer();
     }
 
     /**

@@ -36,13 +36,8 @@ namespace UniSell.NET.Data.WebServices
         }
 
         [WebMethod]
-        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User CreateUser(User user)
         {
-            if (user.Role != Model.Types.UserRole.BUYER)
-            {
-                ValidateSecurity();
-            }
             user.Password = getHashedPassword(user.Password);
             using (var ds = new DataService())
             {
@@ -151,6 +146,17 @@ namespace UniSell.NET.Data.WebServices
             using (var ds = new DataService())
             {
                 return ds.getUserSellerDAO().FindAllSellers().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public UserBuyer[] ListAllBuyers()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getUserBuyerDAO().FindAllBuyers().ToArray();
             }
         }
 

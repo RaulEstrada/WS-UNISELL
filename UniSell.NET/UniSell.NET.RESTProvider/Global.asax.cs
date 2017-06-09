@@ -12,6 +12,9 @@ namespace UniSell.NET.RESTProvider
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.Formatters.Add(
+                new System.Net.Http.Formatting.XmlMediaTypeFormatter());
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
         }
     }
 }

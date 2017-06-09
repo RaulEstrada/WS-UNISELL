@@ -173,11 +173,13 @@
     <Compile Include="Persistence\Implementation\GenericDAO.cs" />
     <Compile Include="Persistence\Implementation\ProductDAO.cs" />
     <Compile Include="Persistence\Implementation\UserAdminDAO.cs" />
+    <Compile Include="Persistence\Implementation\UserBuyerDAO.cs" />
     <Compile Include="Persistence\Implementation\UserDAO.cs" />
     <Compile Include="Persistence\Implementation\UserSearchFilter.cs" />
     <Compile Include="Persistence\Implementation\UserSellerDAO.cs" />
     <Compile Include="Persistence\IProductDAO.cs" />
     <Compile Include="Persistence\IUserAdminDAO.cs" />
+    <Compile Include="Persistence\IUserBuyerDAO.cs" />
     <Compile Include="Persistence\IUserDAO.cs" />
     <Compile Include="Persistence\IUserSellerDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

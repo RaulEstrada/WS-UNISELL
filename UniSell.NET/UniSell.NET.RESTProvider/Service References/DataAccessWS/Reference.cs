@@ -23,13 +23,12 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/CountUsers", ReplyAction="*")]
         System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.CountUsersResponse> CountUsersAsync(UniSell.NET.RESTProvider.DataAccessWS.CountUsersRequest request);
         
-        // CODEGEN: Generating message contract since message CreateUserRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/CreateUser", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse CreateUser(UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest request);
+        UniSell.NET.RESTProvider.DataAccessWS.User CreateUser(UniSell.NET.RESTProvider.DataAccessWS.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/CreateUser", ReplyAction="*")]
-        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse> CreateUserAsync(UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest request);
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.User> CreateUserAsync(UniSell.NET.RESTProvider.DataAccessWS.User user);
         
         // CODEGEN: Generating message contract since message FindAllUsersRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindAllUsers", ReplyAction="*")]
@@ -92,6 +91,14 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/ListAllSellers", ReplyAction="*")]
         System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.ListAllSellersResponse> ListAllSellersAsync(UniSell.NET.RESTProvider.DataAccessWS.ListAllSellersRequest request);
+        
+        // CODEGEN: Generating message contract since message ListAllBuyersRequest has headers
+        [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/ListAllBuyers", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse ListAllBuyers(UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/ListAllBuyers", ReplyAction="*")]
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse> ListAllBuyersAsync(UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest request);
         
         // CODEGEN: Generating message contract since message FindSellersByCompanyIdRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindSellersByCompanyId", ReplyAction="*")]
@@ -872,6 +879,7 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserBuyer))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserSeller))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserAdmin))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
@@ -1078,6 +1086,15 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         /// <remarks/>
         BUYER,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public partial class UserBuyer : User {
     }
     
     /// <remarks/>
@@ -1302,44 +1319,6 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateUser", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
-    public partial class CreateUserRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
-        public UniSell.NET.RESTProvider.DataAccessWS.Security Security;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
-        public UniSell.NET.RESTProvider.DataAccessWS.User user;
-        
-        public CreateUserRequest() {
-        }
-        
-        public CreateUserRequest(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.User user) {
-            this.Security = Security;
-            this.user = user;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CreateUserResponse", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
-    public partial class CreateUserResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
-        public UniSell.NET.RESTProvider.DataAccessWS.User CreateUserResult;
-        
-        public CreateUserResponse() {
-        }
-        
-        public CreateUserResponse(UniSell.NET.RESTProvider.DataAccessWS.User CreateUserResult) {
-            this.CreateUserResult = CreateUserResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="FindAllUsers", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
     public partial class FindAllUsersRequest {
         
@@ -1550,6 +1529,40 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         public ListAllSellersResponse(UniSell.NET.RESTProvider.DataAccessWS.UserSeller[] ListAllSellersResult) {
             this.ListAllSellersResult = ListAllSellersResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ListAllBuyers", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
+    public partial class ListAllBuyersRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
+        public UniSell.NET.RESTProvider.DataAccessWS.Security Security;
+        
+        public ListAllBuyersRequest() {
+        }
+        
+        public ListAllBuyersRequest(UniSell.NET.RESTProvider.DataAccessWS.Security Security) {
+            this.Security = Security;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ListAllBuyersResponse", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
+    public partial class ListAllBuyersResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
+        public UniSell.NET.RESTProvider.DataAccessWS.UserBuyer[] ListAllBuyersResult;
+        
+        public ListAllBuyersResponse() {
+        }
+        
+        public ListAllBuyersResponse(UniSell.NET.RESTProvider.DataAccessWS.UserBuyer[] ListAllBuyersResult) {
+            this.ListAllBuyersResult = ListAllBuyersResult;
         }
     }
     
@@ -2377,29 +2390,12 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
             return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).CountUsersAsync(inValue);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.CreateUser(UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest request) {
-            return base.Channel.CreateUser(request);
+        public UniSell.NET.RESTProvider.DataAccessWS.User CreateUser(UniSell.NET.RESTProvider.DataAccessWS.User user) {
+            return base.Channel.CreateUser(user);
         }
         
-        public UniSell.NET.RESTProvider.DataAccessWS.User CreateUser(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.User user) {
-            UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest();
-            inValue.Security = Security;
-            inValue.user = user;
-            UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse retVal = ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).CreateUser(inValue);
-            return retVal.CreateUserResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse> UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.CreateUserAsync(UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest request) {
-            return base.Channel.CreateUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse> CreateUserAsync(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.User user) {
-            UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.CreateUserRequest();
-            inValue.Security = Security;
-            inValue.user = user;
-            return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).CreateUserAsync(inValue);
+        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.User> CreateUserAsync(UniSell.NET.RESTProvider.DataAccessWS.User user) {
+            return base.Channel.CreateUserAsync(user);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -2560,6 +2556,29 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
             UniSell.NET.RESTProvider.DataAccessWS.ListAllSellersRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.ListAllSellersRequest();
             inValue.Security = Security;
             return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).ListAllSellersAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.ListAllBuyers(UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest request) {
+            return base.Channel.ListAllBuyers(request);
+        }
+        
+        public UniSell.NET.RESTProvider.DataAccessWS.UserBuyer[] ListAllBuyers(UniSell.NET.RESTProvider.DataAccessWS.Security Security) {
+            UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest();
+            inValue.Security = Security;
+            UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse retVal = ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).ListAllBuyers(inValue);
+            return retVal.ListAllBuyersResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse> UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.ListAllBuyersAsync(UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest request) {
+            return base.Channel.ListAllBuyersAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse> ListAllBuyersAsync(UniSell.NET.RESTProvider.DataAccessWS.Security Security) {
+            UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersRequest();
+            inValue.Security = Security;
+            return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).ListAllBuyersAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

@@ -54,7 +54,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 @XmlSeeAlso({
     UserAdmin.class,
-    UserSeller.class
+    UserSeller.class,
+    UserBuyer.class
 })
 public abstract class User {
 

@@ -146,9 +146,6 @@
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.CreateProductResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.CreateUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindAllCategoriesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -233,15 +230,24 @@
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.UserSeller.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.ListAllBuyersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.UserBuyer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BuyersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Models\AuthToken.cs" />
+    <Compile Include="Models\RestUser.cs" />
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\DataAccessWS\Reference.cs">
       <AutoGen>True</AutoGen>

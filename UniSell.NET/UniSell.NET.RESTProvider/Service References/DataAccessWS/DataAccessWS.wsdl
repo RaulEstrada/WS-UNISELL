@@ -218,6 +218,26 @@
           <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ListAllBuyers">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListAllBuyersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListAllBuyersResult" type="tns:ArrayOfUserBuyer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserBuyer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserBuyer" nillable="true" type="tns:UserBuyer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserBuyer">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:User" />
+        </s:complexContent>
+      </s:complexType>
       <s:element name="FindSellersByCompanyId">
         <s:complexType>
           <s:sequence>
@@ -614,9 +634,6 @@
   <wsdl:message name="CreateUserSoapOut">
     <wsdl:part name="parameters" element="tns:CreateUserResponse" />
   </wsdl:message>
-  <wsdl:message name="CreateUserSecurity">
-    <wsdl:part name="Security" element="s1:Security" />
-  </wsdl:message>
   <wsdl:message name="FindAllUsersSoapIn">
     <wsdl:part name="parameters" element="tns:FindAllUsers" />
   </wsdl:message>
@@ -681,6 +698,15 @@
     <wsdl:part name="parameters" element="tns:ListAllSellersResponse" />
   </wsdl:message>
   <wsdl:message name="ListAllSellersSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="ListAllBuyersSoapIn">
+    <wsdl:part name="parameters" element="tns:ListAllBuyers" />
+  </wsdl:message>
+  <wsdl:message name="ListAllBuyersSoapOut">
+    <wsdl:part name="parameters" element="tns:ListAllBuyersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListAllBuyersSecurity">
     <wsdl:part name="Security" element="s1:Security" />
   </wsdl:message>
   <wsdl:message name="FindSellersByCompanyIdSoapIn">
@@ -931,6 +957,10 @@
       <wsdl:input message="tns:ListAllSellersSoapIn" />
       <wsdl:output message="tns:ListAllSellersSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ListAllBuyers">
+      <wsdl:input message="tns:ListAllBuyersSoapIn" />
+      <wsdl:output message="tns:ListAllBuyersSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="FindSellersByCompanyId">
       <wsdl:input message="tns:FindSellersByCompanyIdSoapIn" />
       <wsdl:output message="tns:FindSellersByCompanyIdSoapOut" />
@@ -1044,7 +1074,6 @@
       <soap:operation soapAction="http://unisell.net.data/CreateUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
-        <soap:header message="tns:CreateUserSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -1123,6 +1152,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:ListAllSellersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListAllBuyers">
+      <soap:operation soapAction="http://unisell.net.data/ListAllBuyers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ListAllBuyersSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -1382,7 +1421,6 @@
       <soap12:operation soapAction="http://unisell.net.data/CreateUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
-        <soap12:header message="tns:CreateUserSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
@@ -1461,6 +1499,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:ListAllSellersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListAllBuyers">
+      <soap12:operation soapAction="http://unisell.net.data/ListAllBuyers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ListAllBuyersSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
