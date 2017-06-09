@@ -14,7 +14,7 @@ public class UserConversor {
 
 	public User assignCommonAttributes(User user, UserData data, Long id) {
 		user.setId(id);
-		user.setActiveAccount(true);
+		user.setActiveAccount(data.isAccountEnabled());
 		user.setName(data.getName());
 		user.setSurname(data.getSurname());
 		user.setEmail(data.getEmail());

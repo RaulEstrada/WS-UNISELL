@@ -16,22 +16,6 @@
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
     </operation>
-    <operation name="removeUser">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" parts="parameters" />
-        <soap:header message="ns1:removeUser" part="arg0" use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="ElementNotFoundException">
-        <soap:fault use="literal" name="ElementNotFoundException" namespace="" />
-      </fault>
-      <fault name="ArgumentException">
-        <soap:fault use="literal" name="ArgumentException" namespace="" />
-      </fault>
-    </operation>
     <operation name="findUserRoles">
       <soap:operation soapAction="" />
       <input>
@@ -68,6 +52,22 @@
       </output>
       <fault name="UnauthorizeAccessException">
         <soap:fault use="literal" name="UnauthorizeAccessException" namespace="" />
+      </fault>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="removeUser">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:removeUser" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ElementNotFoundException">
+        <soap:fault use="literal" name="ElementNotFoundException" namespace="" />
       </fault>
       <fault name="ArgumentException">
         <soap:fault use="literal" name="ArgumentException" namespace="" />

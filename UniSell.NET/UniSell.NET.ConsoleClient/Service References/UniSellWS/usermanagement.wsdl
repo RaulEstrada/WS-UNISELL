@@ -20,16 +20,6 @@
   <message name="ArgumentException">
     <part name="fault" element="tns:ArgumentException" />
   </message>
-  <message name="removeUser">
-    <part name="parameters" element="tns:removeUser" />
-    <part xmlns:ns1="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns1:arg0" />
-  </message>
-  <message name="removeUserResponse">
-    <part name="result" element="tns:removeUserResponse" />
-  </message>
-  <message name="ElementNotFoundException">
-    <part name="fault" element="tns:ElementNotFoundException" />
-  </message>
   <message name="findUserRoles">
     <part name="parameters" element="tns:findUserRoles" />
   </message>
@@ -38,7 +28,7 @@
   </message>
   <message name="disableAccount">
     <part name="parameters" element="tns:disableAccount" />
-    <part xmlns:ns2="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns2:arg0" />
+    <part xmlns:ns1="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns1:arg0" />
   </message>
   <message name="disableAccountResponse">
     <part name="result" element="tns:disableAccountResponse" />
@@ -48,10 +38,20 @@
   </message>
   <message name="enableAccount">
     <part name="parameters" element="tns:enableAccount" />
-    <part xmlns:ns3="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns3:arg0" />
+    <part xmlns:ns2="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns2:arg0" />
   </message>
   <message name="enableAccountResponse">
     <part name="result" element="tns:enableAccountResponse" />
+  </message>
+  <message name="removeUser">
+    <part name="parameters" element="tns:removeUser" />
+    <part xmlns:ns3="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns3:arg0" />
+  </message>
+  <message name="removeUserResponse">
+    <part name="result" element="tns:removeUserResponse" />
+  </message>
+  <message name="ElementNotFoundException">
+    <part name="fault" element="tns:ElementNotFoundException" />
   </message>
   <message name="listUsersByFilter">
     <part name="parameters" element="tns:listUsersByFilter" />
@@ -78,27 +78,27 @@
       <output xmlns:ns6="http://www.w3.org/2007/05/addressing/metadata" ns6:Action="http://ws.unisell.miw.uniovi/IUserWS/loginResponse" message="tns:loginResponse" />
       <fault xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://ws.unisell.miw.uniovi/IUserWS/login/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
     </operation>
-    <operation name="removeUser" parameterOrder="parameters arg0">
-      <input xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest" message="tns:removeUser" />
-      <output xmlns:ns9="http://www.w3.org/2007/05/addressing/metadata" ns9:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse" message="tns:removeUserResponse" />
-      <fault xmlns:ns10="http://www.w3.org/2007/05/addressing/metadata" ns10:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ElementNotFoundException" name="ElementNotFoundException" message="tns:ElementNotFoundException" />
-      <fault xmlns:ns11="http://www.w3.org/2007/05/addressing/metadata" ns11:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
-    </operation>
     <operation name="findUserRoles">
-      <input xmlns:ns12="http://www.w3.org/2007/05/addressing/metadata" ns12:Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest" message="tns:findUserRoles" />
-      <output xmlns:ns13="http://www.w3.org/2007/05/addressing/metadata" ns13:Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse" message="tns:findUserRolesResponse" />
+      <input xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest" message="tns:findUserRoles" />
+      <output xmlns:ns9="http://www.w3.org/2007/05/addressing/metadata" ns9:Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse" message="tns:findUserRolesResponse" />
     </operation>
     <operation name="disableAccount" parameterOrder="parameters arg0">
-      <input xmlns:ns14="http://www.w3.org/2007/05/addressing/metadata" ns14:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest" message="tns:disableAccount" />
-      <output xmlns:ns15="http://www.w3.org/2007/05/addressing/metadata" ns15:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse" message="tns:disableAccountResponse" />
-      <fault xmlns:ns16="http://www.w3.org/2007/05/addressing/metadata" ns16:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/UnauthorizeAccessException" name="UnauthorizeAccessException" message="tns:UnauthorizeAccessException" />
-      <fault xmlns:ns17="http://www.w3.org/2007/05/addressing/metadata" ns17:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
+      <input xmlns:ns10="http://www.w3.org/2007/05/addressing/metadata" ns10:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountRequest" message="tns:disableAccount" />
+      <output xmlns:ns11="http://www.w3.org/2007/05/addressing/metadata" ns11:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccountResponse" message="tns:disableAccountResponse" />
+      <fault xmlns:ns12="http://www.w3.org/2007/05/addressing/metadata" ns12:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/UnauthorizeAccessException" name="UnauthorizeAccessException" message="tns:UnauthorizeAccessException" />
+      <fault xmlns:ns13="http://www.w3.org/2007/05/addressing/metadata" ns13:Action="http://ws.unisell.miw.uniovi/IUserWS/disableAccount/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
     </operation>
     <operation name="enableAccount" parameterOrder="parameters arg0">
-      <input xmlns:ns18="http://www.w3.org/2007/05/addressing/metadata" ns18:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest" message="tns:enableAccount" />
-      <output xmlns:ns19="http://www.w3.org/2007/05/addressing/metadata" ns19:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse" message="tns:enableAccountResponse" />
-      <fault xmlns:ns20="http://www.w3.org/2007/05/addressing/metadata" ns20:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/UnauthorizeAccessException" name="UnauthorizeAccessException" message="tns:UnauthorizeAccessException" />
-      <fault xmlns:ns21="http://www.w3.org/2007/05/addressing/metadata" ns21:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
+      <input xmlns:ns14="http://www.w3.org/2007/05/addressing/metadata" ns14:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest" message="tns:enableAccount" />
+      <output xmlns:ns15="http://www.w3.org/2007/05/addressing/metadata" ns15:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse" message="tns:enableAccountResponse" />
+      <fault xmlns:ns16="http://www.w3.org/2007/05/addressing/metadata" ns16:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/UnauthorizeAccessException" name="UnauthorizeAccessException" message="tns:UnauthorizeAccessException" />
+      <fault xmlns:ns17="http://www.w3.org/2007/05/addressing/metadata" ns17:Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccount/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
+    </operation>
+    <operation name="removeUser" parameterOrder="parameters arg0">
+      <input xmlns:ns18="http://www.w3.org/2007/05/addressing/metadata" ns18:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest" message="tns:removeUser" />
+      <output xmlns:ns19="http://www.w3.org/2007/05/addressing/metadata" ns19:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse" message="tns:removeUserResponse" />
+      <fault xmlns:ns20="http://www.w3.org/2007/05/addressing/metadata" ns20:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ElementNotFoundException" name="ElementNotFoundException" message="tns:ElementNotFoundException" />
+      <fault xmlns:ns21="http://www.w3.org/2007/05/addressing/metadata" ns21:Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
     </operation>
     <operation name="listUsersByFilter" parameterOrder="parameters arg0">
       <input xmlns:ns22="http://www.w3.org/2007/05/addressing/metadata" ns22:Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest" message="tns:listUsersByFilter" />

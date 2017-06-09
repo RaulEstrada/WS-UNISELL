@@ -49,7 +49,7 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class ElementNotFoundException : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class UnauthorizeAccessException : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string messageField;
         
@@ -81,7 +81,7 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class UnauthorizeAccessException : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ElementNotFoundException : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string messageField;
         
@@ -121,16 +121,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/loginRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/loginResponse")]
         System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.loginResponse> loginAsync(UniSell.NET.ConsoleClient.UniSellWS.loginRequest request);
         
-        // CODEGEN: Generating message contract since the operation removeUser is neither RPC nor document wrapped.
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ElementNotFoundException), Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ElementNotFoundException", Name="ElementNotFoundException")]
-        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ArgumentException", Name="ArgumentException")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1 removeUser(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse")]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request);
-        
         // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/findUserRolesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -161,6 +151,16 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/enableAccountRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/enableAccountResponse")]
         System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1> enableAccountAsync(UniSell.NET.ConsoleClient.UniSellWS.enableAccountRequest request);
+        
+        // CODEGEN: Generating message contract since the operation removeUser is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ElementNotFoundException), Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ElementNotFoundException", Name="ElementNotFoundException")]
+        [System.ServiceModel.FaultContractAttribute(typeof(UniSell.NET.ConsoleClient.UniSellWS.ArgumentException), Action="http://ws.unisell.miw.uniovi/IUserWS/removeUser/Fault/ArgumentException", Name="ArgumentException")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1 removeUser(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/removeUserRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/removeUserResponse")]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request);
         
         // CODEGEN: Generating message contract since the operation listUsersByFilter is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterRequest", ReplyAction="http://ws.unisell.miw.uniovi/IUserWS/listUsersByFilterResponse")]
@@ -236,6 +236,50 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
     [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public enum UserRole {
+        
+        /// <remarks/>
+        ADMIN,
+        
+        /// <remarks/>
+        SELLER,
+        
+        /// <remarks/>
+        BUYER,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRoles", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findUserRolesRequest {
+        
+        public findUserRolesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRolesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
+    public partial class findUserRolesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
+        public System.Nullable<UserRole>[] @return;
+        
+        public findUserRolesResponse() {
+        }
+        
+        public findUserRolesResponse(System.Nullable<UserRole>[] @return) {
+            this.@return = @return;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
@@ -285,7 +329,7 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class removeUser : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class disableAccount : object, System.ComponentModel.INotifyPropertyChanged {
         
         private long arg1Field;
         
@@ -331,7 +375,7 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class removeUserResponse : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class disableAccountResponse : object, System.ComponentModel.INotifyPropertyChanged {
         
         private editUserData returnField;
         
@@ -608,167 +652,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         PASSPORT,
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
-    public enum UserRole {
-        
-        /// <remarks/>
-        ADMIN,
-        
-        /// <remarks/>
-        SELLER,
-        
-        /// <remarks/>
-        BUYER,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class removeUserRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public UniSell.NET.ConsoleClient.UniSellWS.Security arg0;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
-        public UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser;
-        
-        public removeUserRequest() {
-        }
-        
-        public removeUserRequest(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser) {
-            this.arg0 = arg0;
-            this.removeUser = removeUser;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class removeUserResponse1 {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
-        public UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUserResponse;
-        
-        public removeUserResponse1() {
-        }
-        
-        public removeUserResponse1(UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUserResponse) {
-            this.removeUserResponse = removeUserResponse;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRoles", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
-    public partial class findUserRolesRequest {
-        
-        public findUserRolesRequest() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="findUserRolesResponse", WrapperNamespace="http://ws.unisell.miw.uniovi/", IsWrapped=true)]
-    public partial class findUserRolesResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true)]
-        public System.Nullable<UserRole>[] @return;
-        
-        public findUserRolesResponse() {
-        }
-        
-        public findUserRolesResponse(System.Nullable<UserRole>[] @return) {
-            this.@return = @return;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class disableAccount : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private long arg1Field;
-        
-        private bool arg1FieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public long arg1 {
-            get {
-                return this.arg1Field;
-            }
-            set {
-                this.arg1Field = value;
-                this.RaisePropertyChanged("arg1");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool arg1Specified {
-            get {
-                return this.arg1FieldSpecified;
-            }
-            set {
-                this.arg1FieldSpecified = value;
-                this.RaisePropertyChanged("arg1Specified");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
-    public partial class disableAccountResponse : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private editUserData returnField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public editUserData @return {
-            get {
-                return this.returnField;
-            }
-            set {
-                this.returnField = value;
-                this.RaisePropertyChanged("return");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -922,6 +805,123 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         
         public enableAccountResponse1(UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse enableAccountResponse) {
             this.enableAccountResponse = enableAccountResponse;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
+    public partial class removeUser : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private long arg1Field;
+        
+        private bool arg1FieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public long arg1 {
+            get {
+                return this.arg1Field;
+            }
+            set {
+                this.arg1Field = value;
+                this.RaisePropertyChanged("arg1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool arg1Specified {
+            get {
+                return this.arg1FieldSpecified;
+            }
+            set {
+                this.arg1FieldSpecified = value;
+                this.RaisePropertyChanged("arg1Specified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://ws.unisell.miw.uniovi/")]
+    public partial class removeUserResponse : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private editUserData returnField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public editUserData @return {
+            get {
+                return this.returnField;
+            }
+            set {
+                this.returnField = value;
+                this.RaisePropertyChanged("return");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class removeUserRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public UniSell.NET.ConsoleClient.UniSellWS.Security arg0;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        public UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser;
+        
+        public removeUserRequest() {
+        }
+        
+        public removeUserRequest(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser) {
+            this.arg0 = arg0;
+            this.removeUser = removeUser;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class removeUserResponse1 {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://ws.unisell.miw.uniovi/", Order=0)]
+        public UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUserResponse;
+        
+        public removeUserResponse1() {
+        }
+        
+        public removeUserResponse1(UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUserResponse) {
+            this.removeUserResponse = removeUserResponse;
         }
     }
     
@@ -1235,31 +1235,6 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1 UniSell.NET.ConsoleClient.UniSellWS.IUserWS.removeUser(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request) {
-            return base.Channel.removeUser(request);
-        }
-        
-        public UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUser(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser1) {
-            UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest();
-            inValue.arg0 = arg0;
-            inValue.removeUser = removeUser1;
-            UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1 retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).removeUser(inValue);
-            return retVal.removeUserResponse;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request) {
-            return base.Channel.removeUserAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser) {
-            UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest();
-            inValue.arg0 = arg0;
-            inValue.removeUser = removeUser;
-            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).removeUserAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse UniSell.NET.ConsoleClient.UniSellWS.IUserWS.findUserRoles(UniSell.NET.ConsoleClient.UniSellWS.findUserRolesRequest request) {
             return base.Channel.findUserRoles(request);
         }
@@ -1328,6 +1303,31 @@ namespace UniSell.NET.ConsoleClient.UniSellWS {
             inValue.arg0 = arg0;
             inValue.enableAccount = enableAccount;
             return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).enableAccountAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1 UniSell.NET.ConsoleClient.UniSellWS.IUserWS.removeUser(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request) {
+            return base.Channel.removeUser(request);
+        }
+        
+        public UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse removeUser(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser1) {
+            UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest();
+            inValue.arg0 = arg0;
+            inValue.removeUser = removeUser1;
+            UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1 retVal = ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).removeUser(inValue);
+            return retVal.removeUserResponse;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> UniSell.NET.ConsoleClient.UniSellWS.IUserWS.removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest request) {
+            return base.Channel.removeUserAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1> removeUserAsync(UniSell.NET.ConsoleClient.UniSellWS.Security arg0, UniSell.NET.ConsoleClient.UniSellWS.removeUser removeUser) {
+            UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest inValue = new UniSell.NET.ConsoleClient.UniSellWS.removeUserRequest();
+            inValue.arg0 = arg0;
+            inValue.removeUser = removeUser;
+            return ((UniSell.NET.ConsoleClient.UniSellWS.IUserWS)(this)).removeUserAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
