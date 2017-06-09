@@ -1,0 +1,1714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://unisell.net.data/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://unisell.net.data/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://unisell.net.data/">
+      <s:element name="CountUsers">
+        <s:complexType />
+      </s:element>
+      <s:element name="CountUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountUsersResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Surname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocument" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdDocumentType" type="tns:PersonIdDocumentType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="activeAccount" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Role" type="tns:UserRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PersonIdDocumentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="DNI" />
+          <s:enumeration value="NIF" />
+          <s:enumeration value="NIE" />
+          <s:enumeration value="PASSPORT" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="UserRole">
+        <s:restriction base="s:string">
+          <s:enumeration value="ADMIN" />
+          <s:enumeration value="SELLER" />
+          <s:enumeration value="BUYER" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CreateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateUserResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAllUsers">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindAllUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAllUsersResult" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindUserResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindUserByUsername">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindUserByUsernameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindUserByUsernameResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveUserResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateUserResult" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAllAdmins">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListAllAdminsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListAllAdminsResult" type="tns:ArrayOfUserAdmin" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserAdmin">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserAdmin" nillable="true" type="tns:UserAdmin" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserAdmin">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:User" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ListAllSellers">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListAllSellersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListAllSellersResult" type="tns:ArrayOfUserSeller" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserSeller">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserSeller" nillable="true" type="tns:UserSeller" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserSeller">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:User">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="company_id" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="Company" type="tns:Company" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Company">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocument" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdDocumentType" type="tns:LegalPersonIdDocumentType" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationInfo" type="tns:LocationInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="LegalPersonIdDocumentType">
+        <s:restriction base="s:string">
+          <s:enumeration value="CIF" />
+          <s:enumeration value="CIE" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="LocationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindSellersByCompanyId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindSellersByCompanyIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindSellersByCompanyIdResult" type="tns:ArrayOfUserSeller" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindUsersByFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="tns:UserSearchFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserSearchFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocument" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdDocumentType" type="tns:PersonIdDocumentType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Surname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Role" type="tns:UserRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindUsersByFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindUsersByFilterResult" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="CountCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountCategoriesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAllCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindAllCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAllCategoriesResult" type="tns:ArrayOfCategory" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCategory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Category" nillable="true" type="tns:Category" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Category">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Category" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateCategoryResult" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindCategoryResult" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveCategoryResult" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Category" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCategoryResult" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountProducts">
+        <s:complexType />
+      </s:element>
+      <s:element name="CountProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountProductsResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAllProducts">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindAllProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAllProductsResult" type="tns:ArrayOfProduct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProduct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Product" nillable="true" type="tns:Product" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Product">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Units" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="image" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="seller_id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="seller" type="tns:UserSeller" />
+          <s:element minOccurs="1" maxOccurs="1" name="category_id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="category" type="tns:Category" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Product" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateProductResult" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindProductResult" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveProductResult" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Product" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateProductResult" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountCompanies">
+        <s:complexType />
+      </s:element>
+      <s:element name="CountCompaniesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountCompaniesResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Company" type="tns:Company" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateCompanyResult" type="tns:Company" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAllCompanies">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindAllCompaniesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAllCompaniesResult" type="tns:ArrayOfCompany" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCompany">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Company" nillable="true" type="tns:Company" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindCompanyResult" type="tns:Company" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveCompanyResult" type="tns:Company" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="company" type="tns:Company" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCompanyResult" type="tns:Company" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCompaniesByFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="tns:CompanySearchFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CompanySearchFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocument" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdDocumentType" type="tns:LegalPersonIdDocumentType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindCompaniesByFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindCompaniesByFilterResult" type="tns:ArrayOfCompany" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindUserRoles">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindUserRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindUserRolesResult" type="tns:ArrayOfUserRole" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserRole">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserRole" type="tns:UserRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindPersonIdDocumentTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindPersonIdDocumentTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindPersonIdDocumentTypesResult" type="tns:ArrayOfPersonIdDocumentType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPersonIdDocumentType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PersonIdDocumentType" type="tns:PersonIdDocumentType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindLegalIdDocumentTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindLegalIdDocumentTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindLegalIdDocumentTypesResult" type="tns:ArrayOfLegalPersonIdDocumentType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLegalPersonIdDocumentType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LegalPersonIdDocumentType" type="tns:LegalPersonIdDocumentType" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.xmlsoap.org/ws/2002/04/secext">
+      <s:element name="Security" type="s1:Security" />
+      <s:complexType name="Security">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BinarySecurityToken" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CountUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:CountUsers" />
+  </wsdl:message>
+  <wsdl:message name="CountUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:CountUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountUsersSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindAllUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="FindAllUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindAllUsersSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindUserSoapIn">
+    <wsdl:part name="parameters" element="tns:FindUser" />
+  </wsdl:message>
+  <wsdl:message name="FindUserSoapOut">
+    <wsdl:part name="parameters" element="tns:FindUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindUserSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindUserByUsernameSoapIn">
+    <wsdl:part name="parameters" element="tns:FindUserByUsername" />
+  </wsdl:message>
+  <wsdl:message name="FindUserByUsernameSoapOut">
+    <wsdl:part name="parameters" element="tns:FindUserByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUser" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="ListAllAdminsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListAllAdmins" />
+  </wsdl:message>
+  <wsdl:message name="ListAllAdminsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListAllAdminsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListAllAdminsSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="ListAllSellersSoapIn">
+    <wsdl:part name="parameters" element="tns:ListAllSellers" />
+  </wsdl:message>
+  <wsdl:message name="ListAllSellersSoapOut">
+    <wsdl:part name="parameters" element="tns:ListAllSellersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListAllSellersSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindSellersByCompanyIdSoapIn">
+    <wsdl:part name="parameters" element="tns:FindSellersByCompanyId" />
+  </wsdl:message>
+  <wsdl:message name="FindSellersByCompanyIdSoapOut">
+    <wsdl:part name="parameters" element="tns:FindSellersByCompanyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindSellersByCompanyIdSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindUsersByFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:FindUsersByFilter" />
+  </wsdl:message>
+  <wsdl:message name="FindUsersByFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:FindUsersByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindUsersByFilterSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CountCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:CountCategories" />
+  </wsdl:message>
+  <wsdl:message name="CountCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:CountCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountCategoriesSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindAllCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAllCategories" />
+  </wsdl:message>
+  <wsdl:message name="FindAllCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAllCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindAllCategoriesSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CreateCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:CreateCategory" />
+  </wsdl:message>
+  <wsdl:message name="CreateCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:CreateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateCategorySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:FindCategory" />
+  </wsdl:message>
+  <wsdl:message name="FindCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:FindCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindCategorySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveCategory" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCategorySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCategory" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategorySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CountProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:CountProducts" />
+  </wsdl:message>
+  <wsdl:message name="CountProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:CountProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountProductsSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindAllProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAllProducts" />
+  </wsdl:message>
+  <wsdl:message name="FindAllProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAllProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindAllProductsSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CreateProductSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateProduct" />
+  </wsdl:message>
+  <wsdl:message name="CreateProductSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateProductSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindProductSoapIn">
+    <wsdl:part name="parameters" element="tns:FindProduct" />
+  </wsdl:message>
+  <wsdl:message name="FindProductSoapOut">
+    <wsdl:part name="parameters" element="tns:FindProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindProductSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="RemoveProductSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveProduct" />
+  </wsdl:message>
+  <wsdl:message name="RemoveProductSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveProductSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProductSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateProduct" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProductSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProductSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CountCompaniesSoapIn">
+    <wsdl:part name="parameters" element="tns:CountCompanies" />
+  </wsdl:message>
+  <wsdl:message name="CountCompaniesSoapOut">
+    <wsdl:part name="parameters" element="tns:CountCompaniesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountCompaniesSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CreateCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:CreateCompany" />
+  </wsdl:message>
+  <wsdl:message name="CreateCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:CreateCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateCompanySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindAllCompaniesSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAllCompanies" />
+  </wsdl:message>
+  <wsdl:message name="FindAllCompaniesSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAllCompaniesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindAllCompaniesSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:FindCompany" />
+  </wsdl:message>
+  <wsdl:message name="FindCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:FindCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindCompanySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveCompany" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveCompanySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCompany" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCompanySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindCompaniesByFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:FindCompaniesByFilter" />
+  </wsdl:message>
+  <wsdl:message name="FindCompaniesByFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:FindCompaniesByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindCompaniesByFilterSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindUserRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:FindUserRoles" />
+  </wsdl:message>
+  <wsdl:message name="FindUserRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:FindUserRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindPersonIdDocumentTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:FindPersonIdDocumentTypes" />
+  </wsdl:message>
+  <wsdl:message name="FindPersonIdDocumentTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:FindPersonIdDocumentTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindLegalIdDocumentTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:FindLegalIdDocumentTypes" />
+  </wsdl:message>
+  <wsdl:message name="FindLegalIdDocumentTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:FindLegalIdDocumentTypesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DataAccessSoap">
+    <wsdl:operation name="CountUsers">
+      <wsdl:input message="tns:CountUsersSoapIn" />
+      <wsdl:output message="tns:CountUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input message="tns:CreateUserSoapIn" />
+      <wsdl:output message="tns:CreateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllUsers">
+      <wsdl:input message="tns:FindAllUsersSoapIn" />
+      <wsdl:output message="tns:FindAllUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindUser">
+      <wsdl:input message="tns:FindUserSoapIn" />
+      <wsdl:output message="tns:FindUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByUsername">
+      <wsdl:input message="tns:FindUserByUsernameSoapIn" />
+      <wsdl:output message="tns:FindUserByUsernameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <wsdl:input message="tns:RemoveUserSoapIn" />
+      <wsdl:output message="tns:RemoveUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input message="tns:UpdateUserSoapIn" />
+      <wsdl:output message="tns:UpdateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListAllAdmins">
+      <wsdl:input message="tns:ListAllAdminsSoapIn" />
+      <wsdl:output message="tns:ListAllAdminsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListAllSellers">
+      <wsdl:input message="tns:ListAllSellersSoapIn" />
+      <wsdl:output message="tns:ListAllSellersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindSellersByCompanyId">
+      <wsdl:input message="tns:FindSellersByCompanyIdSoapIn" />
+      <wsdl:output message="tns:FindSellersByCompanyIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindUsersByFilter">
+      <wsdl:input message="tns:FindUsersByFilterSoapIn" />
+      <wsdl:output message="tns:FindUsersByFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CountCategories">
+      <wsdl:input message="tns:CountCategoriesSoapIn" />
+      <wsdl:output message="tns:CountCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllCategories">
+      <wsdl:input message="tns:FindAllCategoriesSoapIn" />
+      <wsdl:output message="tns:FindAllCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCategory">
+      <wsdl:input message="tns:CreateCategorySoapIn" />
+      <wsdl:output message="tns:CreateCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCategory">
+      <wsdl:input message="tns:FindCategorySoapIn" />
+      <wsdl:output message="tns:FindCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCategory">
+      <wsdl:input message="tns:RemoveCategorySoapIn" />
+      <wsdl:output message="tns:RemoveCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <wsdl:input message="tns:UpdateCategorySoapIn" />
+      <wsdl:output message="tns:UpdateCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CountProducts">
+      <wsdl:input message="tns:CountProductsSoapIn" />
+      <wsdl:output message="tns:CountProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllProducts">
+      <wsdl:input message="tns:FindAllProductsSoapIn" />
+      <wsdl:output message="tns:FindAllProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProduct">
+      <wsdl:input message="tns:CreateProductSoapIn" />
+      <wsdl:output message="tns:CreateProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <wsdl:input message="tns:FindProductSoapIn" />
+      <wsdl:output message="tns:FindProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveProduct">
+      <wsdl:input message="tns:RemoveProductSoapIn" />
+      <wsdl:output message="tns:RemoveProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <wsdl:input message="tns:UpdateProductSoapIn" />
+      <wsdl:output message="tns:UpdateProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CountCompanies">
+      <wsdl:input message="tns:CountCompaniesSoapIn" />
+      <wsdl:output message="tns:CountCompaniesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompany">
+      <wsdl:input message="tns:CreateCompanySoapIn" />
+      <wsdl:output message="tns:CreateCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllCompanies">
+      <wsdl:input message="tns:FindAllCompaniesSoapIn" />
+      <wsdl:output message="tns:FindAllCompaniesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCompany">
+      <wsdl:input message="tns:FindCompanySoapIn" />
+      <wsdl:output message="tns:FindCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCompany">
+      <wsdl:input message="tns:RemoveCompanySoapIn" />
+      <wsdl:output message="tns:RemoveCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompany">
+      <wsdl:input message="tns:UpdateCompanySoapIn" />
+      <wsdl:output message="tns:UpdateCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCompaniesByFilter">
+      <wsdl:input message="tns:FindCompaniesByFilterSoapIn" />
+      <wsdl:output message="tns:FindCompaniesByFilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindUserRoles">
+      <wsdl:input message="tns:FindUserRolesSoapIn" />
+      <wsdl:output message="tns:FindUserRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPersonIdDocumentTypes">
+      <wsdl:input message="tns:FindPersonIdDocumentTypesSoapIn" />
+      <wsdl:output message="tns:FindPersonIdDocumentTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindLegalIdDocumentTypes">
+      <wsdl:input message="tns:FindLegalIdDocumentTypesSoapIn" />
+      <wsdl:output message="tns:FindLegalIdDocumentTypesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataAccessSoap" type="tns:DataAccessSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CountUsers">
+      <soap:operation soapAction="http://unisell.net.data/CountUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CountUsersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://unisell.net.data/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllUsers">
+      <soap:operation soapAction="http://unisell.net.data/FindAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindAllUsersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUser">
+      <soap:operation soapAction="http://unisell.net.data/FindUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://unisell.net.data/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByUsername">
+      <soap:operation soapAction="http://unisell.net.data/FindUserByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <soap:operation soapAction="http://unisell.net.data/RemoveUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://unisell.net.data/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListAllAdmins">
+      <soap:operation soapAction="http://unisell.net.data/ListAllAdmins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ListAllAdminsSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListAllSellers">
+      <soap:operation soapAction="http://unisell.net.data/ListAllSellers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ListAllSellersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSellersByCompanyId">
+      <soap:operation soapAction="http://unisell.net.data/FindSellersByCompanyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindSellersByCompanyIdSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUsersByFilter">
+      <soap:operation soapAction="http://unisell.net.data/FindUsersByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindUsersByFilterSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountCategories">
+      <soap:operation soapAction="http://unisell.net.data/CountCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CountCategoriesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllCategories">
+      <soap:operation soapAction="http://unisell.net.data/FindAllCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindAllCategoriesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCategory">
+      <soap:operation soapAction="http://unisell.net.data/CreateCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCategory">
+      <soap:operation soapAction="http://unisell.net.data/FindCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCategory">
+      <soap:operation soapAction="http://unisell.net.data/RemoveCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <soap:operation soapAction="http://unisell.net.data/UpdateCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountProducts">
+      <soap:operation soapAction="http://unisell.net.data/CountProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CountProductsSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllProducts">
+      <soap:operation soapAction="http://unisell.net.data/FindAllProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindAllProductsSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProduct">
+      <soap:operation soapAction="http://unisell.net.data/CreateProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <soap:operation soapAction="http://unisell.net.data/FindProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveProduct">
+      <soap:operation soapAction="http://unisell.net.data/RemoveProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap:operation soapAction="http://unisell.net.data/UpdateProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountCompanies">
+      <soap:operation soapAction="http://unisell.net.data/CountCompanies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CountCompaniesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompany">
+      <soap:operation soapAction="http://unisell.net.data/CreateCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllCompanies">
+      <soap:operation soapAction="http://unisell.net.data/FindAllCompanies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindAllCompaniesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCompany">
+      <soap:operation soapAction="http://unisell.net.data/FindCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCompany">
+      <soap:operation soapAction="http://unisell.net.data/RemoveCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompany">
+      <soap:operation soapAction="http://unisell.net.data/UpdateCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCompaniesByFilter">
+      <soap:operation soapAction="http://unisell.net.data/FindCompaniesByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindCompaniesByFilterSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserRoles">
+      <soap:operation soapAction="http://unisell.net.data/FindUserRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPersonIdDocumentTypes">
+      <soap:operation soapAction="http://unisell.net.data/FindPersonIdDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindLegalIdDocumentTypes">
+      <soap:operation soapAction="http://unisell.net.data/FindLegalIdDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DataAccessSoap12" type="tns:DataAccessSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CountUsers">
+      <soap12:operation soapAction="http://unisell.net.data/CountUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CountUsersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://unisell.net.data/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllUsers">
+      <soap12:operation soapAction="http://unisell.net.data/FindAllUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindAllUsersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUser">
+      <soap12:operation soapAction="http://unisell.net.data/FindUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://unisell.net.data/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserByUsername">
+      <soap12:operation soapAction="http://unisell.net.data/FindUserByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUser">
+      <soap12:operation soapAction="http://unisell.net.data/RemoveUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://unisell.net.data/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateUserSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListAllAdmins">
+      <soap12:operation soapAction="http://unisell.net.data/ListAllAdmins" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ListAllAdminsSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListAllSellers">
+      <soap12:operation soapAction="http://unisell.net.data/ListAllSellers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ListAllSellersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSellersByCompanyId">
+      <soap12:operation soapAction="http://unisell.net.data/FindSellersByCompanyId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindSellersByCompanyIdSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUsersByFilter">
+      <soap12:operation soapAction="http://unisell.net.data/FindUsersByFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindUsersByFilterSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountCategories">
+      <soap12:operation soapAction="http://unisell.net.data/CountCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CountCategoriesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllCategories">
+      <soap12:operation soapAction="http://unisell.net.data/FindAllCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindAllCategoriesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCategory">
+      <soap12:operation soapAction="http://unisell.net.data/CreateCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCategory">
+      <soap12:operation soapAction="http://unisell.net.data/FindCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCategory">
+      <soap12:operation soapAction="http://unisell.net.data/RemoveCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <soap12:operation soapAction="http://unisell.net.data/UpdateCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateCategorySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountProducts">
+      <soap12:operation soapAction="http://unisell.net.data/CountProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CountProductsSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllProducts">
+      <soap12:operation soapAction="http://unisell.net.data/FindAllProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindAllProductsSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProduct">
+      <soap12:operation soapAction="http://unisell.net.data/CreateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <soap12:operation soapAction="http://unisell.net.data/FindProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveProduct">
+      <soap12:operation soapAction="http://unisell.net.data/RemoveProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap12:operation soapAction="http://unisell.net.data/UpdateProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountCompanies">
+      <soap12:operation soapAction="http://unisell.net.data/CountCompanies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CountCompaniesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompany">
+      <soap12:operation soapAction="http://unisell.net.data/CreateCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllCompanies">
+      <soap12:operation soapAction="http://unisell.net.data/FindAllCompanies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindAllCompaniesSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCompany">
+      <soap12:operation soapAction="http://unisell.net.data/FindCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCompany">
+      <soap12:operation soapAction="http://unisell.net.data/RemoveCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompany">
+      <soap12:operation soapAction="http://unisell.net.data/UpdateCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateCompanySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindCompaniesByFilter">
+      <soap12:operation soapAction="http://unisell.net.data/FindCompaniesByFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindCompaniesByFilterSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindUserRoles">
+      <soap12:operation soapAction="http://unisell.net.data/FindUserRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPersonIdDocumentTypes">
+      <soap12:operation soapAction="http://unisell.net.data/FindPersonIdDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindLegalIdDocumentTypes">
+      <soap12:operation soapAction="http://unisell.net.data/FindLegalIdDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataAccess">
+    <wsdl:port name="DataAccessSoap" binding="tns:DataAccessSoap">
+      <soap:address location="http://localhost:9090/WebServices/DataAccessWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DataAccessSoap12" binding="tns:DataAccessSoap12">
+      <soap12:address location="http://localhost:9090/WebServices/DataAccessWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
