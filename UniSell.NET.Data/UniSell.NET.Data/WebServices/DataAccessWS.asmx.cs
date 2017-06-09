@@ -177,6 +177,138 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public int CountCategories()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().Count();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Category[] FindAllCategories()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().All().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Category CreateCategory(Category Category)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().Create(Category);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Category FindCategory(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().Find(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Category RemoveCategory(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().Remove(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Category UpdateCategory(Category Category)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().Update(Category);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public int CountProducts()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().Count();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Product[] FindAllProducts()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().All().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Product CreateProduct(Product Product)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().Create(Product);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Product FindProduct(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().Find(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Product RemoveProduct(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().Remove(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Product UpdateProduct(Product Product)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().Update(Product);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountCompanies()
         {
             ValidateSecurity();

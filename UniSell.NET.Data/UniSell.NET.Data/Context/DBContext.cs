@@ -20,6 +20,8 @@ namespace UniSell.NET.Data.Context
         public DbSet<UserSeller> UserSeller { get; set; }
         public DbSet<UserBuyer> UserBuyer { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
 
     }
 }

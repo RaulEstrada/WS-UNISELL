@@ -38,5 +38,15 @@ namespace UniSell.NET.Data.Factory
         {
             return new CompanyDAO(_context);
         }
+
+        public ICategoryDAO getCategoryDAO()
+        {
+            return new CategoryDAO(_context);
+        }
+
+        public IProductDAO getProductDAO()
+        {
+            return new ProductDAO(_context);
+        }
     }
 }
