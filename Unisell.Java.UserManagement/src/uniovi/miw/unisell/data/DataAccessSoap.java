@@ -212,7 +212,6 @@ public interface DataAccessSoap {
     /**
      * 
      * @param filter
-     * @param security
      * @return
      *     returns uniovi.miw.unisell.data.ArrayOfUser
      */
@@ -222,9 +221,7 @@ public interface DataAccessSoap {
     @ResponseWrapper(localName = "FindUsersByFilterResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindUsersByFilterResponse")
     public ArrayOfUser findUsersByFilter(
         @WebParam(name = "filter", targetNamespace = "http://unisell.net.data/")
-        UserSearchFilter filter,
-        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
-        Security security);
+        UserSearchFilter filter);
 
     /**
      * 

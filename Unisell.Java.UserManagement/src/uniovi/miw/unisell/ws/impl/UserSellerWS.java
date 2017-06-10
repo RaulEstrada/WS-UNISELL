@@ -36,7 +36,7 @@ public class UserSellerWS implements IUserSellerWS {
 		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
-		DataValidator.validateUserData(soap, security, user.getUserData(), null);
+		DataValidator.validateUserData(soap, user.getUserData(), null);
 		Company company = soap.findCompany(user.getCompanyId(), security);
 		if (company == null) {
 			throw new InvalidEntityException("Seller company with id " + user.getCompanyId() + " not found in the system");
@@ -60,7 +60,7 @@ public class UserSellerWS implements IUserSellerWS {
 		if (dbUser == null || dbUser.getRole() != UserRole.SELLER) {
 			throw new InvalidEntityException("No user seller found with id " + user.getId());
 		}
-		DataValidator.validateUserData(soap, security, user.getUserData().getUserData(), user.getId());
+		DataValidator.validateUserData(soap, user.getUserData().getUserData(), user.getId());
 		Company company = soap.findCompany(user.getUserData().getCompanyId(), security);
 		if (company == null) {
 			throw new InvalidEntityException("Seller company with id " + user.getUserData().getCompanyId() + " not found in the system");

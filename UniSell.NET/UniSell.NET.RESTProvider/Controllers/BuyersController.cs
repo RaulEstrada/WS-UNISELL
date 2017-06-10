@@ -6,24 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Xml;
 using UniSell.NET.RESTProvider.DataAccessWS;
+using UniSell.NET.RESTProvider.IdentityWS;
 using UniSell.NET.RESTProvider.Models;
 
 namespace UniSell.NET.RESTProvider.Controllers
 {
     public class BuyersController : ApiController
     {
-        private string GetAuthToken()
-        {
-            try
-            {
-                IEnumerable<string> headerValues = Request.Headers.GetValues("token");
-                return headerValues.First();
-            } catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
         // GET: api/Buyers
         public IHttpActionResult Get()
         {
@@ -33,30 +22,23 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return Unauthorized();
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
-            User[] buyers = ws.FindUsersByFilter(new Security { BinarySecurityToken = token }, 
-                new UserSearchFilter { Role = UserRole.BUYER });
-            return Ok(buyers.Select(b => new RestUser {
-                href = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("GetBuyerById", new { id = b.Id }),
-                id = b.Id,
-                name = b.Name,
-                surname = b.Surname,
-                email = b.Email,
-                document = b.IdDocument,
-                documentType = b.IdDocumentType,
-                username = b.Username
-            }));
+            User[] buyers = ws.FindUsersByFilter(new UserSearchFilter { Role = DataAccessWS.UserRole.BUYER });
+            return Ok(buyers.Select(b => CreateRestUser(b)));
         }
 
         // GET: api/Buyers/5
         [Route("api/Buyers/{id}", Name = "GetBuyerById")]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(long id)
         {
             string token = GetAuthToken();
-            if (string.IsNullOrEmpty(token))
+            IHttpActionResult validation = Validate(token, id);
+            if (validation != null)
             {
-                return Unauthorized();
+                return validation;
             }
-            return null;
+            DataAccessSoapClient ws = new DataAccessSoapClient();
+            User user = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            return Ok(CreateRestUser(user));
         }
 
         // POST: api/Buyers
@@ -66,29 +48,139 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 return BadRequest("Missing user data");
             }
+            IHttpActionResult userValidation = ValidateUserData(User);
+            if (userValidation != null)
+            {
+                return userValidation;
+            }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             User NewUser = ws.CreateUser(User.CreateBuyer());
-            return Ok(NewUser);
+            return Created(Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("GetBuyerById", new { id = NewUser.Id }),
+                CreateRestUser(NewUser));
         }
 
         // PUT: api/Buyers/5
-        public IHttpActionResult Put(int id, [FromBody]string value)
+        [Route("api/Buyers/{id}")]
+        public IHttpActionResult Put(long id, [FromBody] UserData userData)
         {
             string token = GetAuthToken();
-            if (string.IsNullOrEmpty(token))
+            IHttpActionResult validation = Validate(token, id);
+            if (validation != null)
+            {
+                return validation;
+            }
+            if (userData == null)
+            {
+                return BadRequest("Missing user data");
+            }
+            DataAccessSoapClient ws = new DataAccessSoapClient();
+            User target = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            IHttpActionResult userValidation = ValidateUserData(userData, target);
+            if (userValidation != null)
+            {
+                return userValidation;
+            }
+            User inputUser = userData.CreateBuyer();
+            inputUser.Id = id;
+            User updated = ws.UpdateUser(new DataAccessWS.Security { BinarySecurityToken = token }, inputUser);
+            return Ok(CreateRestUser(updated));
+        }
+
+        // DELETE: api/Buyers/5
+        [Route("api/Buyers/{id}")]
+        public IHttpActionResult Delete(long id)
+        {
+            string token = GetAuthToken();
+            IHttpActionResult validation = Validate(token, id);
+            if (validation != null)
+            {
+                return validation;
+            }
+            DataAccessSoapClient ws = new DataAccessSoapClient();
+            User removed = ws.RemoveUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            RestUser res = CreateRestUser(removed);
+            res.href = "";
+            return Ok(res);
+        }
+
+        private string GetAuthToken()
+        {
+            try
+            {
+                IEnumerable<string> headerValues = Request.Headers.GetValues("token");
+                return headerValues.First();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private RestUser CreateRestUser(User user)
+        {
+            return new RestUser
+            {
+                href = Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("GetBuyerById", new { id = user.Id }),
+                id = user.Id,
+                name = user.Name,
+                surname = user.Surname,
+                email = user.Email,
+                document = user.IdDocument,
+                documentType = user.IdDocumentType,
+                username = user.Username
+            };
+        }
+
+        private IHttpActionResult Validate(string token, long userId)
+        {
+            if (!ValidateUserExists(token, userId))
+            {
+                return BadRequest("User with id " + userId + " not found in the system");
+            }
+            if (string.IsNullOrEmpty(token) || !ValidateClientIdentity(token, userId))
             {
                 return Unauthorized();
             }
             return null;
         }
 
-        // DELETE: api/Buyers/5
-        public IHttpActionResult Delete(int id)
+        private bool ValidateClientIdentity(string token, long userId)
         {
-            string token = GetAuthToken();
-            if (string.IsNullOrEmpty(token))
+            IdentityWSSoapClient ws = new IdentityWSSoapClient();
+            IdentityData identity = ws.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
+            DataAccessSoapClient dataWS = new DataAccessSoapClient();
+            User target = dataWS.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, userId);
+            return identity != null && target != null && 
+                identity.Username.Equals(target.Username) && identity.Role.ToString().Equals(target.Role.ToString());
+        }
+
+        private bool ValidateUserExists(string token, long id)
+        {
+            DataAccessSoapClient dataWS = new DataAccessSoapClient();
+            User target = dataWS.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            return target != null;
+        }
+
+        private IHttpActionResult ValidateUserData(UserData User, User currentUser = null)
+        {
+            DataAccessSoapClient ws = new DataAccessSoapClient();
+            User[] users = ws.FindUsersByFilter(new UserSearchFilter { Email = User.email });
+            if (!string.IsNullOrEmpty(User.email) && users != null && users.Length > 0 && 
+                (currentUser == null || currentUser.Id != users[0].Id))
             {
-                return Unauthorized();
+                return BadRequest("Another user has already registered the email " + User.email);
+            }
+            users = ws.FindUsersByFilter(new UserSearchFilter { IdDocument = User.document });
+            if (!string.IsNullOrEmpty(User.document) && users != null && users.Length > 0 && 
+                (currentUser == null || currentUser.Id != users[0].Id))
+            {
+                return BadRequest("Another user has already registered the document " + User.document);
+            }
+            users = ws.FindUsersByFilter(new UserSearchFilter { Username = User.username });
+            if (!string.IsNullOrEmpty(User.username) && users != null && users.Length > 0 && 
+                (currentUser == null || currentUser.Id != users[0].Id))
+            {
+                return BadRequest("Another user has already registered the username " + User.username);
             }
             return null;
         }

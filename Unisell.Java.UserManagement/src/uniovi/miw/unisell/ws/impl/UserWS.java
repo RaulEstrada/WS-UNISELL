@@ -60,7 +60,7 @@ public class UserWS implements IUserWS {
 		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
-		ArrayOfUser users = soap.findUsersByFilter(filter, security);
+		ArrayOfUser users = soap.findUsersByFilter(filter);
 		List<EditUserData> res = new ArrayList<>();
 		for (User u : users.getUser()) {
 			res.add(userConversor.createEditUserData(u));

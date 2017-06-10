@@ -724,9 +724,6 @@
   <wsdl:message name="FindUsersByFilterSoapOut">
     <wsdl:part name="parameters" element="tns:FindUsersByFilterResponse" />
   </wsdl:message>
-  <wsdl:message name="FindUsersByFilterSecurity">
-    <wsdl:part name="Security" element="s1:Security" />
-  </wsdl:message>
   <wsdl:message name="CountCategoriesSoapIn">
     <wsdl:part name="parameters" element="tns:CountCategories" />
   </wsdl:message>
@@ -1181,7 +1178,6 @@
       <soap:operation soapAction="http://unisell.net.data/FindUsersByFilter" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
-        <soap:header message="tns:FindUsersByFilterSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -1528,7 +1524,6 @@
       <soap12:operation soapAction="http://unisell.net.data/FindUsersByFilter" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
-        <soap12:header message="tns:FindUsersByFilterSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

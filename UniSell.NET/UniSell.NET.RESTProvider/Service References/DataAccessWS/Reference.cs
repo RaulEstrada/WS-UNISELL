@@ -108,13 +108,12 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindSellersByCompanyId", ReplyAction="*")]
         System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindSellersByCompanyIdResponse> FindSellersByCompanyIdAsync(UniSell.NET.RESTProvider.DataAccessWS.FindSellersByCompanyIdRequest request);
         
-        // CODEGEN: Generating message contract since message FindUsersByFilterRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindUsersByFilter", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse FindUsersByFilter(UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest request);
+        UniSell.NET.RESTProvider.DataAccessWS.User[] FindUsersByFilter(UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindUsersByFilter", ReplyAction="*")]
-        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse> FindUsersByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest request);
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.User[]> FindUsersByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter);
         
         // CODEGEN: Generating message contract since message CountCategoriesRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/CountCategories", ReplyAction="*")]
@@ -1607,44 +1606,6 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="FindUsersByFilter", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
-    public partial class FindUsersByFilterRequest {
-        
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
-        public UniSell.NET.RESTProvider.DataAccessWS.Security Security;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
-        public UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter;
-        
-        public FindUsersByFilterRequest() {
-        }
-        
-        public FindUsersByFilterRequest(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter) {
-            this.Security = Security;
-            this.filter = filter;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="FindUsersByFilterResponse", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
-    public partial class FindUsersByFilterResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
-        public UniSell.NET.RESTProvider.DataAccessWS.User[] FindUsersByFilterResult;
-        
-        public FindUsersByFilterResponse() {
-        }
-        
-        public FindUsersByFilterResponse(UniSell.NET.RESTProvider.DataAccessWS.User[] FindUsersByFilterResult) {
-            this.FindUsersByFilterResult = FindUsersByFilterResult;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="CountCategories", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
     public partial class CountCategoriesRequest {
         
@@ -2606,29 +2567,12 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
             return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindSellersByCompanyIdAsync(inValue);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.FindUsersByFilter(UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest request) {
-            return base.Channel.FindUsersByFilter(request);
+        public UniSell.NET.RESTProvider.DataAccessWS.User[] FindUsersByFilter(UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter) {
+            return base.Channel.FindUsersByFilter(filter);
         }
         
-        public UniSell.NET.RESTProvider.DataAccessWS.User[] FindUsersByFilter(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter) {
-            UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest();
-            inValue.Security = Security;
-            inValue.filter = filter;
-            UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse retVal = ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindUsersByFilter(inValue);
-            return retVal.FindUsersByFilterResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse> UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.FindUsersByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest request) {
-            return base.Channel.FindUsersByFilterAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse> FindUsersByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter) {
-            UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterRequest();
-            inValue.Security = Security;
-            inValue.filter = filter;
-            return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindUsersByFilterAsync(inValue);
+        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.User[]> FindUsersByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.UserSearchFilter filter) {
+            return base.Channel.FindUsersByFilterAsync(filter);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

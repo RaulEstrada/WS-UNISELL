@@ -118,6 +118,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\IdentityWS\configuration91.svcinfo" />
+    <None Include="Service References\IdentityWS\configuration.svcinfo" />
+    <None Include="Service References\IdentityWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.Category.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -174,9 +180,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindUserResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindUsersByFilterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.LegalPersonIdDocumentType.datasource">
@@ -254,6 +257,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\IdentityWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -261,6 +269,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Service References\DataAccessWS\DataAccessWS.wsdl" />
+    <None Include="Service References\IdentityWS\IdentityWS.wsdl" />
+    <Content Include="Service References\IdentityWS\UniSell.NET.RESTProvider.IdentityWS.GetIdentityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\IdentityWS\UniSell.NET.RESTProvider.IdentityWS.IdentityData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -276,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataAccessWS\" />
+    <WCFMetadataStorage Include="Service References\IdentityWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

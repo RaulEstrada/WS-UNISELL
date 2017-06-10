@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://unisell.net.data/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://schemas.xmlsoap.org/ws/2002/04/secext" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://unisell.net.data/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://unisell.net.data/">
+      <s:element name="GetIdentity">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetIdentityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIdentityResult" type="tns:IdentityData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="IdentityData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Role" type="tns:UserRole" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="UserRole">
+        <s:restriction base="s:string">
+          <s:enumeration value="ADMIN" />
+          <s:enumeration value="SELLER" />
+          <s:enumeration value="BUYER" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.xmlsoap.org/ws/2002/04/secext">
+      <s:element name="Security" type="s1:Security" />
+      <s:complexType name="Security">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BinarySecurityToken" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetIdentitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetIdentity" />
+  </wsdl:message>
+  <wsdl:message name="GetIdentitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetIdentityResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIdentitySecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:portType name="IdentityWSSoap">
+    <wsdl:operation name="GetIdentity">
+      <wsdl:input message="tns:GetIdentitySoapIn" />
+      <wsdl:output message="tns:GetIdentitySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IdentityWSSoap" type="tns:IdentityWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIdentity">
+      <soap:operation soapAction="http://unisell.net.data/GetIdentity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetIdentitySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IdentityWSSoap12" type="tns:IdentityWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIdentity">
+      <soap12:operation soapAction="http://unisell.net.data/GetIdentity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetIdentitySecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IdentityWS">
+    <wsdl:port name="IdentityWSSoap" binding="tns:IdentityWSSoap">
+      <soap:address location="http://localhost:9090/WebServices/IdentityWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IdentityWSSoap12" binding="tns:IdentityWSSoap12">
+      <soap12:address location="http://localhost:9090/WebServices/IdentityWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

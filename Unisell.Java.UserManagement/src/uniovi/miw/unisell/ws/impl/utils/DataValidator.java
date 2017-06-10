@@ -3,7 +3,6 @@ package uniovi.miw.unisell.ws.impl.utils;
 import uniovi.miw.unisell.data.ArrayOfUser;
 import uniovi.miw.unisell.data.DataAccessSoap;
 import uniovi.miw.unisell.data.LocationInfo;
-import uniovi.miw.unisell.data.Security;
 import uniovi.miw.unisell.data.UserSearchFilter;
 import uniovi.miw.unisell.model.CompanyData;
 import uniovi.miw.unisell.model.UserData;
@@ -45,25 +44,25 @@ public class DataValidator {
 				&& location.getZipCode() != null && !location.getZipCode().isEmpty();
 	}
 	
-	public static void validateUserData(DataAccessSoap soap, Security security, UserData user, Long id) 
+	public static void validateUserData(DataAccessSoap soap, UserData user, Long id) 
 			throws RepeatedEmailException, RepeatedUsernameException, RepeatedDocumentException {
 		UserSearchFilter filter = new UserSearchFilter();
 		filter.setEmail(user.getEmail());
-		ArrayOfUser res = soap.findUsersByFilter(filter, security);
+		ArrayOfUser res = soap.findUsersByFilter(filter);
 		if ((!res.getUser().isEmpty() && id == null) || 
 				(!res.getUser().isEmpty() && res.getUser().get(0).getId() != id)) {
 			throw new RepeatedEmailException("Email " + user.getEmail() + " has already been registered");
 		}
 		filter = new UserSearchFilter();
 		filter.setUsername(user.getUsername());
-		res = soap.findUsersByFilter(filter, security);
+		res = soap.findUsersByFilter(filter);
 		if ((!res.getUser().isEmpty() && id == null) || 
 				(!res.getUser().isEmpty() && res.getUser().get(0).getId() != id)) {
 			throw new RepeatedUsernameException("Another user has registered the username " + user.getUsername());
 		}
 		filter = new UserSearchFilter();
 		filter.setIdDocument(user.getIdDocument());
-		res = soap.findUsersByFilter(filter, security);
+		res = soap.findUsersByFilter(filter);
 		if ((!res.getUser().isEmpty() && id == null) || 
 				(!res.getUser().isEmpty() && res.getUser().get(0).getId() != id)) {
 			throw new RepeatedDocumentException(user.getIdDocument() + " has already been registered");

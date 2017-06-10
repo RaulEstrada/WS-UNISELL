@@ -30,7 +30,7 @@ public class UserAdminWS implements IUserAdminWS {
 		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
-		DataValidator.validateUserData(soap, security, admin, null);
+		DataValidator.validateUserData(soap, admin, null);
 		User user = conversor.createUser(admin);
 		User serverUser = soap.createUser(user);
 		return conversor.createEditUserData(serverUser);
@@ -48,7 +48,7 @@ public class UserAdminWS implements IUserAdminWS {
 		if (dbUser == null || dbUser.getRole() != UserRole.ADMIN) {
 			throw new InvalidEntityException("No user admin found with id " + user.getId());
 		}
-		DataValidator.validateUserData(soap, security, user.getUserData(), user.getId());
+		DataValidator.validateUserData(soap, user.getUserData(), user.getId());
 		User usr = conversor.createUser(user.getUserData(), user.getId());
 		User editedServer = soap.updateUser(usr, security);
 		return conversor.createEditUserData(editedServer);
