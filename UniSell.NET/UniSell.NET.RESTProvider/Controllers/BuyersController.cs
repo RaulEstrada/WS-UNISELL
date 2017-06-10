@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.ServiceModel;
 using System.Web.Http;
+using System.Web.Services.Protocols;
 using System.Xml;
 using UniSell.NET.RESTProvider.DataAccessWS;
 using UniSell.NET.RESTProvider.IdentityWS;
@@ -133,15 +135,21 @@ namespace UniSell.NET.RESTProvider.Controllers
 
         private IHttpActionResult Validate(string token, long userId)
         {
-            if (!ValidateUserExists(token, userId))
+            try
             {
-                return BadRequest("User with id " + userId + " not found in the system");
-            }
-            if (string.IsNullOrEmpty(token) || !ValidateClientIdentity(token, userId))
+                if (!ValidateUserExists(token, userId))
+                {
+                    return BadRequest("User with id " + userId + " not found in the system");
+                }
+                if (string.IsNullOrEmpty(token) || !ValidateClientIdentity(token, userId))
+                {
+                    return Unauthorized();
+                }
+                return null;
+            } catch (FaultException ex)
             {
-                return Unauthorized();
+                return BadRequest("Invalid security token");
             }
-            return null;
         }
 
         private bool ValidateClientIdentity(string token, long userId)
