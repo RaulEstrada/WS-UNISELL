@@ -321,6 +321,20 @@ public interface DataAccessSoap {
 
     /**
      * 
+     * @param name
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfCategory
+     */
+    @WebMethod(operationName = "FindCategoriesByName", action = "http://unisell.net.data/FindCategoriesByName")
+    @WebResult(name = "FindCategoriesByNameResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindCategoriesByName", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindCategoriesByName")
+    @ResponseWrapper(localName = "FindCategoriesByNameResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindCategoriesByNameResponse")
+    public ArrayOfCategory findCategoriesByName(
+        @WebParam(name = "name", targetNamespace = "http://unisell.net.data/")
+        String name);
+
+    /**
+     * 
      * @param security
      * @return
      *     returns int

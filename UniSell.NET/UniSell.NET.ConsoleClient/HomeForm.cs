@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UniSell.NET.ConsoleClient.UniSellAdminWS;
+using UniSell.NET.ConsoleClient.UniSellCategoryWS;
 using UniSell.NET.ConsoleClient.UniSellCompanyWS;
 using UniSell.NET.ConsoleClient.UniSellSellerWS;
 using UniSell.NET.ConsoleClient.UniSellWS;
@@ -29,8 +30,10 @@ namespace UniSell.NET.ConsoleClient
             InitializeCompanyDocumentTypeCombobox();
             InitializeUserTableControls();
             InitializeCompanyTableControls();
+            InitializeCategoryTableControls();
             FilterUsersTable();
             FilterCompaniesTable();
+            FilterCategoriesTable();
         }
 
         private void InitializeUserRolesCombobox()
@@ -92,6 +95,13 @@ namespace UniSell.NET.ConsoleClient
             companiesTable.Controls.Add(new Label() { Text = "Documento" }, 6, 0);
             companiesTable.Controls.Add(new Label() { Text = "Editar" }, 7, 0);
             companiesTable.Controls.Add(new Label() { Text = "Borrar" }, 8, 0);
+        }
+
+        private void InitializeCategoryTableControls()
+        {
+            categoriesTable.Controls.Add(new Label() { Text = "Name" }, 0, 0);
+            categoriesTable.Controls.Add(new Label() { Text = "Editar" }, 1, 0);
+            categoriesTable.Controls.Add(new Label() { Text = "Borrar" }, 2, 0);
         }
 
         private void Tab_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,6 +198,19 @@ namespace UniSell.NET.ConsoleClient
             FillCompaniesTable(data);
         }
 
+        public void FilterCategoriesTable()
+        {
+            CategoryWSClient ws = new CategoryWSClient();
+            for (int indx = (categoriesTable.RowCount * categoriesTable.ColumnCount) - 1; indx >= categoriesTable.ColumnCount; indx--)
+            {
+                categoriesTable.Controls.RemoveAt(indx);
+            }
+            categoriesTable.RowCount = 1;
+            editCategoryData[] data = ws.listCategoriesByName(new UniSellCategoryWS.Security { BinarySecurityToken = authToken },
+                new listCategoriesByName { arg1 = category_filter_name.Text });
+            FillCategoryTable(data);
+        }
+
         private void FillCompaniesTable(editCompanyData[] companies)
         {
             if (companies == null)
@@ -213,9 +236,62 @@ namespace UniSell.NET.ConsoleClient
             }
         }
 
+        private void FillCategoryTable(editCategoryData[] data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+            foreach (var category in data)
+            {
+                Button editBtn = new Button { Text = "Editar", Tag = category.id };
+                editBtn.Click += EditCategory;
+                Button removeBtn = new Button { Text = "Borrar", Tag = category.id };
+                removeBtn.Click += DeleteCategory;
+                categoriesTable.RowCount++;
+                categoriesTable.Controls.Add(new Label() { Text = category.categoryData.name }, 0, categoriesTable.RowCount - 1);
+                categoriesTable.Controls.Add(editBtn, 1, categoriesTable.RowCount - 1);
+                categoriesTable.Controls.Add(removeBtn, 2, categoriesTable.RowCount - 1);
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FilterUsersTable();
+        }
+
+        private void DeleteCategory(dynamic sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Está a punto de eliminar una categoría de productos. " +
+                "Esta acción no se podrá deshacer. ¿Desea continuar con la operación?",
+                "Confirmar borrado",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+            if (confirmResult == DialogResult.Yes)
+            {
+                long id = sender.Tag;
+                CategoryWSClient ws = new CategoryWSClient();
+                try
+                {
+                    removeCategoryResponse response = ws.removeCategory(new UniSellCategoryWS.Security { BinarySecurityToken = authToken },
+                        new removeCategory { arg1 = id, arg1Specified = true });
+                    FilterCategoriesTable();
+                }
+                catch (FaultException<UniSellCategoryWS.ElementNotFoundException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se ha encontrado una categoría con id " + id + " en el sistema",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (FaultException<UniSellCategoryWS.ArgumentException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se ha recibido el id de la categoría a eliminar",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void DeleteUser(dynamic sender, EventArgs e)
@@ -303,6 +379,16 @@ namespace UniSell.NET.ConsoleClient
             form.Show();
         }
 
+        private void EditCategory(dynamic sender, EventArgs e)
+        {
+            long id = sender.Tag;
+            CategoryWSClient ws = new CategoryWSClient();
+            findCategoryResponse res = ws.findCategory(new UniSellCategoryWS.Security { BinarySecurityToken = authToken },
+                new findCategory { arg1 = id, arg1Specified = true });
+            CategoryForm form = new CategoryForm(authToken, this, res.@return);
+            form.Show();
+        }
+
         private void EditCompany(dynamic sender, EventArgs e)
         {
             long id = sender.Tag;
@@ -386,6 +472,16 @@ namespace UniSell.NET.ConsoleClient
         private void newCompanyButton_Click(object sender, EventArgs e)
         {
             new CompanyForm(authToken, this).Show();
+        }
+
+        private void filterCategoriesButton_Click(object sender, EventArgs e)
+        {
+            FilterCategoriesTable();
+        }
+
+        private void newCategoryBtn_Click(object sender, EventArgs e)
+        {
+            new CategoryForm(authToken, this).Show();
         }
     }
 }

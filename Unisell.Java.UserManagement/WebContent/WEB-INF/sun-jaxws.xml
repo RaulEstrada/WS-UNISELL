@@ -22,4 +22,9 @@
  		implementation="uniovi.miw.unisell.ws.impl.UserSellerWS"
  		url-pattern="/sellermanagement" />
  		
+ 	<endpoint
+		name="CategoryManagementWS"
+ 		implementation="uniovi.miw.unisell.ws.impl.CategoryWS"
+ 		url-pattern="/categorymanagement" />
+ 		
 </endpoints> 

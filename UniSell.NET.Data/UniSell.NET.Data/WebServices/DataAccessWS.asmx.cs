@@ -247,6 +247,15 @@ namespace UniSell.NET.Data.WebServices
         }
 
         [WebMethod]
+        public Category[] FindCategoriesByName(string name)
+        {
+            using (var ds = new DataService())
+            {
+                return ds.getCategoryDAO().FindByName(name);
+            }
+        }
+
+        [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountProducts()
         {

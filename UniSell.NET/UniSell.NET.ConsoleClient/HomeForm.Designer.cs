@@ -72,12 +72,20 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.categoryTab = new System.Windows.Forms.TabPage();
+            this.categoriesTable = new System.Windows.Forms.TableLayoutPanel();
+            this.filterCategoriesButton = new System.Windows.Forms.Button();
+            this.category_filter_name = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.newCategoryBtn = new System.Windows.Forms.Button();
             this.Inicio.SuspendLayout();
             this.homeTab.SuspendLayout();
             this.usersTab.SuspendLayout();
             this.companiesTab.SuspendLayout();
+            this.categoryTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +94,7 @@
             this.Inicio.Controls.Add(this.homeTab);
             this.Inicio.Controls.Add(this.usersTab);
             this.Inicio.Controls.Add(this.companiesTab);
+            this.Inicio.Controls.Add(this.categoryTab);
             this.Inicio.Location = new System.Drawing.Point(12, 79);
             this.Inicio.Name = "Inicio";
             this.Inicio.SelectedIndex = 0;
@@ -525,6 +534,72 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Filtros";
             // 
+            // categoryTab
+            // 
+            this.categoryTab.Controls.Add(this.newCategoryBtn);
+            this.categoryTab.Controls.Add(this.categoriesTable);
+            this.categoryTab.Controls.Add(this.filterCategoriesButton);
+            this.categoryTab.Controls.Add(this.category_filter_name);
+            this.categoryTab.Controls.Add(this.label19);
+            this.categoryTab.Controls.Add(this.label18);
+            this.categoryTab.Location = new System.Drawing.Point(4, 22);
+            this.categoryTab.Name = "categoryTab";
+            this.categoryTab.Padding = new System.Windows.Forms.Padding(3);
+            this.categoryTab.Size = new System.Drawing.Size(820, 471);
+            this.categoryTab.TabIndex = 3;
+            this.categoryTab.Text = "Categorías de productos";
+            this.categoryTab.UseVisualStyleBackColor = true;
+            // 
+            // categoriesTable
+            // 
+            this.categoriesTable.ColumnCount = 3;
+            this.categoriesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.categoriesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.categoriesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.categoriesTable.Location = new System.Drawing.Point(26, 104);
+            this.categoriesTable.Name = "categoriesTable";
+            this.categoriesTable.RowCount = 1;
+            this.categoriesTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.categoriesTable.Size = new System.Drawing.Size(736, 269);
+            this.categoriesTable.TabIndex = 4;
+            // 
+            // filterCategoriesButton
+            // 
+            this.filterCategoriesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterCategoriesButton.Location = new System.Drawing.Point(398, 53);
+            this.filterCategoriesButton.Name = "filterCategoriesButton";
+            this.filterCategoriesButton.Size = new System.Drawing.Size(119, 28);
+            this.filterCategoriesButton.TabIndex = 3;
+            this.filterCategoriesButton.Text = "Filtrar";
+            this.filterCategoriesButton.UseVisualStyleBackColor = true;
+            this.filterCategoriesButton.Click += new System.EventHandler(this.filterCategoriesButton_Click);
+            // 
+            // category_filter_name
+            // 
+            this.category_filter_name.Location = new System.Drawing.Point(94, 59);
+            this.category_filter_name.Name = "category_filter_name";
+            this.category_filter_name.Size = new System.Drawing.Size(274, 20);
+            this.category_filter_name.TabIndex = 2;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(23, 59);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(55, 15);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Nombre:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(19, 19);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(52, 20);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Filtro:";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -545,6 +620,18 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // newCategoryBtn
+            // 
+            this.newCategoryBtn.BackColor = System.Drawing.Color.LightGreen;
+            this.newCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newCategoryBtn.Location = new System.Drawing.Point(26, 393);
+            this.newCategoryBtn.Name = "newCategoryBtn";
+            this.newCategoryBtn.Size = new System.Drawing.Size(103, 46);
+            this.newCategoryBtn.TabIndex = 5;
+            this.newCategoryBtn.Text = "Nueva";
+            this.newCategoryBtn.UseVisualStyleBackColor = false;
+            this.newCategoryBtn.Click += new System.EventHandler(this.newCategoryBtn_Click);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -563,6 +650,8 @@
             this.usersTab.PerformLayout();
             this.companiesTab.ResumeLayout(false);
             this.companiesTab.PerformLayout();
+            this.categoryTab.ResumeLayout(false);
+            this.categoryTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -616,5 +705,12 @@
         private System.Windows.Forms.Button filterCompanies;
         private System.Windows.Forms.TableLayoutPanel companiesTable;
         private System.Windows.Forms.Button newCompanyButton;
+        private System.Windows.Forms.TabPage categoryTab;
+        private System.Windows.Forms.TextBox category_filter_name;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button filterCategoriesButton;
+        private System.Windows.Forms.TableLayoutPanel categoriesTable;
+        private System.Windows.Forms.Button newCategoryBtn;
     }
 }

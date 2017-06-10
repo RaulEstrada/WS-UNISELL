@@ -562,6 +562,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindCategoriesByNameResponse }
+     * 
+     */
+    public FindCategoriesByNameResponse createFindCategoriesByNameResponse() {
+        return new FindCategoriesByNameResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfCategory }
+     * 
+     */
+    public ArrayOfCategory createArrayOfCategory() {
+        return new ArrayOfCategory();
+    }
+
+    /**
      * Create an instance of {@link UpdateProductResponse }
      * 
      */
@@ -631,14 +647,6 @@ public class ObjectFactory {
      */
     public FindAllCategoriesResponse createFindAllCategoriesResponse() {
         return new FindAllCategoriesResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfCategory }
-     * 
-     */
-    public ArrayOfCategory createArrayOfCategory() {
-        return new ArrayOfCategory();
     }
 
     /**
@@ -719,6 +727,14 @@ public class ObjectFactory {
      */
     public CreateCategoryResponse createCreateCategoryResponse() {
         return new CreateCategoryResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindCategoriesByName }
+     * 
+     */
+    public FindCategoriesByName createFindCategoriesByName() {
+        return new FindCategoriesByName();
     }
 
     /**

@@ -9,5 +9,6 @@ namespace UniSell.NET.Data.Persistence
 {
     public interface ICategoryDAO : IGenericDAO<Category>
     {
+        Category[] FindByName(string name = null);
     }
 }

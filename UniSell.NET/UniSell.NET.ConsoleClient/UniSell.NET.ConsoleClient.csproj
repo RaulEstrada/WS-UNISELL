@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoryForm.Designer.cs">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\UniSellCategoryWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UniSellCompanyWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,6 +105,9 @@
     <Compile Include="UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CategoryForm.resx">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CompanyForm.resx">
       <DependentUpon>CompanyForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +168,44 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\UniSellAdminWS\UserAdminWSService.wsdl" />
+    <None Include="Service References\UniSellCategoryWS\categorymanagement.wsdl" />
+    <None Include="Service References\UniSellCategoryWS\categorymanagement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\categorymanagement1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\CategoryWSService.wsdl" />
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.createCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.createCategoryResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.editCategoryData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.editCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.editCategoryResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.findCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.findCategoryResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.listCategoriesByNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.removeCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.removeCategoryResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UniSellCompanyWS\companymanagement.wsdl" />
     <None Include="Service References\UniSellCompanyWS\companymanagement.xsd">
       <SubType>Designer</SubType>
@@ -298,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\UniSellAdminWS\" />
+    <WCFMetadataStorage Include="Service References\UniSellCategoryWS\" />
     <WCFMetadataStorage Include="Service References\UniSellCompanyWS\" />
     <WCFMetadataStorage Include="Service References\UniSellSellerWS\" />
     <WCFMetadataStorage Include="Service References\UniSellWS\" />
@@ -346,6 +399,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UniSellCompanyWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UniSellCategoryWS\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UniSellCategoryWS\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UniSellCategoryWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
