@@ -28,16 +28,23 @@ namespace UniSell.NET.ConsoleClient
             } else
             {
                 UserWSClient ws = new UserWSClient();
-                string authToken = ws.login(username, password);
-                if (string.IsNullOrEmpty(authToken))
+                try
                 {
-                    showErrorMsg("Credenciales de acceso incorrectas", "Login Incorrecto");
-                } else
+                    string authToken = ws.login(username, password);
+                    if (string.IsNullOrEmpty(authToken))
+                    {
+                        showErrorMsg("Credenciales de acceso incorrectas", "Login Incorrecto");
+                    }
+                    else
+                    {
+                        this.Hide();
+                        HomeForm homeForm = new HomeForm(authToken);
+                        homeForm.Closed += (s, args) => this.Close();
+                        homeForm.Show();
+                    }
+                } catch (Exception ex)
                 {
-                    this.Hide();
-                    HomeForm homeForm = new HomeForm(authToken);
-                    homeForm.Closed += (s, args) => this.Close();
-                    homeForm.Show();
+                    showErrorMsg(ex.Message, "Error");
                 }
             }
         }

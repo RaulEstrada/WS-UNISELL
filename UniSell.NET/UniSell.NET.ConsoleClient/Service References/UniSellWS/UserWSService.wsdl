@@ -4,18 +4,6 @@
   <types />
   <binding xmlns:ns1="http://ws.unisell.miw.uniovi/" name="UserWSPortBinding" type="ns1:IUserWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <operation name="login">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-      <fault name="ArgumentException">
-        <soap:fault use="literal" name="ArgumentException" namespace="" />
-      </fault>
-    </operation>
     <operation name="findUserRoles">
       <soap:operation soapAction="" />
       <input>
@@ -24,6 +12,22 @@
       <output>
         <soap:body use="literal" />
       </output>
+    </operation>
+    <operation name="enableAccount">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:enableAccount" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="UnauthorizeAccessException">
+        <soap:fault use="literal" name="UnauthorizeAccessException" namespace="" />
+      </fault>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
     </operation>
     <operation name="disableAccount">
       <soap:operation soapAction="" />
@@ -41,18 +45,14 @@
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
     </operation>
-    <operation name="enableAccount">
+    <operation name="login">
       <soap:operation soapAction="" />
       <input>
-        <soap:body use="literal" parts="parameters" />
-        <soap:header message="ns1:enableAccount" part="arg0" use="literal" />
+        <soap:body use="literal" />
       </input>
       <output>
         <soap:body use="literal" />
       </output>
-      <fault name="UnauthorizeAccessException">
-        <soap:fault use="literal" name="UnauthorizeAccessException" namespace="" />
-      </fault>
       <fault name="ArgumentException">
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
@@ -73,6 +73,15 @@
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
     </operation>
+    <operation name="findLegalDocumentTypes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="listUsersByFilter">
       <soap:operation soapAction="" />
       <input>
@@ -88,15 +97,6 @@
       <fault name="ArgumentException">
         <soap:fault use="literal" name="ArgumentException" namespace="" />
       </fault>
-    </operation>
-    <operation name="findLegalDocumentTypes">
-      <soap:operation soapAction="" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
     </operation>
     <operation name="findPersonDocumentTypes">
       <soap:operation soapAction="" />

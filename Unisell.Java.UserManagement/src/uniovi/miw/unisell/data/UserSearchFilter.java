@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Surname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Role" type="{http://unisell.net.data/}UserRole"/>
+ *         &lt;element name="Roles" type="{http://unisell.net.data/}ArrayOfUserRole" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "name",
     "surname",
     "username",
-    "role"
+    "roles"
 })
 public class UserSearchFilter {
 
@@ -58,9 +58,8 @@ public class UserSearchFilter {
     protected String surname;
     @XmlElement(name = "Username")
     protected String username;
-    @XmlElement(name = "Role", required = true)
-    @XmlSchemaType(name = "string")
-    protected UserRole role;
+    @XmlElement(name = "Roles")
+    protected ArrayOfUserRole roles;
 
     /**
      * Obtiene el valor de la propiedad idDocument.
@@ -207,27 +206,27 @@ public class UserSearchFilter {
     }
 
     /**
-     * Obtiene el valor de la propiedad role.
+     * Obtiene el valor de la propiedad roles.
      * 
      * @return
      *     possible object is
-     *     {@link UserRole }
+     *     {@link ArrayOfUserRole }
      *     
      */
-    public UserRole getRole() {
-        return role;
+    public ArrayOfUserRole getRoles() {
+        return roles;
     }
 
     /**
-     * Define el valor de la propiedad role.
+     * Define el valor de la propiedad roles.
      * 
      * @param value
      *     allowed object is
-     *     {@link UserRole }
+     *     {@link ArrayOfUserRole }
      *     
      */
-    public void setRole(UserRole value) {
-        this.role = value;
+    public void setRoles(ArrayOfUserRole value) {
+        this.roles = value;
     }
 
 }

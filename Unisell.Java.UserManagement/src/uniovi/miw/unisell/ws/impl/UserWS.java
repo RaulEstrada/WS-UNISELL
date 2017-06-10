@@ -58,6 +58,12 @@ public class UserWS implements IUserWS {
 		if (filter == null) {
 			throw new ArgumentException("A filter is required but not provided");
 		}
+		filter.getRoles().getUserRole().remove(UserRole.BUYER);
+		filter.getRoles().getUserRole().removeIf((x) -> x == null);
+		if (filter.getRoles().getUserRole().isEmpty()) {
+			filter.getRoles().getUserRole().add(UserRole.ADMIN);
+			filter.getRoles().getUserRole().add(UserRole.SELLER);
+		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		ArrayOfUser users = soap.findUsersByFilter(filter);
@@ -88,9 +94,7 @@ public class UserWS implements IUserWS {
 
 	@Override
 	public UserRole[] findUserRoles() {
-		DataAccess dataAccessWS = new DataAccess();
-		DataAccessSoap dataAccessSOAP = dataAccessWS.getDataAccessSoap();
-		return dataAccessSOAP.findUserRoles().getUserRole().toArray(new UserRole[0]);
+		return new UserRole[]{UserRole.ADMIN, UserRole.SELLER};
 	}
 
 	@Override

@@ -114,7 +114,7 @@ namespace UniSell.NET.ConsoleClient
                 Surname = surname_filter.Text.ToString(),
                 Email = email_filter.Text.ToString(),
                 Username = surname_filter.Text.ToString(),
-                Role = rol_filter.Text.ToString(),
+                Roles = new string[] { rol_filter.Text.ToString() },
                 IdDocument = document_filter.Text.ToString(),
                 IdDocumentType = document_type_filter.Text.ToString()
             };

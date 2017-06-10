@@ -39,7 +39,7 @@ namespace UniSell.NET.Data.Persistence.Implementation
             if (!string.IsNullOrEmpty(filter.Name)) { users = users.Where(u => u.Name.Equals(filter.Name)).ToArray(); }
             if (!string.IsNullOrEmpty(filter.Surname)) { users = users.Where(u => u.Surname.Equals(filter.Surname)).ToArray(); }
             if (!string.IsNullOrEmpty(filter.Username)) { users = users.Where(u => u.Username.Equals(filter.Username)).ToArray(); }
-            if (filter.Role != 0) { users = users.Where(u => u.Role == filter.Role).ToArray(); }
+            if (filter.Roles != null && filter.Roles.Length > 0) { users = users.Where(u => filter.Roles.Contains(u.Role)).ToArray(); }
             return users;
         }
     }

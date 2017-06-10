@@ -14,6 +14,6 @@ namespace UniSell.NET.Data.Persistence.Implementation
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Username { get; set; }
-        public UserRole Role { get; set; }
+        public UserRole[] Roles { get; set; }
     }
 }

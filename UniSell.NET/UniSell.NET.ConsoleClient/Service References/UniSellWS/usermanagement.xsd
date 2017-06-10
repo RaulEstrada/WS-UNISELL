@@ -8,7 +8,12 @@
       <xs:element minOccurs="0" name="Name" type="xs:string" />
       <xs:element minOccurs="0" name="Surname" type="xs:string" />
       <xs:element minOccurs="0" name="Username" type="xs:string" />
-      <xs:element name="Role" type="xs:string" />
+      <xs:element minOccurs="0" name="Roles" type="tns:ArrayOfUserRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUserRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserRole" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="PersonIdDocumentType">
