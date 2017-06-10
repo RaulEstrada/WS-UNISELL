@@ -19,9 +19,10 @@ namespace UniSell.NET.RESTProvider.Controllers
         public IHttpActionResult Get()
         {
             string token = GetAuthToken();
-            if (string.IsNullOrEmpty(token))
+            IHttpActionResult validateToken = ValidateToken(token);
+            if (validateToken != null)
             {
-                return Unauthorized();
+                return validateToken;
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             User[] buyers = ws.FindUsersByFilter(new UserSearchFilter { Role = DataAccessWS.UserRole.BUYER });
@@ -139,7 +140,7 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 if (!ValidateUserExists(token, userId))
                 {
-                    return BadRequest("User with id " + userId + " not found in the system");
+                    return NotFound();
                 }
                 if (string.IsNullOrEmpty(token) || !ValidateClientIdentity(token, userId))
                 {
@@ -150,6 +151,24 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 return BadRequest("Invalid security token");
             }
+        }
+
+        private IHttpActionResult ValidateToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized();
+            }
+            try
+            {
+                IdentityWSSoapClient ws = new IdentityWSSoapClient();
+                ws.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
+            }
+            catch (FaultException ex)
+            {
+                return BadRequest("Invalid security token");
+            }
+            return null;
         }
 
         private bool ValidateClientIdentity(string token, long userId)
