@@ -68,13 +68,75 @@ namespace UniSell.NET.RESTProvider.Controllers
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/Products/{id}")]
+        public IHttpActionResult Put(int id, [FromBody]ProductData value)
         {
+            string token = GetAuthToken();
+            IHttpActionResult validation = ValidateOwnerProduct(token, id);
+            if (validation != null)
+            {
+                return validation;
+            }
+            validation = ValidateProductData(value, token, true);
+            if (validation != null)
+            {
+                return validation;
+            }
+            DataAccessSoapClient ws = new DataAccessSoapClient();
+            Product target = ws.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            assignProperties(target, value);
+            target.Id = id;
+            Product updated = ws.UpdateProduct(new DataAccessWS.Security { BinarySecurityToken = token }, target);
+            return Ok(CreateRestProduct(updated));
         }
 
         // DELETE: api/Products/5
-        public void Delete(int id)
+        [Route("api/Products/{id}")]
+        public IHttpActionResult Delete(int id)
         {
+            string token = GetAuthToken();
+            IHttpActionResult validation = ValidateOwnerProduct(token, id);
+            if (validation != null)
+            {
+                return validation;
+            }
+            DataAccessSoapClient ws = new DataAccessSoapClient();
+            Product removed = ws.RemoveProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            RestProduct res = CreateRestProduct(removed);
+            res.href = "";
+            return Ok(res);
+        }
+
+        private void assignProperties(Product product, ProductData data)
+        {
+            if (!string.IsNullOrEmpty(data.Name))
+            {
+                product.Name = data.Name;
+            }
+            if (!string.IsNullOrEmpty(data.Description))
+            {
+                product.Description = data.Description;
+            }
+            if (data.Price != null)
+            {
+                product.Price = data.Price.Value;
+            }
+            if (data.Units != null)
+            {
+                product.Units = data.Units.Value;
+            }
+            if (data.Image != null)
+            {
+                product.image = data.Image;
+            }
+            if (data.SellerId != null)
+            {
+                product.seller_id = data.SellerId.Value;
+            }
+            if (data.CategoryId != null)
+            {
+                product.category_id = data.CategoryId.Value;
+            }
         }
 
         private string GetAuthToken()
@@ -96,7 +158,7 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 IdentityWSSoapClient ws = new IdentityWSSoapClient();
                 IdentityData identity = ws.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
-                if (identity != null && identity.Role == IdentityWS.UserRole.SELLER)
+                if (identity != null && identity.Role != IdentityWS.UserRole.SELLER)
                 {
                     return Unauthorized();
                 }
@@ -118,6 +180,35 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 IdentityWSSoapClient ws = new IdentityWSSoapClient();
                 ws.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
+            }
+            catch (FaultException ex)
+            {
+                return BadRequest("Invalid security token");
+            }
+            return null;
+        }
+
+        private IHttpActionResult ValidateOwnerProduct(string token, long productId)
+        {
+            try
+            {
+                IdentityWSSoapClient ws = new IdentityWSSoapClient();
+                IdentityData identity = ws.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
+                if (identity == null)
+                {
+                    return Unauthorized();
+                }
+                DataAccessSoapClient dataWS = new DataAccessSoapClient();
+                Product target = dataWS.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, productId);
+                if (target == null)
+                {
+                    return NotFound();
+                }
+                User owner = dataWS.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, target.seller_id);
+                if (!owner.Username.Equals(identity.Username))
+                {
+                    return Unauthorized();
+                }
             }
             catch (FaultException ex)
             {
