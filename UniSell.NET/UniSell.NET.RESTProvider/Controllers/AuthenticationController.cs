@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using UniSell.NET.RESTProvider.DataAccessWS;
+using UniSell.NET.RESTProvider.IdentityWS;
 using UniSell.NET.RESTProvider.Models;
 
 namespace UniSell.NET.RESTProvider.Controllers
@@ -19,12 +20,14 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return BadRequest("Authentication data required but not provided");
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
-            string token = ws.Login(AuthData.username, AuthData.password, new UserRole[2] { UserRole.BUYER, UserRole.SELLER});
+            string token = ws.Login(AuthData.username, AuthData.password, new DataAccessWS.UserRole[2] { DataAccessWS.UserRole.BUYER, DataAccessWS.UserRole.SELLER});
             if (string.IsNullOrEmpty(token))
             {
                 return StatusCode(HttpStatusCode.Unauthorized);
             }
-            return Ok(new AuthToken { Token = token });
+            IdentityWSSoapClient idWS = new IdentityWSSoapClient();
+            IdentityData idData = idWS.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
+            return Ok(new AuthToken { Token = token, Username = idData.Username, Role = idData.Role.ToString() });
         }
     }
 }
