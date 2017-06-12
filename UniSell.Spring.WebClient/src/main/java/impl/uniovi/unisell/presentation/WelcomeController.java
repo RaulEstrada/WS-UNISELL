@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,15 +17,20 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @Controller
-@RequestMapping(value = {"/", "/index"})
 public class WelcomeController {
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String get() {
 		return "index";
 	}
+	
+	@RequestMapping(value = "/loginError", method = RequestMethod.GET)
+	public String getLoginError(Model model) {
+		model.addAttribute("error", "true");
+		return "index";
+	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = {"/", "/index", "/loginError"}, method = RequestMethod.POST)
 	public String post(@Valid @ModelAttribute(value = "authentication") Authentication authentication) {
 		try {
 			Client client = Client.create();
@@ -32,6 +38,9 @@ public class WelcomeController {
 			ClientResponse response = webResource.
 					type(MediaType.APPLICATION_JSON).
 					post(ClientResponse.class, authentication); 
+			if (!response.hasEntity()) {
+				return "redirect:/loginError";
+			}
 			AuthenticationInfo output = response.getEntity(AuthenticationInfo.class);
 			System.out.println(output);
 		} catch (Exception e) {

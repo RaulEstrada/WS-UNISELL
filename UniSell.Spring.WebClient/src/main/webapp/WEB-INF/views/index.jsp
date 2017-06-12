@@ -25,6 +25,11 @@
 					<section class="col-sm-12 col-md-6">
 						<h2><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h2>
 						<form:form commandName="authentication">
+							<c:if test="${not empty error}">
+								<div class="alert alert-danger">
+  									<strong>Credenciales de acceso incorrectas. Por favor, inténtelo de nuevo</strong>
+								</div>
+							</c:if>
 							<div class="form-group">
 								<label for="usernameInput">Nombre de usuario</label>
 	    						<form:input type="text" cssClass="form-control" 
