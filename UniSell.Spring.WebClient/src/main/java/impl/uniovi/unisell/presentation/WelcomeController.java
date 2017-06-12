@@ -3,6 +3,7 @@ package impl.uniovi.unisell.presentation;
 import impl.uniovi.unisell.model.Authentication;
 import impl.uniovi.unisell.model.AuthenticationInfo;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
@@ -31,7 +32,7 @@ public class WelcomeController {
 	}
 
 	@RequestMapping(value = {"/", "/index", "/loginError"}, method = RequestMethod.POST)
-	public String post(@Valid @ModelAttribute(value = "authentication") Authentication authentication) {
+	public String post(@Valid @ModelAttribute(value = "authentication") Authentication authentication, HttpSession session) {
 		try {
 			Client client = Client.create();
 			WebResource webResource = client.resource("http://156.35.98.14:50868/api/authentication");
@@ -42,7 +43,12 @@ public class WelcomeController {
 				return "redirect:/loginError";
 			}
 			AuthenticationInfo output = response.getEntity(AuthenticationInfo.class);
-			System.out.println(output);
+			session.setAttribute("authCredentials", output);
+			if (output.getRole().equals("SELLER")) {
+				return "redirect:/seller";
+			} else {
+				return "redirect:/buyer";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
