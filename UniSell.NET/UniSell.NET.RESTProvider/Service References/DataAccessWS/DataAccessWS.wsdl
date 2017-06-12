@@ -267,7 +267,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Surname" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Role" type="tns:UserRole" />
+          <s:element minOccurs="0" maxOccurs="1" name="Roles" type="tns:ArrayOfUserRole" />
         </s:sequence>
       </s:complexType>
       <s:element name="FindUsersByFilterResponse">
@@ -365,6 +365,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="FindCategoriesByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindCategoriesByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindCategoriesByNameResult" type="tns:ArrayOfCategory" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="CountProducts">
         <s:complexType />
       </s:element>
@@ -430,6 +444,30 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="FindProductResult" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindProductsByFilter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="tns:ProductSearchFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProductSearchFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceFrom" nillable="true" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceTo" nillable="true" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Seller" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindProductsByFilterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindProductsByFilterResult" type="tns:ArrayOfProduct" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -778,6 +816,12 @@
   <wsdl:message name="UpdateCategorySecurity">
     <wsdl:part name="Security" element="s1:Security" />
   </wsdl:message>
+  <wsdl:message name="FindCategoriesByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:FindCategoriesByName" />
+  </wsdl:message>
+  <wsdl:message name="FindCategoriesByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:FindCategoriesByNameResponse" />
+  </wsdl:message>
   <wsdl:message name="CountProductsSoapIn">
     <wsdl:part name="parameters" element="tns:CountProducts" />
   </wsdl:message>
@@ -812,6 +856,15 @@
     <wsdl:part name="parameters" element="tns:FindProductResponse" />
   </wsdl:message>
   <wsdl:message name="FindProductSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindProductsByFilterSoapIn">
+    <wsdl:part name="parameters" element="tns:FindProductsByFilter" />
+  </wsdl:message>
+  <wsdl:message name="FindProductsByFilterSoapOut">
+    <wsdl:part name="parameters" element="tns:FindProductsByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindProductsByFilterSecurity">
     <wsdl:part name="Security" element="s1:Security" />
   </wsdl:message>
   <wsdl:message name="RemoveProductSoapIn">
@@ -990,6 +1043,10 @@
       <wsdl:input message="tns:UpdateCategorySoapIn" />
       <wsdl:output message="tns:UpdateCategorySoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="FindCategoriesByName">
+      <wsdl:input message="tns:FindCategoriesByNameSoapIn" />
+      <wsdl:output message="tns:FindCategoriesByNameSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="CountProducts">
       <wsdl:input message="tns:CountProductsSoapIn" />
       <wsdl:output message="tns:CountProductsSoapOut" />
@@ -1005,6 +1062,10 @@
     <wsdl:operation name="FindProduct">
       <wsdl:input message="tns:FindProductSoapIn" />
       <wsdl:output message="tns:FindProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsByFilter">
+      <wsdl:input message="tns:FindProductsByFilterSoapIn" />
+      <wsdl:output message="tns:FindProductsByFilterSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="RemoveProduct">
       <wsdl:input message="tns:RemoveProductSoapIn" />
@@ -1243,6 +1304,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FindCategoriesByName">
+      <soap:operation soapAction="http://unisell.net.data/FindCategoriesByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CountProducts">
       <soap:operation soapAction="http://unisell.net.data/CountProducts" style="document" />
       <wsdl:input>
@@ -1278,6 +1348,16 @@
       <wsdl:input>
         <soap:body use="literal" />
         <soap:header message="tns:FindProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsByFilter">
+      <soap:operation soapAction="http://unisell.net.data/FindProductsByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindProductsByFilterSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
@@ -1589,6 +1669,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FindCategoriesByName">
+      <soap12:operation soapAction="http://unisell.net.data/FindCategoriesByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CountProducts">
       <soap12:operation soapAction="http://unisell.net.data/CountProducts" style="document" />
       <wsdl:input>
@@ -1624,6 +1713,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:FindProductSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsByFilter">
+      <soap12:operation soapAction="http://unisell.net.data/FindProductsByFilter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindProductsByFilterSecurity" part="Security" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />

@@ -301,6 +301,17 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Product[] FindProductsByFilter(ProductSearchFilter filter)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getProductDAO().FindProductsByFilter(filter);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product RemoveProduct(long id)
         {
             ValidateSecurity();

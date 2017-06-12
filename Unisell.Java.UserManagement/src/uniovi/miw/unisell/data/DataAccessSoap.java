@@ -397,6 +397,23 @@ public interface DataAccessSoap {
 
     /**
      * 
+     * @param filter
+     * @param security
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfProduct
+     */
+    @WebMethod(operationName = "FindProductsByFilter", action = "http://unisell.net.data/FindProductsByFilter")
+    @WebResult(name = "FindProductsByFilterResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindProductsByFilter", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindProductsByFilter")
+    @ResponseWrapper(localName = "FindProductsByFilterResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindProductsByFilterResponse")
+    public ArrayOfProduct findProductsByFilter(
+        @WebParam(name = "filter", targetNamespace = "http://unisell.net.data/")
+        ProductSearchFilter filter,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
      * @param security
      * @param id
      * @return

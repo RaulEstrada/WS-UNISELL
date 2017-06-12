@@ -163,6 +163,13 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/UpdateCategory", ReplyAction="*")]
         System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.UpdateCategoryResponse> UpdateCategoryAsync(UniSell.NET.RESTProvider.DataAccessWS.UpdateCategoryRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindCategoriesByName", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.RESTProvider.DataAccessWS.Category[] FindCategoriesByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindCategoriesByName", ReplyAction="*")]
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.Category[]> FindCategoriesByNameAsync(string name);
+        
         // CODEGEN: Generating message contract since message CountProductsRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/CountProducts", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -194,6 +201,14 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindProduct", ReplyAction="*")]
         System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindProductResponse> FindProductAsync(UniSell.NET.RESTProvider.DataAccessWS.FindProductRequest request);
+        
+        // CODEGEN: Generating message contract since message FindProductsByFilterRequest has headers
+        [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindProductsByFilter", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse FindProductsByFilter(UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/FindProductsByFilter", ReplyAction="*")]
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse> FindProductsByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest request);
         
         // CODEGEN: Generating message contract since message RemoveProductRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://unisell.net.data/RemoveProduct", ReplyAction="*")]
@@ -476,6 +491,108 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         /// <remarks/>
         CIE,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://unisell.net.data/")]
+    public partial class ProductSearchFilter : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string nameField;
+        
+        private string descriptionField;
+        
+        private System.Nullable<double> priceFromField;
+        
+        private System.Nullable<double> priceToField;
+        
+        private string sellerField;
+        
+        private string categoryField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+                this.RaisePropertyChanged("Name");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("Description");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public System.Nullable<double> PriceFrom {
+            get {
+                return this.priceFromField;
+            }
+            set {
+                this.priceFromField = value;
+                this.RaisePropertyChanged("PriceFrom");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public System.Nullable<double> PriceTo {
+            get {
+                return this.priceToField;
+            }
+            set {
+                this.priceToField = value;
+                this.RaisePropertyChanged("PriceTo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string Seller {
+            get {
+                return this.sellerField;
+            }
+            set {
+                this.sellerField = value;
+                this.RaisePropertyChanged("Seller");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string Category {
+            get {
+                return this.categoryField;
+            }
+            set {
+                this.categoryField = value;
+                this.RaisePropertyChanged("Category");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     /// <remarks/>
@@ -1185,7 +1302,7 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         private string usernameField;
         
-        private UserRole roleField;
+        private UserRole[] rolesField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -1260,14 +1377,14 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public UserRole Role {
+        [System.Xml.Serialization.XmlArrayAttribute(Order=6)]
+        public UserRole[] Roles {
             get {
-                return this.roleField;
+                return this.rolesField;
             }
             set {
-                this.roleField = value;
-                this.RaisePropertyChanged("Role");
+                this.rolesField = value;
+                this.RaisePropertyChanged("Roles");
             }
         }
         
@@ -1964,6 +2081,44 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
         
         public FindProductResponse(UniSell.NET.RESTProvider.DataAccessWS.Product FindProductResult) {
             this.FindProductResult = FindProductResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FindProductsByFilter", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
+    public partial class FindProductsByFilterRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://schemas.xmlsoap.org/ws/2002/04/secext")]
+        public UniSell.NET.RESTProvider.DataAccessWS.Security Security;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
+        public UniSell.NET.RESTProvider.DataAccessWS.ProductSearchFilter filter;
+        
+        public FindProductsByFilterRequest() {
+        }
+        
+        public FindProductsByFilterRequest(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.ProductSearchFilter filter) {
+            this.Security = Security;
+            this.filter = filter;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FindProductsByFilterResponse", WrapperNamespace="http://unisell.net.data/", IsWrapped=true)]
+    public partial class FindProductsByFilterResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://unisell.net.data/", Order=0)]
+        public UniSell.NET.RESTProvider.DataAccessWS.Product[] FindProductsByFilterResult;
+        
+        public FindProductsByFilterResponse() {
+        }
+        
+        public FindProductsByFilterResponse(UniSell.NET.RESTProvider.DataAccessWS.Product[] FindProductsByFilterResult) {
+            this.FindProductsByFilterResult = FindProductsByFilterResult;
         }
     }
     
@@ -2721,6 +2876,14 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
             return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).UpdateCategoryAsync(inValue);
         }
         
+        public UniSell.NET.RESTProvider.DataAccessWS.Category[] FindCategoriesByName(string name) {
+            return base.Channel.FindCategoriesByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.Category[]> FindCategoriesByNameAsync(string name) {
+            return base.Channel.FindCategoriesByNameAsync(name);
+        }
+        
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         UniSell.NET.RESTProvider.DataAccessWS.CountProductsResponse UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.CountProducts(UniSell.NET.RESTProvider.DataAccessWS.CountProductsRequest request) {
             return base.Channel.CountProducts(request);
@@ -2815,6 +2978,31 @@ namespace UniSell.NET.RESTProvider.DataAccessWS {
             inValue.Security = Security;
             inValue.id = id;
             return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindProductAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.FindProductsByFilter(UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest request) {
+            return base.Channel.FindProductsByFilter(request);
+        }
+        
+        public UniSell.NET.RESTProvider.DataAccessWS.Product[] FindProductsByFilter(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.ProductSearchFilter filter) {
+            UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest();
+            inValue.Security = Security;
+            inValue.filter = filter;
+            UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse retVal = ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindProductsByFilter(inValue);
+            return retVal.FindProductsByFilterResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse> UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap.FindProductsByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest request) {
+            return base.Channel.FindProductsByFilterAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse> FindProductsByFilterAsync(UniSell.NET.RESTProvider.DataAccessWS.Security Security, UniSell.NET.RESTProvider.DataAccessWS.ProductSearchFilter filter) {
+            UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest inValue = new UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterRequest();
+            inValue.Security = Security;
+            inValue.filter = filter;
+            return ((UniSell.NET.RESTProvider.DataAccessWS.DataAccessSoap)(this)).FindProductsByFilterAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

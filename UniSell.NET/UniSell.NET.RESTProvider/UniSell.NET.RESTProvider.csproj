@@ -118,6 +118,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\IdentityWS\configuration91.svcinfo" />
     <None Include="Service References\IdentityWS\configuration.svcinfo" />
     <None Include="Service References\IdentityWS\Reference.svcmap">
@@ -245,6 +248,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BuyersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

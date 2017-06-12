@@ -172,6 +172,7 @@
     <Compile Include="Persistence\Implementation\CompanySearchFilter.cs" />
     <Compile Include="Persistence\Implementation\GenericDAO.cs" />
     <Compile Include="Persistence\Implementation\ProductDAO.cs" />
+    <Compile Include="Persistence\Implementation\ProductSearchFilter.cs" />
     <Compile Include="Persistence\Implementation\UserAdminDAO.cs" />
     <Compile Include="Persistence\Implementation\UserBuyerDAO.cs" />
     <Compile Include="Persistence\Implementation\UserDAO.cs" />

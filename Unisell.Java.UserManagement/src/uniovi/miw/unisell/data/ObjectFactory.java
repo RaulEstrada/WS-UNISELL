@@ -98,6 +98,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindProductsByFilterResponse }
+     * 
+     */
+    public FindProductsByFilterResponse createFindProductsByFilterResponse() {
+        return new FindProductsByFilterResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfProduct }
+     * 
+     */
+    public ArrayOfProduct createArrayOfProduct() {
+        return new ArrayOfProduct();
+    }
+
+    /**
      * Create an instance of {@link FindCompaniesByFilter }
      * 
      */
@@ -450,14 +466,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArrayOfProduct }
-     * 
-     */
-    public ArrayOfProduct createArrayOfProduct() {
-        return new ArrayOfProduct();
-    }
-
-    /**
      * Create an instance of {@link UpdateProduct }
      * 
      */
@@ -607,6 +615,22 @@ public class ObjectFactory {
      */
     public CountCategories createCountCategories() {
         return new CountCategories();
+    }
+
+    /**
+     * Create an instance of {@link FindProductsByFilter }
+     * 
+     */
+    public FindProductsByFilter createFindProductsByFilter() {
+        return new FindProductsByFilter();
+    }
+
+    /**
+     * Create an instance of {@link ProductSearchFilter }
+     * 
+     */
+    public ProductSearchFilter createProductSearchFilter() {
+        return new ProductSearchFilter();
     }
 
     /**

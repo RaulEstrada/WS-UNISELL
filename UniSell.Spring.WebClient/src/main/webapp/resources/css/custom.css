@@ -1,3 +1,11 @@
 html, body {
 	min-height: 100%;
 }
+
+.a-logo {
+	padding: 0 !important;
+}
+
+.a-logo img {
+	height: 100% !important;
+}

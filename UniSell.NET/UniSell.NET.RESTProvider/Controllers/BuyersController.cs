@@ -25,7 +25,7 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return validateToken;
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
-            User[] buyers = ws.FindUsersByFilter(new UserSearchFilter { Role = DataAccessWS.UserRole.BUYER });
+            User[] buyers = ws.FindUsersByFilter(new UserSearchFilter { Roles = new DataAccessWS.UserRole[] { DataAccessWS.UserRole.BUYER  } });
             return Ok(buyers.Select(b => CreateRestUser(b)));
         }
 
