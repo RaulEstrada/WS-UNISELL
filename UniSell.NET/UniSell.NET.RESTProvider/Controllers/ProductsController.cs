@@ -267,8 +267,8 @@ namespace UniSell.NET.RESTProvider.Controllers
                 Price = product.Price,
                 Units = product.Units,
                 Image = product.image,
-                Seller = product.seller.Username,
-                Category = product.category.Name
+                Seller = product.seller_id,
+                Category = product.category_id
             };
         }
 

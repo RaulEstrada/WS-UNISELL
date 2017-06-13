@@ -2,8 +2,6 @@ package impl.uniovi.unisell.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,13 +9,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Product<T> {
-	@XmlAttribute
-	@JsonProperty
-	private String href;
-	@XmlElement
-	@JsonProperty
-	private Long Id;
+public class ProductPost {
 	@XmlElement
 	@JsonProperty
 	private String Name;
@@ -35,26 +27,10 @@ public class Product<T> {
 	private byte[] Image;
 	@XmlElement
 	@JsonProperty
-	private T Seller;
+	private long SellerId;
 	@XmlElement
 	@JsonProperty
-	private T Category;
-	
-	public String getHref() {
-		return href;
-	}
-
-	public void setHref(String href) {
-		this.href = href;
-	}
-	
-	public long getId() {
-		return Id;
-	}
-	
-	public void setId(long id) {
-		Id = id;
-	}
+	private long CategoryId;
 	
 	public String getName() {
 		return Name;
@@ -96,20 +72,19 @@ public class Product<T> {
 		Image = image;
 	}
 	
-	public T getSeller() {
-		return Seller;
+	public long getSellerId() {
+		return SellerId;
 	}
 	
-	public void setSeller(T seller) {
-		Seller = seller;
+	public void setSellerId(long seller) {
+		SellerId = seller;
 	}
 	
-	public T getCategory() {
-		return Category;
+	public long getCategoryId() {
+		return CategoryId;
 	}
 	
-	public void setCategory(T category) {
-		Category = category;
+	public void setCategoryId(long category) {
+		CategoryId = category;
 	}
-	
 }

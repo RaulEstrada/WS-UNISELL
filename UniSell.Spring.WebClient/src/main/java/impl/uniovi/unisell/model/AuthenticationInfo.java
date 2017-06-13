@@ -11,6 +11,8 @@ public class AuthenticationInfo {
 	private String Username;
 	@XmlElement
 	private String Role;
+	@XmlElement
+	private long Id;
 	
 	public String getToken() {
 		return Token;
@@ -35,4 +37,14 @@ public class AuthenticationInfo {
 	public void setRole(String role) {
 		Role = role;
 	}
+
+	public long getId() {
+		return Id;
+	}
+
+	public void setId(long id) {
+		Id = id;
+	}
+	
+	
 }

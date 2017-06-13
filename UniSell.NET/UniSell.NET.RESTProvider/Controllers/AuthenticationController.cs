@@ -27,7 +27,13 @@ namespace UniSell.NET.RESTProvider.Controllers
             }
             IdentityWSSoapClient idWS = new IdentityWSSoapClient();
             IdentityData idData = idWS.GetIdentity(new IdentityWS.Security { BinarySecurityToken = token });
-            return Ok(new AuthToken { Token = token, Username = idData.Username, Role = idData.Role.ToString() });
+            User user = ws.FindUserByUsername(idData.Username);
+            return Ok(new AuthToken {
+                Token = token,
+                Username = idData.Username,
+                Role = idData.Role.ToString(),
+                Id = user.Id
+            });
         }
     }
 }

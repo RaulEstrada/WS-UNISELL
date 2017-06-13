@@ -17,7 +17,7 @@ namespace UniSell.NET.RESTProvider.Models
         public double Price { get; set; }
         public int Units { get; set; }
         public byte[] Image { get; set; }
-        public string Seller { get; set; }
-        public string Category { get; set; }
+        public dynamic Seller { get; set; }
+        public dynamic Category { get; set; }
     }
 }

@@ -10,10 +10,25 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jquery-ui.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/custom.css"/>"/>
 	
 		<script src="<c:url value="/resources/js/jquery-3.1.1.min.js" />"></script>
+		<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 		<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+		<script>
+  			$(function(){
+    			$("#dialog").dialog({
+      				autoOpen: false
+    			});
+			    $(".opener").on( "click", function(e) {
+			    	var opener = $(e.target);
+			    	var productId = opener.attr("id");
+			    	$("#doDeleteBtn").attr("href", "/unisell/borrarproducto/" + productId);
+			      	$("#dialog").dialog("open");
+			    });
+  			});
+  		</script>
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
@@ -26,7 +41,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>	
 					</button>
-					<a class="navbar-brand a-logo" href="/unisell/">
+					<a class="navbar-brand a-logo" href="/unisell/home">
 						<img src="<c:url value="/resources/img/logo.png"/>"
 							alt="Logo"/>
 					</a>
@@ -67,18 +82,22 @@
 										<td><c:out value="${product.units}"/></td>
 										<td><c:out value="${product.category}"/></td>
 										<td class="text-center">
-											<a href="" class="btn btn-default">Editar</a>
+											<a href="/unisell/products/${product.id}" class="btn btn-default">Editar</a>
 										</td>
 										<td class="text-center">
-											<a href="" class="btn btn-danger">Eliminar</a>
+											<button id="${product.id}" href="" class="btn btn-danger opener">Eliminar</button>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<div id="dialog" title="Confirmar borrado">
+						  <p>Está a punto de eliminar un producto. Esta acción no se podrá deshacer. ¿Desea continuar?</p>
+						  <a href="" id="doDeleteBtn" class="btn btn-danger">Borrar</a>
+						</div>
 					</div>
 					<div class="row">
-						<a href="" class="btn btn-lg btn-primary">Crear nuevo</a>
+						<a href="/unisell/products" class="btn btn-lg btn-primary">Crear nuevo</a>
 					</div>
 				</div>
 			</div>

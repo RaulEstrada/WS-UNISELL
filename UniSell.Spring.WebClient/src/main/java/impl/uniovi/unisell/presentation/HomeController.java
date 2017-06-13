@@ -18,20 +18,28 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @Controller
-@RequestMapping("/seller")
-public class SellerHomeController {
+@RequestMapping("/home")
+public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String get(HttpSession session, Model model) {
+		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
+		if (auth.getRole().equals("SELLER")) {
+			return getSeller(auth, model);
+		} else {
+			return getBuyer();
+		}
+	}
+	
+	private String getSeller(AuthenticationInfo auth, Model model) {
 		try {
-			AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute("authCredentials");
 			String username = auth.getUsername();
 			String token = auth.getToken();
 			ClientConfig cfg = new DefaultClientConfig();
 			cfg.getClasses().add(JacksonJsonProvider.class);
 			Client client = Client.create(cfg);
 			WebResource webResource = client.resource("http://156.35.98.14:50868/api/sellers/" + username + "/products");
-			Product[] products = webResource
+			Product<String>[] products = webResource
 				.type(MediaType.APPLICATION_JSON)
 				.header("token", token)
 				.get(Product[].class);
@@ -40,5 +48,9 @@ public class SellerHomeController {
 			e.printStackTrace();
 		} 
 		return "/seller/home";
+	}
+	
+	private String getBuyer() {
+		return "/buyer/home";
 	}
 }

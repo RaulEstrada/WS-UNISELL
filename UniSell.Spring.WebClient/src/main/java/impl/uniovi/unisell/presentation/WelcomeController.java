@@ -19,6 +19,8 @@ import com.sun.jersey.api.client.WebResource;
 
 @Controller
 public class WelcomeController {
+	
+	public static String AUTH_SESSION = "authCredentials";
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String get() {
@@ -43,12 +45,8 @@ public class WelcomeController {
 				return "redirect:/loginError";
 			}
 			AuthenticationInfo output = response.getEntity(AuthenticationInfo.class);
-			session.setAttribute("authCredentials", output);
-			if (output.getRole().equals("SELLER")) {
-				return "redirect:/seller";
-			} else {
-				return "redirect:/buyer";
-			}
+			session.setAttribute(AUTH_SESSION, output);
+			return "redirect:/home";
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
