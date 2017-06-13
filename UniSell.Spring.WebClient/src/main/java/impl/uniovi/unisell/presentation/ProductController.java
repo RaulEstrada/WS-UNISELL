@@ -1,14 +1,19 @@
 package impl.uniovi.unisell.presentation;
 
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import impl.uniovi.unisell.model.AuthenticationInfo;
 import impl.uniovi.unisell.model.Category;
 import impl.uniovi.unisell.model.Product;
 import impl.uniovi.unisell.model.ProductPost;
 
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,11 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @Controller
 public class ProductController {
@@ -39,10 +39,11 @@ public class ProductController {
 		try {
 			AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 			String token = auth.getToken();
-			Product<Long> product = prepareWebResource("http://156.35.98.14:50868/api/products/" + id)
-					.type(MediaType.APPLICATION_JSON)
-					.header("token", token)
-					.get(Product.class);
+			Client client = ClientBuilder.newClient();
+			WebTarget target = client.target("http://156.35.98.14:50868/api/products/" + id);
+			Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", token);
+			Response response = builder.get(Response.class);
+			Product<Long> product = response.readEntity(Product.class);
 			model.addAttribute("product", product);
 			if (okMessage != null && !okMessage.trim().isEmpty()) {
 				model.addAttribute("okMessage", okMessage);
@@ -60,13 +61,14 @@ public class ProductController {
 			@RequestParam("Image") CommonsMultipartFile file, HttpSession session, Model model) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		ProductPost product = prepareProduct(Name, Description, Price, Units, Category, file, auth);
-		Product<Long> response = prepareWebResource("http://156.35.98.14:50868/api/products")
-				.header("token", auth.getToken())
-				.type(MediaType.APPLICATION_JSON)
-				.post(Product.class, product);
-		if (response != null) {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://156.35.98.14:50868/api/products");
+		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
+		Response response = builder.post(Entity.entity(product, MediaType.APPLICATION_JSON), Response.class);
+		Product<Long> resp = response.readEntity(Product.class);
+		if (resp != null) {
 			model.addAttribute("okMessage", "true");
-			return "redirect:/products/" + response.getId();
+			return "redirect:/products/" + resp.getId();
 		} else {
 			model.addAttribute("error", "true");
 			return null;
@@ -81,13 +83,14 @@ public class ProductController {
 			@RequestParam("Image") CommonsMultipartFile file, HttpSession session, Model model) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		ProductPost product = prepareProduct(Name, Description, Price, Units, Category, file, auth);
-		Product<Long> response = prepareWebResource("http://156.35.98.14:50868/api/products/" + id)
-				.header("token", auth.getToken())
-				.type(MediaType.APPLICATION_JSON)
-				.put(Product.class, product);
-		if (response != null) {
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://156.35.98.14:50868/api/products/" + id);
+		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
+		Response response = builder.put(Entity.entity(product, MediaType.APPLICATION_JSON), Response.class);
+		Product<Long> resp = response.readEntity(Product.class);
+		if (resp != null) {
 			model.addAttribute("okMessage", "true");
-			model.addAttribute("product", response);
+			model.addAttribute("product", resp);
 			return "product";
 		} else {
 			model.addAttribute("error", "true");
@@ -110,21 +113,15 @@ public class ProductController {
 		return product;
 	}
 	
-	private WebResource prepareWebResource(String restURI) {
-		ClientConfig cfg = new DefaultClientConfig();
-		cfg.getClasses().add(JacksonJsonProvider.class);
-		Client client = Client.create(cfg);
-		return client.resource(restURI);
-	}
-	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/borrarproducto/{productId}", method = RequestMethod.GET)
 	public String borrarProducto(@PathVariable(value="productId") String id, HttpSession session) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
-		Product<Long> response = prepareWebResource("http://156.35.98.14:50868/api/products/" + id)
-				.header("token", auth.getToken())
-				.type(MediaType.APPLICATION_JSON)
-				.delete(Product.class);
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://156.35.98.14:50868/api/products/" + id);
+		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
+		Response resp = builder.delete(Response.class);
+		Product<Long> response = resp.readEntity(Product.class);
 		if (response != null) {
 			return "redirect:/home";
 		} else {
@@ -135,15 +132,11 @@ public class ProductController {
 	@ModelAttribute(value = "categories")
 	public Category[] generateAuthentication(HttpSession session) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
-		String token = auth.getToken();
-		ClientConfig cfg = new DefaultClientConfig();
-		cfg.getClasses().add(JacksonJsonProvider.class);
-		Client client = Client.create(cfg);
-		WebResource webResource = client.resource("http://156.35.98.14:50868/api/categories");
-		Category[] categories = webResource
-				.type(MediaType.APPLICATION_JSON)
-				.header("token", token)
-				.get(Category[].class);
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://156.35.98.14:50868/api/categories");
+		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
+		Response resp = builder.get(Response.class);
+		Category[] categories = resp.readEntity(Category[].class);
 		return categories;
 	}
 }

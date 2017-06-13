@@ -84,7 +84,7 @@ namespace UniSell.NET.RESTProvider.Controllers
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             Product target = ws.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
-            assignProperties(target, value);
+            assignProperties(target, value, token);
             target.Id = id;
             Product updated = ws.UpdateProduct(new DataAccessWS.Security { BinarySecurityToken = token }, target);
             return Ok(CreateRestProduct(updated));
@@ -107,7 +107,7 @@ namespace UniSell.NET.RESTProvider.Controllers
             return Ok(res);
         }
 
-        private void assignProperties(Product product, ProductData data)
+        private void assignProperties(Product product, ProductData data, string token)
         {
             if (!string.IsNullOrEmpty(data.Name))
             {
@@ -132,10 +132,16 @@ namespace UniSell.NET.RESTProvider.Controllers
             if (data.SellerId != null)
             {
                 product.seller_id = data.SellerId.Value;
+                DataAccessSoapClient ws = new DataAccessSoapClient();
+                dynamic user = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, product.seller_id);
+                product.seller = user;
             }
             if (data.CategoryId != null)
             {
                 product.category_id = data.CategoryId.Value;
+                DataAccessSoapClient ws = new DataAccessSoapClient();
+                dynamic category = ws.FindCategory(new DataAccessWS.Security { BinarySecurityToken = token }, product.category_id);
+                product.category = category;
             }
         }
 

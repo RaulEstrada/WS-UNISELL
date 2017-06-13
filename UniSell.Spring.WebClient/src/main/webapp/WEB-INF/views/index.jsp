@@ -22,6 +22,13 @@
 					<h1>Acceso al portal</h1>
 				</div>
 				<div class="row">
+					<c:if test="${okMessage}">
+						<div class="alert alert-success">
+								Cuenta de usuario guardada con éxito
+						</div>
+					</c:if>
+				</div>
+				<div class="row">
 					<section class="col-sm-12 col-md-6">
 						<h2><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h2>
 						<form:form commandName="authentication">
@@ -53,7 +60,7 @@
 						<div class="col-sm-10 col-sm-offset-1">
 							<p>Regístrate de forma gratuita como comprador. Para crear una cuenta de vendedor o 
 							registrar tu empresa, contacta con el administrador.</p>
-							<a href="" class="btn btn-lg btn-primary">Registro</a>
+							<a href="/unisell/registration" class="btn btn-lg btn-primary">Registro</a>
 						</div>
 					</section>
 				</div>
