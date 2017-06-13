@@ -31,6 +31,7 @@ public class HomeController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private String getSeller(AuthenticationInfo auth, Model model) {
 		try {
 			String username = auth.getUsername();

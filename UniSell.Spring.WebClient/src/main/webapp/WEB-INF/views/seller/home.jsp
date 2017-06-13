@@ -49,7 +49,7 @@
 				<div class="collapse navbar-collapse" id="nav-unisell">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="">Bienvenido, ${authCredentials.username}</a></li>
-						<li><a href="/logout" class="btn btn-default">Salir</a></li>
+						<li><a href="/unisell/logout" class="btn btn-default">Salir</a></li>
 					</ul>
 				</div>
 			</div>
