@@ -108,7 +108,9 @@ public class ProductController {
 		product.setPrice(Price);
 		product.setUnits(Units);
 		product.setCategoryId(Category);
-		product.setImage(data);
+		if (data.length != 0) {
+			product.setImage(data);
+		}
 		product.setSellerId(auth.getId());
 		return product;
 	}
@@ -130,7 +132,7 @@ public class ProductController {
 	}
 
 	@ModelAttribute(value = "categories")
-	public Category[] generateAuthentication(HttpSession session) {
+	public Category[] generateCategories(HttpSession session) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://156.35.98.14:50868/api/categories");

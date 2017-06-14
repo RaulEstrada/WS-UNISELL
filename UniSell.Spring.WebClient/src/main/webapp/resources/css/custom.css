@@ -9,3 +9,8 @@ html, body {
 .a-logo img {
 	height: 100% !important;
 }
+
+.prod img {
+	width: 100px !important;
+	height: 100px !important;
+}

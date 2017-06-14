@@ -22,8 +22,16 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 return validateToken;
             }
+            Dictionary<String, String> query = 
+                ActionContext.Request.GetQueryNameValuePairs().ToDictionary(q => q.Key, q => q.Value);
+            ProductSearchFilter filter = new ProductSearchFilter();
+            if (query.ContainsKey("Name")) { filter.Name = query["Name"]; }
+            if (query.ContainsKey("Description")) { filter.Description = query["Description"]; }
+            if (query.ContainsKey("PriceFrom")) { filter.PriceFrom = Double.Parse(query["PriceFrom"]); }
+            if (query.ContainsKey("PriceTo")) { filter.PriceTo = Double.Parse(query["PriceTo"]); }
+            if (query.ContainsKey("Category")) { filter.Category = query["Category"]; }
             DataAccessSoapClient ws = new DataAccessSoapClient();
-            Product[] prods = ws.FindAllProducts(new DataAccessWS.Security { BinarySecurityToken = token });
+            Product[] prods = ws.FindProductsByFilter(new DataAccessWS.Security { BinarySecurityToken = token }, filter);
             return Ok(prods.Select(p => CreateRestProduct(p)));
         }
 

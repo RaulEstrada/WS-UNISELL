@@ -92,6 +92,11 @@
 						 			</c:forEach>
 						 		</select>
 						 	</div>
+						 	<div class="row">
+						 		<div class="prod">
+									<img src="data:image/jpg;base64, ${product.imageBase64}"/>
+								</div>
+						 	</div>
 							<div class="form-group">
 						    	<label for="Image">Imagen: </label>
 						    	<input type="file" id="Image" name="Image"/>

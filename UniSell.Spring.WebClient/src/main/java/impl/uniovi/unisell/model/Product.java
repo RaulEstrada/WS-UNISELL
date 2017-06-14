@@ -1,5 +1,7 @@
 package impl.uniovi.unisell.model;
 
+import java.util.Base64;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -109,6 +111,10 @@ public class Product<T> {
 	
 	public void setCategory(T category) {
 		Category = category;
+	}
+	
+	public String getImageBase64() {
+		return Base64.getEncoder().encodeToString(Image);
 	}
 	
 }
