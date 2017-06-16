@@ -334,6 +334,72 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public int CountOrders()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().Count();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Order[] FindAllOrders()
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().All().ToArray();
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Order CreateOrder(Order Order)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().Create(Order);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Order FindOrder(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().Find(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Order RemoveOrder(long id)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().Remove(id);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public Order UpdateOrder(Order Order)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().Update(Order);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountCompanies()
         {
             ValidateSecurity();
