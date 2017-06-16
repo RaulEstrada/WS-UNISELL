@@ -41,6 +41,10 @@ namespace UniSell.NET.RESTProvider.Controllers
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             User user = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            if (user.Role != DataAccessWS.UserRole.BUYER)
+            {
+                return NotFound();
+            }
             return Ok(CreateRestUser(user));
         }
 
@@ -78,6 +82,10 @@ namespace UniSell.NET.RESTProvider.Controllers
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             User target = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            if (target.Role != DataAccessWS.UserRole.BUYER)
+            {
+                return NotFound();
+            }
             IHttpActionResult userValidation = ValidateUserData(userData, target);
             if (userValidation != null)
             {
@@ -100,6 +108,11 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return validation;
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
+            User target = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
+            if (target.Role != DataAccessWS.UserRole.BUYER)
+            {
+                return NotFound();
+            }
             User removed = ws.RemoveUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             RestUser res = CreateRestUser(removed);
             res.href = "";

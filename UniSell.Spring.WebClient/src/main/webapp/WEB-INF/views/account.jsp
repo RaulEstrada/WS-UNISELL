@@ -10,10 +10,22 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jquery-ui.min.css"/>"/>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/custom.css"/>"/>
 	
 		<script src="<c:url value="/resources/js/jquery-3.1.1.min.js" />"></script>
+		<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 		<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+		<script>
+  			$(function(){
+    			$("#dialog").dialog({
+      				autoOpen: false
+    			});
+			    $("#opener").on("click", function(e) {
+			      	$("#dialog").dialog("open");
+			    });
+  			});
+  		</script>
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
@@ -26,10 +38,18 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>	
 					</button>
-					<a class="navbar-brand a-logo" href="/unisell/">
-						<img src="<c:url value="/resources/img/logo.png"/>"
-							alt="Logo"/>
-					</a>
+					<c:if test="${empty userProfile}">
+						<a class="navbar-brand a-logo" href="/unisell/">
+							<img src="<c:url value="/resources/img/logo.png"/>"
+								alt="Logo"/>
+						</a>
+					</c:if>
+					<c:if test="${userProfile}">
+						<a class="navbar-brand a-logo" href="/unisell/home">
+							<img src="<c:url value="/resources/img/logo.png"/>"
+								alt="Logo"/>
+						</a>
+					</c:if>
 				</div>
 			</div>
 		</nav>
@@ -86,13 +106,27 @@
 						 	</div>
 						 	<div class="form-group">
 						    	<label for="Password">Contraseña: </label>
-						    	<form:input type="password" cssClass="form-control" 
-	    							id="Password" required="required"
-	    							path="password"/>
+						    	<c:if test="${empty userProfile}">
+							    	<form:input type="password" cssClass="form-control" 
+		    							id="Password" required="required"
+		    							path="password"/>
+		    					</c:if>
+		    					<c:if test="${userProfile}">
+							    	<form:input type="password" cssClass="form-control" 
+		    							id="Password"
+		    							path="password"/>
+		    					</c:if>
 						 	</div>
 						 	<button type="submit" class="btn btn-primary">Enviar</button>
 						 	<button type="reset" class="btn btn-warning">Limpiar</button>
 						</form:form>
+						<c:if test="${userProfile}">
+							<a id="opener" class="btn btn-danger">Borrar cuenta</a>
+						</c:if>
+						<div id="dialog" title="Confirmar borrado">
+						  <p>Está a punto de eliminar su cuenta de usuario. Esta acción no se podrá deshacer. ¿Desea continuar?</p>
+						  <a href="/unisell/removeUser" class="btn btn-danger">Borrar</a>
+						</div>
 					</div>
 				</div>
 			</div>

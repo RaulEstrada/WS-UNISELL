@@ -36,6 +36,7 @@
 				<div class="collapse navbar-collapse" id="nav-unisell">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="">Bienvenido, ${authCredentials.username}</a></li>
+						<li><a href="/unisell/profile" class="btn btn-default">Perfil</a></li>
 						<li><a href="/unisell/logout" class="btn btn-default">Salir</a></li>
 					</ul>
 				</div>
