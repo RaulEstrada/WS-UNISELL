@@ -7,6 +7,7 @@ import impl.uniovi.unisell.model.AuthenticationInfo;
 import impl.uniovi.unisell.model.Category;
 import impl.uniovi.unisell.model.Product;
 import impl.uniovi.unisell.model.ProductFilter;
+import impl.uniovi.unisell.model.ShoppingCart;
 
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
@@ -34,7 +35,7 @@ public class HomeController {
 		if (auth.getRole().equals("SELLER")) {
 			return getSeller(auth, model);
 		} else {
-			return getBuyer(productFilter, auth, model);
+			return getBuyer(productFilter, auth, model, session);
 		}
 	}
 	
@@ -56,7 +57,7 @@ public class HomeController {
 		return "/seller/home";
 	}
 	
-	private String getBuyer(ProductFilter productFilter, AuthenticationInfo auth, Model model) {
+	private String getBuyer(ProductFilter productFilter, AuthenticationInfo auth, Model model, HttpSession session) {
 		Category[] categories = getCategories(auth);
 		Map<Integer, String> catMap = createCategoryMap(categories);
 		Product<String>[] products = getProducts(productFilter, auth.getToken());
@@ -66,6 +67,9 @@ public class HomeController {
 		model.addAttribute("categories", categories);
 		model.addAttribute("products", products);
 		model.addAttribute("productFilter", productFilter);
+		if (session.getAttribute("shoppingCart") == null) {
+			session.setAttribute("shoppingCart", new ShoppingCart());
+		}
 		return "/buyer/home";
 	}
 	

@@ -106,13 +106,43 @@
 											</c:if>
 										</td>
 										<td class="text-center">
-											<button id="${product.id}" class="btn btn-primary">Añadir al carro</button>
+											<a href="/unisell/additem/${product.id}" class="btn btn-primary">Añadir al carro</a>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
+				</div>
+			</div>
+			<div class="jumbotron">
+				<div class="row">
+					<h1>Tu carrito de la compra</h1>
+					<c:if test="${empty shoppingCart.items}">
+						El carrito está vacío
+					</c:if>
+					<c:if test="${not empty shoppingCart.items}">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<td>Nombre</td>
+									<td>Unidades</td>
+									<td></td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${shoppingCart.items}" var="item">
+									<tr>
+										<td><c:out value="${item.product.name}"/></td>
+										<td><c:out value="${item.quantity}"/></td>
+										<td class="text-center">
+											<a href="/unisell/removeitem/${item.product.id}" class="btn btn-danger">Quitar del carro</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
 				</div>
 			</div>
 		</main>
