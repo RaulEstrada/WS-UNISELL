@@ -20,5 +20,8 @@ public class ShoppingCartItem {
 		this.product = product;
 	}
 	
+	public double getTotal() {
+		return product.getPrice() * quantity;
+	}
 	
 }

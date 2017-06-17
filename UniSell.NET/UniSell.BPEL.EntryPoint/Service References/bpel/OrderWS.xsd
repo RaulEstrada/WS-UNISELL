@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://orderws.unisell.miw.uniovi/" targetNamespace="http://orderws.unisell.miw.uniovi/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ArgumentExceptionOrder" type="tns:ArgumentExceptionOrder" />
+  <xs:element name="PaymentException" type="tns:PaymentException" />
+  <xs:element name="createOrder" type="tns:createOrder" />
+  <xs:element name="createOrderResponse" type="tns:createOrderResponse" />
+  <xs:complexType name="createOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:shoppingCartOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="shoppingCartOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:double" />
+      <xs:element minOccurs="0" name="authToken" type="xs:string" />
+      <xs:element minOccurs="0" name="buyerId" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="items" nillable="true" type="tns:itemOrder" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+      <xs:element name="productsAvailable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="signature" type="xs:string" />
+      <xs:element name="successfulPayment" type="xs:boolean" />
+      <xs:element minOccurs="0" name="username" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="productId" type="xs:long" />
+      <xs:element minOccurs="0" name="units" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createOrderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PaymentException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArgumentExceptionOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -44,7 +44,7 @@
 </binding>
 <service name="ProductAvailabilityWSService">
 <port name="ProductAvailabilityWSPort" binding="tns:ProductAvailabilityWSPortBinding">
-<soap:address location="http://localhost:8086/UniSell.BPEL.ProductAvailability/productavailability"/>
+<soap:address location="http://156.35.98.14:8086/UniSell.BPEL.ProductAvailability/productavailability"/>
 </port>
 </service>
 </definitions>

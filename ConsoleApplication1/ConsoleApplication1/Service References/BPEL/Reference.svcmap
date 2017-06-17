@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="40860b51-1ef4-474d-926c-0d42327adac8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/WS_InvocationArtifacts.wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WS_Invocation.wsdl" MetadataType="Wsdl" ID="66218e74-f3dc-404f-b489-1f6190766d0d" SourceId="1" SourceUrl="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/WS_InvocationArtifacts.wsdl" />
+    <MetadataFile FileName="PaymentWS.wsdl" MetadataType="Wsdl" ID="8a65b74f-f57b-4d77-a09f-cdc6cc69ad9f" SourceId="1" SourceUrl="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/PaymentWS.wsdl" />
+    <MetadataFile FileName="CreateOrderWSService.wsdl" MetadataType="Wsdl" ID="11dd33a6-7d4e-45e2-8277-4eb22157b2fe" SourceId="1" SourceUrl="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/OrderWS.wsdl" />
+    <MetadataFile FileName="ProductAvailabilityWS.xsd" MetadataType="Schema" ID="8573c541-6cb7-47ea-ba17-3f3ab7cb1a4e" SourceId="1" SourceUrl="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/ProductAvailabilityWS.xsd" />
+    <MetadataFile FileName="OrderWS.xsd" MetadataType="Schema" ID="81a52a32-329c-4eaa-b364-daf4013d6092" SourceId="1" SourceUrl="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/OrderWS.xsd" />
+    <MetadataFile FileName="ProductAvailabilityWSService.wsdl" MetadataType="Wsdl" ID="1a0b85ec-9e64-4a29-9c7f-086e62fd16ae" SourceId="1" SourceUrl="http://156.35.98.14:8080/ode/deployment/bundles/UniSell.BPEL/ProductAvailabilityWS.wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

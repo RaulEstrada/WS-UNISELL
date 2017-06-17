@@ -1,5 +1,9 @@
 package impl.uniovi.unisell.presentation;
 
+import impl.uniovi.unisell.bpel.ItemAvail;
+import impl.uniovi.unisell.bpel.PurchaseWS;
+import impl.uniovi.unisell.bpel.PurchaseWSSoap;
+import impl.uniovi.unisell.bpel.ShoppingCartAvail;
 import impl.uniovi.unisell.model.AuthenticationInfo;
 import impl.uniovi.unisell.model.Product;
 import impl.uniovi.unisell.model.ShoppingCart;
@@ -14,9 +18,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ShoppingCartController {
@@ -48,5 +54,38 @@ public class ShoppingCartController {
 		ShoppingCart cart = (ShoppingCart)session.getAttribute("shoppingCart");
 		cart.getItemsMap().remove(id);
 		return "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public String getCheckout(@RequestParam("Username") String Username, 
+			@RequestParam("Password") String Password,
+			@RequestParam("Signature") String Signature, 
+			HttpSession session, Model model) {
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("shoppingCart");
+		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
+		double amount = cart.getTotal();
+		ShoppingCartAvail purchase = new ShoppingCartAvail();
+		purchase.setAmount(amount);
+		purchase.setAuthToken(auth.getToken());
+		purchase.setBuyerId(auth.getId());
+		purchase.setPassword(Password);
+		purchase.setSignature(Signature);
+		purchase.setUsername(Username);
+		for (ShoppingCartItem i : cart.getItems()) {
+			ItemAvail item = new ItemAvail();
+			item.setProductId(i.getProduct().getId());
+			item.setUnits(i.getQuantity());
+			purchase.getItems().add(item);
+		}
+		PurchaseWS ws = new PurchaseWS();
+		PurchaseWSSoap soap = ws.getPurchaseWSSoap();
+		try {
+			String orderNumber = soap.purchase(purchase);
+			model.addAttribute("orderNumber", orderNumber);
+			return "redirect:/home";
+		} catch (Exception ex) {
+			model.addAttribute("orderError", ex.getMessage());
+			return "redirect:/home";
+		}
 	}
 }

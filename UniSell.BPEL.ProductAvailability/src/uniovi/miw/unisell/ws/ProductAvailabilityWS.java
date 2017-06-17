@@ -12,14 +12,14 @@ import uniovi.miw.unisell.data.DataAccessSoap;
 public class ProductAvailabilityWS implements IProductAvailabilityWS {
 
 	@Override
-	public ShoppingCart checkAvailability(ShoppingCart cart) throws ProductNotAvailableException, ArgumentException {
+	public ShoppingCartAvail checkAvailability(ShoppingCartAvail cart) throws ProductNotAvailableException, ArgumentException {
 		if (cart == null || cart.getItems() == null || cart.getItems().isEmpty()) {
 			throw new ArgumentException("Shopping cart or items not found");
 		}
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		List<String> productsNotAvailable = new ArrayList<>();
-		for (Item item : cart.getItems()) {
+		for (ItemAvail item : cart.getItems()) {
 			int unitsAvailable = soap.findProductAvailability(item.getProductId());
 			if (item.getUnits() > unitsAvailable) {
 				productsNotAvailable.add(item.getProductId() + "");

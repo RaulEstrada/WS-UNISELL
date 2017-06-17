@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -29,13 +30,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String get(@ModelAttribute(value = "productFilter") ProductFilter productFilter,
+	public String get(@RequestParam(value = "orderNumber", required = false) String orderNumber,
+			@RequestParam(value = "orderError", required = false) String orderError,
+			@ModelAttribute(value = "productFilter") ProductFilter productFilter,
 			HttpSession session, Model model) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		if (auth.getRole().equals("SELLER")) {
 			return getSeller(auth, model);
 		} else {
-			return getBuyer(productFilter, auth, model, session);
+			return getBuyer(productFilter, auth, model, session, orderNumber, orderError);
 		}
 	}
 	
@@ -57,7 +60,8 @@ public class HomeController {
 		return "/seller/home";
 	}
 	
-	private String getBuyer(ProductFilter productFilter, AuthenticationInfo auth, Model model, HttpSession session) {
+	private String getBuyer(ProductFilter productFilter, AuthenticationInfo auth, Model model, HttpSession session,
+			String orderNumber, String orderError) {
 		Category[] categories = getCategories(auth);
 		Map<Integer, String> catMap = createCategoryMap(categories);
 		Product<String>[] products = getProducts(productFilter, auth.getToken());
@@ -67,6 +71,8 @@ public class HomeController {
 		model.addAttribute("categories", categories);
 		model.addAttribute("products", products);
 		model.addAttribute("productFilter", productFilter);
+		model.addAttribute("orderNumber", orderNumber);
+		model.addAttribute("orderError", orderError);
 		if (session.getAttribute("shoppingCart") == null) {
 			session.setAttribute("shoppingCart", new ShoppingCart());
 		}

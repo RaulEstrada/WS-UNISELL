@@ -13,7 +13,7 @@
     <invoke partnerLink="PaymentWSPL">
       <service name="tempuri.org:PaymentWS" port="PaymentWSSoap"/>
     </invoke>
-    <invoke partnerLink="CreationWSPL">
+    <invoke partnerLink="OrderWSPL">
       <service name="orderws.unisell.miw.uniovi:CreateOrderWSService" port="CreateOrderWSPort"/>
     </invoke>
   </process>

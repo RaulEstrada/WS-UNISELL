@@ -13,19 +13,19 @@
     <plnk:partnerLinkType name="PaymentWSPLT">
     <plnk:role name="PaymentWSPLRole" portType="wsdl1:PaymentWSSoap"/>
   </plnk:partnerLinkType>
-    <plnk:partnerLinkType name="CreationWSPLT">
-    <plnk:role name="CreationWSPLRole" portType="wsdl2:ICreateOrderWS"/>
+    <plnk:partnerLinkType name="OrderWSPLT">
+    <plnk:role name="OrderWSPLRole" portType="wsdl2:ICreateOrderWS"/>
   </plnk:partnerLinkType>
     <import location="ProductAvailabilityWS.wsdl" namespace="http://ws.unisell.miw.uniovi/"/>
     <import location="PaymentWS.wsdl" namespace="http://tempuri.org/"/>
-    <import location="CreationWS.wsdl" namespace="http://orderws.unisell.miw.uniovi/"/>
+    <import location="OrderWS.wsdl" namespace="http://orderws.unisell.miw.uniovi/"/>
     <types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.Invocation.tps">
             <import namespace="http://ws.unisell.miw.uniovi/" schemaLocation="ProductAvailabilityWS.xsd"/>
             <element name="WS_InvocationRequest">
                 <complexType>
                     <sequence>
-                        <element name="input" type="wsdl:shoppingCart"/>
+                        <element name="input" type="wsdl:shoppingCartAvail"/>
                     </sequence>
                 </complexType>
             </element>

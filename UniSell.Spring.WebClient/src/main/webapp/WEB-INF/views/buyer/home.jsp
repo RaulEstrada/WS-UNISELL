@@ -44,6 +44,20 @@
 		</nav>
 		<main class="container-fluid">
 			<div class="jumbotron">
+				<c:if test="${not empty orderNumber}">
+					<div class="row">
+						<div class="alert alert-success">
+							Compra <c:out value="${orderNumber}"></c:out> creada con éxito
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${not empty orderError}">
+					<div class="row">
+						<div class="alert alert-danger">
+							Error en el proceso de compra: <c:out value="${orderError}"></c:out>
+						</div>
+					</div>
+				</c:if>
 				<div class="row">
 					<h1>Catálogo de productos</h1>
 					<div class="row">
@@ -127,6 +141,7 @@
 								<tr>
 									<td>Nombre</td>
 									<td>Unidades</td>
+									<td>Total</td>
 									<td></td>
 								</tr>
 							</thead>
@@ -135,6 +150,7 @@
 									<tr>
 										<td><c:out value="${item.product.name}"/></td>
 										<td><c:out value="${item.quantity}"/></td>
+										<td><c:out value="${item.quantity * item.product.price}"/></td>
 										<td class="text-center">
 											<a href="/unisell/removeitem/${item.product.id}" class="btn btn-danger">Quitar del carro</a>
 										</td>
@@ -142,6 +158,25 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<form action="/unisell/checkout" method="get">
+							<div class="form-group">
+							    <label for="Username">Paypal Username: </label>
+							    <input type="text" class="form-control" id="Username" required="required"
+	    							name="Username"/>
+							 </div>
+							 <div class="form-group">
+							    <label for="Password">Paypal Password: </label>
+							    <input type="text" class="form-control" id="Password" required="required"
+	    							name="Password"/>
+							 </div>
+							 <div class="form-group">
+							    <label for="Signature">Paypal Signature: </label>
+							    <input type="text" class="form-control" id="Signature" required="required"
+	    							name="Signature"/>
+							 </div>
+							 <button type="submit" class="btn btn-primary">Enviar</button>
+						 	<button type="reset" class="btn btn-warning">Limpiar</button>
+						</form>
 					</c:if>
 				</div>
 			</div>

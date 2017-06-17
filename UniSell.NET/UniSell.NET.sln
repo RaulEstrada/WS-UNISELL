@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSell.NET.RESTProvider", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSell.NET.BPEL.PayPalPayment", "UniSell.NET.BPEL.PayPalPayment\UniSell.NET.BPEL.PayPalPayment.csproj", "{537A57EF-4C3C-4E2F-BD98-3582E006E8B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSell.BPEL.EntryPoint", "UniSell.BPEL.EntryPoint\UniSell.BPEL.EntryPoint.csproj", "{E6D81528-9155-4FF9-9940-AB3C1C022077}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{537A57EF-4C3C-4E2F-BD98-3582E006E8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{537A57EF-4C3C-4E2F-BD98-3582E006E8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{537A57EF-4C3C-4E2F-BD98-3582E006E8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D81528-9155-4FF9-9940-AB3C1C022077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D81528-9155-4FF9-9940-AB3C1C022077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D81528-9155-4FF9-9940-AB3C1C022077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D81528-9155-4FF9-9940-AB3C1C022077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

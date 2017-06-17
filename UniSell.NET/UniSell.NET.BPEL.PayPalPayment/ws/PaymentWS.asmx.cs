@@ -7,7 +7,6 @@ using System.Web.Services;
 using System.Web.Services.Protocols;
 using UniSell.NET.BPEL.PayPalPayment.IdentityWS;
 using UniSell.NET.BPEL.PayPalPayment.PayPalSOAP;
-using UniSell.NET.BPEL.PayPalPayment.ProductAvailabilityWS;
 
 namespace UniSell.NET.BPEL.PayPalPayment.ws
 {
@@ -23,7 +22,7 @@ namespace UniSell.NET.BPEL.PayPalPayment.ws
     {
 
         [WebMethod]
-        public shoppingCart Pay(shoppingCart orderDetails)
+        public ShoppingCartPayment Pay(ShoppingCartPayment orderDetails)
         {
             if (string.IsNullOrEmpty(orderDetails.authToken))
             {

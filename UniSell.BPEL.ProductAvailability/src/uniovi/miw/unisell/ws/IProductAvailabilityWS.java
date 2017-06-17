@@ -9,5 +9,5 @@ import javax.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.DOCUMENT)
 public interface IProductAvailabilityWS {
 	@WebMethod
-	public ShoppingCart checkAvailability(ShoppingCart cart) throws ProductNotAvailableException, ArgumentException;
+	public ShoppingCartAvail checkAvailability(ShoppingCartAvail cart) throws ProductNotAvailableException, ArgumentException;
 }

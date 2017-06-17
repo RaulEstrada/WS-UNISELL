@@ -17,4 +17,12 @@ public class ShoppingCart {
 	public Map<Long, ShoppingCartItem> getItemsMap() {
 		return items;
 	}
+	
+	public double getTotal(){
+		double total = 0;
+		for (ShoppingCartItem item : getItems()) {
+			total += item.getTotal();
+		}
+		return total;
+	}
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsdl1="http://tempuri.org/" xmlns:wsdl2="http://orderws.unisell.miw.uniovi/" xmlns:tns="http://ws.Invocation.tps" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://ws.unisell.miw.uniovi/" name="WS_Invocation" targetNamespace="http://ws.Invocation.tps" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <plnk:partnerLinkType name="AvailabilityWSPLT">
+    <plnk:role name="AvailabilityWSPLRole" portType="wsdl:IProductAvailabilityWS" />
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="PaymentWSPLT">
+    <plnk:role name="PaymentWSPLRole" portType="wsdl1:PaymentWSSoap" />
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="OrderWSPLT">
+    <plnk:role name="OrderWSPLRole" portType="wsdl2:ICreateOrderWS" />
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="WS_Invocation">
+    <plnk:role name="WS_InvocationProvider" portType="tns:WS_Invocation" />
+  </plnk:partnerLinkType>
+  <import namespace="http://ws.unisell.miw.uniovi/" location="ProductAvailabilityWS.wsdl" />
+  <import namespace="http://tempuri.org/" location="PaymentWS.wsdl" />
+  <import namespace="http://orderws.unisell.miw.uniovi/" location="OrderWS.wsdl" />
+  <types>
+    <schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.Invocation.tps" xmlns="http://www.w3.org/2001/XMLSchema">
+      <import schemaLocation="ProductAvailabilityWS.xsd" namespace="http://ws.unisell.miw.uniovi/" />
+      <element name="WS_InvocationRequest">
+        <complexType>
+          <sequence>
+            <element name="input" type="wsdl:shoppingCartAvail" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="WS_InvocationResponse">
+        <complexType>
+          <sequence>
+            <element name="result" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="WS_InvocationRequestMessage">
+    <part name="payload" element="tns:WS_InvocationRequest" />
+  </message>
+  <message name="WS_InvocationResponseMessage">
+    <part name="payload" element="tns:WS_InvocationResponse" />
+  </message>
+  <portType name="WS_Invocation">
+    <operation name="process">
+      <input message="tns:WS_InvocationRequestMessage" />
+      <output message="tns:WS_InvocationResponseMessage" />
+    </operation>
+  </portType>
+  <binding name="WS_InvocationBinding" type="tns:WS_Invocation">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="process">
+      <soap:operation soapAction="http://ws.Invocation.tps/process" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WS_InvocationService">
+    <port name="WS_InvocationPort" binding="tns:WS_InvocationBinding">
+      <soap:address location="http://localhost:8080/ode/processes/WS_Invocation" />
+    </port>
+  </service>
+</definitions>

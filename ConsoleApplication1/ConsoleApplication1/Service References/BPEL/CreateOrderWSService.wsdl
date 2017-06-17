@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://orderws.unisell.miw.uniovi/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="CreateOrderWSService" targetNamespace="http://orderws.unisell.miw.uniovi/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="OrderWS.xsd" namespace="http://orderws.unisell.miw.uniovi/" />
+    </xsd:schema>
+  </types>
+  <message name="createOrder">
+    <part name="parameters" element="tns:createOrder" />
+  </message>
+  <message name="createOrderResponse">
+    <part name="parameters" element="tns:createOrderResponse" />
+  </message>
+  <message name="PaymentException">
+    <part name="fault" element="tns:PaymentException" />
+  </message>
+  <message name="ArgumentExceptionOrder">
+    <part name="fault" element="tns:ArgumentExceptionOrder" />
+  </message>
+  <portType name="ICreateOrderWS">
+    <operation name="createOrder">
+      <input wsam:Action="http://orderws.unisell.miw.uniovi/ICreateOrderWS/createOrderRequest" message="tns:createOrder" />
+      <output wsam:Action="http://orderws.unisell.miw.uniovi/ICreateOrderWS/createOrderResponse" message="tns:createOrderResponse" />
+      <fault wsam:Action="http://orderws.unisell.miw.uniovi/ICreateOrderWS/createOrder/Fault/PaymentException" name="PaymentException" message="tns:PaymentException" />
+      <fault wsam:Action="http://orderws.unisell.miw.uniovi/ICreateOrderWS/createOrder/Fault/ArgumentExceptionOrder" name="ArgumentExceptionOrder" message="tns:ArgumentExceptionOrder" />
+    </operation>
+  </portType>
+  <binding name="CreateOrderWSPortBinding" type="tns:ICreateOrderWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="createOrder">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="PaymentException">
+        <soap:fault use="literal" name="PaymentException" namespace="" />
+      </fault>
+      <fault name="ArgumentExceptionOrder">
+        <soap:fault use="literal" name="ArgumentExceptionOrder" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="CreateOrderWSService">
+    <port name="CreateOrderWSPort" binding="tns:CreateOrderWSPortBinding">
+      <soap:address location="http://156.35.98.14:8086/UniSell.BPEL.CreateOrder/createorder" />
+    </port>
+  </service>
+</definitions>
