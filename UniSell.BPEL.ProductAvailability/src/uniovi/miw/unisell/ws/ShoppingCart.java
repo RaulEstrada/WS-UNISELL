@@ -9,6 +9,13 @@ public class ShoppingCart implements Serializable {
 
 	private Long buyerId;
 	private Set<Item> items = new HashSet<>();
+	private Double amount;
+	private String username;
+	private String password;
+	private String signature;
+	private String authToken;
+	private boolean productsAvailable = false;
+	private boolean successfulPayment = false;
 	
 	public Long getBuyerId() {
 		return buyerId;
@@ -24,6 +31,62 @@ public class ShoppingCart implements Serializable {
 	
 	public void setItems(Set<Item> items) {
 		this.items = items;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
+
+	public boolean isProductsAvailable() {
+		return productsAvailable;
+	}
+
+	public void setProductsAvailable(boolean productsAvailable) {
+		this.productsAvailable = productsAvailable;
+	}
+
+	public boolean isSuccessfulPayment() {
+		return successfulPayment;
+	}
+
+	public void setSuccessfulPayment(boolean successfulPayment) {
+		this.successfulPayment = successfulPayment;
 	}
 	
 }

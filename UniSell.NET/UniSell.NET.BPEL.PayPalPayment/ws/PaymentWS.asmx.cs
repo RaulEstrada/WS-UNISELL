@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Services;
+using System.Web.Services.Protocols;
 using UniSell.NET.BPEL.PayPalPayment.IdentityWS;
 using UniSell.NET.BPEL.PayPalPayment.PayPalSOAP;
+using UniSell.NET.BPEL.PayPalPayment.ProductAvailabilityWS;
 
 namespace UniSell.NET.BPEL.PayPalPayment.ws
 {
@@ -21,38 +23,40 @@ namespace UniSell.NET.BPEL.PayPalPayment.ws
     {
 
         [WebMethod]
-        public bool Pay(double Amount, string Username, string Password, string Signature, string AuthToken)
+        public shoppingCart Pay(shoppingCart orderDetails)
         {
-            if (string.IsNullOrEmpty(AuthToken))
+            if (string.IsNullOrEmpty(orderDetails.authToken))
             {
-                return false;
+                return orderDetails;
             }
-            if (!CheckUserBuyer(AuthToken))
+            if (!CheckUserBuyer(orderDetails.authToken))
             {
-                return false;
+                return orderDetails;
             }
-            if (Amount <= 0.01)
+            if (orderDetails.amount <= 0.01)
             {
-                return false;
+                return orderDetails;
             }
             PayPalAPIAAInterfaceClient pp = CreatePaypalConnection();
-            CustomSecurityHeaderType credentials = CreateHeaderCredentials(Username, Password, Signature);
-            SetExpressCheckoutReq request = CreateExpressCheckoutRequest(Amount);
+            CustomSecurityHeaderType credentials = CreateHeaderCredentials(orderDetails.username,
+                orderDetails.password, orderDetails.signature);
+            SetExpressCheckoutReq request = CreateExpressCheckoutRequest(orderDetails.amount);
             try
             {
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
                 var response = pp.SetExpressCheckout(ref credentials, request);
                 if (response.Ack == AckCodeType.Success)
                 {
-                    return true;
+                    orderDetails.successfulPayment = true;
+                    return orderDetails;
                 } else
                 {
-                    return false;
+                    return orderDetails;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return orderDetails;
             }
         }
 
@@ -92,7 +96,7 @@ namespace UniSell.NET.BPEL.PayPalPayment.ws
                     {
                         OrderTotal = new BasicAmountType
                         {
-                            Value = String.Format("{0:0.00}", Amount),
+                            Value = String.Format("{0:0.00}", Amount).Replace(",", "."),
                             currencyID = CurrencyCodeType.EUR
                         },
                         ReturnURL = "http://unisell.miw",

@@ -131,6 +131,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ProductAvailabilityWS\configuration91.svcinfo" />
+    <None Include="Service References\ProductAvailabilityWS\configuration.svcinfo" />
+    <None Include="Service References\ProductAvailabilityWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ws\PaymentWS.asmx" />
     <None Include="Service References\DataAccessWS\DataAccessWS.wsdl" />
     <Content Include="Service References\DataAccessWS\UniSell.NET.BPEL.PayPalPayment.DataAccessWS.Category.datasource">
@@ -630,6 +636,16 @@
     <Content Include="Service References\PayPalSOAP\UniSell.NET.BPEL.PayPalPayment.PayPalSOAP.UpdateRecurringPaymentsProfileResponseType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\ProductAvailabilityWS\productavailability.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProductAvailabilityWS\ProductAvailabilityWSService.wsdl" />
+    <Content Include="Service References\ProductAvailabilityWS\UniSell.NET.BPEL.PayPalPayment.ProductAvailabilityWS.checkAvailabilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ProductAvailabilityWS\UniSell.NET.BPEL.PayPalPayment.ProductAvailabilityWS.shoppingCart.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -648,6 +664,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ProductAvailabilityWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ws\PaymentWS.asmx.cs">
       <DependentUpon>PaymentWS.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -661,6 +682,7 @@
     <WCFMetadataStorage Include="Service References\DataAccessWS\" />
     <WCFMetadataStorage Include="Service References\IdentityWS\" />
     <WCFMetadataStorage Include="Service References\PayPalSOAP\" />
+    <WCFMetadataStorage Include="Service References\ProductAvailabilityWS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

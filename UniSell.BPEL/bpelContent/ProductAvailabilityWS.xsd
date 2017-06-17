@@ -16,8 +16,15 @@
 
 <xs:complexType name="shoppingCart">
 <xs:sequence>
+<xs:element name="amount" type="xs:double" minOccurs="0"/>
+<xs:element name="authToken" type="xs:string" minOccurs="0"/>
 <xs:element name="buyerId" type="xs:long" minOccurs="0"/>
 <xs:element name="items" type="tns:item" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="productsAvailable" type="xs:boolean"/>
+<xs:element name="signature" type="xs:string" minOccurs="0"/>
+<xs:element name="successfulPayment" type="xs:boolean"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -30,7 +37,7 @@
 
 <xs:complexType name="checkAvailabilityResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
+<xs:element name="return" type="tns:shoppingCart" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

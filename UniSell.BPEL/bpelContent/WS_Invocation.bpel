@@ -5,7 +5,7 @@
          suppressJoinFailure="yes"
          xmlns:tns="http://ws.Invocation.tps"
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-         xmlns:ns="http://ws.unisell.miw.uniovi/">
+         xmlns:ns="http://ws.unisell.miw.uniovi/" xmlns:ns0="http://tempuri.org/">
 
     <!-- Import the client WSDL -->
 	<bpel:import location="WS_InvocationArtifacts.wsdl" namespace="http://ws.Invocation.tps" 
@@ -42,6 +42,8 @@
         <bpel:variable name="d" element="tns:WS_InvocationRequest"></bpel:variable>
         <bpel:variable name="AvailabilityWSPLResponse" messageType="ns:checkAvailabilityResponse"></bpel:variable>
         <bpel:variable name="AvailabilityWSPLRequest" messageType="ns:checkAvailability"></bpel:variable>
+        <bpel:variable name="PaymentWSPLResponse" messageType="ns0:PaySoapOut"></bpel:variable>
+        <bpel:variable name="PaymentWSPLRequest" messageType="ns0:PaySoapIn"></bpel:variable>
     </bpel:variables>
 
     <!-- ================================================================= -->         
@@ -57,18 +59,34 @@
         <bpel:receive name="receiveInput" partnerLink="client"
                  portType="tns:WS_Invocation"
                  operation="process" createInstance="yes" variable="input"/>
-        <bpel:assign validate="no" name="AssignCheckAvailabilityRequest">
-            
-            
+        
+        
+        
+        
+        
+        
+        <!-- Generate reply to synchronous request -->
+        
+        
+        
+        
+        <bpel:assign validate="no" name="AssignAvailabilityInput">
             
             <bpel:copy>
                 <bpel:from><bpel:literal><tns:checkAvailability xmlns:tns="http://ws.unisell.miw.uniovi/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <arg0>
+    <amount>0.0</amount>
+    <authToken>authToken</authToken>
     <buyerId>0</buyerId>
     <items>
       <productId>0</productId>
       <units>0</units>
     </items>
+    <password>password</password>
+    <productsAvailable>true</productsAvailable>
+    <signature>signature</signature>
+    <successfulPayment>true</successfulPayment>
+    <username>username</username>
   </arg0>
 </tns:checkAvailability>
 </bpel:literal></bpel:from>
@@ -76,32 +94,69 @@
             </bpel:copy>
             <bpel:copy>
                 <bpel:from part="payload" variable="input">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
-                        <![CDATA[tns:input]]>
-                    </bpel:query>
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:input]]></bpel:query>
                 </bpel:from>
                 <bpel:to part="parameters" variable="AvailabilityWSPLRequest">
                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[arg0]]></bpel:query>
                 </bpel:to>
             </bpel:copy>
         </bpel:assign>
-        <bpel:invoke name="InvokeCheckAvailabilityRequest" partnerLink="AvailabilityWSPL" operation="checkAvailability" portType="ns:IProductAvailabilityWS" inputVariable="AvailabilityWSPLRequest" outputVariable="AvailabilityWSPLResponse"></bpel:invoke>
-        
-        
-        
-        
-        <!-- Generate reply to synchronous request -->
-        <bpel:assign validate="no" name="AssignAvailabilityResponse">
+        <bpel:invoke name="InvokeAvailabilityWS" partnerLink="AvailabilityWSPL" operation="checkAvailability" portType="ns:IProductAvailabilityWS" inputVariable="AvailabilityWSPLRequest" outputVariable="AvailabilityWSPLResponse"></bpel:invoke>
+        <bpel:assign validate="no" name="AssignAvailabilityOutputToPaymentWS">
+            <bpel:copy>
+                <bpel:from><bpel:literal><tns:Pay xmlns:tns="http://tempuri.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tns:orderDetails>
+    <amount>0.0</amount>
+    <authToken>authToken</authToken>
+    <buyerId>0</buyerId>
+    <items>
+      <productId>0</productId>
+      <units>0</units>
+    </items>
+    <password>password</password>
+    <productsAvailable>true</productsAvailable>
+    <signature>signature</signature>
+    <successfulPayment>true</successfulPayment>
+    <username>username</username>
+  </tns:orderDetails>
+</tns:Pay>
+</bpel:literal></bpel:from>
+                <bpel:to variable="PaymentWSPLRequest" part="parameters"></bpel:to>
+            </bpel:copy>
+            <bpel:copy>
+                <bpel:from part="parameters" variable="AvailabilityWSPLResponse">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[return]]></bpel:query>
+                </bpel:from>
+                <bpel:to part="parameters" variable="PaymentWSPLRequest">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns0:orderDetails]]></bpel:query>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>
+        <bpel:invoke name="InvokePaymentWS" partnerLink="PaymentWSPL" operation="Pay" portType="ns0:PaymentWSSoap" inputVariable="PaymentWSPLRequest" outputVariable="PaymentWSPLResponse"></bpel:invoke>
+        <bpel:assign validate="no" name="AssignPaymentOutputToOutput">
             <bpel:copy>
                 <bpel:from><bpel:literal><tns:WS_InvocationResponse xmlns:tns="http://ws.Invocation.tps" xmlns:tns1="http://ws.unisell.miw.uniovi/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:result>tns:result</tns:result>
+  <tns:result>
+    <amount>0.0</amount>
+    <authToken>authToken</authToken>
+    <buyerId>0</buyerId>
+    <items>
+      <productId>0</productId>
+      <units>0</units>
+    </items>
+    <password>password</password>
+    <productsAvailable>true</productsAvailable>
+    <signature>signature</signature>
+    <successfulPayment>true</successfulPayment>
+    <username>username</username>
+  </tns:result>
 </tns:WS_InvocationResponse>
 </bpel:literal></bpel:from>
                 <bpel:to variable="output" part="payload"></bpel:to>
             </bpel:copy>
             <bpel:copy>
-                <bpel:from part="parameters" variable="AvailabilityWSPLResponse">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[return]]></bpel:query>
+                <bpel:from part="parameters" variable="PaymentWSPLResponse">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns0:PayResult]]></bpel:query>
                 </bpel:from>
                 <bpel:to part="payload" variable="output">
                     <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>

@@ -17,12 +17,11 @@
     <import location="PaymentWS.wsdl" namespace="http://tempuri.org/"/>
     <types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.Invocation.tps">
-
-            <import schemaLocation="ProductAvailability.xsd" namespace="http://ws.unisell.miw.uniovi/"></import>
+            <import namespace="http://ws.unisell.miw.uniovi/" schemaLocation="ProductAvailabilityWS.xsd"/>
             <element name="WS_InvocationRequest">
                 <complexType>
                     <sequence>
-                        <element name="input" type="wsdl:shoppingCart" />
+                        <element name="input" type="wsdl:shoppingCart"/>
                     </sequence>
                 </complexType>
             </element>
@@ -30,7 +29,7 @@
             <element name="WS_InvocationResponse">
                 <complexType>
                     <sequence>
-                        <element name="result" type="boolean"/>
+                        <element name="result" type="wsdl:shoppingCart"/>
                     </sequence>
                 </complexType>
             </element>

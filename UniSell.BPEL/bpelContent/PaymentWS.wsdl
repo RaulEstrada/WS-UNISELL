@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://ws.unisell.miw.uniovi/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://ws.unisell.miw.uniovi/" />
       <s:element name="Pay">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:double" />
-            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="Signature" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="AuthToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderDetails" type="s1:shoppingCart" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="PayResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="PayResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="PayResult" type="s1:shoppingCart" />
           </s:sequence>
         </s:complexType>
       </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.unisell.miw.uniovi/">
+      <s:complexType name="shoppingCart">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="authToken" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="buyerId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="items" nillable="true" type="s1:item" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="productsAvailable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="signature" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="successfulPayment" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="username" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="item">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="productId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="units" type="s:int" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="PaySoapIn">

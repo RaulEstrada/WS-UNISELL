@@ -12,7 +12,7 @@ import uniovi.miw.unisell.data.DataAccessSoap;
 public class ProductAvailabilityWS implements IProductAvailabilityWS {
 
 	@Override
-	public boolean checkAvailability(ShoppingCart cart) throws ProductNotAvailableException, ArgumentException {
+	public ShoppingCart checkAvailability(ShoppingCart cart) throws ProductNotAvailableException, ArgumentException {
 		if (cart == null || cart.getItems() == null || cart.getItems().isEmpty()) {
 			throw new ArgumentException("Shopping cart or items not found");
 		}
@@ -29,7 +29,8 @@ public class ProductAvailabilityWS implements IProductAvailabilityWS {
 			throw new ProductNotAvailableException("The following products do not have enough units available: " 
 					+ String.join(", ", productsNotAvailable));
 		}
-		return true;
+		cart.setProductsAvailable(true);
+		return cart;
 	}
 
 }
