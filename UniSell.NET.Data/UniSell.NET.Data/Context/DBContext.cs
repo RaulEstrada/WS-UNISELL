@@ -24,13 +24,5 @@ namespace UniSell.NET.Data.Context
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OrderItem>()
-                .HasRequired<Order>(i => i.Order)
-                .WithMany(o => o.Items)
-                .WillCascadeOnDelete(true);
-        }
     }
 }

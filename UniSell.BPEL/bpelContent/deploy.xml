@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:tempuri.org="http://tempuri.org/" xmlns:ws.Invocation.tps="http://ws.Invocation.tps" xmlns:ws.unisell.miw.uniovi="http://ws.unisell.miw.uniovi/">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:orderws.unisell.miw.uniovi="http://orderws.unisell.miw.uniovi/" xmlns:tempuri.org="http://tempuri.org/" xmlns:ws.Invocation.tps="http://ws.Invocation.tps" xmlns:ws.unisell.miw.uniovi="http://ws.unisell.miw.uniovi/">
   <process name="ws.Invocation.tps:WS_Invocation">
     <active>true</active>
     <retired>false</retired>
@@ -12,6 +12,9 @@
     </invoke>
     <invoke partnerLink="PaymentWSPL">
       <service name="tempuri.org:PaymentWS" port="PaymentWSSoap"/>
+    </invoke>
+    <invoke partnerLink="CreationWSPL">
+      <service name="orderws.unisell.miw.uniovi:CreateOrderWSService" port="CreateOrderWSPort"/>
     </invoke>
   </process>
 </deploy>

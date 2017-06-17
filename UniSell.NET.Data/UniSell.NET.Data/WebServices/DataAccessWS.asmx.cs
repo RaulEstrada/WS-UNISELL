@@ -356,12 +356,14 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
-        public Order CreateOrder(Order Order)
+        public bool CreateOrder(Order Order)
         {
             ValidateSecurity();
             using (var ds = new DataService())
             {
-                return ds.getOrderDAO().Create(Order);
+                Order.dateCreated = DateTime.Now;
+                Order newOrder = ds.getOrderDAO().Create(Order);
+                return true;
             }
         }
 
