@@ -29,6 +29,7 @@ public class ProductController {
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String getNewProduct(Model model) {
 		model.addAttribute("product", new Product<Long>());
+		model.addAttribute("newProduct", "true");
 		return "/product";
 	}
 
@@ -47,6 +48,7 @@ public class ProductController {
 			model.addAttribute("product", product);
 			if (okMessage != null && !okMessage.trim().isEmpty()) {
 				model.addAttribute("okMessage", okMessage);
+				model.addAttribute("newProduct", null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

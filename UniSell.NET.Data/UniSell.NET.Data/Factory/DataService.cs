@@ -58,5 +58,10 @@ namespace UniSell.NET.Data.Factory
         {
             return new OrderDAO(_context);
         }
+
+        public IOrderItemDAO getOrderItemDAO()
+        {
+            return new OrderItemDAO(_context);
+        }
     }
 }

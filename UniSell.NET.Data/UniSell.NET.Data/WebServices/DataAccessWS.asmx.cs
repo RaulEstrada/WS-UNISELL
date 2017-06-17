@@ -499,6 +499,22 @@ namespace UniSell.NET.Data.WebServices
             return Enum.GetValues(typeof(LegalPersonIdDocumentType)).Cast<LegalPersonIdDocumentType>().ToArray();
         }
 
+        [WebMethod]
+        public int FindProductAvailability(long productId)
+        {
+            using (var ds = new DataService())
+            {
+                Product product = ds.getProductDAO().Find(productId);
+                if (product == null)
+                {
+                    return 0;
+                }
+                int productUnits = product.Units;
+                int activeOrders = ds.getOrderItemDAO().FindActiveProductOrderCount(productId);
+                return productUnits - activeOrders;
+            }
+        }
+
         private void ValidateSecurity()
         {
             if (Security == null || String.IsNullOrEmpty(Security.BinarySecurityToken))

@@ -68,11 +68,13 @@
 						 	<div class="form-group">
 						    	<label for="Price">Precio: </label>
 						    	<input type="number" id="Price" name="Price" class="form-control" required
+						    		min="0.01" step="0.01"
 						    		value="${ product.price }"/>
 						 	</div>
 						 	<div class="form-group">
 						    	<label for="Units">Unidades: </label>
 						    	<input type="number" id="Units" name="Units" class="form-control" required
+						    		min="1" step="1"
 						    		value="${ product.units }"/>
 						 	</div>
 						 	<div class="form-group">
@@ -99,7 +101,12 @@
 						 	</div>
 							<div class="form-group">
 						    	<label for="Image">Imagen: </label>
-						    	<input type="file" id="Image" name="Image"/>
+						    	<c:if test="${not empty newProduct}">
+						    		<input type="file" id="Image" name="Image" required="required"/>
+						    	</c:if>
+						    	<c:if test="${empty newProduct}">
+						    		<input type="file" id="Image" name="Image"/>
+						    	</c:if>
 						 	</div>
 						 	<button type="submit" class="btn btn-primary">Enviar</button>
 						 	<button type="reset" class="btn btn-warning">Limpiar</button>

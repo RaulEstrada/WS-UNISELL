@@ -114,6 +114,9 @@ public class Product<T> {
 	}
 	
 	public String getImageBase64() {
+		if (Image == null || Image.length == 0) {
+			return null;
+		}
 		return Base64.getEncoder().encodeToString(Image);
 	}
 	

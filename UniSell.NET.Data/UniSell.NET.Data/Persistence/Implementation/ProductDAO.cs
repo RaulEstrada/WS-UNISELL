@@ -27,6 +27,10 @@ namespace UniSell.NET.Data.Persistence.Implementation
 
         public new Product Find(long id)
         {
+            if (DbSet.Find(id) == null)
+            {
+                return null;
+            }
             return DbSet.Include("seller").Include("category").Where(p => p.Id == id).First();
         }
     }
