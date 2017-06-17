@@ -1,11 +1,5 @@
-<?xml version="1.0"?>
-<definitions name="WS_Invocation"
-        targetNamespace="http://ws.Invocation.tps"
-        xmlns:tns="http://ws.Invocation.tps"
-        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-        xmlns="http://schemas.xmlsoap.org/wsdl/"
-        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-        >
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.Invocation.tps" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://ws.unisell.miw.uniovi/" xmlns:wsdl1="http://tempuri.org/" name="WS_Invocation" targetNamespace="http://ws.Invocation.tps">
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      TYPE DEFINITION - List of types participating in this BPEL process 
@@ -13,15 +7,22 @@
      but you can define or import any XML Schema type and use them as part 
      of the message types.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="AvailabilityWSPLT">
+    <plnk:role name="AvailabilityWSPLRole" portType="wsdl:IProductAvailabilityWS"/>
+  </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="PaymentWSPLT">
+    <plnk:role name="PaymentWSPLRole" portType="wsdl1:PaymentWSSoap"/>
+  </plnk:partnerLinkType>
+    <import location="ProductAvailabilityWS.wsdl" namespace="http://ws.unisell.miw.uniovi/"/>
+    <import location="PaymentWS.wsdl" namespace="http://tempuri.org/"/>
     <types>
-        <schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
-                targetNamespace="http://ws.Invocation.tps" 
-                xmlns="http://www.w3.org/2001/XMLSchema">
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ws.Invocation.tps">
 
+            <import schemaLocation="ProductAvailability.xsd" namespace="http://ws.unisell.miw.uniovi/"></import>
             <element name="WS_InvocationRequest">
                 <complexType>
                     <sequence>
-                        <element name="input" type="string"/>
+                        <element name="input" type="wsdl:shoppingCart" />
                     </sequence>
                 </complexType>
             </element>
@@ -29,7 +30,7 @@
             <element name="WS_InvocationResponse">
                 <complexType>
                     <sequence>
-                        <element name="result" type="string"/>
+                        <element name="result" type="boolean"/>
                     </sequence>
                 </complexType>
             </element>
@@ -42,10 +43,10 @@
      part of the port type defintions
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
     <message name="WS_InvocationRequestMessage">
-        <part name="payload" element="tns:WS_InvocationRequest"/>
+        <part element="tns:WS_InvocationRequest" name="payload"/>
     </message>
     <message name="WS_InvocationResponseMessage">
-        <part name="payload" element="tns:WS_InvocationResponse"/>
+        <part element="tns:WS_InvocationResponse" name="payload"/>
     </message>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,7 +57,7 @@
     <!-- portType implemented by the WS_Invocation BPEL process -->
     <portType name="WS_Invocation">
         <operation name="process">
-            <input  message="tns:WS_InvocationRequestMessage" />
+            <input message="tns:WS_InvocationRequestMessage"/>
             <output message="tns:WS_InvocationResponseMessage"/>
         </operation>
     </portType>   
@@ -73,16 +74,14 @@
      for a web service.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <binding name="WS_InvocationBinding" type="tns:WS_Invocation">
-    	<soap:binding style="document"
-    		transport="http://schemas.xmlsoap.org/soap/http" />
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     	<operation name="process">
-    		<soap:operation
-    			soapAction="http://ws.Invocation.tps/process" />
+    		<soap:operation soapAction="http://ws.Invocation.tps/process"/>
     		<input>
-    			<soap:body use="literal" />
+    			<soap:body use="literal"/>
     		</input>
     		<output>
-    			<soap:body use="literal" />
+    			<soap:body use="literal"/>
     		</output>
     	</operation>
     </binding>
@@ -92,8 +91,8 @@
      a service unit.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <service name="WS_InvocationService">
-    	<port name="WS_InvocationPort" binding="tns:WS_InvocationBinding">
-    		<soap:address location="http://localhost:8080/ode/processes/WS_Invocation" />
+    	<port binding="tns:WS_InvocationBinding" name="WS_InvocationPort">
+    		<soap:address location="http://localhost:8080/ode/processes/WS_Invocation"/>
     	</port>
     </service>
 </definitions>

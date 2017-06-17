@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:tempuri.org="http://tempuri.org/" xmlns:ws.Invocation.tps="http://ws.Invocation.tps" xmlns:ws.unisell.miw.uniovi="http://ws.unisell.miw.uniovi/">
+  <process name="ws.Invocation.tps:WS_Invocation">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="ws.Invocation.tps:WS_InvocationService" port="WS_InvocationPort"/>
+    </provide>
+    <invoke partnerLink="AvailabilityWSPL">
+      <service name="ws.unisell.miw.uniovi:ProductAvailabilityWSService" port="ProductAvailabilityWSPort"/>
+    </invoke>
+    <invoke partnerLink="PaymentWSPL">
+      <service name="tempuri.org:PaymentWS" port="PaymentWSSoap"/>
+    </invoke>
+  </process>
+</deploy>

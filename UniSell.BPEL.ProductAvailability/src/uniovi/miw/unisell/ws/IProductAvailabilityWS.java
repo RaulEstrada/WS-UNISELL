@@ -5,10 +5,6 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
-import uniovi.miw.unisell.ws.exceptions.ArgumentException;
-import uniovi.miw.unisell.ws.exceptions.ProductNotAvailableException;
-import uniovi.miw.unisell.ws.model.ShoppingCart;
-
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
 public interface IProductAvailabilityWS {

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.10 svn-revision#919b322c92f13ad085a933e8dd6dd35d4947364b. --><xs:schema xmlns:tns="http://ws.unisell.miw.uniovi/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.unisell.miw.uniovi/">
+
+<xs:element name="ArgumentException" type="tns:ArgumentException"/>
+
+<xs:element name="ProductNotAvailableException" type="tns:ProductNotAvailableException"/>
+
+<xs:element name="checkAvailability" type="tns:checkAvailability"/>
+
+<xs:element name="checkAvailabilityResponse" type="tns:checkAvailabilityResponse"/>
+
+<xs:complexType name="checkAvailability">
+<xs:sequence>
+<xs:element name="arg0" type="tns:shoppingCart" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="shoppingCart">
+<xs:sequence>
+<xs:element name="buyerId" type="xs:long" minOccurs="0"/>
+<xs:element name="items" type="tns:item" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="item">
+<xs:sequence>
+<xs:element name="productId" type="xs:long" minOccurs="0"/>
+<xs:element name="units" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkAvailabilityResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ProductNotAvailableException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ArgumentException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

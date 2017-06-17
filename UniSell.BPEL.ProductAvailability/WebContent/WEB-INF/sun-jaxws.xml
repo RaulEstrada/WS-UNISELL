@@ -4,7 +4,7 @@
  	
 	<endpoint
 		name="ProductAvailabilityWS"
- 		implementation="uniovi.miw.unisell.ws.impl.ProductAvailabilityWS"
+ 		implementation="uniovi.miw.unisell.ws.ProductAvailabilityWS"
  		url-pattern="/productavailability" />
  	
 </endpoints> 
