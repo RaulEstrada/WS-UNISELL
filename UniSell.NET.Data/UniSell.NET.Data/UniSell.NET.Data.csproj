@@ -157,6 +157,7 @@
     <Compile Include="Model\Company.cs" />
     <Compile Include="Model\IdentityData.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderData.cs" />
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Types\IdDocumentType.cs" />

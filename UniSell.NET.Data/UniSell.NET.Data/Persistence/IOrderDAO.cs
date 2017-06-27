@@ -9,5 +9,6 @@ namespace UniSell.NET.Data.Persistence
 {
     public interface IOrderDAO : IGenericDAO<Order>
     {
+        OrderData[] FindOrdersByUser(string username);
     }
 }

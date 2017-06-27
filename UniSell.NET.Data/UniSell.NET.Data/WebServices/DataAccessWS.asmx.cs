@@ -356,6 +356,17 @@ namespace UniSell.NET.Data.WebServices
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
+        public OrderData[] FindOrdersByUsername(string username)
+        {
+            ValidateSecurity();
+            using (var ds = new DataService())
+            {
+                return ds.getOrderDAO().FindOrdersByUser(username);
+            }
+        }
+
+        [WebMethod]
+        [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public bool CreateOrder(Order Order)
         {
             ValidateSecurity();
