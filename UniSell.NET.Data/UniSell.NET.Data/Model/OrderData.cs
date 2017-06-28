@@ -11,10 +11,5 @@ namespace UniSell.NET.Data.Model
         public string OrderNumber { get; set; }
         public DateTime DateCreated { get; set; }
         public OrderState State { get; set; }
-
-        public string formattedString()
-        {
-            return "{" + OrderNumber + "} " + DateCreated.ToShortDateString() + " [" + State.ToString() + "]";
-        }
     }
 }

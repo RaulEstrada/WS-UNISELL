@@ -205,6 +205,16 @@
       <DependentUpon>IdentityWS.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebServices\impl\DataAccessAdminImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessBuyersImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessCategoryImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessCompanyImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessLoginImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessOrderImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessProductImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessSellerImpl.cs" />
+    <Compile Include="WebServices\impl\DataAccessUserImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using UniSell.NET.Data.Persistence.Implementation;
 using UniSell.NET.Data.Model.Types;
+using UniSell.NET.Data.WebServices.impl;
 
 namespace UniSell.NET.Data.WebServices
 {
@@ -28,470 +29,282 @@ namespace UniSell.NET.Data.WebServices
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountUsers()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().Count();
-            }
+            return new DataAccessImpl().CountUsers(Security);
         }
 
         [WebMethod]
         public User CreateUser(User user)
         {
-            user.Password = getHashedPassword(user.Password);
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().Create(user);
-            }
+            return new DataAccessImpl().CreateUser(user);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User[] FindAllUsers()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().All().ToArray();
-            }
+            return new DataAccessImpl().FindAllUsers(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User FindUser(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().Find(id);
-            }
+            return new DataAccessImpl().FindUser(id, Security);
         }
 
         [WebMethod]
         public string Login(string username, string password, UserRole[] rolesAllowed)
         {
-            string hashedPassword = getHashedPassword(password);
-            using (var ds = new DataService())
-            {
-                if (ds.getUserDAO().ExistsUsernamePassword(username, hashedPassword, rolesAllowed))
-                {
-                    return JWTGenerator.Generate(username);
-                }
-                return null;
-            }
+            return new DataAccessImpl().Login(username, password, rolesAllowed);
         }
 
         [WebMethod]
         public User FindUserByUsername(string username)
         {
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().FindByUsername(username);
-            }
+            return new DataAccessImpl().FindUserByUsername(username);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User RemoveUser(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().Remove(id);
-            }
+            return new DataAccessImpl().RemoveUser(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public User UpdateUser(User user)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                User dbUser = ds.getUserDAO().Find(user.Id);
-                dbUser.Name = (!String.IsNullOrEmpty(user.Name)) ? user.Name : dbUser.Name;
-                dbUser.Surname = (!String.IsNullOrEmpty(user.Surname)) ? user.Surname : dbUser.Surname;
-                dbUser.Username = (!String.IsNullOrEmpty(user.Username)) ? user.Username : dbUser.Username;
-                dbUser.Password = (!String.IsNullOrEmpty(user.Password)) ? getHashedPassword(user.Password) : dbUser.Password;
-                dbUser.IdDocument = (!String.IsNullOrEmpty(user.IdDocument)) ? user.IdDocument : dbUser.IdDocument;
-                dbUser.IdDocumentType = (user.IdDocumentType != 0) ? user.IdDocumentType : dbUser.IdDocumentType;
-                dbUser.Email = (!String.IsNullOrEmpty(user.Email)) ? user.Email : dbUser.Email;
-                dbUser.activeAccount = user.activeAccount;
-                if (user.Role == Model.Types.UserRole.SELLER)
-                {
-                    UserSeller seller = user as UserSeller;
-                    UserSeller dbSeller = dbUser as UserSeller;
-                    dbSeller.company_id = (seller.company_id != 0) ? seller.company_id : dbSeller.company_id;
-                }
-                return ds.getUserDAO().Update(dbUser);
-            }
+            return new DataAccessImpl().UpdateUser(user, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public UserAdmin[] ListAllAdmins()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserAdminDAO().FindAllAdmins().ToArray();
-            }
+            return new DataAccessImpl().ListAllAdmins(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public UserSeller[] ListAllSellers()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserSellerDAO().FindAllSellers().ToArray();
-            }
+            return new DataAccessImpl().ListAllSellers(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public UserBuyer[] ListAllBuyers()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserBuyerDAO().FindAllBuyers().ToArray();
-            }
+            return new DataAccessImpl().ListAllBuyers(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public UserSeller[] FindSellersByCompanyId(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getUserSellerDAO().FindByCompanyId(id).ToArray();
-            }
+            return new DataAccessImpl().FindSellersByCompanyId(id, Security);
         }
 
         [WebMethod]
         public User[] FindUsersByFilter(UserSearchFilter filter)
         {
-            using (var ds = new DataService())
-            {
-                return ds.getUserDAO().FindUsersByFilter(filter);
-            }
+            return new DataAccessImpl().FindUsersByFilter(filter);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountCategories()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().Count();
-            }
+            return new DataAccessImpl().CountCategories(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Category[] FindAllCategories()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().All().ToArray();
-            }
+            return new DataAccessImpl().FindAllCategories(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Category CreateCategory(Category Category)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().Create(Category);
-            }
+            return new DataAccessImpl().CreateCategory(Category, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Category FindCategory(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().Find(id);
-            }
+            return new DataAccessImpl().FindCategory(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Category RemoveCategory(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().Remove(id);
-            }
+            return new DataAccessImpl().RemoveCategory(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Category UpdateCategory(Category Category)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().Update(Category);
-            }
+            return new DataAccessImpl().UpdateCategory(Category, Security);
         }
 
         [WebMethod]
         public Category[] FindCategoriesByName(string name)
         {
-            using (var ds = new DataService())
-            {
-                return ds.getCategoryDAO().FindByName(name);
-            }
+            return new DataAccessImpl().FindCategoriesByName(name);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountProducts()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().Count();
-            }
+            return new DataAccessImpl().CountProducts(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product[] FindAllProducts()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().All().ToArray();
-            }
+            return new DataAccessImpl().FindAllProducts(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product CreateProduct(Product Product)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().Create(Product);
-            }
+            return new DataAccessImpl().CreateProduct(Product, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product FindProduct(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().Find(id);
-            }
+            return new DataAccessImpl().FindProduct(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product[] FindProductsByFilter(ProductSearchFilter filter)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().FindProductsByFilter(filter);
-            }
+            return new DataAccessImpl().FindProductsByFilter(filter, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product RemoveProduct(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().Remove(id);
-            }
+            return new DataAccessImpl().RemoveProduct(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Product UpdateProduct(Product Product)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getProductDAO().Update(Product);
-            }
+            return new DataAccessImpl().UpdateProduct(Product, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountOrders()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getOrderDAO().Count();
-            }
+            return new DataAccessImpl().CountOrders(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Order[] FindAllOrders()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getOrderDAO().All().ToArray();
-            }
+            return new DataAccessImpl().FindAllOrders(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public OrderData[] FindOrdersByUsername(string username)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getOrderDAO().FindOrdersByUser(username);
-            }
+            return new DataAccessImpl().FindOrdersByUsername(username, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public bool CreateOrder(Order Order)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                Order.dateCreated = DateTime.Now;
-                Order newOrder = ds.getOrderDAO().Create(Order);
-                return true;
-            }
+            return new DataAccessImpl().CreateOrder(Order, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Order FindOrder(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getOrderDAO().Find(id);
-            }
+            return new DataAccessImpl().FindOrder(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Order RemoveOrder(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getOrderDAO().Remove(id);
-            }
+            return new DataAccessImpl().RemoveOrder(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Order UpdateOrder(Order Order)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getOrderDAO().Update(Order);
-            }
+            return new DataAccessImpl().UpdateOrder(Order, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public int CountCompanies()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCompanyDAO().Count();
-            }
+            return new DataAccessImpl().CountCompanies(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Company CreateCompany(Company Company)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCompanyDAO().Create(Company);
-            }
+            return new DataAccessImpl().CreateCompany(Company, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Company[] FindAllCompanies()
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCompanyDAO().All().ToArray();
-            }
+            return new DataAccessImpl().FindAllCompanies(Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Company FindCompany(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCompanyDAO().Find(id);
-            }
+            return new DataAccessImpl().FindCompany(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Company RemoveCompany(long id)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCompanyDAO().Remove(id);
-            }
+            return new DataAccessImpl().RemoveCompany(id, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Company UpdateCompany(Company company)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                Company dbCompany = ds.getCompanyDAO().Find(company.Id);
-                dbCompany.Name = (!string.IsNullOrEmpty(company.Name)) ? company.Name : dbCompany.Name;
-                dbCompany.Description = (!string.IsNullOrEmpty(company.Description)) ? company.Description : dbCompany.Description;
-                dbCompany.IdDocument = (!string.IsNullOrEmpty(company.IdDocument)) ? company.IdDocument : dbCompany.IdDocument;
-                dbCompany.IdDocumentType = (company.IdDocumentType != 0) ? company.IdDocumentType : dbCompany.IdDocumentType;
-                dbCompany.LocationInfo = (company.LocationInfo != null) ? company.LocationInfo : dbCompany.LocationInfo;
-                return ds.getCompanyDAO().Update(dbCompany);
-            }
+            return new DataAccessImpl().UpdateCompany(company, Security);
         }
 
         [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Company[] FindCompaniesByFilter(CompanySearchFilter filter)
         {
-            ValidateSecurity();
-            using (var ds = new DataService())
-            {
-                return ds.getCompanyDAO().FindCompaniesByFilter(filter);
-            }
+            return new DataAccessImpl().FindCompaniesByFilter(filter, Security);
         }
 
         [WebMethod]
@@ -515,49 +328,7 @@ namespace UniSell.NET.Data.WebServices
         [WebMethod]
         public int FindProductAvailability(long productId)
         {
-            using (var ds = new DataService())
-            {
-                Product product = ds.getProductDAO().Find(productId);
-                if (product == null)
-                {
-                    return 0;
-                }
-                int productUnits = product.Units;
-                int activeOrders = ds.getOrderItemDAO().FindActiveProductOrderCount(productId);
-                return productUnits - activeOrders;
-            }
-        }
-
-        private void ValidateSecurity()
-        {
-            if (Security == null || String.IsNullOrEmpty(Security.BinarySecurityToken))
-            {
-                throw new SoapException("Authentication Failure - Auth token required but not received",
-                    SoapException.ClientFaultCode);
-            }
-            try
-            {
-                bool validToken = JWTAuthenticator.ValidateToken(Security.BinarySecurityToken);
-                if (!validToken)
-                {
-                    throw new SoapException("Authentication Failure - Auth token provided is not valid",
-                        SoapException.ClientFaultCode);
-                }
-            } catch (Exception ex) when (ex is ArgumentException
-                || ex is SecurityTokenInvalidSignatureException
-                || ex is SecurityTokenExpiredException)
-            {
-                throw new SoapException("Authentication Failure - Auth token provided is not valid",
-                        SoapException.ClientFaultCode);
-            }
-        }
-
-        private string getHashedPassword(string plainPassword)
-        {
-            SHA512 sha512 = new SHA512Managed();
-            byte[] password = Encoding.UTF8.GetBytes(plainPassword);
-            byte[] hashed = sha512.ComputeHash(password);
-            return Convert.ToBase64String(hashed);
+            return new DataAccessImpl().FindProductAvailability(productId);
         }
     }
 }
