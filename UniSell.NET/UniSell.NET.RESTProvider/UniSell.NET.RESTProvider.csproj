@@ -121,6 +121,33 @@
     <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindProductsByFilterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.CountOrdersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.CreateOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindAllOrdersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.FindOrdersByUsernameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.Order.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.OrderData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.RemoveOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAccessWS\UniSell.NET.RESTProvider.DataAccessWS.UpdateOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\IdentityWS\configuration91.svcinfo" />
     <None Include="Service References\IdentityWS\configuration.svcinfo" />
     <None Include="Service References\IdentityWS\Reference.svcmap">

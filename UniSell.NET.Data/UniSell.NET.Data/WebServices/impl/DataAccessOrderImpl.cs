@@ -74,5 +74,13 @@ namespace UniSell.NET.Data.WebServices.impl
                 return ds.getOrderDAO().Update(Order);
             }
         }
+
+        public int CountOrdersByProduct(long id)
+        {
+            using (var ds = new DataService())
+            {
+                return ds.getOrderItemDAO().FindActiveProductOrderCount(id);
+            }
+        }
     }
 }

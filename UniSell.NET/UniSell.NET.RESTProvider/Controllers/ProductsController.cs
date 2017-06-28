@@ -108,6 +108,11 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 return validation;
             }
+            validation = ValidateProductCanBeRemoved(id);
+            if (validation != null)
+            {
+                return validation;
+            }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             Product removed = ws.RemoveProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             RestProduct res = CreateRestProduct(removed);
@@ -180,6 +185,17 @@ namespace UniSell.NET.RESTProvider.Controllers
             catch (FaultException ex)
             {
                 return BadRequest("Invalid security token");
+            }
+            return null;
+        }
+
+        private IHttpActionResult ValidateProductCanBeRemoved(long id)
+        {
+            DataAccessSoapClient dataWS = new DataAccessSoapClient();
+            int orders = dataWS.CountOrdersByProduct(id);
+            if (orders > 0)
+            {
+                return BadRequest("Product cannot be removed since some customers have purchased it");
             }
             return null;
         }

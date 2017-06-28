@@ -107,6 +107,11 @@ namespace UniSell.NET.RESTProvider.Controllers
             {
                 return validation;
             }
+            validation = ValidateUserCanBeDeleted(token);
+            if (validation != null)
+            {
+                return validation;
+            }
             DataAccessSoapClient ws = new DataAccessSoapClient();
             User target = ws.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             if (target.Role != DataAccessWS.UserRole.BUYER)
@@ -199,6 +204,19 @@ namespace UniSell.NET.RESTProvider.Controllers
             DataAccessSoapClient dataWS = new DataAccessSoapClient();
             User target = dataWS.FindUser(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             return target != null;
+        }
+
+        private IHttpActionResult ValidateUserCanBeDeleted(string authToken)
+        {
+            IdentityWSSoapClient ws = new IdentityWSSoapClient();
+            IdentityData identity = ws.GetIdentity(new IdentityWS.Security { BinarySecurityToken = authToken });
+            DataAccessSoapClient dataWS = new DataAccessSoapClient();
+            OrderData[] orders = dataWS.FindOrdersByUsername(new DataAccessWS.Security { BinarySecurityToken = authToken }, identity.Username);
+            if (orders != null && orders.Length > 0)
+            {
+                return BadRequest("User cannot be removed since he/she has registered orders");
+            }
+            return null;
         }
 
         private IHttpActionResult ValidateUserData(UserData User, User currentUser = null)

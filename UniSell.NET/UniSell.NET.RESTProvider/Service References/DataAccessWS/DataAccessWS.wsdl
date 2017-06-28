@@ -499,6 +499,161 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="CountOrders">
+        <s:complexType />
+      </s:element>
+      <s:element name="CountOrdersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountOrdersResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountOrdersByProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CountOrdersByProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountOrdersByProductResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAllOrders">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindAllOrdersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAllOrdersResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOrder">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Order" nillable="true" type="tns:Order" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Order">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="dateCreated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="orderNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" type="tns:OrderState" />
+          <s:element minOccurs="1" maxOccurs="1" name="buyer_id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:UserBuyer" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfOrderItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="OrderState">
+        <s:restriction base="s:string">
+          <s:enumeration value="ACTIVE" />
+          <s:enumeration value="CANCELLED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfOrderItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderItem" nillable="true" type="tns:OrderItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="quantity" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="product_id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Product" type="tns:Product" />
+          <s:element minOccurs="1" maxOccurs="1" name="order_id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Order" type="tns:Order" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindOrdersByUsername">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindOrdersByUsernameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindOrdersByUsernameResult" type="tns:ArrayOfOrderData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOrderData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderData" nillable="true" type="tns:OrderData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrderNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" type="tns:OrderState" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Order" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateOrderResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindOrderResult" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveOrderResult" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Order" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateOrderResult" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="CountCompanies">
         <s:complexType />
       </s:element>
@@ -646,6 +801,20 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="LegalPersonIdDocumentType" type="tns:LegalPersonIdDocumentType" />
         </s:sequence>
       </s:complexType>
+      <s:element name="FindProductAvailability">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindProductAvailabilityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindProductAvailabilityResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://schemas.xmlsoap.org/ws/2002/04/secext">
       <s:element name="Security" type="s1:Security" />
@@ -885,6 +1054,75 @@
   <wsdl:message name="UpdateProductSecurity">
     <wsdl:part name="Security" element="s1:Security" />
   </wsdl:message>
+  <wsdl:message name="CountOrdersSoapIn">
+    <wsdl:part name="parameters" element="tns:CountOrders" />
+  </wsdl:message>
+  <wsdl:message name="CountOrdersSoapOut">
+    <wsdl:part name="parameters" element="tns:CountOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="CountOrdersSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CountOrdersByProductSoapIn">
+    <wsdl:part name="parameters" element="tns:CountOrdersByProduct" />
+  </wsdl:message>
+  <wsdl:message name="CountOrdersByProductSoapOut">
+    <wsdl:part name="parameters" element="tns:CountOrdersByProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindAllOrdersSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAllOrders" />
+  </wsdl:message>
+  <wsdl:message name="FindAllOrdersSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAllOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindAllOrdersSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindOrdersByUsernameSoapIn">
+    <wsdl:part name="parameters" element="tns:FindOrdersByUsername" />
+  </wsdl:message>
+  <wsdl:message name="FindOrdersByUsernameSoapOut">
+    <wsdl:part name="parameters" element="tns:FindOrdersByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindOrdersByUsernameSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateOrder" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateOrderSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="FindOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:FindOrder" />
+  </wsdl:message>
+  <wsdl:message name="FindOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:FindOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindOrderSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="RemoveOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveOrder" />
+  </wsdl:message>
+  <wsdl:message name="RemoveOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveOrderSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateOrder" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOrderSecurity">
+    <wsdl:part name="Security" element="s1:Security" />
+  </wsdl:message>
   <wsdl:message name="CountCompaniesSoapIn">
     <wsdl:part name="parameters" element="tns:CountCompanies" />
   </wsdl:message>
@@ -965,6 +1203,12 @@
   </wsdl:message>
   <wsdl:message name="FindLegalIdDocumentTypesSoapOut">
     <wsdl:part name="parameters" element="tns:FindLegalIdDocumentTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindProductAvailabilitySoapIn">
+    <wsdl:part name="parameters" element="tns:FindProductAvailability" />
+  </wsdl:message>
+  <wsdl:message name="FindProductAvailabilitySoapOut">
+    <wsdl:part name="parameters" element="tns:FindProductAvailabilityResponse" />
   </wsdl:message>
   <wsdl:portType name="DataAccessSoap">
     <wsdl:operation name="CountUsers">
@@ -1075,6 +1319,38 @@
       <wsdl:input message="tns:UpdateProductSoapIn" />
       <wsdl:output message="tns:UpdateProductSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="CountOrders">
+      <wsdl:input message="tns:CountOrdersSoapIn" />
+      <wsdl:output message="tns:CountOrdersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CountOrdersByProduct">
+      <wsdl:input message="tns:CountOrdersByProductSoapIn" />
+      <wsdl:output message="tns:CountOrdersByProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllOrders">
+      <wsdl:input message="tns:FindAllOrdersSoapIn" />
+      <wsdl:output message="tns:FindAllOrdersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByUsername">
+      <wsdl:input message="tns:FindOrdersByUsernameSoapIn" />
+      <wsdl:output message="tns:FindOrdersByUsernameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <wsdl:input message="tns:CreateOrderSoapIn" />
+      <wsdl:output message="tns:CreateOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <wsdl:input message="tns:FindOrderSoapIn" />
+      <wsdl:output message="tns:FindOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOrder">
+      <wsdl:input message="tns:RemoveOrderSoapIn" />
+      <wsdl:output message="tns:RemoveOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <wsdl:input message="tns:UpdateOrderSoapIn" />
+      <wsdl:output message="tns:UpdateOrderSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="CountCompanies">
       <wsdl:input message="tns:CountCompaniesSoapIn" />
       <wsdl:output message="tns:CountCompaniesSoapOut" />
@@ -1114,6 +1390,10 @@
     <wsdl:operation name="FindLegalIdDocumentTypes">
       <wsdl:input message="tns:FindLegalIdDocumentTypesSoapIn" />
       <wsdl:output message="tns:FindLegalIdDocumentTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProductAvailability">
+      <wsdl:input message="tns:FindProductAvailabilitySoapIn" />
+      <wsdl:output message="tns:FindProductAvailabilitySoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DataAccessSoap" type="tns:DataAccessSoap">
@@ -1383,6 +1663,85 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CountOrders">
+      <soap:operation soapAction="http://unisell.net.data/CountOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CountOrdersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountOrdersByProduct">
+      <soap:operation soapAction="http://unisell.net.data/CountOrdersByProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllOrders">
+      <soap:operation soapAction="http://unisell.net.data/FindAllOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindAllOrdersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByUsername">
+      <soap:operation soapAction="http://unisell.net.data/FindOrdersByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindOrdersByUsernameSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap:operation soapAction="http://unisell.net.data/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <soap:operation soapAction="http://unisell.net.data/FindOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:FindOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOrder">
+      <soap:operation soapAction="http://unisell.net.data/RemoveOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <soap:operation soapAction="http://unisell.net.data/UpdateOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CountCompanies">
       <soap:operation soapAction="http://unisell.net.data/CountCompanies" style="document" />
       <wsdl:input>
@@ -1473,6 +1832,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindLegalIdDocumentTypes">
       <soap:operation soapAction="http://unisell.net.data/FindLegalIdDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductAvailability">
+      <soap:operation soapAction="http://unisell.net.data/FindProductAvailability" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1748,6 +2116,85 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CountOrders">
+      <soap12:operation soapAction="http://unisell.net.data/CountOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CountOrdersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountOrdersByProduct">
+      <soap12:operation soapAction="http://unisell.net.data/CountOrdersByProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllOrders">
+      <soap12:operation soapAction="http://unisell.net.data/FindAllOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindAllOrdersSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByUsername">
+      <soap12:operation soapAction="http://unisell.net.data/FindOrdersByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindOrdersByUsernameSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrder">
+      <soap12:operation soapAction="http://unisell.net.data/CreateOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrder">
+      <soap12:operation soapAction="http://unisell.net.data/FindOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:FindOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveOrder">
+      <soap12:operation soapAction="http://unisell.net.data/RemoveOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrder">
+      <soap12:operation soapAction="http://unisell.net.data/UpdateOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateOrderSecurity" part="Security" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CountCompanies">
       <soap12:operation soapAction="http://unisell.net.data/CountCompanies" style="document" />
       <wsdl:input>
@@ -1838,6 +2285,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindLegalIdDocumentTypes">
       <soap12:operation soapAction="http://unisell.net.data/FindLegalIdDocumentTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductAvailability">
+      <soap12:operation soapAction="http://unisell.net.data/FindProductAvailability" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

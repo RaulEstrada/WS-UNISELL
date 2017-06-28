@@ -217,6 +217,12 @@ namespace UniSell.NET.Data.WebServices
         }
 
         [WebMethod]
+        public int CountOrdersByProduct(long id)
+        {
+            return new DataAccessImpl().CountOrdersByProduct(id);
+        }
+
+        [WebMethod]
         [SoapHeader("Security", Direction = SoapHeaderDirection.In)]
         public Order[] FindAllOrders()
         {
