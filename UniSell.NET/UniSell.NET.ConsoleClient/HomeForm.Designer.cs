@@ -73,6 +73,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.categoryTab = new System.Windows.Forms.TabPage();
+            this.newCategoryBtn = new System.Windows.Forms.Button();
             this.categoriesTable = new System.Windows.Forms.TableLayoutPanel();
             this.filterCategoriesButton = new System.Windows.Forms.Button();
             this.category_filter_name = new System.Windows.Forms.TextBox();
@@ -80,7 +81,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.newCategoryBtn = new System.Windows.Forms.Button();
+            this.logoutButton = new System.Windows.Forms.Button();
             this.Inicio.SuspendLayout();
             this.homeTab.SuspendLayout();
             this.usersTab.SuspendLayout();
@@ -550,6 +551,18 @@
             this.categoryTab.Text = "Categorías de productos";
             this.categoryTab.UseVisualStyleBackColor = true;
             // 
+            // newCategoryBtn
+            // 
+            this.newCategoryBtn.BackColor = System.Drawing.Color.LightGreen;
+            this.newCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newCategoryBtn.Location = new System.Drawing.Point(26, 393);
+            this.newCategoryBtn.Name = "newCategoryBtn";
+            this.newCategoryBtn.Size = new System.Drawing.Size(103, 46);
+            this.newCategoryBtn.TabIndex = 5;
+            this.newCategoryBtn.Text = "Nueva";
+            this.newCategoryBtn.UseVisualStyleBackColor = false;
+            this.newCategoryBtn.Click += new System.EventHandler(this.newCategoryBtn_Click);
+            // 
             // categoriesTable
             // 
             this.categoriesTable.ColumnCount = 3;
@@ -620,23 +633,22 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // newCategoryBtn
+            // logoutButton
             // 
-            this.newCategoryBtn.BackColor = System.Drawing.Color.LightGreen;
-            this.newCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newCategoryBtn.Location = new System.Drawing.Point(26, 393);
-            this.newCategoryBtn.Name = "newCategoryBtn";
-            this.newCategoryBtn.Size = new System.Drawing.Size(103, 46);
-            this.newCategoryBtn.TabIndex = 5;
-            this.newCategoryBtn.Text = "Nueva";
-            this.newCategoryBtn.UseVisualStyleBackColor = false;
-            this.newCategoryBtn.Click += new System.EventHandler(this.newCategoryBtn_Click);
+            this.logoutButton.Location = new System.Drawing.Point(723, 21);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(97, 41);
+            this.logoutButton.TabIndex = 3;
+            this.logoutButton.Text = "Salir";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 598);
+            this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Inicio);
@@ -712,5 +724,6 @@
         private System.Windows.Forms.Button filterCategoriesButton;
         private System.Windows.Forms.TableLayoutPanel categoriesTable;
         private System.Windows.Forms.Button newCategoryBtn;
+        private System.Windows.Forms.Button logoutButton;
     }
 }

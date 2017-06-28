@@ -5,9 +5,9 @@ using System.Dynamic;
 using System.Net.Mail;
 using System.ServiceModel;
 using System.Windows.Forms;
-using UniSell.NET.ConsoleClient.UniSellAdminWS;
-using UniSell.NET.ConsoleClient.UniSellCompanyWS;
-using UniSell.NET.ConsoleClient.UniSellSellerWS;
+using UniSell.NET.ConsoleClient.AdminWS;
+using UniSell.NET.ConsoleClient.CompanyWS;
+using UniSell.NET.ConsoleClient.SellerWS;
 
 namespace UniSell.NET.ConsoleClient
 {
@@ -45,8 +45,8 @@ namespace UniSell.NET.ConsoleClient
         private void InitializeDocumentCombobox(bool seller)
         {
             dynamic docTypes = seller ? 
-                Enum.GetValues(typeof(UniSellSellerWS.PersonIdDocumentType)) :
-                Enum.GetValues(typeof(UniSellAdminWS.PersonIdDocumentType));
+                Enum.GetValues(typeof(SellerWS.PersonIdDocumentType)) :
+                Enum.GetValues(typeof(AdminWS.PersonIdDocumentType));
             if (docTypes != null)
             {
                 foreach (var type in docTypes)
@@ -69,7 +69,7 @@ namespace UniSell.NET.ConsoleClient
             if (seller)
             {
                 CompanyWSClient ws = new CompanyWSClient();
-                findCompanyResponse res = ws.findCompany(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+                findCompanyResponse res = ws.findCompany(new CompanyWS.Security { BinarySecurityToken = authToken },
                     new findCompany { arg1 = user.userData.companyId, arg1Specified = true });
                 user_company.SelectedIndex = user_company.FindStringExact(res.@return.companyData.name + " - " + res.@return.companyData.idDocument);
             }
@@ -81,7 +81,7 @@ namespace UniSell.NET.ConsoleClient
             {
                 CompanyWSClient ws = new CompanyWSClient();
                 editCompanyData[] data = ws.listCompaniesByFilter(
-                    new UniSellCompanyWS.Security { BinarySecurityToken = authToken }, 
+                    new CompanyWS.Security { BinarySecurityToken = authToken }, 
                     new listCompaniesByFilter { arg1 = new CompanySearchFilter { } });
                 if (data != null)
                 {
@@ -115,19 +115,19 @@ namespace UniSell.NET.ConsoleClient
             {
                 DoEditUser();
             }
-            catch (FaultException<UniSellSellerWS.RepeatedUsernameException> ex)
+            catch (FaultException<SellerWS.RepeatedUsernameException> ex)
             {
                 ShowExceptionError("Ya hay otra persona con ese usuario (nombre de usuario). Por favor, introduzca otro");
             }
-            catch (FaultException<UniSellSellerWS.InvalidEntityException> ex)
+            catch (FaultException<SellerWS.InvalidEntityException> ex)
             {
                 ShowExceptionError("No se han recibido todos los datos necesarios para completar la acción");
             }
-            catch (FaultException<UniSellSellerWS.RepeatedEmailException> ex)
+            catch (FaultException<SellerWS.RepeatedEmailException> ex)
             {
                 ShowExceptionError("Ya hay otra persona con ese email. Por favor, introduzca otro");
             }
-            catch (FaultException<UniSellSellerWS.RepeatedDocumentException> ex)
+            catch (FaultException<SellerWS.RepeatedDocumentException> ex)
             {
                 ShowExceptionError("Ya hay otra persona con ese documento. Por favor, introduzca otro");
             }
@@ -144,14 +144,14 @@ namespace UniSell.NET.ConsoleClient
                 UserSellerWSClient ws = new UserSellerWSClient();
                 user.userData.companyId = ((CompanyComboboxItem)user_company.SelectedItem).Id;
                 createUserData(user.userData.userData, user_document_type.SelectedItem);
-                ws.editSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken },
+                ws.editSeller(new SellerWS.Security { BinarySecurityToken = authToken },
                     new editSeller { arg1 = user });
             }
             else
             {
                 UserAdminWSClient ws = new UserAdminWSClient();
                 createUserData(user.userData, user_document_type.SelectedItem);
-                ws.editAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken },
+                ws.editAdmin(new AdminWS.Security { BinarySecurityToken = authToken },
                     new editAdmin { arg1 = user });
             }
             parentForm.FilterUsersTable();
@@ -178,16 +178,16 @@ namespace UniSell.NET.ConsoleClient
             try
             {
                 DoSaveUser();
-            } catch (FaultException<UniSellSellerWS.RepeatedUsernameException> ex)
+            } catch (FaultException<SellerWS.RepeatedUsernameException> ex)
             {
                 ShowExceptionError("Ya hay otra persona con ese usuario (nombre de usuario). Por favor, introduzca otro");
-            } catch (FaultException<UniSellSellerWS.InvalidEntityException> ex)
+            } catch (FaultException<SellerWS.InvalidEntityException> ex)
             {
                 ShowExceptionError("No se han recibido todos los datos necesarios para completar la acción");
-            } catch (FaultException<UniSellSellerWS.RepeatedEmailException> ex)
+            } catch (FaultException<SellerWS.RepeatedEmailException> ex)
             {
                 ShowExceptionError("Ya hay otra persona con ese email. Por favor, introduzca otro");
-            } catch (FaultException<UniSellSellerWS.RepeatedDocumentException> ex)
+            } catch (FaultException<SellerWS.RepeatedDocumentException> ex)
             {
                 ShowExceptionError("Ya hay otra persona con ese documento. Por favor, introduzca otro");
             }
@@ -209,10 +209,10 @@ namespace UniSell.NET.ConsoleClient
             }
             if (seller)
             {
-                UniSellSellerWS.userData ud = new UniSellSellerWS.userData();
+                SellerWS.userData ud = new SellerWS.userData();
                 createUserData(ud, user_document_type.SelectedItem);
                 UserSellerWSClient ws = new UserSellerWSClient();
-                ws.createSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken },
+                ws.createSeller(new SellerWS.Security { BinarySecurityToken = authToken },
                     new createSeller
                     {
                         arg1 = new userSellerData
@@ -226,9 +226,9 @@ namespace UniSell.NET.ConsoleClient
             else
             {
                 UserAdminWSClient ws = new UserAdminWSClient();
-                UniSellAdminWS.userData ud = new UniSellAdminWS.userData();
+                AdminWS.userData ud = new AdminWS.userData();
                 createUserData(ud, user_document_type.SelectedItem);
-                ws.createAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken },
+                ws.createAdmin(new AdminWS.Security { BinarySecurityToken = authToken },
                     new createAdmin { arg1 = ud });
             }
             parentForm.FilterUsersTable();

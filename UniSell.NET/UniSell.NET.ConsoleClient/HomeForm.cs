@@ -9,21 +9,23 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UniSell.NET.ConsoleClient.UniSellAdminWS;
-using UniSell.NET.ConsoleClient.UniSellCategoryWS;
-using UniSell.NET.ConsoleClient.UniSellCompanyWS;
-using UniSell.NET.ConsoleClient.UniSellSellerWS;
-using UniSell.NET.ConsoleClient.UniSellWS;
+using UniSell.NET.ConsoleClient.AdminWS;
+using UniSell.NET.ConsoleClient.CategoryWS;
+using UniSell.NET.ConsoleClient.CompanyWS;
+using UniSell.NET.ConsoleClient.SellerWS;
+using UniSell.NET.ConsoleClient.UserWS;
 
 namespace UniSell.NET.ConsoleClient
 {
     public partial class HomeForm : Form
     {
         private string authToken;
+        private LoginForm parentForm;
 
-        public HomeForm(string authToken)
+        public HomeForm(string authToken, LoginForm parentForm)
         {
             this.authToken = authToken;
+            this.parentForm = parentForm;
             InitializeComponent();
             InitializeUserRolesCombobox();
             InitializeUserDocumentTypeCombobox();
@@ -39,7 +41,7 @@ namespace UniSell.NET.ConsoleClient
         private void InitializeUserRolesCombobox()
         {
             UserWSClient ws = new UserWSClient();
-            UniSellWS.UserRole?[] roles = ws.findUserRoles();
+            UserWS.UserRole?[] roles = ws.findUserRoles();
             if (roles != null)
             {
                 foreach (var rol in roles)
@@ -52,7 +54,7 @@ namespace UniSell.NET.ConsoleClient
         private void InitializeUserDocumentTypeCombobox()
         {
             UserWSClient ws = new UserWSClient();
-            UniSellWS.PersonIdDocumentType?[] types = ws.findPersonDocumentTypes();
+            UserWS.PersonIdDocumentType?[] types = ws.findPersonDocumentTypes();
             if (types != null)
             {
                 foreach (var type in types)
@@ -64,7 +66,7 @@ namespace UniSell.NET.ConsoleClient
 
         private void InitializeCompanyDocumentTypeCombobox()
         {
-            var types = Enum.GetValues(typeof(UniSellCompanyWS.LegalPersonIdDocumentType));
+            var types = Enum.GetValues(typeof(CompanyWS.LegalPersonIdDocumentType));
             foreach (var type in types)
             {
                 comp_document_type.Items.Add(type);
@@ -134,17 +136,17 @@ namespace UniSell.NET.ConsoleClient
                 userTable.Controls.RemoveAt(indx);
             }
             userTable.RowCount = 1;
-            UniSellWS.editUserData[] users = ws.listUsersByFilter(new UniSellWS.Security { BinarySecurityToken = authToken }, new listUsersByFilter { arg1 = filter });
+            UserWS.editUserData[] users = ws.listUsersByFilter(new UserWS.Security { BinarySecurityToken = authToken }, new listUsersByFilter { arg1 = filter });
             FillUsersTable(users);
         }
 
-        private void FillUsersTable(UniSellWS.editUserData[] users)
+        private void FillUsersTable(UserWS.editUserData[] users)
         {
             if (users == null)
             {
                 return;
             }
-            foreach (UniSellWS.editUserData user in users)
+            foreach (UserWS.editUserData user in users)
             {
                 dynamic editTag = new ExpandoObject();
                 editTag.id = user.id;
@@ -193,7 +195,7 @@ namespace UniSell.NET.ConsoleClient
                 companiesTable.Controls.RemoveAt(indx);
             }
             companiesTable.RowCount = 1;
-            editCompanyData[] data = ws.listCompaniesByFilter(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+            editCompanyData[] data = ws.listCompaniesByFilter(new CompanyWS.Security { BinarySecurityToken = authToken },
                 new listCompaniesByFilter { arg1 = filter });
             FillCompaniesTable(data);
         }
@@ -206,7 +208,7 @@ namespace UniSell.NET.ConsoleClient
                 categoriesTable.Controls.RemoveAt(indx);
             }
             categoriesTable.RowCount = 1;
-            editCategoryData[] data = ws.listCategoriesByName(new UniSellCategoryWS.Security { BinarySecurityToken = authToken },
+            editCategoryData[] data = ws.listCategoriesByName(new CategoryWS.Security { BinarySecurityToken = authToken },
                 new listCategoriesByName { arg1 = category_filter_name.Text });
             FillCategoryTable(data);
         }
@@ -273,20 +275,27 @@ namespace UniSell.NET.ConsoleClient
                 CategoryWSClient ws = new CategoryWSClient();
                 try
                 {
-                    removeCategoryResponse response = ws.removeCategory(new UniSellCategoryWS.Security { BinarySecurityToken = authToken },
+                    removeCategoryResponse response = ws.removeCategory(new CategoryWS.Security { BinarySecurityToken = authToken },
                         new removeCategory { arg1 = id, arg1Specified = true });
                     FilterCategoriesTable();
                 }
-                catch (FaultException<UniSellCategoryWS.ElementNotFoundException> ex)
+                catch (FaultException<CategoryWS.ElementNotFoundException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha encontrado una categoría con id " + id + " en el sistema",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-                catch (FaultException<UniSellCategoryWS.ArgumentException> ex)
+                catch (FaultException<CategoryWS.ArgumentException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha recibido el id de la categoría a eliminar",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (FaultException<CategoryWS.CannotRemoveElementException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se puede eliminar la categoría porque tiene productos asociados",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -307,19 +316,26 @@ namespace UniSell.NET.ConsoleClient
                 UserWSClient ws = new UserWSClient();
                 try
                 {
-                    removeUserResponse response = ws.removeUser(new UniSellWS.Security { BinarySecurityToken = authToken }, new removeUser { arg1 = id,  arg1Specified = true });
+                    removeUserResponse response = ws.removeUser(new UserWS.Security { BinarySecurityToken = authToken }, new removeUser { arg1 = id,  arg1Specified = true });
                     FilterUsersTable();
                 }
-                catch (FaultException<UniSellWS.ElementNotFoundException> ex)
+                catch (FaultException<UserWS.ElementNotFoundException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha encontrado un usuario con id " + id + " en el sistema",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-                catch (FaultException<UniSellWS.ArgumentException> ex)
+                catch (FaultException<UserWS.ArgumentException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha recibido el id del usuario a eliminar",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (FaultException<UserWS.CannotRemoveElementException> ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error. No se puede eliminar al vendedor porque ha creado productos",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -336,21 +352,21 @@ namespace UniSell.NET.ConsoleClient
             {
                 if (enabled)
                 {
-                    ws.disableAccount(new UniSellWS.Security { BinarySecurityToken = authToken }, new disableAccount { arg1 = id, arg1Specified = true });
+                    ws.disableAccount(new UserWS.Security { BinarySecurityToken = authToken }, new disableAccount { arg1 = id, arg1Specified = true });
                 }
                 else
                 {
-                    ws.enableAccount(new UniSellWS.Security { BinarySecurityToken = authToken }, new enableAccount { arg1 = id, arg1Specified = true });
+                    ws.enableAccount(new UserWS.Security { BinarySecurityToken = authToken }, new enableAccount { arg1 = id, arg1Specified = true });
                 }
                 FilterUsersTable();
-            } catch (FaultException<UniSellWS.ArgumentException> ex)
+            } catch (FaultException<UserWS.ArgumentException> ex)
             {
                 MessageBox.Show("Ha ocurrido un error. No se ha recibido el id del usuario a eliminar",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
             }
-            catch (FaultException<UniSellWS.UnauthorizeAccessException> ex)
+            catch (FaultException<UserWS.UnauthorizedAccessException> ex)
             {
                 MessageBox.Show("Ha ocurrido un error. No está autorizado a realizar esta operación",
                         "Error",
@@ -362,20 +378,20 @@ namespace UniSell.NET.ConsoleClient
         private void EditUser(dynamic sender, EventArgs e)
         {
             long id = sender.Tag.id;
-            UniSellWS.UserRole role = sender.Tag.role;
+            UserWS.UserRole role = sender.Tag.role;
             dynamic user = null;
-            if (role == UniSellWS.UserRole.SELLER)
+            if (role == UserWS.UserRole.SELLER)
             {
                 UserSellerWSClient ws = new UserSellerWSClient();
-                findSellerResponse res = ws.findSeller(new UniSellSellerWS.Security { BinarySecurityToken = authToken }, new findSeller { arg1 = id, arg1Specified = true });
+                findSellerResponse res = ws.findSeller(new SellerWS.Security { BinarySecurityToken = authToken }, new findSeller { arg1 = id, arg1Specified = true });
                 user = res.@return;
             } else
             {
                 UserAdminWSClient ws = new UserAdminWSClient();
-                findAdminResponse res = ws.findAdmin(new UniSellAdminWS.Security { BinarySecurityToken = authToken }, new findAdmin { arg1 = id, arg1Specified = true });
+                findAdminResponse res = ws.findAdmin(new AdminWS.Security { BinarySecurityToken = authToken }, new findAdmin { arg1 = id, arg1Specified = true });
                 user = res.@return;
             }
-            UserForm form = new UserForm(role == UniSellWS.UserRole.SELLER, authToken, this, user);
+            UserForm form = new UserForm(role == UserWS.UserRole.SELLER, authToken, this, user);
             form.Show();
         }
 
@@ -383,7 +399,7 @@ namespace UniSell.NET.ConsoleClient
         {
             long id = sender.Tag;
             CategoryWSClient ws = new CategoryWSClient();
-            findCategoryResponse res = ws.findCategory(new UniSellCategoryWS.Security { BinarySecurityToken = authToken },
+            findCategoryResponse res = ws.findCategory(new CategoryWS.Security { BinarySecurityToken = authToken },
                 new findCategory { arg1 = id, arg1Specified = true });
             CategoryForm form = new CategoryForm(authToken, this, res.@return);
             form.Show();
@@ -393,7 +409,7 @@ namespace UniSell.NET.ConsoleClient
         {
             long id = sender.Tag;
             CompanyWSClient ws = new CompanyWSClient();
-            findCompanyResponse res = ws.findCompany(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+            findCompanyResponse res = ws.findCompany(new CompanyWS.Security { BinarySecurityToken = authToken },
                 new findCompany { arg1 = id, arg1Specified = true });
             CompanyForm form = new CompanyForm(authToken, this, res.@return);
             form.Show();
@@ -420,7 +436,7 @@ namespace UniSell.NET.ConsoleClient
         {
             long id = sender.Tag;
             UserSellerWSClient ws = new UserSellerWSClient();
-            editUserSellerData[] sellers = ws.findSellersByCompanyId(new UniSellSellerWS.Security { BinarySecurityToken = authToken },
+            editUserSellerData[] sellers = ws.findSellersByCompanyId(new SellerWS.Security { BinarySecurityToken = authToken },
                 new findSellersByCompanyId { arg1 = id, arg1Specified = true });
             if (sellers != null && sellers.Length > 0)
             {
@@ -441,25 +457,25 @@ namespace UniSell.NET.ConsoleClient
                 CompanyWSClient companyWS = new CompanyWSClient();
                 try
                 {
-                    removeCompanyResponse response = companyWS.removeCompany(new UniSellCompanyWS.Security { BinarySecurityToken = authToken },
+                    removeCompanyResponse response = companyWS.removeCompany(new CompanyWS.Security { BinarySecurityToken = authToken },
                         new removeCompany { arg1 = id, arg1Specified = true });
                     FilterCompaniesTable();
                 }
-                catch (FaultException<UniSellCompanyWS.ElementNotFoundException> ex)
+                catch (FaultException<CompanyWS.ElementNotFoundException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha encontrado una empresa con id " + id + " en el sistema",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-                catch (FaultException<UniSellCompanyWS.ArgumentException> ex)
+                catch (FaultException<CompanyWS.ArgumentException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se ha recibido el id de la empresa a eliminar",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-                catch (FaultException<UniSellCompanyWS.CannotRemoveElementException> ex)
+                catch (FaultException<CompanyWS.CannotRemoveElementException> ex)
                 {
                     MessageBox.Show("Ha ocurrido un error. No se puede eliminar la empresa porque todavía tiene usuarios asociados",
                         "Error",
@@ -482,6 +498,12 @@ namespace UniSell.NET.ConsoleClient
         private void newCategoryBtn_Click(object sender, EventArgs e)
         {
             new CategoryForm(authToken, this).Show();
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            new LoginForm().Show();
+            this.Dispose();
         }
     }
 }

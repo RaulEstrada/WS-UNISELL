@@ -8,7 +8,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UniSell.NET.ConsoleClient.UniSellCompanyWS;
+using UniSell.NET.ConsoleClient.CompanyWS;
 
 namespace UniSell.NET.ConsoleClient
 {

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://ws.unisell.miw.uniovi/" targetNamespace="http://ws.unisell.miw.uniovi/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ArgumentException" type="tns:ArgumentException" />
+  <xs:element name="CannotRemoveElementException" type="tns:CannotRemoveElementException" />
+  <xs:element name="ElementNotFoundException" type="tns:ElementNotFoundException" />
+  <xs:element name="InvalidEntityException" type="tns:InvalidEntityException" />
+  <xs:element name="RepeatedNameException" type="tns:RepeatedNameException" />
+  <xs:element name="UnauthorizedAccessException" type="tns:UnauthorizedAccessException" />
+  <xs:element name="createCategory" type="tns:createCategory" />
+  <xs:element name="createCategoryResponse" type="tns:createCategoryResponse" />
+  <xs:element name="editCategory" type="tns:editCategory" />
+  <xs:element name="editCategoryResponse" type="tns:editCategoryResponse" />
+  <xs:element name="findCategory" type="tns:findCategory" />
+  <xs:element name="findCategoryResponse" type="tns:findCategoryResponse" />
+  <xs:element name="listCategoriesByName" type="tns:listCategoriesByName" />
+  <xs:element name="listCategoriesByNameResponse" type="tns:listCategoriesByNameResponse" />
+  <xs:element name="removeCategory" type="tns:removeCategory" />
+  <xs:element name="removeCategoryResponse" type="tns:removeCategoryResponse" />
+  <xs:complexType name="editCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="tns:editCategoryData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editCategoryData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="categoryData" type="tns:categoryData" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="categoryData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="editCategoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCategoryData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RepeatedNameException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InvalidEntityException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnauthorizedAccessException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCategoriesByName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listCategoriesByNameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="tns:editCategoryData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findCategoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCategoryData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArgumentException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="removeCategoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCategoryData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElementNotFoundException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CannotRemoveElementException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg1" type="tns:categoryData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createCategoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:editCategoryData" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

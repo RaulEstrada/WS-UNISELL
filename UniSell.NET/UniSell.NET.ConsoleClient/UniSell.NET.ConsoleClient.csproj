@@ -74,27 +74,27 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\UniSellAdminWS\Reference.cs">
+    <Compile Include="Service References\AdminWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\UniSellCategoryWS\Reference.cs">
+    <Compile Include="Service References\CategoryWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\UniSellCompanyWS\Reference.cs">
+    <Compile Include="Service References\CompanyWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\UniSellSellerWS\Reference.cs">
+    <Compile Include="Service References\SellerWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\UniSellWS\Reference.cs">
+    <Compile Include="Service References\UserWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -139,205 +139,205 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\UniSellAdminWS\adminmanagement.wsdl" />
-    <None Include="Service References\UniSellAdminWS\adminmanagement.xsd">
+    <None Include="Service References\AdminWS\adminmanagement.wsdl" />
+    <None Include="Service References\AdminWS\adminmanagement.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellAdminWS\adminmanagement1.xsd">
+    <None Include="Service References\AdminWS\adminmanagement1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellAdminWS\adminmanagement2.xsd">
+    <None Include="Service References\AdminWS\adminmanagement2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellAdminWS\UniSell.NET.ConsoleClient.UniSellAdminWS.createAdminResponse.datasource">
+    <None Include="Service References\AdminWS\UniSell.NET.ConsoleClient.AdminWS.createAdminResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellAdminWS\UniSell.NET.ConsoleClient.UniSellAdminWS.createAdminResponse1.datasource">
+    <None Include="Service References\AdminWS\UniSell.NET.ConsoleClient.AdminWS.createAdminResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellAdminWS\UniSell.NET.ConsoleClient.UniSellAdminWS.editAdminResponse.datasource">
+    <None Include="Service References\AdminWS\UniSell.NET.ConsoleClient.AdminWS.editAdminResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellAdminWS\UniSell.NET.ConsoleClient.UniSellAdminWS.editAdminResponse1.datasource">
+    <None Include="Service References\AdminWS\UniSell.NET.ConsoleClient.AdminWS.editAdminResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellAdminWS\UniSell.NET.ConsoleClient.UniSellAdminWS.findAdminResponse.datasource">
+    <None Include="Service References\AdminWS\UniSell.NET.ConsoleClient.AdminWS.findAdminResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellAdminWS\UniSell.NET.ConsoleClient.UniSellAdminWS.findAdminResponse1.datasource">
+    <None Include="Service References\AdminWS\UniSell.NET.ConsoleClient.AdminWS.findAdminResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellAdminWS\UserAdminWSService.wsdl" />
-    <None Include="Service References\UniSellCategoryWS\categorymanagement.wsdl" />
-    <None Include="Service References\UniSellCategoryWS\categorymanagement.xsd">
+    <None Include="Service References\AdminWS\UserAdminWSService.wsdl" />
+    <None Include="Service References\CategoryWS\categorymanagement.wsdl" />
+    <None Include="Service References\CategoryWS\categorymanagement.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellCategoryWS\categorymanagement1.xsd">
+    <None Include="Service References\CategoryWS\categorymanagement1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellCategoryWS\CategoryWSService.wsdl" />
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.createCategoryResponse.datasource">
+    <None Include="Service References\CategoryWS\CategoryWSService.wsdl" />
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.createCategoryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.createCategoryResponse1.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.createCategoryResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.editCategoryData.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.editCategoryData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.editCategoryResponse.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.editCategoryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.editCategoryResponse1.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.editCategoryResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.findCategoryResponse.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.findCategoryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.findCategoryResponse1.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.findCategoryResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.listCategoriesByNameResponse.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.listCategoriesByNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.removeCategoryResponse.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.removeCategoryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCategoryWS\UniSell.NET.ConsoleClient.UniSellCategoryWS.removeCategoryResponse1.datasource">
+    <None Include="Service References\CategoryWS\UniSell.NET.ConsoleClient.CategoryWS.removeCategoryResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\companymanagement.wsdl" />
-    <None Include="Service References\UniSellCompanyWS\companymanagement.xsd">
+    <None Include="Service References\CompanyWS\companymanagement.wsdl" />
+    <None Include="Service References\CompanyWS\companymanagement.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellCompanyWS\companymanagement1.xsd">
+    <None Include="Service References\CompanyWS\companymanagement1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellCompanyWS\companymanagement2.xsd">
+    <None Include="Service References\CompanyWS\companymanagement2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellCompanyWS\CompanyWSService.wsdl" />
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.createCompanyResponse.datasource">
+    <None Include="Service References\CompanyWS\CompanyWSService.wsdl" />
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.createCompanyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.createCompanyResponse1.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.createCompanyResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.editCompanyData.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.editCompanyData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.editCompanyResponse.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.editCompanyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.editCompanyResponse1.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.editCompanyResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.findCompanyResponse.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.findCompanyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.findCompanyResponse1.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.findCompanyResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.listCompaniesByFilterResponse.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.listCompaniesByFilterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.removeCompanyResponse.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.removeCompanyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellCompanyWS\UniSell.NET.ConsoleClient.UniSellCompanyWS.removeCompanyResponse1.datasource">
+    <None Include="Service References\CompanyWS\UniSell.NET.ConsoleClient.CompanyWS.removeCompanyResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\sellermanagement.wsdl" />
-    <None Include="Service References\UniSellSellerWS\sellermanagement.xsd">
+    <None Include="Service References\SellerWS\sellermanagement.wsdl" />
+    <None Include="Service References\SellerWS\sellermanagement.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellSellerWS\sellermanagement1.xsd">
+    <None Include="Service References\SellerWS\sellermanagement1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellSellerWS\sellermanagement2.xsd">
+    <None Include="Service References\SellerWS\sellermanagement2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.createSellerResponse.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.createSellerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.createSellerResponse1.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.createSellerResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.editSellerResponse.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.editSellerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.editSellerResponse1.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.editSellerResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.editUserSellerData.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.editUserSellerData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.findSellerResponse.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.findSellerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.findSellerResponse1.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.findSellerResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UniSell.NET.ConsoleClient.UniSellSellerWS.findSellersByCompanyIdResponse.datasource">
+    <None Include="Service References\SellerWS\UniSell.NET.ConsoleClient.SellerWS.findSellersByCompanyIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellSellerWS\UserSellerWSService.wsdl" />
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse.datasource">
+    <None Include="Service References\SellerWS\UserSellerWSService.wsdl" />
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.disableAccountResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.disableAccountResponse1.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.disableAccountResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.editUserData.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.editUserData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.enableAccountResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.enableAccountResponse1.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.enableAccountResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.findLegalDocumentTypesResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.findLegalDocumentTypesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.findPersonDocumentTypesResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.findPersonDocumentTypesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.findUserRolesResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.findUserRolesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.LegalPersonIdDocumentType.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.LegalPersonIdDocumentType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.listUsersByFilterResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.listUsersByFilterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.loginResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.loginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.PersonIdDocumentType.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.PersonIdDocumentType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.removeUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.removeUserResponse1.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.removeUserResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\UniSell.NET.ConsoleClient.UniSellWS.UserRole.datasource">
+    <None Include="Service References\UserWS\UniSell.NET.ConsoleClient.UserWS.UserRole.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UniSellWS\usermanagement.wsdl" />
-    <None Include="Service References\UniSellWS\usermanagement.xsd">
+    <None Include="Service References\UserWS\usermanagement.wsdl" />
+    <None Include="Service References\UserWS\usermanagement.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellWS\usermanagement1.xsd">
+    <None Include="Service References\UserWS\usermanagement1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellWS\usermanagement2.xsd">
+    <None Include="Service References\UserWS\usermanagement2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UniSellWS\UserWSService.wsdl" />
+    <None Include="Service References\UserWS\UserWSService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -349,68 +349,68 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\UniSellAdminWS\" />
-    <WCFMetadataStorage Include="Service References\UniSellCategoryWS\" />
-    <WCFMetadataStorage Include="Service References\UniSellCompanyWS\" />
-    <WCFMetadataStorage Include="Service References\UniSellSellerWS\" />
-    <WCFMetadataStorage Include="Service References\UniSellWS\" />
+    <WCFMetadataStorage Include="Service References\AdminWS\" />
+    <WCFMetadataStorage Include="Service References\CategoryWS\" />
+    <WCFMetadataStorage Include="Service References\CompanyWS\" />
+    <WCFMetadataStorage Include="Service References\SellerWS\" />
+    <WCFMetadataStorage Include="Service References\UserWS\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellWS\configuration91.svcinfo" />
+    <None Include="Service References\CategoryWS\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellWS\configuration.svcinfo" />
+    <None Include="Service References\CategoryWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellWS\Reference.svcmap">
+    <None Include="Service References\CategoryWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellAdminWS\configuration91.svcinfo" />
+    <None Include="Service References\SellerWS\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellAdminWS\configuration.svcinfo" />
+    <None Include="Service References\SellerWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellAdminWS\Reference.svcmap">
+    <None Include="Service References\SellerWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellSellerWS\configuration91.svcinfo" />
+    <None Include="Service References\AdminWS\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellSellerWS\configuration.svcinfo" />
+    <None Include="Service References\AdminWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellSellerWS\Reference.svcmap">
+    <None Include="Service References\AdminWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellCompanyWS\configuration91.svcinfo" />
+    <None Include="Service References\CompanyWS\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellCompanyWS\configuration.svcinfo" />
+    <None Include="Service References\CompanyWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellCompanyWS\Reference.svcmap">
+    <None Include="Service References\CompanyWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellCategoryWS\configuration91.svcinfo" />
+    <None Include="Service References\UserWS\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellCategoryWS\configuration.svcinfo" />
+    <None Include="Service References\UserWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UniSellCategoryWS\Reference.svcmap">
+    <None Include="Service References\UserWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

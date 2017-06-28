@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="32c35af5-d60f-4a78-9d33-0d8fc035514e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://156.35.98.14:8443/Unisell.Java.UserManagement/companymanagement?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="companymanagement.wsdl" MetadataType="Wsdl" ID="946c641a-f4f8-445a-8cec-cad07a77be19" SourceId="1" SourceUrl="https://156.35.98.14:8443/Unisell.Java.UserManagement/companymanagement?wsdl=1" />
+    <MetadataFile FileName="CompanyWSService.wsdl" MetadataType="Wsdl" ID="58f14fba-349e-41b4-ae42-305c4a88c03a" SourceId="1" SourceUrl="https://156.35.98.14:8443/Unisell.Java.UserManagement/companymanagement?wsdl" />
+    <MetadataFile FileName="companymanagement.xsd" MetadataType="Schema" ID="c58c7ec8-0296-44c5-bce8-daccadb9731a" SourceId="1" SourceUrl="https://156.35.98.14:8443/Unisell.Java.UserManagement/companymanagement?xsd=2" />
+    <MetadataFile FileName="companymanagement1.xsd" MetadataType="Schema" ID="3ecc9f3d-ae6c-4593-a49c-2621503d716c" SourceId="1" SourceUrl="https://156.35.98.14:8443/Unisell.Java.UserManagement/companymanagement?xsd=3" />
+    <MetadataFile FileName="companymanagement2.xsd" MetadataType="Schema" ID="04b68c1f-c640-4387-b91e-263d836d24a4" SourceId="1" SourceUrl="https://156.35.98.14:8443/Unisell.Java.UserManagement/companymanagement?xsd=1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

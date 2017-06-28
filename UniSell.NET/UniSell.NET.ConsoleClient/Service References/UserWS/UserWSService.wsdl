@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://impl.ws.unisell.miw.uniovi/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="UserWSService" targetNamespace="http://impl.ws.unisell.miw.uniovi/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <import namespace="http://ws.unisell.miw.uniovi/" location="https://156.35.98.14:8443/Unisell.Java.UserManagement/usermanagement?wsdl=1" />
+  <types />
+  <binding xmlns:ns1="http://ws.unisell.miw.uniovi/" name="UserWSPortBinding" type="ns1:IUserWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="login">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="removeUser">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:removeUser" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="ElementNotFoundException">
+        <soap:fault use="literal" name="ElementNotFoundException" namespace="" />
+      </fault>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+      <fault name="CannotRemoveElementException">
+        <soap:fault use="literal" name="CannotRemoveElementException" namespace="" />
+      </fault>
+      <fault name="UnauthorizedAccessException">
+        <soap:fault use="literal" name="UnauthorizedAccessException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="findUserRoles">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="listUsersByFilter">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:listUsersByFilter" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="UnauthorizedAccessException">
+        <soap:fault use="literal" name="UnauthorizedAccessException" namespace="" />
+      </fault>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="findLegalDocumentTypes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findPersonDocumentTypes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="enableAccount">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:enableAccount" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="UnauthorizedAccessException">
+        <soap:fault use="literal" name="UnauthorizedAccessException" namespace="" />
+      </fault>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="disableAccount">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" parts="parameters" />
+        <soap:header message="ns1:disableAccount" part="arg0" use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="UnauthorizedAccessException">
+        <soap:fault use="literal" name="UnauthorizedAccessException" namespace="" />
+      </fault>
+      <fault name="ArgumentException">
+        <soap:fault use="literal" name="ArgumentException" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="UserWSService">
+    <port name="UserWSPort" binding="tns:UserWSPortBinding">
+      <soap:address location="https://156.35.98.14:8443/Unisell.Java.UserManagement/usermanagement" />
+    </port>
+  </service>
+</definitions>

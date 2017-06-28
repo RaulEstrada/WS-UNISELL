@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UniSell.NET.ConsoleClient.UniSellWS;
+using UniSell.NET.ConsoleClient.UserWS;
 
 namespace UniSell.NET.ConsoleClient
 {
@@ -18,7 +19,7 @@ namespace UniSell.NET.ConsoleClient
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void loginButton_Click(object sender1, EventArgs e)
         {
             string username = username_login.Text.ToString();
             string password = password_login.Text.ToString();
@@ -38,7 +39,7 @@ namespace UniSell.NET.ConsoleClient
                     else
                     {
                         this.Hide();
-                        HomeForm homeForm = new HomeForm(authToken);
+                        HomeForm homeForm = new HomeForm(authToken, this);
                         homeForm.Closed += (s, args) => this.Close();
                         homeForm.Show();
                     }

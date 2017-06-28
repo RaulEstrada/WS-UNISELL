@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.unisell.miw.uniovi/" targetNamespace="http://ws.unisell.miw.uniovi/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://156.35.98.14:8443/Unisell.Java.UserManagement/adminmanagement?xsd=1" namespace="http://ws.unisell.miw.uniovi/" />
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://156.35.98.14:8443/Unisell.Java.UserManagement/adminmanagement?xsd=2" namespace="http://unisell.net.data/" />
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://156.35.98.14:8443/Unisell.Java.UserManagement/adminmanagement?xsd=3" namespace="http://schemas.xmlsoap.org/ws/2002/04/secext" />
+    </xsd:schema>
+  </types>
+  <message name="findAdmin">
+    <part name="parameters" element="tns:findAdmin" />
+    <part xmlns:ns1="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns1:arg0" />
+  </message>
+  <message name="findAdminResponse">
+    <part name="result" element="tns:findAdminResponse" />
+  </message>
+  <message name="ArgumentException">
+    <part name="fault" element="tns:ArgumentException" />
+  </message>
+  <message name="UnauthorizedAccessException">
+    <part name="fault" element="tns:UnauthorizedAccessException" />
+  </message>
+  <message name="createAdmin">
+    <part name="parameters" element="tns:createAdmin" />
+    <part xmlns:ns2="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns2:arg0" />
+  </message>
+  <message name="createAdminResponse">
+    <part name="result" element="tns:createAdminResponse" />
+  </message>
+  <message name="InvalidEntityException">
+    <part name="fault" element="tns:InvalidEntityException" />
+  </message>
+  <message name="RepeatedUsernameException">
+    <part name="fault" element="tns:RepeatedUsernameException" />
+  </message>
+  <message name="RepeatedEmailException">
+    <part name="fault" element="tns:RepeatedEmailException" />
+  </message>
+  <message name="RepeatedDocumentException">
+    <part name="fault" element="tns:RepeatedDocumentException" />
+  </message>
+  <message name="editAdmin">
+    <part name="parameters" element="tns:editAdmin" />
+    <part xmlns:ns3="http://schemas.xmlsoap.org/ws/2002/04/secext" name="arg0" element="ns3:arg0" />
+  </message>
+  <message name="editAdminResponse">
+    <part name="result" element="tns:editAdminResponse" />
+  </message>
+  <portType name="IUserAdminWS">
+    <operation name="findAdmin" parameterOrder="parameters arg0">
+      <input xmlns:ns4="http://www.w3.org/2007/05/addressing/metadata" ns4:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/findAdminRequest" message="tns:findAdmin" />
+      <output xmlns:ns5="http://www.w3.org/2007/05/addressing/metadata" ns5:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/findAdminResponse" message="tns:findAdminResponse" />
+      <fault xmlns:ns6="http://www.w3.org/2007/05/addressing/metadata" ns6:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/findAdmin/Fault/ArgumentException" name="ArgumentException" message="tns:ArgumentException" />
+      <fault xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/findAdmin/Fault/UnauthorizedAccessException" name="UnauthorizedAccessException" message="tns:UnauthorizedAccessException" />
+    </operation>
+    <operation name="createAdmin" parameterOrder="parameters arg0">
+      <input xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdminRequest" message="tns:createAdmin" />
+      <output xmlns:ns9="http://www.w3.org/2007/05/addressing/metadata" ns9:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdminResponse" message="tns:createAdminResponse" />
+      <fault xmlns:ns10="http://www.w3.org/2007/05/addressing/metadata" ns10:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdmin/Fault/InvalidEntityException" name="InvalidEntityException" message="tns:InvalidEntityException" />
+      <fault xmlns:ns11="http://www.w3.org/2007/05/addressing/metadata" ns11:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdmin/Fault/RepeatedUsernameException" name="RepeatedUsernameException" message="tns:RepeatedUsernameException" />
+      <fault xmlns:ns12="http://www.w3.org/2007/05/addressing/metadata" ns12:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdmin/Fault/RepeatedEmailException" name="RepeatedEmailException" message="tns:RepeatedEmailException" />
+      <fault xmlns:ns13="http://www.w3.org/2007/05/addressing/metadata" ns13:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdmin/Fault/RepeatedDocumentException" name="RepeatedDocumentException" message="tns:RepeatedDocumentException" />
+      <fault xmlns:ns14="http://www.w3.org/2007/05/addressing/metadata" ns14:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/createAdmin/Fault/UnauthorizedAccessException" name="UnauthorizedAccessException" message="tns:UnauthorizedAccessException" />
+    </operation>
+    <operation name="editAdmin" parameterOrder="parameters arg0">
+      <input xmlns:ns15="http://www.w3.org/2007/05/addressing/metadata" ns15:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdminRequest" message="tns:editAdmin" />
+      <output xmlns:ns16="http://www.w3.org/2007/05/addressing/metadata" ns16:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdminResponse" message="tns:editAdminResponse" />
+      <fault xmlns:ns17="http://www.w3.org/2007/05/addressing/metadata" ns17:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdmin/Fault/InvalidEntityException" name="InvalidEntityException" message="tns:InvalidEntityException" />
+      <fault xmlns:ns18="http://www.w3.org/2007/05/addressing/metadata" ns18:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdmin/Fault/RepeatedUsernameException" name="RepeatedUsernameException" message="tns:RepeatedUsernameException" />
+      <fault xmlns:ns19="http://www.w3.org/2007/05/addressing/metadata" ns19:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdmin/Fault/RepeatedEmailException" name="RepeatedEmailException" message="tns:RepeatedEmailException" />
+      <fault xmlns:ns20="http://www.w3.org/2007/05/addressing/metadata" ns20:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdmin/Fault/RepeatedDocumentException" name="RepeatedDocumentException" message="tns:RepeatedDocumentException" />
+      <fault xmlns:ns21="http://www.w3.org/2007/05/addressing/metadata" ns21:Action="http://ws.unisell.miw.uniovi/IUserAdminWS/editAdmin/Fault/UnauthorizedAccessException" name="UnauthorizedAccessException" message="tns:UnauthorizedAccessException" />
+    </operation>
+  </portType>
+</definitions>
