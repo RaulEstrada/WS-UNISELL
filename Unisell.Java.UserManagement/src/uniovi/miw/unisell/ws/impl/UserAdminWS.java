@@ -15,7 +15,9 @@ import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedEmailException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedUsernameException;
+import uniovi.miw.unisell.ws.exceptions.UnauthorizedAccessException;
 import uniovi.miw.unisell.ws.impl.utils.DataValidator;
+import uniovi.miw.unisell.ws.impl.utils.TokenValidator;
 import uniovi.miw.unisell.ws.impl.utils.UserConversor;
 
 @WebService(endpointInterface = "uniovi.miw.unisell.ws.IUserAdminWS")
@@ -24,7 +26,11 @@ public class UserAdminWS implements IUserAdminWS {
 
 	@Override
 	public EditUserData createAdmin(Security security, UserData admin) throws InvalidEntityException,
-			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException {
+			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException, UnauthorizedAccessException {
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		if (!DataValidator.validateUser(admin)) {
 			throw new InvalidEntityException("User is missing some required field");
 		}
@@ -38,10 +44,14 @@ public class UserAdminWS implements IUserAdminWS {
 
 	@Override
 	public EditUserData editAdmin(Security security, EditUserData user) throws InvalidEntityException,
-			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException {
+			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException, UnauthorizedAccessException {
 		if (user == null || user.getId() == null || !DataValidator.validateUserEdit(user.getUserData())) {
 			throw new InvalidEntityException("User is missing some required field");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		User dbUser = soap.findUser(user.getId(), security);
@@ -55,10 +65,14 @@ public class UserAdminWS implements IUserAdminWS {
 	}
 
 	@Override
-	public EditUserData findAdmin(Security security, Long id) throws ArgumentException {
+	public EditUserData findAdmin(Security security, Long id) throws ArgumentException, UnauthorizedAccessException {
 		if (id == null) {
 			throw new ArgumentException("Id required but not provided");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		User user = soap.findUser(id, security);

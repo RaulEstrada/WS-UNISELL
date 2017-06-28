@@ -3,7 +3,6 @@ package uniovi.miw.unisell.data;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="CreateOrderResult" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,28 +28,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "createOrderResult"
+    "username"
 })
-@XmlRootElement(name = "CreateOrderResponse")
-public class CreateOrderResponse {
+@XmlRootElement(name = "FindOrdersByUsername")
+public class FindOrdersByUsername {
 
-    @XmlElement(name = "CreateOrderResult")
-    protected boolean createOrderResult;
+    protected String username;
 
     /**
-     * Obtiene el valor de la propiedad createOrderResult.
+     * Obtiene el valor de la propiedad username.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public boolean isCreateOrderResult() {
-        return createOrderResult;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * Define el valor de la propiedad createOrderResult.
+     * Define el valor de la propiedad username.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setCreateOrderResult(boolean value) {
-        this.createOrderResult = value;
+    public void setUsername(String value) {
+        this.username = value;
     }
 
 }

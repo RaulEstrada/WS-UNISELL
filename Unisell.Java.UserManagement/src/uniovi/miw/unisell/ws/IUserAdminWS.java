@@ -15,6 +15,7 @@ import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedEmailException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedUsernameException;
+import uniovi.miw.unisell.ws.exceptions.UnauthorizedAccessException;
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
@@ -22,14 +23,14 @@ public interface IUserAdminWS {
 	@WebMethod
 	public EditUserData createAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
 			UserData admin) throws InvalidEntityException, RepeatedUsernameException, 
-			RepeatedEmailException, RepeatedDocumentException;
+			RepeatedEmailException, RepeatedDocumentException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditUserData editAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
 			EditUserData user) throws InvalidEntityException, RepeatedUsernameException, 
-			RepeatedEmailException, RepeatedDocumentException;
+			RepeatedEmailException, RepeatedDocumentException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditUserData findAdmin(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id)  throws ArgumentException;
+			Long id)  throws ArgumentException, UnauthorizedAccessException;
 }

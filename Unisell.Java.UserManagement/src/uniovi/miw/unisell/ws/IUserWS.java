@@ -24,19 +24,19 @@ public interface IUserWS {
 	
 	@WebMethod
 	public EditUserData disableAccount(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws UnauthorizeAccessException, ArgumentException;
+			Long id) throws UnauthorizedAccessException, ArgumentException;
 	
 	@WebMethod
 	public EditUserData enableAccount(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws UnauthorizeAccessException, ArgumentException;
+			Long id) throws UnauthorizedAccessException, ArgumentException;
 	
 	@WebMethod
 	public EditUserData[] listUsersByFilter(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			UserSearchFilter filter) throws UnauthorizeAccessException, ArgumentException;
+			UserSearchFilter filter) throws UnauthorizedAccessException, ArgumentException;
 	
 	@WebMethod
 	public EditUserData removeUser(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ElementNotFoundException, ArgumentException;
+			Long id) throws ElementNotFoundException, ArgumentException, CannotRemoveElementException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public UserRole[] findUserRoles();

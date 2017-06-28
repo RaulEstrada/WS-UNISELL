@@ -15,28 +15,28 @@ import uniovi.miw.unisell.ws.exceptions.CannotRemoveElementException;
 import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedNameException;
-import uniovi.miw.unisell.ws.exceptions.UnauthorizeAccessException;
+import uniovi.miw.unisell.ws.exceptions.UnauthorizedAccessException;
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
 public interface ICategoryWS {
 	@WebMethod
 	public EditCategoryData[] listCategoriesByName(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			String name) throws UnauthorizeAccessException;
+			String name) throws UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCategoryData createCategory(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			CategoryData category) throws RepeatedNameException, InvalidEntityException;
+			CategoryData category) throws RepeatedNameException, InvalidEntityException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCategoryData editCategory(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			EditCategoryData category) throws RepeatedNameException, InvalidEntityException;
+			EditCategoryData category) throws RepeatedNameException, InvalidEntityException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCategoryData removeCategory(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ArgumentException, ElementNotFoundException, CannotRemoveElementException;
+			Long id) throws ArgumentException, ElementNotFoundException, CannotRemoveElementException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCategoryData findCategory(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ArgumentException;
+			Long id) throws ArgumentException, UnauthorizedAccessException;
 }

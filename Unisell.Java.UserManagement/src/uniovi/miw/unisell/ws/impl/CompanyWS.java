@@ -20,9 +20,10 @@ import uniovi.miw.unisell.ws.exceptions.CannotRemoveElementException;
 import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
-import uniovi.miw.unisell.ws.exceptions.UnauthorizeAccessException;
+import uniovi.miw.unisell.ws.exceptions.UnauthorizedAccessException;
 import uniovi.miw.unisell.ws.impl.utils.CompanyConversor;
 import uniovi.miw.unisell.ws.impl.utils.DataValidator;
+import uniovi.miw.unisell.ws.impl.utils.TokenValidator;
 
 @WebService(endpointInterface = "uniovi.miw.unisell.ws.ICompanyWS")
 public class CompanyWS implements ICompanyWS {
@@ -30,10 +31,14 @@ public class CompanyWS implements ICompanyWS {
 
 	@Override
 	public EditCompanyData[] listCompaniesByFilter(Security security, CompanySearchFilter filter)
-			throws UnauthorizeAccessException, ArgumentException {
+			throws UnauthorizedAccessException, ArgumentException {
 		if (filter == null) {
 			throw new ArgumentException("A filter is required but not provided");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		ArrayOfCompany companies = soap.findCompaniesByFilter(filter, security);
@@ -46,10 +51,14 @@ public class CompanyWS implements ICompanyWS {
 
 	@Override
 	public EditCompanyData createCompany(Security security, CompanyData companyData) 
-			throws RepeatedDocumentException, InvalidEntityException {
+			throws RepeatedDocumentException, InvalidEntityException, UnauthorizedAccessException {
 		if (!DataValidator.validateCompany(companyData)) {
 			throw new InvalidEntityException("Company is missing some required field");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		validateDocument(soap, security, companyData, null);
@@ -60,10 +69,14 @@ public class CompanyWS implements ICompanyWS {
 
 	@Override
 	public EditCompanyData editCompany(Security security, EditCompanyData company) 
-			throws RepeatedDocumentException, InvalidEntityException {
+			throws RepeatedDocumentException, InvalidEntityException, UnauthorizedAccessException {
 		if (company == null || company.getId() == null || !DataValidator.validateCompany(company.getCompanyData())) {
 			throw new InvalidEntityException("Company is missing some required field");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		validateDocument(soap, security, company.getCompanyData(), company.getId());
@@ -74,10 +87,14 @@ public class CompanyWS implements ICompanyWS {
 
 	@Override
 	public EditCompanyData removeCompany(Security security, Long id) 
-			throws ArgumentException, ElementNotFoundException, CannotRemoveElementException {
+			throws ArgumentException, ElementNotFoundException, CannotRemoveElementException, UnauthorizedAccessException {
 		if (id == null) {
 			throw new ArgumentException("Id required but not provided");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		Company target = soap.findCompany(id, security);
@@ -92,10 +109,14 @@ public class CompanyWS implements ICompanyWS {
 	}
 
 	@Override
-	public EditCompanyData findCompany(Security security, Long id) throws ArgumentException {
+	public EditCompanyData findCompany(Security security, Long id) throws ArgumentException, UnauthorizedAccessException {
 		if (id == null) {
 			throw new ArgumentException("Id required but not provided");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		Company company = soap.findCompany(id, security);

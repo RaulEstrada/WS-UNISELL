@@ -210,6 +210,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindOrdersByUsernameResponse }
+     * 
+     */
+    public FindOrdersByUsernameResponse createFindOrdersByUsernameResponse() {
+        return new FindOrdersByUsernameResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfOrderData }
+     * 
+     */
+    public ArrayOfOrderData createArrayOfOrderData() {
+        return new ArrayOfOrderData();
+    }
+
+    /**
      * Create an instance of {@link UpdateOrderResponse }
      * 
      */
@@ -618,6 +634,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link FindOrdersByUsername }
+     * 
+     */
+    public FindOrdersByUsername createFindOrdersByUsername() {
+        return new FindOrdersByUsername();
+    }
+
+    /**
      * Create an instance of {@link RemoveOrderResponse }
      * 
      */
@@ -911,6 +935,14 @@ public class ObjectFactory {
      */
     public UserSeller createUserSeller() {
         return new UserSeller();
+    }
+
+    /**
+     * Create an instance of {@link OrderData }
+     * 
+     */
+    public OrderData createOrderData() {
+        return new OrderData();
     }
 
     /**

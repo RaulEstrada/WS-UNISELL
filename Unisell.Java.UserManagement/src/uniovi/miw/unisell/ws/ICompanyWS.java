@@ -16,7 +16,7 @@ import uniovi.miw.unisell.ws.exceptions.CannotRemoveElementException;
 import uniovi.miw.unisell.ws.exceptions.ElementNotFoundException;
 import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
-import uniovi.miw.unisell.ws.exceptions.UnauthorizeAccessException;
+import uniovi.miw.unisell.ws.exceptions.UnauthorizedAccessException;
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
@@ -24,21 +24,21 @@ public interface ICompanyWS {
 
 	@WebMethod
 	public EditCompanyData[] listCompaniesByFilter(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			CompanySearchFilter filter) throws UnauthorizeAccessException, ArgumentException;
+			CompanySearchFilter filter) throws UnauthorizedAccessException, ArgumentException;
 	
 	@WebMethod
 	public EditCompanyData createCompany(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			CompanyData company) throws RepeatedDocumentException, InvalidEntityException;
+			CompanyData company) throws RepeatedDocumentException, InvalidEntityException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCompanyData editCompany(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			EditCompanyData company) throws RepeatedDocumentException, InvalidEntityException;
+			EditCompanyData company) throws RepeatedDocumentException, InvalidEntityException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCompanyData removeCompany(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ArgumentException, ElementNotFoundException, CannotRemoveElementException;
+			Long id) throws ArgumentException, ElementNotFoundException, CannotRemoveElementException, UnauthorizedAccessException;
 	
 	@WebMethod
 	public EditCompanyData findCompany(@WebParam(header = true, mode = Mode.IN, targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext") Security security,
-			Long id) throws ArgumentException;
+			Long id) throws ArgumentException, UnauthorizedAccessException;
 }

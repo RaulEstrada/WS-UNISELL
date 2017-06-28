@@ -477,15 +477,32 @@ public interface DataAccessSoap {
     /**
      * 
      * @param security
+     * @param username
+     * @return
+     *     returns uniovi.miw.unisell.data.ArrayOfOrderData
+     */
+    @WebMethod(operationName = "FindOrdersByUsername", action = "http://unisell.net.data/FindOrdersByUsername")
+    @WebResult(name = "FindOrdersByUsernameResult", targetNamespace = "http://unisell.net.data/")
+    @RequestWrapper(localName = "FindOrdersByUsername", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindOrdersByUsername")
+    @ResponseWrapper(localName = "FindOrdersByUsernameResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.FindOrdersByUsernameResponse")
+    public ArrayOfOrderData findOrdersByUsername(
+        @WebParam(name = "username", targetNamespace = "http://unisell.net.data/")
+        String username,
+        @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")
+        Security security);
+
+    /**
+     * 
+     * @param security
      * @param order
      * @return
-     *     returns uniovi.miw.unisell.data.Order
+     *     returns boolean
      */
     @WebMethod(operationName = "CreateOrder", action = "http://unisell.net.data/CreateOrder")
     @WebResult(name = "CreateOrderResult", targetNamespace = "http://unisell.net.data/")
     @RequestWrapper(localName = "CreateOrder", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CreateOrder")
     @ResponseWrapper(localName = "CreateOrderResponse", targetNamespace = "http://unisell.net.data/", className = "uniovi.miw.unisell.data.CreateOrderResponse")
-    public Order createOrder(
+    public boolean createOrder(
         @WebParam(name = "Order", targetNamespace = "http://unisell.net.data/")
         Order order,
         @WebParam(name = "Security", targetNamespace = "http://schemas.xmlsoap.org/ws/2002/04/secext", header = true, partName = "Security")

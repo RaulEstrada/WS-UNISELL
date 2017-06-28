@@ -21,7 +21,9 @@ import uniovi.miw.unisell.ws.exceptions.InvalidEntityException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedDocumentException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedEmailException;
 import uniovi.miw.unisell.ws.exceptions.RepeatedUsernameException;
+import uniovi.miw.unisell.ws.exceptions.UnauthorizedAccessException;
 import uniovi.miw.unisell.ws.impl.utils.DataValidator;
+import uniovi.miw.unisell.ws.impl.utils.TokenValidator;
 import uniovi.miw.unisell.ws.impl.utils.UserSellerConversor;
 
 @WebService(endpointInterface = "uniovi.miw.unisell.ws.IUserSellerWS")
@@ -30,10 +32,14 @@ public class UserSellerWS implements IUserSellerWS {
 
 	@Override
 	public EditUserSellerData createSeller(Security security, UserSellerData user) throws InvalidEntityException,
-			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException {
+			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException, UnauthorizedAccessException {
 		if (user.getCompanyId() == null || !DataValidator.validateUser(user.getUserData())) {
 			throw new InvalidEntityException("User is missing some required field");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		DataValidator.validateUserData(soap, user.getUserData(), null);
@@ -48,12 +54,16 @@ public class UserSellerWS implements IUserSellerWS {
 
 	@Override
 	public EditUserSellerData editSeller(Security security, EditUserSellerData user) throws InvalidEntityException,
-			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException {
+			RepeatedUsernameException, RepeatedEmailException, RepeatedDocumentException, UnauthorizedAccessException {
 		if (user == null || user.getId() == null || 
 				!DataValidator.validateUserEdit(user.getUserData().getUserData()) || 
 				user.getUserData().getCompanyId() == null) {
 			throw new InvalidEntityException("User is missing some required field");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		User dbUser = soap.findUser(user.getId(), security);
@@ -71,10 +81,14 @@ public class UserSellerWS implements IUserSellerWS {
 	}
 
 	@Override
-	public EditUserSellerData findSeller(Security security, Long id) throws ArgumentException {
+	public EditUserSellerData findSeller(Security security, Long id) throws ArgumentException, UnauthorizedAccessException {
 		if (id == null) {
 			throw new ArgumentException("Id required but not provided");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		User user = soap.findUser(id, security);
@@ -85,10 +99,14 @@ public class UserSellerWS implements IUserSellerWS {
 	}
 
 	@Override
-	public EditUserSellerData[] findSellersByCompanyId(Security security, Long id) throws ArgumentException {
+	public EditUserSellerData[] findSellersByCompanyId(Security security, Long id) throws ArgumentException, UnauthorizedAccessException {
 		if (id == null) {
 			throw new ArgumentException("Company id required but not provided");
 		}
+		if (security == null) {
+			throw new UnauthorizedAccessException("Security token needed");
+		}
+		TokenValidator.validateAuthToken(security);
 		DataAccess dataAccessWS = new DataAccess();
 		DataAccessSoap soap = dataAccessWS.getDataAccessSoap12();
 		ArrayOfUserSeller sellers = soap.findSellersByCompanyId(id, security);
