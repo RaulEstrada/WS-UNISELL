@@ -31,6 +31,8 @@ namespace UniSell.NET.RESTProvider.Controllers
             if (query.ContainsKey("PriceTo")) { filter.PriceTo = Double.Parse(query["PriceTo"]); }
             if (query.ContainsKey("Category")) { filter.Category = query["Category"]; }
             DataAccessSoapClient ws = new DataAccessSoapClient();
+            var binding = ws.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             Product[] prods = ws.FindProductsByFilter(new DataAccessWS.Security { BinarySecurityToken = token }, filter);
             return Ok(prods.Select(p => CreateRestProduct(p)));
         }
@@ -50,6 +52,8 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return NotFound();
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
+            var binding = ws.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             Product product = ws.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             return Ok(CreateRestProduct(product));
         }
@@ -69,6 +73,8 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return productValidation;
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
+            var binding = ws.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             Product product = ws.CreateProduct(new DataAccessWS.Security { BinarySecurityToken = token }, value.CreateProduct());
             return Created(
                 Request.RequestUri.GetLeftPart(UriPartial.Authority) + Url.Route("GetProductById", new { id = product.Id }),
@@ -91,6 +97,8 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return validation;
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
+            var binding = ws.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             Product target = ws.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             assignProperties(target, value, token);
             target.Id = id;
@@ -114,6 +122,8 @@ namespace UniSell.NET.RESTProvider.Controllers
                 return validation;
             }
             DataAccessSoapClient ws = new DataAccessSoapClient();
+            var binding = ws.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             Product removed = ws.RemoveProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             RestProduct res = CreateRestProduct(removed);
             res.href = "";
@@ -229,6 +239,8 @@ namespace UniSell.NET.RESTProvider.Controllers
                     return Unauthorized();
                 }
                 DataAccessSoapClient dataWS = new DataAccessSoapClient();
+                var binding = dataWS.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+                binding.MaxReceivedMessageSize = int.MaxValue;
                 Product target = dataWS.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, productId);
                 if (target == null)
                 {
@@ -305,6 +317,8 @@ namespace UniSell.NET.RESTProvider.Controllers
         private bool ValidateProductExists(string token, long id)
         {
             DataAccessSoapClient dataWS = new DataAccessSoapClient();
+            var binding = dataWS.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             Product target = dataWS.FindProduct(new DataAccessWS.Security { BinarySecurityToken = token }, id);
             return target != null;
         }

@@ -18,6 +18,8 @@ namespace UniSell.NET.RESTProvider.Controllers
         public IHttpActionResult Get(string username)
         {
             DataAccessSoapClient dataWS = new DataAccessSoapClient();
+            var binding = dataWS.ChannelFactory.Endpoint.Binding as BasicHttpBinding;
+            binding.MaxReceivedMessageSize = int.MaxValue;
             string token = GetAuthToken();
             IHttpActionResult validation = ValidateSeller(token, username);
             if (validation != null)
