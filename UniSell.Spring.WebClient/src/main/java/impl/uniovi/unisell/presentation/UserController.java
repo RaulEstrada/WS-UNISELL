@@ -84,7 +84,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/removeUser", method = RequestMethod.GET)
-	public String removeUser(HttpSession session, Model model) {
+	public String removeUser(@Valid @ModelAttribute(value = "userData") UserPost userData, HttpSession session, Model model) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://156.35.98.14:50868/api/buyers/" + auth.getId());
@@ -95,6 +95,7 @@ public class UserController {
 			model.addAttribute("error", "true");
 			model.addAttribute("errorMsg", res.getMessage());
 			model.addAttribute("userProfile", "true");
+			model.addAttribute("userData", userData);
 			return "account";
 		}
 		session.invalidate();

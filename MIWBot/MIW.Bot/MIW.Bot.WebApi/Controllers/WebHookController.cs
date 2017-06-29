@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MIW.Bot.WebApi.Controllers
 {
@@ -33,6 +34,18 @@ namespace MIW.Bot.WebApi.Controllers
                 else if (message.Text.StartsWith("/listorders"))
                 {
                     await listOrders(message);   
+                } else if (message.Text.StartsWith("/help"))
+                {
+                    await BotClient.SendTextMessageAsync(message.Chat.Id, "These are the commands I understand", replyMarkup: new ReplyKeyboardMarkup
+                    {
+                        Keyboard = new[] {
+                            new KeyboardButton[]
+                                {
+                                    "/authenticate",
+                                    "/listorders",
+                                }
+                        }
+                    });
                 }
                 else
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Services;
@@ -40,6 +41,7 @@ namespace UniSell.NET.BPEL.PayPalPayment.ws
             CustomSecurityHeaderType credentials = CreateHeaderCredentials(orderDetails.username,
                 orderDetails.password, orderDetails.signature);
             SetExpressCheckoutReq request = CreateExpressCheckoutRequest(orderDetails.amount);
+            
             try
             {
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
@@ -48,15 +50,11 @@ namespace UniSell.NET.BPEL.PayPalPayment.ws
                 {
                     orderDetails.successfulPayment = true;
                     return orderDetails;
-                } else
-                {
-                    return orderDetails;
                 }
             }
-            catch (Exception ex)
-            {
-                return orderDetails;
-            }
+            catch (Exception ex) { }
+            orderDetails.successfulPayment = false;
+            return orderDetails;
         }
 
         private bool CheckUserBuyer(string AuthToken)

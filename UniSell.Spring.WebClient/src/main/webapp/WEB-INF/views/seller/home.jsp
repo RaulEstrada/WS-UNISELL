@@ -57,6 +57,13 @@
 		<main class="container-fluid">
 			<div class="jumbotron">
 				<div class="row">
+					<c:if test="${error}">
+						<div class="alert alert-danger">
+								${errorMsg}
+						</div>
+					</c:if>
+				</div>				
+				<div class="row">
 					<h1>Tus productos</h1>
 					<div class="row">
 						<table class="table table-striped table-bordered">

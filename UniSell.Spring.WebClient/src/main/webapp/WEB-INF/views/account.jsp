@@ -100,9 +100,16 @@
 						 	</div>
 						 	<div class="form-group">
 						    	<label for="Username">Usuario: </label>
-						    	<form:input type="text" cssClass="form-control" 
-	    							id="Username" required="required"
-	    							path="username"/>
+						    	<c:if test="${empty userProfile}">
+							    	<form:input type="text" cssClass="form-control" 
+		    							id="Username" required="required"
+		    							path="username"/>
+		    					</c:if>
+		    					<c:if test="${userProfile}">
+							    	<form:input type="text" cssClass="form-control" 
+		    							id="Username" required="required" readonly="true"
+		    							path="username"/>
+		    					</c:if>
 						 	</div>
 						 	<div class="form-group">
 						    	<label for="Password">Contraseña: </label>

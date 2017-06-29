@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import impl.uniovi.unisell.model.AuthenticationInfo;
+import impl.uniovi.unisell.model.BadRequestResponse;
 import impl.uniovi.unisell.model.Category;
 import impl.uniovi.unisell.model.Product;
 import impl.uniovi.unisell.model.ProductPost;
@@ -67,13 +68,23 @@ public class ProductController {
 		WebTarget target = client.target("http://156.35.98.14:50868/api/products");
 		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
 		Response response = builder.post(Entity.entity(product, MediaType.APPLICATION_JSON), Response.class);
-		Product<Long> resp = response.readEntity(Product.class);
-		if (resp != null) {
+		if (response.getStatus() == 500) {
+			model.addAttribute("error", "true");
+			model.addAttribute("errorMsg", "Ha ocurrido un error guardando el producto. Intenta escoger una foto de menor tamaño");
+			model.addAttribute("product", new Product<Long>());
+			model.addAttribute("newProduct", "true");
+			return "/product";
+		} else if (response.getStatus() == 400) {
+			BadRequestResponse res = response.readEntity(BadRequestResponse.class);
+			model.addAttribute("error", "true");
+			model.addAttribute("errorMsg", res.getMessage());
+			model.addAttribute("product", new Product<Long>());
+			model.addAttribute("newProduct", "true");
+			return "/product";
+		} else {
+			Product<Long> resp = response.readEntity(Product.class);
 			model.addAttribute("okMessage", "true");
 			return "redirect:/products/" + resp.getId();
-		} else {
-			model.addAttribute("error", "true");
-			return null;
 		}
 	}
 	
@@ -89,14 +100,23 @@ public class ProductController {
 		WebTarget target = client.target("http://156.35.98.14:50868/api/products/" + id);
 		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
 		Response response = builder.put(Entity.entity(product, MediaType.APPLICATION_JSON), Response.class);
-		Product<Long> resp = response.readEntity(Product.class);
-		if (resp != null) {
-			model.addAttribute("okMessage", "true");
-			model.addAttribute("product", resp);
+		if (response.getStatus() == 500) {
+			model.addAttribute("error", "true");
+			model.addAttribute("errorMsg", "Ha ocurrido un error guardando el producto. Intenta escoger una foto de menor tamaño");
+			model.addAttribute("product", new Product<Long>());
+			model.addAttribute("newProduct", "true");
+			return "product";
+		} else if (response.getStatus() == 400) {
+			BadRequestResponse res = response.readEntity(BadRequestResponse.class);
+			model.addAttribute("error", "true");
+			model.addAttribute("errorMsg", res.getMessage());
+			model.addAttribute("product", new Product<Long>());
+			model.addAttribute("newProduct", "true");
 			return "product";
 		} else {
-			model.addAttribute("error", "true");
-			model.addAttribute("product", new Product<Long>());
+			Product<Long> resp = response.readEntity(Product.class);
+			model.addAttribute("okMessage", "true");
+			model.addAttribute("product", resp);
 			return "product";
 		}
 	}
@@ -117,20 +137,19 @@ public class ProductController {
 		return product;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/borrarproducto/{productId}", method = RequestMethod.GET)
-	public String borrarProducto(@PathVariable(value="productId") String id, HttpSession session) {
+	public String removeProducto(@PathVariable(value="productId") String id, HttpSession session, Model model) {
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://156.35.98.14:50868/api/products/" + id);
 		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON).header("token", auth.getToken());
 		Response resp = builder.delete(Response.class);
-		Product<Long> response = resp.readEntity(Product.class);
-		if (response != null) {
-			return "redirect:/home";
-		} else {
-			return null;
+		if (resp.getStatus() != 200) {
+			BadRequestResponse res = resp.readEntity(BadRequestResponse.class);
+			model.addAttribute("error", "true");
+			model.addAttribute("errorMsg", res.getMessage());
 		}
+		return "redirect:/home";
 	}
 
 	@ModelAttribute(value = "categories")

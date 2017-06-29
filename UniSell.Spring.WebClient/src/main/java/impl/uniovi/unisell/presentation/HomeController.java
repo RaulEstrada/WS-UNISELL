@@ -32,8 +32,14 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String get(@RequestParam(value = "orderNumber", required = false) String orderNumber,
 			@RequestParam(value = "orderError", required = false) String orderError,
+			@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "errorMsg", required = false) String errorMsg,
 			@ModelAttribute(value = "productFilter") ProductFilter productFilter,
 			HttpSession session, Model model) {
+		if (error != null && !error.trim().isEmpty()) {
+			model.addAttribute("error", error);
+			model.addAttribute("errorMsg", errorMsg);
+		}
 		AuthenticationInfo auth = (AuthenticationInfo)session.getAttribute(WelcomeController.AUTH_SESSION);
 		if (auth.getRole().equals("SELLER")) {
 			return getSeller(auth, model);

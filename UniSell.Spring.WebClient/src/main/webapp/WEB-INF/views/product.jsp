@@ -50,8 +50,8 @@
 							</div>
 						</c:if>
 						<c:if test="${error}">
-							<div class="alert alert-success">
- 								No se ha podido guardar el producto. Comprueba que los datos son correctos
+							<div class="alert alert-danger">
+ 								${errorMsg}
 							</div>
 						</c:if>
 						<form enctype="multipart/form-data" method="post">
